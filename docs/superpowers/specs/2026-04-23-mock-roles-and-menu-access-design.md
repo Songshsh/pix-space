@@ -51,7 +51,7 @@
 - 继续保留全局 `beforeEach`：
   - 未登录访问 `requiresAuth` 路由：跳转登录并携带 redirect
   - 已登录访问 `/login`：跳转 redirect 或 `/dashboard`
-  - 命中 `meta.roles` 且 `!canAccess(...)`：跳转 `/dashboard`
+  - 命中 `meta.roles` 且 `!canAccess(...)`：跳转 `/403`
 - `canAccess` 使用归一化后的 role 判定
 
 ## 实现拆分
@@ -71,6 +71,6 @@
 
 - 在 Mock 模式下，使用三组账号登录后：
   - `admin` 可见并可进入：用户管理、系统设置
-  - `user/viewer` 不可见：用户管理、系统设置；直接访问 `/users`、`/settings` 会被路由守卫跳回 `/dashboard`
+  - `user/viewer` 不可见：用户管理、系统设置；直接访问 `/users`、`/settings` 会被路由守卫跳回 `/403`
 - 菜单项仅通过 routes meta 配置即可完成新增/限制，无需在布局里新增 `v-if`
 - 刷新页面后权限状态保持一致（基于 `/user/info` 恢复 role）

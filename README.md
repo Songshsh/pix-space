@@ -44,21 +44,31 @@ nvm use
 ## 项目结构
 
 ```
-vue-project/
+pix-space/
 ├── public/              # 静态资源
 ├── src/
-│   ├── components/      # Vue组件
+│   ├── api/             # API 请求接口
+│   ├── components/      # 基础与业务组件
+│   ├── composables/     # 组合式函数
 │   ├── layouts/         # 布局组件
 │   ├── router/          # 路由配置
 │   ├── stores/          # Pinia状态管理
+│   │   ├── settings.ts  # 系统设置 store
 │   │   └── user.ts      # 用户 store
+│   ├── utils/           # 工具函数
 │   ├── views/           # 页面视图
-│   │   ├── DashboardView.vue
-│   │   ├── FileManagement.vue
-│   │   ├── ImageManagement.vue
-│   │   ├── LoginView.vue
-│   │   ├── SettingsView.vue
-│   │   └── UserManagement.vue
+│   │   ├── dashboard/
+│   │   │   └── index.vue
+│   │   ├── file-management/
+│   │   │   └── index.vue
+│   │   ├── image-management/
+│   │   │   └── index.vue
+│   │   ├── login/
+│   │   │   └── index.vue
+│   │   ├── settings/
+│   │   │   └── index.vue
+│   │   └── user-management/
+│   │       └── index.vue
 │   ├── App.vue          # 根组件
 │   └── main.ts          # 应用入口
 ├── .env.example         # 环境变量示例
@@ -187,15 +197,19 @@ npm install <package-name>
 
 创建新的 Store 文件：
 
-```javascript
-// src/stores/example.js
+```typescript
+// src/stores/example.ts
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-export const useExampleStore = defineStore('example', {
-  state: () => ({
-    data: null,
-  }),
-  // ... getters, actions
+export const useExampleStore = defineStore('example', () => {
+  const data = ref(null);
+
+  function setData(newData: any) {
+    data.value = newData;
+  }
+
+  return { data, setData };
 });
 ```
 

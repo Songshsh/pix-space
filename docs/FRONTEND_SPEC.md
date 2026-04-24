@@ -13,8 +13,8 @@
 
 **新增页面触点**：
 
-1. `src/views/<PageName>.vue`
-2. `src/router/index.ts` (注册路由)
+1. `src/views/<domain>/index.vue`
+2. `src/router/routes.ts` (注册业务路由)
 3. `src/api/<domain>.ts` (新增接口)
 4. `src/mocks/handlers.ts` (如有需要)
 
@@ -26,7 +26,7 @@
   - **严禁**手动导入 Vue 核心 API（如 `ref`, `computed`, `watch`, `onMounted` 等）。
   - **严禁**手动导入 Element Plus 组件库（如 `ElMessage`, `ElButton`, `ElTable` 等）。
 - **命名规范**：
-  - 页面：`<Domain><Action>.vue` (例：`UserManagement.vue`)
+  - 页面：`src/views/<domain>/index.vue` (例：`user-management/index.vue`)
   - 组件：`<Domain><Widget>.vue` (例：`UserTable.vue`)
   - 逻辑：`use<Domain><Verb>.ts` (例：`useUserDisplay.ts`)
 - **数据流**：列表/看板类 GET 请求优先使用 `silentError: true`，由页面自己渲染空状态；用户提交类请求交由底层统一 toast。
