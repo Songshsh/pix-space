@@ -9,3 +9,4 @@ dist
 auto-imports.d.ts
 components.d.ts
 .eslintrc-auto-import.json
+/public/mockServiceWorker.js
