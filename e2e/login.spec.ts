@@ -11,8 +11,8 @@ test.describe('Authentication Flow', () => {
     // Submit form using data-testid
     await page.getByTestId('login-submit-btn').click();
 
-    // Wait for navigation
-    await page.waitForURL('**/dashboard');
+    // Wait for navigation and allow MSW to process the request
+    await page.waitForURL('**/dashboard', { timeout: 30000 });
 
     // Verify dashboard content is visible
     await expect(
