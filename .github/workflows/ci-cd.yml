@@ -18,6 +18,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
+      - name: Setup environment variables
+        run: cp .env.example .env
       - name: Run lint
         run: npm run lint
       - name: Run stylelint
@@ -38,6 +40,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
+      - name: Setup environment variables
+        run: cp .env.example .env
       - name: Run unit tests
         run: npm run test:unit
 
@@ -52,6 +56,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
+      - name: Setup environment variables
+        run: cp .env.example .env
       - name: Get installed Playwright version
         id: playwright-version
         run: echo "PLAYWRIGHT_VERSION=$(npx playwright --version | awk '{print $2}')" >> $GITHUB_ENV
@@ -94,6 +100,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
+      - name: Setup environment variables
+        run: cp .env.example .env
       - name: Run security audit (PR)
         if: github.event_name == 'pull_request'
         run: npm audit --audit-level=high
