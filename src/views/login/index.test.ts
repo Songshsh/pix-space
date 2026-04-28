@@ -112,7 +112,7 @@ describe('LoginView.vue', () => {
       { name: 'Admin', email: 'admin@example.com' },
       'fake-token'
     );
-    expect(mockRouter.push).toHaveBeenCalledWith('/dashboard');
+    expect(mockRouter.push).toHaveBeenCalledWith('/admin/dashboard');
   });
 
   it('logs error on login failure', async () => {
@@ -183,6 +183,6 @@ describe('LoginView.vue', () => {
       role: 'user',
     });
     expect(String(loginCalls[0][1])).toMatch(/^mock\./);
-    expect(mockRouter.push).toHaveBeenCalledWith('/dashboard');
+    expect(mockRouter.push).toHaveBeenCalledWith('/admin/dashboard');
   });
 });

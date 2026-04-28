@@ -4,7 +4,9 @@ import { useUserStore } from '../stores/user';
 
 vi.mock('../router', () => ({
   default: {
-    currentRoute: { value: { path: '/dashboard', fullPath: '/dashboard' } },
+    currentRoute: {
+      value: { path: '/admin/dashboard', fullPath: '/admin/dashboard' },
+    },
     push: vi.fn(() => Promise.resolve()),
   },
 }));
@@ -66,7 +68,7 @@ describe('request', () => {
     expect(userStore.isLoggedIn).toBe(false);
     expect(router.push).toHaveBeenCalledWith({
       path: '/login',
-      query: { redirect: '/dashboard' },
+      query: { redirect: '/admin/dashboard' },
     });
   });
 });

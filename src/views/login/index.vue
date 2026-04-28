@@ -75,7 +75,7 @@ const handleLogin = async (payload: { email: string; password: string }) => {
 
     if (token) {
       userStore.login(user, token);
-      router.push((route.query.redirect || '/dashboard').toString());
+      router.push((route.query.redirect || '/admin/dashboard').toString());
       return;
     }
 
@@ -90,7 +90,7 @@ const handleLogin = async (payload: { email: string; password: string }) => {
       };
       const token = `mock.${btoa(JSON.stringify(user))}`;
       userStore.login(user, token);
-      router.push((route.query.redirect || '/dashboard').toString());
+      router.push((route.query.redirect || '/admin/dashboard').toString());
       return;
     }
     // 拦截器已经处理了 error 的提示，不需手写 ElMessage.error

@@ -27,7 +27,7 @@ import StarryBackground from '../../components/StarryBackground.vue';
 const router = useRouter();
 
 const handleGoBack = () => {
-  router.push('/dashboard');
+  router.push('/admin/dashboard');
 };
 </script>
 
