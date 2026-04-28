@@ -10,7 +10,7 @@ export type MenuIconKey =
 export const protectedChildrenRoutes: RouteRecordRaw[] = [
   {
     path: '',
-    redirect: '/dashboard',
+    redirect: '/admin/dashboard',
     meta: { showInMenu: false },
   },
   {

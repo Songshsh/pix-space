@@ -38,7 +38,7 @@
       <el-header class="main-header">
         <div class="header-left">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{ path: '/dashboard' }"
+            <el-breadcrumb-item :to="{ path: '/admin/dashboard' }"
               >首页</el-breadcrumb-item
             >
             <el-breadcrumb-item>{{ currentPageTitle }}</el-breadcrumb-item>
@@ -127,7 +127,7 @@ const menuItems = computed(() => {
     .map((r) => {
       const iconKey = r.meta?.icon as MenuIconKey | undefined;
       const icon = iconKey ? iconMap[iconKey] : undefined;
-      const index = r.path.startsWith('/') ? r.path : `/${r.path}`;
+      const index = r.path.startsWith('/') ? r.path : `/admin/${r.path}`;
       return {
         index,
         title: String(r.meta?.title || ''),
@@ -146,7 +146,7 @@ const handleGoProfile = () => {
 };
 
 const handleGoSettings = () => {
-  router.push('/settings');
+  router.push('/admin/settings');
 };
 
 const handleLogout = async () => {

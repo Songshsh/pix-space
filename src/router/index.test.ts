@@ -38,11 +38,11 @@ describe('router guards', () => {
     vi.resetModules();
     const { default: router } = await import('./index');
 
-    await router.push('/dashboard');
+    await router.push('/admin/dashboard');
     await router.isReady();
 
     expect(router.currentRoute.value.path).toBe('/login');
-    expect(router.currentRoute.value.query.redirect).toBe('/dashboard');
+    expect(router.currentRoute.value.query.redirect).toBe('/admin/dashboard');
   });
 
   it('redirects from login when logged in', async () => {
@@ -56,6 +56,6 @@ describe('router guards', () => {
     await router.push('/login');
     await router.isReady();
 
-    expect(router.currentRoute.value.path).toBe('/dashboard');
+    expect(router.currentRoute.value.path).toBe('/admin/dashboard');
   });
 });

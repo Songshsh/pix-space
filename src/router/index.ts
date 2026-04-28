@@ -17,10 +17,28 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: false, title: '登录' },
   },
   {
-    path: '/',
+    path: '/admin',
     component: () => import('../layouts/MainLayout.vue'),
     meta: { requiresAuth: true }, // Explicitly require auth for protected layout
     children: protectedChildrenRoutes,
+  },
+  {
+    path: '/',
+    component: () => import('../layouts/PortalLayout.vue'),
+    meta: { requiresAuth: false },
+    children: [
+      {
+        path: '',
+        name: 'PortalHome',
+        redirect: '/explore',
+      },
+      {
+        path: 'explore',
+        name: 'Explore',
+        component: () => import('../views/explore/index.vue'),
+        meta: { title: '发现灵感' },
+      },
+    ],
   },
   {
     path: '/403',
@@ -69,7 +87,9 @@ router.beforeEach((to, _from, next) => {
   } else if (to.path === '/login' && isLoggedIn) {
     // Fix to.query.redirect typing issue
     const redirectPath =
-      typeof to.query.redirect === 'string' ? to.query.redirect : '/dashboard';
+      typeof to.query.redirect === 'string'
+        ? to.query.redirect
+        : '/admin/dashboard';
 
     next(redirectPath);
     return;
