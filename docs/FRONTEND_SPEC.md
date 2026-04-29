@@ -41,7 +41,7 @@
 
 - **绝不重复造轮子**：必须优先使用 Element Plus (`el-card`, `el-table`, `el-dialog` 等)。能用内置 props / slots 解决的，严禁手捏原生 HTML/CSS。
 - **作用域隔离**：组件样式必须写在 `<style scoped>` 中。
-- **Design System**：禁止魔法数字。间距、圆角、颜色等应优先使用 `src/styles/tokens.css` 中的变量（例如 `var(--ds-space-16)`）。
+- **Design System**：禁止魔法数字。间距、圆角、颜色等应优先使用 `src/styles/tokens.css` 中的变量（例如 `var(--ds-space-4)`）。
 - **典型布局**：页面顶层用 `el-card` + `padding`；筛选区用 `el-form inline`；详情编辑优先用 `el-drawer` / `el-dialog` 避免跳转。
 
 ## 5. 安全性约束 (Security)
