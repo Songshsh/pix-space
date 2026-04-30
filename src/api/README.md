@@ -56,7 +56,7 @@
 
 ## 资源接口（示例）
 
-### Dashboard
+### 仪表盘
 
 `GET /dashboard`
 

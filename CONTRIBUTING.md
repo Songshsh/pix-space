@@ -1,28 +1,34 @@
-## Contributing
+# 贡献指南
 
-### Local development
+## 脚本清单（单一事实来源）
 
-- Node.js version: see [.nvmrc](.nvmrc)
-- Install: `npm ci`
-- Dev: `npm run dev`
+- 开发：`npm run dev`
+- 构建：`npm run build`
+- 预览构建产物：`npm run preview`
+- 代码检查（ESLint）：`npm run lint`
+- 样式检查（Stylelint）：`npm run lint:style`
+- 格式化（写入）：`npm run format`
+- 格式化检查：`npm run format:check`
+- 类型检查：`npm run typecheck`
+- 单元测试（Vitest）：`npm run test:unit`
+- E2E 测试（Playwright）：`npm run test:e2e`
+- CI 等价检查集：`npm run test`
+- 全量验证（CI + E2E + 构建）：`npm run test:all`
 
-### Quality checks
+## 本地开发
 
-- Lint: `npm run lint`
-- Stylelint: `npm run lint:style`
-- Format check: `npm run format:check`
-- Typecheck: `npm run typecheck`
-- Unit tests: `npm run test:unit`
-- E2E tests: `npm run test:e2e`
+- Node.js 版本：见 [.nvmrc](.nvmrc)
+- 安装依赖：`npm ci`
+- 启动开发：`npm run dev`
 
-### Testing guidelines
+## 测试指南
 
-- Unit tests (Vitest): utility functions in `src/utils/`, complex composables in `src/composables/`, and non-trivial stores in `src/stores/`
-- E2E tests (Playwright): critical user flows (login/logout, upload, create user) and new route pages smoke tests
-- Naming: unit tests live next to source as `*.test.ts`; e2e tests live in `e2e/` as `*.spec.ts`
-- Data: tests should rely on MSW mocks in `src/mocks/` rather than a real backend
+- 单元测试（Vitest）：工具函数放在 `src/utils/`，复杂的 composables 放在 `src/composables/`，以及非简单的 stores 放在 `src/stores/`
+- E2E 测试（Playwright）：关键用户链路（登录/退出、上传、创建用户）与新页面的冒烟测试
+- 命名：单测文件与源码同目录，命名为 `*.test.ts`；E2E 测试放在 `e2e/`，命名为 `*.spec.ts`
+- 数据：测试应依赖 `src/mocks/` 的 MSW 模拟数据，而不是依赖真实后端
 
-### Pull requests
+## 提交与合并请求
 
-- Keep changes focused and include tests when applicable
-- Ensure `npm run test` passes before opening a PR
+- 保持变更聚焦，能加测试就补测试
+- 提交 PR 前确保 `npm run test` 通过

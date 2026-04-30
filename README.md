@@ -1,223 +1,118 @@
-# Vue 3 + Element Plus + Pinia 项目模板
+# Pix Space
 
-这是一个基于 Vue 3、Element Plus 和 Pinia 的前端工程模板。
+Pix Space 是一个素材空间的前端项目，当前为“双入口”形态：
 
-## 功能特性
+- **前台**：`/explore` 灵感发现页（目前以原型/模拟数据为主）。
+- **后台**：`/admin/...` 管理端（登录后可访问，包含权限控制）。
 
-- ✅ Vue 3 组合式 API
-- ✅ Element Plus 组件库
-- ✅ Pinia 状态管理
-- ✅ Vite 构建工具
-- ✅ 示例组件和 Store
+## 技术栈
+
+- Vue 3 + TypeScript + Vite
+- Element Plus（组件库） + Pinia（状态管理）
+- MSW（模拟拦截）+ Axios（请求）
+- Vitest（单测）+ Playwright（E2E）
 
 ## 环境要求
 
-本项目需要 Node.js 20.19.0 或更高版本。如果你的系统已安装 [nvm](https://github.com/nvm-sh/nvm)，项目已包含 `.nvmrc` 配置文件。
+- Node.js >= 20.19.0
+- npm >= 10.8.2
 
-### 自动切换 Node 版本 (推荐)
-
-如果你使用 nvm，进入项目目录后运行：
+如果使用 nvm，可直接在项目根目录执行：
 
 ```bash
 nvm use
 ```
 
-这将自动切换到项目所需的 Node.js 版本 (v20.19.3)。
-
-### 手动切换 Node 版本
-
-如果你没有安装 nvm，可以手动安装并切换：
-
-1. 安装 Node.js 20.19.3：
-
-   ```bash
-   nvm install 20.19.3
-   nvm use 20.19.3
-   ```
-
-2. 验证版本：
-   ```bash
-   node --version  # 应该显示 v20.19.3
-   npm --version   # 应该显示 v10.8.2
-   ```
-
-## 项目结构
-
-```
-pix-space/
-├── public/              # 静态资源
-├── src/
-│   ├── api/             # API 请求接口
-│   ├── components/      # 基础与业务组件
-│   ├── composables/     # 组合式函数
-│   ├── layouts/         # 布局组件
-│   ├── router/          # 路由配置
-│   ├── stores/          # Pinia状态管理
-│   │   ├── settings.ts  # 系统设置 store
-│   │   └── user.ts      # 用户 store
-│   ├── utils/           # 工具函数
-│   ├── views/           # 页面视图
-│   │   ├── dashboard/
-│   │   │   └── index.vue
-│   │   ├── file-management/
-│   │   │   └── index.vue
-│   │   ├── image-management/
-│   │   │   └── index.vue
-│   │   ├── login/
-│   │   │   └── index.vue
-│   │   ├── settings/
-│   │   │   └── index.vue
-│   │   └── user-management/
-│   │       └── index.vue
-│   ├── App.vue          # 根组件
-│   └── main.ts          # 应用入口
-├── .env.example         # 环境变量示例
-├── index.html           # HTML 模板
-├── vite.config.ts       # Vite 配置
-├── package.json         # 项目依赖
-└── README.md
-```
-
 ## 快速开始
 
-### 配置环境变量
+1. 安装依赖
 
-复制并按需修改：
+```bash
+npm ci
+```
+
+2. 配置环境变量
 
 ```bash
 cp .env.example .env
 ```
 
-关键变量：
+常用变量说明：
 
+- `VITE_APP_TITLE`：站点标题
 - `VITE_APP_API_BASE_URL`：后端 API 基地址
-- `VITE_ALLOW_MOCK_AUTH`：开发环境下允许在登录接口不可用时使用模拟登录（默认关闭）
-- `VITE_USE_MOCK_DATA`：页面是否使用 mock 数据（默认开启）
+- `VITE_USE_MOCK_DATA`：是否使用模拟数据（推荐开发期保持 `true`）
+- `VITE_ALLOW_MOCK_AUTH`：登录接口不可用时是否允许模拟登录（默认 `false`）
 
-开发期推荐保持 `VITE_USE_MOCK_DATA=true`，项目会通过 MSW 拦截请求，让页面始终调用真实 API 形态，后续接入后端无需改页面。
-
-相关文档：
-
-- `docs/FRONTEND_SPEC.md`（前端开发综合规范）
-- `design/pencil/README.md`（原型工作流约定）
-- `src/api/README.md`（API 契约约定）
-- `src/utils/README.md`（请求错误处理约定）
-- `src/mocks/README.md`（Mock 方案）
-
-### 安装依赖
-
-```bash
-npm install
-```
-
-### 启动开发服务器
+3. 启动开发服务器
 
 ```bash
 npm run dev
 ```
 
-### 构建生产版本
+## 页面入口
+
+- Portal（无需登录）：`/explore`
+- Admin（需要登录）：`/admin/dashboard`
+
+完整路由、权限与菜单约定见 [docs/FRONTEND_SPEC.md](docs/FRONTEND_SPEC.md)。
+
+## 研发联调与模拟数据
+
+项目通过 MSW 在浏览器侧拦截请求，保持“页面调用真实 API 形态”的同时可使用本地模拟数据。
+
+- 使用模拟数据（默认推荐）
+  - 设置 `VITE_USE_MOCK_DATA=true`
+- 接入真实后端
+  - 设置 `VITE_USE_MOCK_DATA=false`
+  - 配置 `VITE_APP_API_BASE_URL` 指向后端
+
+模拟登录账号（仅在 `VITE_USE_MOCK_DATA=true` 时生效）：
+见 [src/mocks/README.md](src/mocks/README.md)。
+
+如果后端登录接口不可用、且你希望临时绕过登录（非 MSW 模式），可设置 `VITE_ALLOW_MOCK_AUTH=true`，此时任意邮箱/密码都会走模拟登录（默认角色为 `user`）。
+
+相关约定与文档入口：
+
+- [docs/README.md](docs/README.md)（文档地图）
+- [docs/FRONTEND_SPEC.md](docs/FRONTEND_SPEC.md)（前端开发综合规范）
+- [src/mocks/README.md](src/mocks/README.md)（模拟数据方案）
+
+## 常用脚本
 
 ```bash
+# 开发
+npm run dev
+
+# 构建/预览
 npm run build
-```
-
-### 预览生产构建
-
-```bash
 npm run preview
+
+# 验证（本地尽量跑这个）
+npm run test:all
 ```
 
-## 主要依赖
+更多脚本与贡献要求见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-- **Vue 3** - 渐进式 JavaScript 框架
-- **Element Plus** - 基于 Vue 3 的组件库
-- **Pinia** - Vue 官方推荐的状态管理库
-- **Vite** - 下一代前端构建工具
+## 目录结构（简版）
 
-## 使用说明
-
-### Element Plus 组件
-
-项目已全局注册 Element Plus 组件，可以直接在模板中使用：
-
-```vue
-<template>
-  <el-button type="primary">主要按钮</el-button>
-  <el-input v-model="text" placeholder="请输入" />
-  <el-select v-model="value">
-    <el-option label="选项1" value="1" />
-  </el-select>
-</template>
 ```
-
-### Pinia Store
-
-项目内置用户 Store：`src/stores/user.ts`
-
-在组件中使用 Store：
-
-```vue
-<script setup>
-import { useUserStore } from './stores/user';
-
-const userStore = useUserStore();
-
-console.log(userStore.userInfo);
-</script>
+pix-space/
+├── docs/                     # 规范与方案沉淀
+├── design/                   # 原型与设计产物
+├── e2e/                      # Playwright E2E
+├── public/                   # 静态资源（含 MSW worker）
+└── src/
+    ├── api/                  # API 定义
+    ├── components/           # 可复用组件
+    ├── composables/          # 组合式逻辑
+    ├── layouts/              # PortalLayout / MainLayout
+    ├── router/               # 路由与权限控制
+    ├── stores/               # Pinia stores
+    ├── styles/               # tokens 与全局样式
+    ├── utils/                # request 与通用工具
+    └── views/                # 路由级页面（portal/admin）
 ```
-
-### 图标使用
-
-Element Plus 图标已全局注册，可以直接使用：
-
-```vue
-<template>
-  <el-button :icon="Edit">编辑</el-button>
-</template>
-
-<script setup>
-import { Edit } from '@element-plus/icons-vue';
-</script>
-```
-
-## 自定义配置
-
-### Vite 配置
-
-修改 `vite.config.ts` 文件进行构建配置。
-
-### 添加新依赖
-
-```bash
-npm install <package-name>
-```
-
-### 添加新的 Store
-
-创建新的 Store 文件：
-
-```typescript
-// src/stores/example.ts
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
-
-export const useExampleStore = defineStore('example', () => {
-  const data = ref(null);
-
-  function setData(newData: any) {
-    data.value = newData;
-  }
-
-  return { data, setData };
-});
-```
-
-## 注意事项
-
-1. 确保 Node.js 版本 >= 20.19.0 以获得最佳兼容性
-2. 项目使用 Vue 3 组合式 API，推荐使用 `<script setup>` 语法
-3. Element Plus 组件已通过 `unplugin-vue-components` 和 `unplugin-auto-import` 配置为**按需自动导入**，无需手动引入组件即可直接使用，且打包体积已自动优化。
 
 ## 许可证
 
