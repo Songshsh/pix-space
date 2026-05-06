@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
+
+type SearchState = 'success' | 'loading' | 'empty' | 'error';
 
 const categories = [
   '全部',
@@ -16,7 +22,82 @@ const categories = [
 ];
 const activeCategory = ref('全部');
 
-// Mock data based on the Pencil design
+const searchTags = ['全部', '极简主义', '排版', '品牌设计', '电商', '其它'];
+const relatedSearches = ['设计系统', 'UI组件库', 'Dashboard', '移动端界面'];
+
+const searchQuery = computed(() => {
+  if (typeof route.query.q !== 'string') return '';
+  return route.query.q.trim();
+});
+
+const isSearching = computed(() => !!searchQuery.value);
+
+const searchState = computed<SearchState>(() => {
+  const state = route.query.state;
+  if (state === 'loading' || state === 'empty' || state === 'error')
+    return state;
+  return 'success';
+});
+
+const activeSort = computed<'newest' | 'hot'>(() => {
+  return route.query.sort === 'hot' ? 'hot' : 'newest';
+});
+
+const activeSearchTag = computed(() => {
+  return typeof route.query.tag === 'string' && route.query.tag
+    ? route.query.tag
+    : '全部';
+});
+
+const setSearchQuery = (q: string) => {
+  const next = q.trim();
+  if (!next) {
+    router.push({ path: '/explore' });
+    return;
+  }
+  router.push({ path: '/explore', query: { q: next } });
+};
+
+const backToExplore = () => {
+  router.push({ path: '/explore' });
+};
+
+const retrySearch = () => {
+  if (!isSearching.value) return;
+  router.push({
+    path: '/explore',
+    query: {
+      q: searchQuery.value,
+      sort: activeSort.value,
+      tag: activeSearchTag.value === '全部' ? undefined : activeSearchTag.value,
+    },
+  });
+};
+
+const setSort = (sort: 'newest' | 'hot') => {
+  if (!isSearching.value) return;
+  router.push({
+    path: '/explore',
+    query: {
+      q: searchQuery.value,
+      sort,
+      tag: activeSearchTag.value === '全部' ? undefined : activeSearchTag.value,
+    },
+  });
+};
+
+const setSearchTag = (tag: string) => {
+  if (!isSearching.value) return;
+  router.push({
+    path: '/explore',
+    query: {
+      q: searchQuery.value,
+      sort: activeSort.value,
+      tag: tag === '全部' ? undefined : tag,
+    },
+  });
+};
+
 const masonryHeights = [
   300, 450, 200, 380, 250, 400, 250, 320, 280, 400, 350, 200, 450, 300, 250,
 ];
@@ -47,48 +128,157 @@ const selectCategory = (cat: string) => {
 
 <template>
   <div class="explore-page">
-    <div class="categories">
-      <div
-        v-for="cat in categories"
-        :key="cat"
-        class="category-tag"
-        :class="{ active: activeCategory === cat }"
-        @click="selectCategory(cat)"
-      >
-        {{ cat }}
+    <template v-if="!isSearching">
+      <div class="categories">
+        <div
+          v-for="cat in categories"
+          :key="cat"
+          class="category-tag"
+          :class="{ active: activeCategory === cat }"
+          @click="selectCategory(cat)"
+        >
+          {{ cat }}
+        </div>
       </div>
-    </div>
+    </template>
 
-    <div class="masonry-grid">
-      <div v-for="item in mockItems" :key="item.id" class="masonry-item">
-        <div class="card">
+    <template v-else>
+      <div class="result-bar">
+        <div class="result-info">
+          <div class="result-title">“{{ searchQuery }}”</div>
+          <div class="result-count">共 2,431 个结果</div>
+        </div>
+        <div class="sort-toggle">
           <div
-            class="card-image"
-            :style="{
-              height: item.imageHeight + 'px',
-              backgroundColor: item.bgColor,
-            }"
+            class="sort-option"
+            :class="{ active: activeSort === 'newest' }"
+            @click="setSort('newest')"
           >
-            <!-- Image placeholder -->
+            最新
           </div>
+          <div
+            class="sort-option"
+            :class="{ active: activeSort === 'hot' }"
+            @click="setSort('hot')"
+          >
+            最热
+          </div>
+        </div>
+      </div>
 
-          <div class="card-content">
-            <div class="card-title">{{ item.title }}</div>
+      <div class="categories search-categories">
+        <div
+          v-for="tag in searchTags"
+          :key="tag"
+          class="category-tag"
+          :class="{ active: activeSearchTag === tag }"
+          @click="setSearchTag(tag)"
+        >
+          {{ tag }}
+        </div>
+      </div>
 
-            <div class="card-tags">
-              <span v-for="tag in item.tags" :key="tag" class="tag-badge">
-                {{ tag }}
-              </span>
-            </div>
+      <div class="related-bar">
+        <div class="related-title">相关搜索</div>
+        <div class="related-items">
+          <div
+            v-for="term in relatedSearches"
+            :key="term"
+            class="related-pill"
+            @click="setSearchQuery(term)"
+          >
+            {{ term }}
+          </div>
+        </div>
+      </div>
+    </template>
 
-            <div class="card-footer">
-              <div class="author-avatar"></div>
-              <span class="author-name">{{ item.author }}</span>
+    <template v-if="!isSearching || searchState === 'success'">
+      <div class="masonry-grid">
+        <div v-for="item in mockItems" :key="item.id" class="masonry-item">
+          <div class="card">
+            <div
+              class="card-image"
+              :style="{
+                height: item.imageHeight + 'px',
+                backgroundColor: item.bgColor,
+              }"
+            ></div>
+
+            <div class="card-content">
+              <div class="card-title">{{ item.title }}</div>
+
+              <div class="card-tags">
+                <span v-for="tag in item.tags" :key="tag" class="tag-badge">
+                  {{ tag }}
+                </span>
+              </div>
+
+              <div class="card-footer">
+                <div class="author-avatar"></div>
+                <span class="author-name">{{ item.author }}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
+
+    <template v-else-if="searchState === 'loading'">
+      <div class="state-card">
+        <div class="state-content">
+          <div class="state-icon">…</div>
+          <div class="state-desc">加载中</div>
+        </div>
+      </div>
+    </template>
+
+    <template v-else-if="searchState === 'empty'">
+      <div class="state-card">
+        <div class="state-content">
+          <div class="state-icon">🔍</div>
+          <div class="state-title">暂无结果</div>
+          <div class="state-desc">换个关键词试试</div>
+          <div class="state-actions state-actions--empty">
+            <div class="state-hot">
+              <div class="state-hot-title">热门搜索</div>
+              <div class="state-hot-items">
+                <button
+                  v-for="term in relatedSearches"
+                  :key="term"
+                  class="state-hot-pill"
+                  type="button"
+                  @click="setSearchQuery(term)"
+                >
+                  {{ term }}
+                </button>
+              </div>
+            </div>
+            <button class="state-back" type="button" @click="backToExplore">
+              返回发现
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
+      <div class="state-card">
+        <div class="state-content">
+          <div class="state-icon">!</div>
+          <div class="state-title">加载失败</div>
+          <div class="state-desc">请检查网络后重试</div>
+          <div class="state-actions">
+            <button class="state-retry" type="button" @click="retrySearch">
+              重试
+            </button>
+            <button class="state-back" type="button" @click="backToExplore">
+              返回发现
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -104,6 +294,213 @@ const selectCategory = (cat: string) => {
   flex-wrap: wrap;
   gap: var(--ds-space-3);
   margin-bottom: var(--ds-space-2);
+}
+
+.search-categories {
+  margin-bottom: 0;
+}
+
+.result-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.result-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1;
+}
+
+.result-count {
+  font-size: 12px;
+  color: #999;
+  line-height: 1;
+}
+
+.sort-toggle {
+  width: 152px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: #fff;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sort-option {
+  width: 72px;
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-option.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.related-bar {
+  height: 56px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.related-title {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+}
+
+.related-items {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.related-pill {
+  height: 28px;
+  padding: 0 14px;
+  background-color: #f0f2f5;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+}
+
+.state-card {
+  height: 360px;
+  background-color: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.state-content {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.state-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background-color: #f0f2f5;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.state-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-top: 16px;
+}
+
+.state-desc {
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+}
+
+.state-actions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.state-actions--empty {
+  width: 100%;
+  gap: 20px;
+}
+
+.state-hot {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.state-hot-title {
+  font-size: 12px;
+  color: #999;
+}
+
+.state-hot-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.state-hot-pill {
+  height: 28px;
+  padding: 0 14px;
+  background-color: #f0f2f5;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+}
+
+.state-retry {
+  height: 32px;
+  width: 96px;
+  border-radius: 16px;
+  background-color: var(--ds-color-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.state-back {
+  background: transparent;
+  color: var(--ds-color-primary);
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
 }
 
 .category-tag {

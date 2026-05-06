@@ -12,7 +12,7 @@
 - [src/api/README.md](../src/api/README.md)：API 契约约定
 - [src/utils/README.md](../src/utils/README.md)：请求与错误处理约定
 - [src/mocks/README.md](../src/mocks/README.md)：模拟数据方案（含模拟登录账号单一事实来源）
-- [design/pencil/README.md](../design/pencil/README.md)：Pencil 原型协作与设计目录
+- [design/README.md](../design/README.md)：Pencil 原型协作与设计目录
 
 ## 方案与设计
 
