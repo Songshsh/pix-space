@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import ImagePreviewDialog from '@/components/portal/ImagePreviewDialog.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -110,6 +111,15 @@ const sampleTags = [
   ['排版', 'UI设计'],
 ];
 
+type ExploreItem = {
+  id: string;
+  title: string;
+  imageHeight: number;
+  bgColor: string;
+  tags: string[];
+  author: string;
+};
+
 const mockItems = masonryHeights.map((h, i) => {
   return {
     id: `img-${i}`,
@@ -119,10 +129,27 @@ const mockItems = masonryHeights.map((h, i) => {
     tags: sampleTags[i % sampleTags.length],
     author: `User ${(i % 5) + 1}`,
   };
-});
+}) as ExploreItem[];
 
 const selectCategory = (cat: string) => {
   activeCategory.value = cat;
+};
+
+const goToDetail = (id: string) => {
+  router.push({ path: `/image/${id}` });
+};
+
+const previewVisible = ref(false);
+const previewItem = ref<ExploreItem | null>(null);
+
+const openPreview = (item: ExploreItem) => {
+  previewItem.value = item;
+  previewVisible.value = true;
+};
+
+const handleViewDetail = (id: string) => {
+  previewVisible.value = false;
+  goToDetail(id);
 };
 </script>
 
@@ -196,7 +223,7 @@ const selectCategory = (cat: string) => {
     <template v-if="!isSearching || searchState === 'success'">
       <div class="masonry-grid">
         <div v-for="item in mockItems" :key="item.id" class="masonry-item">
-          <div class="card">
+          <div class="card" @click="openPreview(item)">
             <div
               class="card-image"
               :style="{
@@ -215,8 +242,18 @@ const selectCategory = (cat: string) => {
               </div>
 
               <div class="card-footer">
-                <div class="author-avatar"></div>
-                <span class="author-name">{{ item.author }}</span>
+                <div class="card-footer-left">
+                  <div class="author-avatar"></div>
+                  <span class="author-name">{{ item.author }}</span>
+                </div>
+                <el-button
+                  link
+                  type="primary"
+                  class="detail-link"
+                  @click.stop="handleViewDetail(item.id)"
+                >
+                  查看详情
+                </el-button>
               </div>
             </div>
           </div>
@@ -280,6 +317,12 @@ const selectCategory = (cat: string) => {
       </div>
     </template>
   </div>
+
+  <ImagePreviewDialog
+    v-model="previewVisible"
+    :item="previewItem"
+    @view-detail="handleViewDetail"
+  />
 </template>
 
 <style scoped>
@@ -524,9 +567,9 @@ const selectCategory = (cat: string) => {
 }
 
 .category-tag.active {
-  background-color: #333;
+  background-color: var(--ds-color-primary);
   color: #fff;
-  border-color: #333;
+  border-color: var(--ds-color-primary);
 }
 
 /* CSS Columns for Masonry Layout */
@@ -594,7 +637,14 @@ const selectCategory = (cat: string) => {
 .card-footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.card-footer-left {
+  display: flex;
+  align-items: center;
   gap: var(--ds-space-2);
+  min-width: 0;
 }
 
 .author-avatar {
@@ -607,6 +657,13 @@ const selectCategory = (cat: string) => {
 .author-name {
   font-size: 12px;
   color: #999;
+}
+
+.detail-link {
+  padding: 0;
+  height: auto;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* Responsive Masonry */
