@@ -38,6 +38,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/explore/index.vue'),
         meta: { title: '发现灵感' },
       },
+      {
+        path: 'image/:id',
+        name: 'ImageDetail',
+        component: () => import('../views/image-detail/index.vue'),
+        meta: { title: '图片详情' },
+      },
     ],
   },
   {

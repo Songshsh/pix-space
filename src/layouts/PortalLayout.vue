@@ -1,11 +1,52 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { Search } from '@element-plus/icons-vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useSettingsStore } from '@/stores/settings';
 
 const route = useRoute();
 const router = useRouter();
+const settingsStore = useSettingsStore();
 const searchQuery = ref('');
+
+const applyPortalPrimaryColor = () => {
+  const root = document.documentElement;
+  const primary = '#8b5cf6';
+  root.style.setProperty('--el-color-primary', primary);
+
+  const hex = primary.replace('#', '');
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  for (let i = 1; i <= 9; i++) {
+    const mixRatio = i * 0.1;
+    const mixR = Math.round(255 * mixRatio + r * (1 - mixRatio));
+    const mixG = Math.round(255 * mixRatio + g * (1 - mixRatio));
+    const mixB = Math.round(255 * mixRatio + b * (1 - mixRatio));
+    root.style.setProperty(
+      `--el-color-primary-light-${i}`,
+      `rgb(${mixR}, ${mixG}, ${mixB})`
+    );
+  }
+
+  const darkRatio = 0.2;
+  const darkR = Math.round(r * (1 - darkRatio));
+  const darkG = Math.round(g * (1 - darkRatio));
+  const darkB = Math.round(b * (1 - darkRatio));
+  root.style.setProperty(
+    '--el-color-primary-dark-2',
+    `rgb(${darkR}, ${darkG}, ${darkB})`
+  );
+};
+
+onMounted(() => {
+  applyPortalPrimaryColor();
+});
+
+onUnmounted(() => {
+  settingsStore.applyPrimaryColor();
+});
 
 const syncQueryFromRoute = () => {
   const q = typeof route.query.q === 'string' ? route.query.q : '';
@@ -33,7 +74,7 @@ const goAdmin = () => {
 </script>
 
 <template>
-  <div class="portal-layout">
+  <div class="portal-layout portal-theme">
     <header class="portal-header">
       <div class="header-container">
         <div class="logo" @click="router.push('/')">
@@ -116,7 +157,11 @@ const goAdmin = () => {
 .logo-icon {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(
+    135deg,
+    var(--portal-color-primary) 0%,
+    var(--portal-color-primary-dark) 100%
+  );
   border-radius: var(--ds-radius-2);
   display: flex;
   align-items: center;

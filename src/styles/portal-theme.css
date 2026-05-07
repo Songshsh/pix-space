@@ -1,0 +1,30 @@
+.portal-theme {
+  --portal-color-primary: #8b5cf6;
+  --portal-color-primary-dark: #6f4ac5;
+  --portal-color-primary-light-1: rgb(151, 108, 247);
+  --portal-color-primary-light-2: rgb(162, 125, 248);
+  --portal-color-primary-light-3: rgb(174, 141, 249);
+  --portal-color-primary-light-4: rgb(185, 157, 250);
+  --portal-color-primary-light-5: rgb(197, 174, 251);
+  --portal-color-primary-light-6: rgb(209, 190, 251);
+  --portal-color-primary-light-7: rgb(220, 206, 252);
+  --portal-color-primary-light-8: rgb(232, 222, 253);
+  --portal-color-primary-light-9: rgb(243, 239, 254);
+
+  --ds-color-primary: var(--portal-color-primary);
+  --ds-color-primary-hover: rgba(139, 92, 246, 0.9);
+  --ds-color-primary-active: var(--portal-color-primary-dark);
+  --ds-color-border-hover: var(--portal-color-primary);
+
+  --el-color-primary: var(--portal-color-primary);
+  --el-color-primary-light-1: var(--portal-color-primary-light-1);
+  --el-color-primary-light-2: var(--portal-color-primary-light-2);
+  --el-color-primary-light-3: var(--portal-color-primary-light-3);
+  --el-color-primary-light-4: var(--portal-color-primary-light-4);
+  --el-color-primary-light-5: var(--portal-color-primary-light-5);
+  --el-color-primary-light-6: var(--portal-color-primary-light-6);
+  --el-color-primary-light-7: var(--portal-color-primary-light-7);
+  --el-color-primary-light-8: var(--portal-color-primary-light-8);
+  --el-color-primary-light-9: var(--portal-color-primary-light-9);
+  --el-color-primary-dark-2: rgb(111, 74, 197);
+}

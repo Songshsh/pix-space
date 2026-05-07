@@ -7,6 +7,7 @@ import 'element-plus/theme-chalk/el-message-box.css';
 import 'element-plus/theme-chalk/el-overlay.css';
 import 'element-plus/theme-chalk/el-image-viewer.css';
 import './styles/tokens.css';
+import './styles/portal-theme.css';
 import './styles/element-overrides.css';
 import App from './App.vue';
 import router from './router';

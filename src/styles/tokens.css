@@ -29,13 +29,22 @@ html,
   --ds-color-primary: #667eea;
   --ds-color-primary-dark: #764ba2;
   --ds-color-primary-light: #f093fb;
+  --ds-color-primary-hover: rgba(102, 126, 234, 0.9);
+  --ds-color-primary-active: #5a6fd6;
+
+  --ds-color-bg-primary: #ffffff;
+  --ds-color-bg-secondary: #f0f2f5;
+  --ds-color-bg-hover: #f0f0ff;
 
   --ds-color-text-primary: #333333;
   --ds-color-text-secondary: #666666;
   --ds-color-text-inverse: #ffffff;
 
-  --ds-color-bg-primary: #ffffff;
-  --ds-color-bg-secondary: #f0f2f5;
-
   --ds-color-border: #e8e8e8;
+  --ds-color-border-hover: var(--ds-color-primary);
+
+  --ds-color-success: #67c23a;
+  --ds-color-warning: #e6a23c;
+  --ds-color-danger: #f56c6c;
+  --ds-color-info: #909399;
 }
