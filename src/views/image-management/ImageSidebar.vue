@@ -90,5 +90,7 @@ defineEmits<{
 
 .tag-item {
   cursor: pointer;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 </style>

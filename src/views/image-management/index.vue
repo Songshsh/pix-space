@@ -155,6 +155,7 @@
                 <el-tag
                   v-for="tag in previewCurrentTags"
                   :key="tag"
+                  class="preview-tag"
                   size="small"
                   type="info"
                 >
@@ -512,6 +513,11 @@ const handleBatchDelete = () => {
 .preview-title-tags {
   display: flex;
   gap: 4px;
+}
+
+.preview-tag {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .preview-title-count {
