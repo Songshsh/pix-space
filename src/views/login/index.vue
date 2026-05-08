@@ -20,7 +20,7 @@
         </p>
         <p>
           由 PixSpace 团队用
-          <span :style="{ color: 'var(--ds-color-primary-light)' }"
+          <span :style="{ color: 'var(--ds-color-brand-accent)' }"
             >&hearts;</span
           >
           制作
@@ -112,10 +112,64 @@ const handleLogin = async (payload: { email: string; password: string }) => {
 .login-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0a0a2a, #1a1a40, #0c0c1e);
-  color: #fff;
+  background: linear-gradient(
+    to bottom,
+    var(--ds-color-space-deep),
+    var(--ds-color-space-mid),
+    var(--ds-color-space-darker)
+  );
+  color: var(--ds-color-text-inverse);
   overflow-x: hidden;
   position: relative;
+
+  --ds-color-starry-accent: var(--ds-color-brand-accent);
+  --el-color-primary: var(--ds-color-brand-primary);
+  --el-color-primary-dark-2: var(--ds-color-brand-primary-dark);
+  --el-color-primary-light-1: color-mix(
+    in srgb,
+    var(--el-color-primary) 90%,
+    white
+  );
+  --el-color-primary-light-2: color-mix(
+    in srgb,
+    var(--el-color-primary) 80%,
+    white
+  );
+  --el-color-primary-light-3: color-mix(
+    in srgb,
+    var(--el-color-primary) 70%,
+    white
+  );
+  --el-color-primary-light-4: color-mix(
+    in srgb,
+    var(--el-color-primary) 60%,
+    white
+  );
+  --el-color-primary-light-5: color-mix(
+    in srgb,
+    var(--el-color-primary) 50%,
+    white
+  );
+  --el-color-primary-light-6: color-mix(
+    in srgb,
+    var(--el-color-primary) 40%,
+    white
+  );
+  --el-color-primary-light-7: color-mix(
+    in srgb,
+    var(--el-color-primary) 30%,
+    white
+  );
+  --el-color-primary-light-8: color-mix(
+    in srgb,
+    var(--el-color-primary) 20%,
+    white
+  );
+  --el-color-primary-light-9: color-mix(
+    in srgb,
+    var(--el-color-primary) 10%,
+    white
+  );
 }
 
 @keyframes fadeInUp {
@@ -138,12 +192,12 @@ const handleLogin = async (payload: { email: string; password: string }) => {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 2rem;
+  padding: var(--ds-space-6);
 }
 
 .header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--ds-space-8);
   animation: fadeInUp 1s ease-out;
 }
 
@@ -151,29 +205,30 @@ const handleLogin = async (payload: { email: string; password: string }) => {
   font-size: 3.5rem;
   background: linear-gradient(
     to right,
-    var(--ds-color-primary),
-    var(--ds-color-primary-dark),
-    var(--ds-color-primary-light)
+    var(--ds-color-brand-primary),
+    var(--ds-color-brand-primary-dark),
+    var(--ds-color-brand-accent)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+  text-shadow: 0 0 20px
+    color-mix(in srgb, var(--ds-color-brand-primary) 50%, transparent);
 }
 
 .header p {
   font-size: 1.2rem;
-  color: #a0a0e0;
+  color: var(--ds-color-text-muted);
   max-width: 800px;
   margin: 0 auto;
 }
 
 /* Footer */
 .footer {
-  margin-top: 3rem;
+  margin-top: var(--ds-space-8);
   text-align: center;
-  color: #a0a0e0;
+  color: var(--ds-color-text-muted);
   font-size: 0.9rem;
   animation: fadeInUp 1s ease-out 0.6s both;
 }

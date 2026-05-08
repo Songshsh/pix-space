@@ -188,23 +188,23 @@ setTimeout(() => {
 
 .detail-card {
   display: flex;
-  background-color: #fff;
+  background-color: var(--ds-color-bg-primary);
   border-radius: var(--ds-radius-3);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--ds-shadow-1);
   overflow: hidden;
 }
 
 .left-col {
   width: 980px;
-  background-color: #fafafa;
-  padding: 40px;
+  background-color: var(--el-fill-color-lighter);
+  padding: var(--ds-space-7);
   box-sizing: border-box;
 }
 
 .main-image {
   width: 900px;
   height: 840px;
-  background-color: #eee;
+  background-color: var(--el-fill-color);
   border-radius: var(--ds-radius-3);
   display: flex;
   align-items: center;
@@ -213,64 +213,64 @@ setTimeout(() => {
 
 .image-placeholder {
   font-size: 14px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
 }
 
 .right-col {
   width: 412px;
-  padding: 32px 24px;
+  padding: var(--ds-space-6) var(--ds-space-5);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--ds-space-5);
 }
 
 .author-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .author-avatar {
   width: 40px;
   height: 40px;
-  background-color: #d9d9d9;
+  background-color: var(--el-fill-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--ds-color-text-inverse);
   font-size: 14px;
 }
 
 .author-content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--ds-space-1);
 }
 
 .author-name {
   font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: var(--ds-color-text-primary);
 }
 
 .pub-time {
   font-size: 12px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
 }
 
 .image-title {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: var(--ds-color-text-primary);
   line-height: 1.3;
 }
 
 .actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .action-btn {
@@ -281,7 +281,7 @@ setTimeout(() => {
 
 .action-group {
   display: flex;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .action-group .action-btn {
@@ -293,50 +293,50 @@ setTimeout(() => {
 .meta-info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-top: 8px;
+  gap: var(--ds-space-3);
+  padding-top: var(--ds-space-2);
 }
 
 .meta-title {
   font-size: 14px;
   font-weight: bold;
-  color: #333;
+  color: var(--ds-color-text-primary);
 }
 
 .meta-item {
   font-size: 13px;
-  color: #666;
+  color: var(--ds-color-text-secondary);
 }
 
 .tags-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-top: 8px;
+  gap: var(--ds-space-3);
+  padding-top: var(--ds-space-2);
 }
 
 .tags-title {
   font-size: 14px;
   font-weight: bold;
-  color: #333;
+  color: var(--ds-color-text-primary);
 }
 
 .tags-list {
   display: flex;
-  gap: 8px;
+  gap: var(--ds-space-2);
 }
 
 .tag {
-  padding: 4px 8px;
-  background-color: #f0f2f5;
-  border-radius: 4px;
+  padding: var(--ds-space-1) var(--ds-space-2);
+  background-color: var(--ds-color-bg-secondary);
+  border-radius: var(--ds-radius-1);
   font-size: 10px;
-  color: #666;
+  color: var(--ds-color-text-secondary);
 }
 
 .state-card {
   height: 360px;
-  background-color: #fff;
+  background-color: var(--ds-color-bg-primary);
   border-radius: var(--ds-radius-3);
   display: flex;
   align-items: center;
@@ -353,9 +353,9 @@ setTimeout(() => {
 .state-icon {
   width: 64px;
   height: 64px;
-  border-radius: 32px;
-  background-color: #f0f2f5;
-  color: #999;
+  border-radius: 50%;
+  background-color: var(--ds-color-bg-secondary);
+  color: var(--ds-color-text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -366,35 +366,35 @@ setTimeout(() => {
 .state-title {
   font-size: 18px;
   font-weight: 700;
-  color: #333;
-  margin-top: 16px;
+  color: var(--ds-color-text-primary);
+  margin-top: var(--ds-space-4);
 }
 
 .state-desc {
   font-size: 12px;
-  color: #999;
-  margin-top: 8px;
+  color: var(--ds-color-text-tertiary);
+  margin-top: var(--ds-space-2);
 }
 
 .state-actions {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 24px;
+  gap: var(--ds-space-4);
+  margin-top: var(--ds-space-5);
 }
 
 .state-retry {
   height: 32px;
   width: 96px;
-  border-radius: 16px;
+  border-radius: var(--ds-radius-pill);
   font-size: 12px;
   font-weight: 600;
 }
 
 .state-back {
   background: transparent;
-  color: var(--ds-color-primary);
+  color: var(--el-color-primary);
   border: none;
   cursor: pointer;
   font-size: 12px;

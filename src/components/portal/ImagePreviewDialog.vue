@@ -86,10 +86,10 @@ const handleViewDetail = () => {
 
 .close {
   position: absolute;
-  top: 20px;
-  right: 40px;
+  top: var(--ds-space-4-5);
+  right: var(--ds-space-7);
   font-size: 24px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
   background: transparent;
   border: none;
   padding: 0;
@@ -99,8 +99,8 @@ const handleViewDetail = () => {
 
 .dialog-body {
   display: flex;
-  gap: 40px;
-  padding: 40px;
+  gap: var(--ds-space-7);
+  padding: var(--ds-space-7);
   height: 900px;
   box-sizing: border-box;
 }
@@ -113,8 +113,8 @@ const handleViewDetail = () => {
 .preview-image {
   width: 100%;
   height: 820px;
-  border-radius: 12px;
-  background-color: #f5f6f7;
+  border-radius: var(--ds-radius-3);
+  background-color: var(--ds-color-bg-tertiary);
 }
 
 .right {
@@ -122,31 +122,31 @@ const handleViewDetail = () => {
   flex: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--ds-space-4);
 }
 
 .author {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #d9d9d9;
+  background-color: var(--el-fill-color);
 }
 
 .name {
   font-size: 16px;
-  color: #333;
+  color: var(--ds-color-text-primary);
   font-weight: 500;
 }
 
 .title {
   font-size: 16px;
-  color: #333;
+  color: var(--ds-color-text-primary);
   font-weight: 600;
 }
 
@@ -161,28 +161,28 @@ const handleViewDetail = () => {
   width: 100%;
   height: 40px;
   font-size: 14px;
-  border-radius: 8px;
-  background-color: #fff;
+  border-radius: var(--ds-radius-2);
+  background-color: var(--ds-color-bg-primary);
   color: var(--portal-color-primary);
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--ds-color-border);
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--ds-space-2);
 }
 
 .tag {
-  background-color: #f0f2f5;
-  color: #666;
+  background-color: var(--ds-color-bg-secondary);
+  color: var(--ds-color-text-secondary);
   font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-1);
 }
 
 .image-preview-dialog :deep(.el-dialog) {
-  border-radius: 12px;
+  border-radius: var(--ds-radius-3);
   overflow: hidden;
 }
 

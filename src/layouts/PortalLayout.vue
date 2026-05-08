@@ -9,10 +9,36 @@ const router = useRouter();
 const settingsStore = useSettingsStore();
 const searchQuery = ref('');
 
-const applyPortalPrimaryColor = () => {
+onMounted(() => {
   const root = document.documentElement;
-  const primary = '#8b5cf6';
+  const portalEl = document.querySelector(
+    '.portal-layout.portal-theme'
+  ) as HTMLElement | null;
+  const primary = portalEl
+    ? getComputedStyle(portalEl)
+        .getPropertyValue('--portal-color-primary')
+        .trim()
+    : '';
+  if (!primary) return;
   root.style.setProperty('--el-color-primary', primary);
+
+  const hasColorMix =
+    typeof CSS !== 'undefined' &&
+    CSS.supports('color', 'color-mix(in srgb, black 50%, white)');
+  if (hasColorMix) {
+    for (let i = 1; i <= 9; i++) {
+      const ratio = 100 - i * 10;
+      root.style.setProperty(
+        `--el-color-primary-light-${i}`,
+        `color-mix(in srgb, var(--el-color-primary) ${ratio}%, white)`
+      );
+    }
+    root.style.setProperty(
+      '--el-color-primary-dark-2',
+      'color-mix(in srgb, var(--el-color-primary) 80%, black)'
+    );
+    return;
+  }
 
   const hex = primary.replace('#', '');
   const r = parseInt(hex.substring(0, 2), 16);
@@ -38,10 +64,6 @@ const applyPortalPrimaryColor = () => {
     '--el-color-primary-dark-2',
     `rgb(${darkR}, ${darkG}, ${darkB})`
   );
-};
-
-onMounted(() => {
-  applyPortalPrimaryColor();
 });
 
 onUnmounted(() => {
@@ -121,7 +143,7 @@ const goAdmin = () => {
 <style scoped>
 .portal-layout {
   min-height: 100vh;
-  background-color: #f5f6f7;
+  background-color: var(--ds-color-bg-tertiary);
   display: flex;
   flex-direction: column;
 }
@@ -130,9 +152,9 @@ const goAdmin = () => {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: #fff;
+  background-color: var(--ds-color-bg-primary);
   height: 64px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--ds-shadow-1);
   display: flex;
   justify-content: center;
 }
@@ -166,13 +188,13 @@ const goAdmin = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--ds-color-text-inverse);
   font-weight: 700;
   font-size: 14px;
 }
 
 .logo-text {
-  color: #333;
+  color: var(--ds-color-text-primary);
   font-size: 20px;
   font-weight: bold;
   white-space: nowrap;
@@ -185,19 +207,19 @@ const goAdmin = () => {
 }
 
 .search-input :deep(.el-input__wrapper) {
-  background-color: #f0f2f5;
-  border-radius: 20px;
+  background-color: var(--ds-color-bg-secondary);
+  border-radius: var(--ds-radius-pill);
   box-shadow: none;
   height: 40px;
 }
 
 .search-input :deep(.el-input__wrapper.is-focus) {
-  box-shadow: 0 0 0 1px var(--ds-color-primary) inset;
-  background-color: #fff;
+  box-shadow: 0 0 0 1px var(--el-color-primary) inset;
+  background-color: var(--ds-color-bg-primary);
 }
 
 .search-input :deep(.el-input__inner) {
-  color: #333;
+  color: var(--ds-color-text-primary);
 }
 
 .header-actions {
@@ -221,7 +243,7 @@ const goAdmin = () => {
 }
 
 .user-avatar {
-  background-color: #d9d9d9;
+  background-color: var(--el-fill-color);
   transition: transform 0.2s ease;
 }
 

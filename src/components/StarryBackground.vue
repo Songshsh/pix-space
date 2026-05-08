@@ -221,7 +221,7 @@ defineExpose({
 
 .star {
   position: absolute;
-  background-color: white;
+  background-color: var(--ds-color-text-inverse);
   border-radius: 50%;
   animation: twinkle 3s infinite alternate;
 }
@@ -233,7 +233,7 @@ defineExpose({
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 255, 255, 0.8),
+    var(--ds-color-white-80),
     transparent
   );
   transform-origin: top;
@@ -245,7 +245,11 @@ defineExpose({
   width: 8px;
   height: 8px;
   z-index: 1000;
-  background: radial-gradient(circle, #fff, #667eea);
+  background: radial-gradient(
+    circle,
+    var(--ds-color-text-inverse),
+    var(--el-color-primary)
+  );
   animation: twinkle 0.8s ease-out forwards;
   transform-origin: center;
   pointer-events: none;
@@ -263,7 +267,7 @@ defineExpose({
 .nebula-1 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, #667eea, transparent);
+  background: radial-gradient(circle, var(--el-color-primary), transparent);
   top: 10%;
   left: 10%;
 }
@@ -271,7 +275,11 @@ defineExpose({
 .nebula-2 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, #764ba2, transparent);
+  background: radial-gradient(
+    circle,
+    var(--el-color-primary-dark-2),
+    transparent
+  );
   bottom: 10%;
   right: 10%;
 }
@@ -286,19 +294,33 @@ defineExpose({
 .planet-1 {
   width: 100px;
   height: 100px;
-  background: radial-gradient(circle at 30% 30%, #667eea, #0a0a2a);
+  background: radial-gradient(
+    circle at 30% 30%,
+    var(--el-color-primary),
+    var(--ds-color-space-deep)
+  );
   top: 20%;
   right: 15%;
-  box-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 0 40px
+    color-mix(in srgb, var(--el-color-primary) 30%, transparent);
 }
 
 .planet-2 {
   width: 60px;
   height: 60px;
-  background: radial-gradient(circle at 40% 40%, #f093fb, #0a0a2a);
+  background: radial-gradient(
+    circle at 40% 40%,
+    var(--ds-color-starry-accent, var(--el-color-primary-light-3)),
+    var(--ds-color-space-deep)
+  );
   bottom: 25%;
   left: 15%;
-  box-shadow: 0 0 30px rgba(240, 147, 251, 0.3);
+  box-shadow: 0 0 30px
+    color-mix(
+      in srgb,
+      var(--ds-color-starry-accent, var(--el-color-primary-light-3)) 30%,
+      transparent
+    );
 }
 
 /* Keyframes */

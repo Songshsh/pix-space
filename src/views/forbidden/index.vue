@@ -35,10 +35,64 @@ const handleGoBack = () => {
 .forbidden-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   height: 100vh;
-  background: linear-gradient(to bottom, #0a0a2a, #1a1a40, #0c0c1e);
-  color: #fff;
+  background: linear-gradient(
+    to bottom,
+    var(--ds-color-space-deep),
+    var(--ds-color-space-mid),
+    var(--ds-color-space-darker)
+  );
+  color: var(--ds-color-text-inverse);
   overflow: hidden;
   position: relative;
+
+  --ds-color-starry-accent: var(--ds-color-brand-accent);
+  --el-color-primary: var(--ds-color-brand-primary);
+  --el-color-primary-dark-2: var(--ds-color-brand-primary-dark);
+  --el-color-primary-light-1: color-mix(
+    in srgb,
+    var(--el-color-primary) 90%,
+    white
+  );
+  --el-color-primary-light-2: color-mix(
+    in srgb,
+    var(--el-color-primary) 80%,
+    white
+  );
+  --el-color-primary-light-3: color-mix(
+    in srgb,
+    var(--el-color-primary) 70%,
+    white
+  );
+  --el-color-primary-light-4: color-mix(
+    in srgb,
+    var(--el-color-primary) 60%,
+    white
+  );
+  --el-color-primary-light-5: color-mix(
+    in srgb,
+    var(--el-color-primary) 50%,
+    white
+  );
+  --el-color-primary-light-6: color-mix(
+    in srgb,
+    var(--el-color-primary) 40%,
+    white
+  );
+  --el-color-primary-light-7: color-mix(
+    in srgb,
+    var(--el-color-primary) 30%,
+    white
+  );
+  --el-color-primary-light-8: color-mix(
+    in srgb,
+    var(--el-color-primary) 20%,
+    white
+  );
+  --el-color-primary-light-9: color-mix(
+    in srgb,
+    var(--el-color-primary) 10%,
+    white
+  );
 }
 
 @keyframes fadeInUp {
@@ -60,12 +114,12 @@ const handleGoBack = () => {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 2rem;
+  padding: var(--ds-space-6);
 }
 
 .header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--ds-space-8);
   animation: fadeInUp 1s ease-out;
 }
 
@@ -75,21 +129,22 @@ const handleGoBack = () => {
   line-height: 1;
   background: linear-gradient(
     to right,
-    var(--ds-color-primary),
-    var(--ds-color-primary-dark),
-    var(--ds-color-primary-light)
+    var(--ds-color-brand-primary),
+    var(--ds-color-brand-primary-dark),
+    var(--ds-color-brand-accent)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1rem;
-  text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+  text-shadow: 0 0 20px
+    color-mix(in srgb, var(--ds-color-brand-primary) 50%, transparent);
   letter-spacing: 0.1em;
 }
 
 .header p {
   font-size: 1.5rem;
-  color: #a0a0e0;
+  color: var(--ds-color-text-muted);
   max-width: 800px;
   margin: 0 auto;
 }
@@ -99,24 +154,30 @@ const handleGoBack = () => {
 }
 
 .back-btn {
-  padding: 0 2.5rem;
+  padding: 0 var(--ds-space-7);
   font-size: 1.1rem;
   height: 3.5rem;
   border-radius: var(--ds-radius-2);
   background: linear-gradient(
     135deg,
-    var(--ds-color-primary) 0%,
-    var(--ds-color-primary-dark) 100%
+    var(--ds-color-brand-primary) 0%,
+    var(--ds-color-brand-primary-dark) 100%
   );
   border: none;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px
+    color-mix(in srgb, var(--ds-color-brand-primary) 40%, transparent);
   transition: all 0.3s ease;
 }
 
 .back-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-  background: linear-gradient(135deg, #768df1 0%, #855eb5 100%);
+  box-shadow: 0 6px 20px
+    color-mix(in srgb, var(--ds-color-brand-primary) 60%, transparent);
+  background: linear-gradient(
+    135deg,
+    var(--ds-color-brand-accent) 0%,
+    var(--ds-color-brand-primary-dark) 100%
+  );
 }
 
 @media (max-width: 768px) {

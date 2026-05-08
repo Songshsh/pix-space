@@ -23,7 +23,7 @@
       </el-form-item>
       <el-form-item label="自动备份">
         <el-switch v-model="systemSettings.autoBackup" />
-        <span style="margin-left: 8px; color: #666">每天自动备份数据</span>
+        <span class="backup-hint">每天自动备份数据</span>
       </el-form-item>
     </el-form>
 
@@ -112,15 +112,15 @@ const handleDeleteAccount = () => {
 .section-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 24px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-5) 0;
 }
 
 .subsection-title {
   font-size: 16px;
   font-weight: 500;
-  color: #333;
-  margin: 0 0 16px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-4) 0;
 }
 
 .settings-form {
@@ -130,31 +130,40 @@ const handleDeleteAccount = () => {
 .danger-zone {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--ds-space-4);
 }
 
 .danger-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: #f9fafb;
-  border-radius: 8px;
+  padding: var(--ds-space-4);
+  background: var(--el-fill-color-lighter);
+  border-radius: var(--ds-radius-2);
 }
 
 .danger-item.danger {
-  background: #fef2f2;
+  background: color-mix(
+    in srgb,
+    var(--ds-color-danger) 10%,
+    var(--ds-color-bg-primary)
+  );
 }
 
 .danger-title {
   font-weight: 500;
-  color: #333;
-  margin: 0 0 4px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-1) 0;
 }
 
 .danger-desc {
   font-size: 13px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
   margin: 0;
+}
+
+.backup-hint {
+  margin-left: var(--ds-space-2);
+  color: var(--ds-color-text-secondary);
 }
 </style>

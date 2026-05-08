@@ -25,7 +25,7 @@
       </el-form-item>
       <el-form-item label="侧边栏">
         <el-switch v-model="appearanceSettings.collapsedSidebar" />
-        <span style="margin-left: 8px; color: #666">默认折叠侧边栏</span>
+        <span class="sidebar-hint">默认折叠侧边栏</span>
       </el-form-item>
     </el-form>
   </div>
@@ -36,22 +36,29 @@ import { useSettingsStore } from '@/stores/settings';
 
 const appearanceSettings = useSettingsStore();
 
-const themeColors = [
-  '#667eea',
-  '#f59e0b',
-  '#10b981',
-  '#ef4444',
-  '#8b5cf6',
-  '#ec4899',
-];
+const themeColors = computed(() => {
+  if (typeof window === 'undefined') return [];
+  const styles = getComputedStyle(document.documentElement);
+  const vars = [
+    '--el-color-primary',
+    '--ds-color-warning',
+    '--ds-color-success',
+    '--ds-color-danger',
+    '--el-color-primary-dark-2',
+    '--el-color-primary-light-3',
+  ];
+  return vars
+    .map((name) => styles.getPropertyValue(name).trim())
+    .filter((value) => value);
+});
 </script>
 
 <style scoped>
 .section-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 24px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-5) 0;
 }
 
 .settings-form {
@@ -60,7 +67,7 @@ const themeColors = [
 
 .color-picker {
   display: flex;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .color-item {
@@ -77,6 +84,11 @@ const themeColors = [
 }
 
 .color-item.active {
-  border-color: #333;
+  border-color: var(--ds-color-text-primary);
+}
+
+.sidebar-hint {
+  margin-left: var(--ds-space-2);
+  color: var(--ds-color-text-secondary);
 }
 </style>

@@ -168,7 +168,11 @@ const handleLogout = async () => {
 }
 
 .sidebar {
-  background: linear-gradient(180deg, #1a1f36 0%, #151929 100%);
+  background: linear-gradient(
+    180deg,
+    var(--ds-color-admin-sidebar-bg-start) 0%,
+    var(--ds-color-admin-sidebar-bg-end) 100%
+  );
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
@@ -180,7 +184,7 @@ const handleLogout = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--ds-color-white-8);
 }
 
 .logo {
@@ -192,18 +196,22 @@ const handleLogout = async () => {
 .logo-icon {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    var(--el-color-primary) 0%,
+    var(--el-color-primary-dark-2) 100%
+  );
+  border-radius: var(--ds-radius-2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--ds-color-text-inverse);
   font-weight: 700;
   font-size: 14px;
 }
 
 .logo-text {
-  color: #fff;
+  color: var(--ds-color-text-inverse);
   font-size: 18px;
   font-weight: 600;
   white-space: nowrap;
@@ -213,7 +221,7 @@ const handleLogout = async () => {
   flex: 1;
   border-right: none;
   background: transparent;
-  padding: 12px 8px;
+  padding: var(--ds-space-3) var(--ds-space-2);
 }
 
 .sidebar-menu:not(.el-menu--collapse) {
@@ -221,25 +229,25 @@ const handleLogout = async () => {
 }
 
 :deep(.sidebar-menu .el-menu-item) {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ds-color-white-65);
   height: 48px;
   line-height: 48px;
-  margin: 4px 0;
-  border-radius: 8px;
+  margin: var(--ds-space-1) 0;
+  border-radius: var(--ds-radius-2);
 }
 
 :deep(.sidebar-menu .el-menu-item:hover) {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background: var(--ds-color-white-8);
+  color: var(--ds-color-text-inverse);
 }
 
 :deep(.sidebar-menu .el-menu-item.is-active) {
   background: linear-gradient(
     90deg,
-    rgba(102, 126, 234, 0.2) 0%,
-    rgba(118, 75, 162, 0.1) 100%
+    var(--el-color-primary-light-9) 0%,
+    var(--el-color-primary-light-8) 100%
   );
-  color: #667eea;
+  color: var(--el-color-primary);
 }
 
 :deep(.sidebar-menu .el-menu-item .el-icon) {
@@ -247,30 +255,30 @@ const handleLogout = async () => {
 }
 
 .sidebar-footer {
-  padding: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--ds-space-3);
+  border-top: 1px solid var(--ds-color-white-8);
   display: flex;
   justify-content: center;
 }
 
 .sidebar-footer .el-button {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ds-color-white-65);
 }
 
 .sidebar-footer .el-button:hover {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--ds-color-text-inverse);
+  background-color: var(--ds-color-white-8);
 }
 
 .main-header {
-  background: #fff;
-  border-bottom: 1px solid #e8e8e8;
+  background: var(--ds-color-bg-primary);
+  border-bottom: 1px solid var(--ds-color-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 var(--ds-space-5);
   height: 56px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--ds-shadow-1);
 }
 
 .header-left {
@@ -281,25 +289,25 @@ const handleLogout = async () => {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--ds-space-4);
 }
 
 .user-trigger {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--ds-space-2);
   cursor: pointer;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-2);
   transition: background 0.2s;
 }
 
 .user-trigger:hover {
-  background: #f5f5f5;
+  background: var(--el-fill-color-light);
 }
 
 .user-name {
-  color: #333;
+  color: var(--ds-color-text-primary);
   font-size: 14px;
   max-width: 120px;
   overflow: hidden;
@@ -308,13 +316,13 @@ const handleLogout = async () => {
 }
 
 .arrow-icon {
-  color: #999;
+  color: var(--ds-color-text-tertiary);
   font-size: 12px;
 }
 
 .main-content {
-  background: #f0f2f5;
-  padding: 24px;
+  background: var(--ds-color-bg-secondary);
+  padding: var(--ds-space-5);
   overflow-y: auto;
 }
 </style>

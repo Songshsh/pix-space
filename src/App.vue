@@ -24,8 +24,8 @@ const isAuthReady = computed(() => userStore.isAuthReady);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  color: #606266;
+  gap: var(--ds-space-2);
+  color: var(--el-text-color-regular);
   font-size: 14px;
 }
 

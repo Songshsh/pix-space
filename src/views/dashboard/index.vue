@@ -94,23 +94,23 @@ onMounted(() => {
 }
 
 .welcome-section {
-  margin-bottom: var(--ds-space-5, 24px);
+  margin-bottom: var(--ds-space-5);
 }
 
 .welcome-section h1 {
   font-size: 28px;
   font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 8px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-2) 0;
 }
 
 .welcome-section p {
   font-size: 14px;
-  color: #666;
+  color: var(--ds-color-text-secondary);
   margin: 0;
 }
 
 .content-row {
-  margin-bottom: var(--ds-space-5, 24px);
+  margin-bottom: var(--ds-space-5);
 }
 </style>

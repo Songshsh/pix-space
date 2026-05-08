@@ -1,8 +1,9 @@
 export const PREVIEW_COLORS = [
-  '#667eea',
-  '#f093fb',
-  '#4facfe',
-  '#fa709a',
-  '#10b981',
-  '#8b5cf6',
+  'var(--el-color-primary)',
+  'var(--el-color-primary-light-3)',
+  'var(--ds-color-warning)',
+  'var(--ds-color-danger)',
+  'var(--ds-color-success)',
+  'var(--ds-color-info)',
+  'var(--el-color-primary-dark-2)',
 ];

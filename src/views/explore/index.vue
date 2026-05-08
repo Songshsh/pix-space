@@ -102,7 +102,13 @@ const setSearchTag = (tag: string) => {
 const masonryHeights = [
   300, 450, 200, 380, 250, 400, 250, 320, 280, 400, 350, 200, 450, 300, 250,
 ];
-const bgColors = ['#f0ebf8', '#ebf4f8', '#f8ebeb', '#ebf8f0', '#f8f5eb'];
+const bgColors = [
+  'var(--el-color-primary-light-9)',
+  'var(--el-color-primary-light-8)',
+  'var(--el-color-primary-light-7)',
+  'var(--el-color-primary-light-6)',
+  'var(--el-color-primary-light-5)',
+];
 const sampleTags = [
   ['UI设计', '极简主义'],
   ['3D渲染'],
@@ -353,28 +359,28 @@ const handleViewDetail = (id: string) => {
 .result-info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--ds-space-2);
 }
 
 .result-title {
   font-size: 18px;
   font-weight: 700;
-  color: #333;
+  color: var(--ds-color-text-primary);
   line-height: 1;
 }
 
 .result-count {
   font-size: 12px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
   line-height: 1;
 }
 
 .sort-toggle {
   width: 152px;
   height: 32px;
-  border-radius: 16px;
-  background-color: #fff;
-  padding: 4px;
+  border-radius: var(--ds-radius-pill);
+  background-color: var(--ds-color-bg-primary);
+  padding: var(--ds-space-1);
   display: flex;
   align-items: center;
   gap: 0;
@@ -383,62 +389,62 @@ const handleViewDetail = (id: string) => {
 .sort-option {
   width: 72px;
   height: 24px;
-  border-radius: 12px;
+  border-radius: var(--ds-radius-3);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  color: #666;
+  color: var(--ds-color-text-secondary);
   cursor: pointer;
   user-select: none;
 }
 
 .sort-option.active {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--ds-color-text-primary);
+  color: var(--ds-color-text-inverse);
 }
 
 .related-bar {
   height: 56px;
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 0 16px;
+  background-color: var(--ds-color-bg-primary);
+  border-radius: var(--ds-radius-3);
+  padding: 0 var(--ds-space-4);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .related-title {
   font-size: 12px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
   white-space: nowrap;
 }
 
 .related-items {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--ds-space-2);
   overflow: hidden;
 }
 
 .related-pill {
   height: 28px;
-  padding: 0 14px;
-  background-color: #f0f2f5;
-  border-radius: 14px;
+  padding: 0 var(--ds-space-4);
+  background-color: var(--ds-color-bg-secondary);
+  border-radius: var(--ds-radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  color: #666;
+  color: var(--ds-color-text-secondary);
   cursor: pointer;
   user-select: none;
 }
 
 .state-card {
   height: 360px;
-  background-color: #fff;
-  border-radius: 12px;
+  background-color: var(--ds-color-bg-primary);
+  border-radius: var(--ds-radius-3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -454,9 +460,9 @@ const handleViewDetail = (id: string) => {
 .state-icon {
   width: 64px;
   height: 64px;
-  border-radius: 32px;
-  background-color: #f0f2f5;
-  color: #999;
+  border-radius: 50%;
+  background-color: var(--ds-color-bg-secondary);
+  color: var(--ds-color-text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -467,59 +473,59 @@ const handleViewDetail = (id: string) => {
 .state-title {
   font-size: 18px;
   font-weight: 700;
-  color: #333;
-  margin-top: 16px;
+  color: var(--ds-color-text-primary);
+  margin-top: var(--ds-space-4);
 }
 
 .state-desc {
   font-size: 12px;
-  color: #999;
-  margin-top: 8px;
+  color: var(--ds-color-text-tertiary);
+  margin-top: var(--ds-space-2);
 }
 
 .state-actions {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 24px;
+  gap: var(--ds-space-4);
+  margin-top: var(--ds-space-5);
 }
 
 .state-actions--empty {
   width: 100%;
-  gap: 20px;
+  gap: var(--ds-space-4-5);
 }
 
 .state-hot {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--ds-space-3);
   align-items: center;
 }
 
 .state-hot-title {
   font-size: 12px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
 }
 
 .state-hot-items {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
+  gap: var(--ds-space-2);
 }
 
 .state-hot-pill {
   height: 28px;
-  padding: 0 14px;
-  background-color: #f0f2f5;
-  border-radius: 14px;
+  padding: 0 var(--ds-space-4);
+  background-color: var(--ds-color-bg-secondary);
+  border-radius: var(--ds-radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  color: #666;
+  color: var(--ds-color-text-secondary);
   cursor: pointer;
   user-select: none;
   border: none;
@@ -528,9 +534,9 @@ const handleViewDetail = (id: string) => {
 .state-retry {
   height: 32px;
   width: 96px;
-  border-radius: 16px;
-  background-color: var(--ds-color-primary);
-  color: #fff;
+  border-radius: var(--ds-radius-pill);
+  background-color: var(--el-color-primary);
+  color: var(--ds-color-text-inverse);
   border: none;
   cursor: pointer;
   font-size: 12px;
@@ -539,7 +545,7 @@ const handleViewDetail = (id: string) => {
 
 .state-back {
   background: transparent;
-  color: var(--ds-color-primary);
+  color: var(--el-color-primary);
   border: none;
   cursor: pointer;
   font-size: 12px;
@@ -549,27 +555,27 @@ const handleViewDetail = (id: string) => {
 .category-tag {
   height: 32px;
   padding: 0 var(--ds-space-4);
-  border-radius: 16px;
-  background-color: #fff;
-  color: #666;
+  border-radius: var(--ds-radius-pill);
+  background-color: var(--ds-color-bg-primary);
+  color: var(--ds-color-text-secondary);
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--ds-color-border);
   transition: all 0.2s ease;
   user-select: none;
 }
 
 .category-tag:hover {
-  background-color: #f9f9f9;
+  background-color: var(--el-fill-color-light);
 }
 
 .category-tag.active {
-  background-color: var(--ds-color-primary);
-  color: #fff;
-  border-color: var(--ds-color-primary);
+  background-color: var(--el-color-primary);
+  color: var(--ds-color-text-inverse);
+  border-color: var(--el-color-primary);
 }
 
 /* CSS Columns for Masonry Layout */
@@ -585,9 +591,9 @@ const handleViewDetail = (id: string) => {
 }
 
 .card {
-  background-color: #fff;
+  background-color: var(--ds-color-bg-primary);
   border-radius: var(--ds-radius-3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--ds-shadow-1);
   overflow: hidden;
   transition:
     transform 0.2s ease,
@@ -597,7 +603,7 @@ const handleViewDetail = (id: string) => {
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--ds-shadow-2);
 }
 
 .card-image {
@@ -612,7 +618,7 @@ const handleViewDetail = (id: string) => {
 .card-title {
   font-size: 14px;
   font-weight: 500;
-  color: #333;
+  color: var(--ds-color-text-primary);
   margin-bottom: var(--ds-space-3);
   white-space: nowrap;
   overflow: hidden;
@@ -627,8 +633,8 @@ const handleViewDetail = (id: string) => {
 }
 
 .tag-badge {
-  background-color: #f0f2f5;
-  color: #666;
+  background-color: var(--ds-color-bg-secondary);
+  color: var(--ds-color-text-secondary);
   font-size: 10px;
   padding: var(--ds-space-1) var(--ds-space-2);
   border-radius: var(--ds-radius-1);
@@ -650,13 +656,13 @@ const handleViewDetail = (id: string) => {
 .author-avatar {
   width: 16px;
   height: 16px;
-  background-color: #d9d9d9;
+  background-color: var(--el-fill-color);
   border-radius: 50%;
 }
 
 .author-name {
   font-size: 12px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
 }
 
 .detail-link {

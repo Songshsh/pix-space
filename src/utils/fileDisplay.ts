@@ -13,14 +13,14 @@ export function getFileIcon(type: string): Component {
 }
 
 const FILE_COLORS: Record<string, string> = {
-  文件夹: '#f59e0b',
-  图片: '#10b981',
-  视频: '#8b5cf6',
-  文档: '#3b82f6',
+  文件夹: 'var(--ds-color-warning)',
+  图片: 'var(--ds-color-success)',
+  视频: 'var(--el-color-primary-dark-2)',
+  文档: 'var(--el-color-primary)',
 };
 
 export function getFileColor(type: string): string {
-  return FILE_COLORS[type] || '#6b7280';
+  return FILE_COLORS[type] || 'var(--ds-color-text-tertiary)';
 }
 
 export function getFileNameError(name: string): string | null {

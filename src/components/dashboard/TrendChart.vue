@@ -60,7 +60,7 @@ watch(
 
 <style scoped>
 .chart-card {
-  margin-bottom: 16px;
+  margin-bottom: var(--ds-space-4);
 }
 
 .card-header {
@@ -81,13 +81,17 @@ watch(
   align-items: flex-end;
   justify-content: space-around;
   height: 240px;
-  padding: 0 20px;
+  padding: 0 var(--ds-space-4-5);
 }
 
 .chart-bar {
   width: 40px;
-  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-  border-radius: 4px 4px 0 0;
+  background: linear-gradient(
+    180deg,
+    var(--el-color-primary) 0%,
+    var(--el-color-primary-dark-2) 100%
+  );
+  border-radius: var(--ds-radius-1) var(--ds-radius-1) 0 0;
   position: relative;
   transition: all 0.3s ease;
 }
@@ -102,15 +106,15 @@ watch(
   left: 50%;
   transform: translateX(-50%);
   font-size: 12px;
-  color: #666;
+  color: var(--ds-color-text-secondary);
   font-weight: 500;
 }
 
 .chart-labels {
   display: flex;
   justify-content: space-around;
-  padding: 12px 20px 0;
+  padding: var(--ds-space-3) var(--ds-space-4-5) 0;
   font-size: 12px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
 }
 </style>

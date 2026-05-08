@@ -154,58 +154,65 @@ onMounted(() => {
 
   /* Use fixed columns based on calculated value to align perfectly */
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
+  gap: var(--ds-space-4);
 
   /* Adjust height to account for gap, padding is not used here */
-  padding-bottom: 16px;
+  padding-bottom: var(--ds-space-4);
 }
 
 .file-item {
   position: relative;
-  padding: 16px;
-  border: 1px solid #e8e8e8;
-  border-radius: 8px;
+  padding: var(--ds-space-4);
+  border: 1px solid var(--ds-color-border);
+  border-radius: var(--ds-radius-2);
   cursor: pointer;
   transition: all 0.2s;
   height: 140px; /* Force fixed height for consistent virtual scrolling */
   box-sizing: border-box;
 }
 .file-item:hover {
-  border-color: #667eea;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+  border-color: var(--el-color-primary);
+  box-shadow: 0 2px 8px
+    color-mix(in srgb, var(--el-color-primary) 10%, transparent);
 }
 .file-item.selected {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.05);
+  border-color: var(--el-color-primary);
+  background: color-mix(in srgb, var(--el-color-primary) 5%, transparent);
 }
+
 .file-icon {
   display: flex;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: var(--ds-space-3);
 }
+
 .file-info {
   text-align: center;
 }
+
 .file-name {
   font-size: 14px;
-  color: #333;
-  margin: 0 0 4px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-1) 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .file-meta {
   font-size: 12px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
   margin: 0;
 }
+
 .file-actions {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: var(--ds-space-2);
+  right: var(--ds-space-2);
   opacity: 0;
   transition: opacity 0.2s;
 }
+
 .file-item:hover .file-actions {
   opacity: 1;
 }

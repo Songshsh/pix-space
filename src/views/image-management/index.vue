@@ -49,13 +49,10 @@
               ><el-icon><Search /></el-icon
             ></template>
           </el-input>
-          <el-button
-            style="margin-left: 12px"
-            @click="showFilters = !showFilters"
-          >
+          <el-button @click="showFilters = !showFilters">
             <el-icon><Filter /></el-icon>筛选
           </el-button>
-          <el-button-group style="margin-left: 12px">
+          <el-button-group>
             <el-button
               :type="viewMode === 'grid' ? 'primary' : ''"
               @click="viewMode = 'grid'"
@@ -69,11 +66,7 @@
               <el-icon><List /></el-icon>
             </el-button>
           </el-button-group>
-          <el-select
-            v-model="sortBy"
-            placeholder="排序"
-            style="width: 100px; margin-left: 12px"
-          >
+          <el-select v-model="sortBy" placeholder="排序" style="width: 100px">
             <el-option label="最新" value="newest" />
             <el-option label="最旧" value="oldest" />
             <el-option label="名称" value="name" />
@@ -102,18 +95,13 @@
                 v-if="images.length > 0"
                 :model-value="isAllSelected"
                 :indeterminate="isIndeterminate"
-                style="margin-right: 16px"
                 @change="(val) => toggleSelectAll(Boolean(val))"
               >
                 全选
               </el-checkbox>
               <h3 class="content-title">{{ collectionTitle }}</h3>
               <p class="content-subtitle">{{ totalImages }} 张图片</p>
-              <span
-                v-if="selectedImages.length > 0"
-                class="selected-count"
-                style="margin-left: 12px"
-              >
+              <span v-if="selectedImages.length > 0" class="selected-count">
                 (已选择 {{ selectedImages.length }} 项)
               </span>
             </div>
@@ -436,7 +424,7 @@ const handleBatchDelete = () => {
 }
 
 .toolbar-card {
-  margin-bottom: 16px;
+  margin-bottom: var(--ds-space-4);
 }
 
 .toolbar {
@@ -444,22 +432,22 @@ const handleBatchDelete = () => {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .toolbar-left,
 .toolbar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--ds-space-3);
 }
 
 .content-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
+  margin-bottom: var(--ds-space-4-5);
+  padding-bottom: var(--ds-space-4);
   border-bottom: 1px solid var(--el-border-color-lighter);
   min-height: 48px;
 }
@@ -467,6 +455,7 @@ const handleBatchDelete = () => {
 .header-left {
   display: flex;
   align-items: center;
+  gap: var(--ds-space-3);
 }
 
 .content-title {
@@ -478,8 +467,8 @@ const handleBatchDelete = () => {
 
 .content-subtitle {
   font-size: 14px;
-  color: #999;
-  margin: 0 0 0 12px;
+  color: var(--ds-color-text-tertiary);
+  margin: 0;
 }
 
 .selected-count {
@@ -490,19 +479,19 @@ const handleBatchDelete = () => {
 
 .preview-title {
   position: fixed;
-  top: 40px;
+  top: var(--ds-space-7);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--ds-space-3);
   z-index: 3000;
-  color: #fff;
+  color: var(--ds-color-text-inverse);
   font-size: 16px;
   background-color: var(--el-text-color-regular);
   opacity: 0.8;
-  padding: 8px 16px;
-  border-radius: 22px;
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-pill);
   transition: opacity 0.2s;
 }
 
@@ -512,24 +501,24 @@ const handleBatchDelete = () => {
 
 .preview-title-tags {
   display: flex;
-  gap: 4px;
+  gap: var(--ds-space-1);
 }
 
 .preview-tag {
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: var(--ds-space-2);
+  padding-right: var(--ds-space-2);
 }
 
 .preview-title-count {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--ds-color-white-80);
   font-size: 14px;
 }
 
 .pagination-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
-  padding-top: 16px;
+  margin-top: var(--ds-space-4-5);
+  padding-top: var(--ds-space-4);
   border-top: 1px solid var(--el-border-color-lighter);
 }
 </style>

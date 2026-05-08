@@ -83,15 +83,15 @@ const handleTwoFactorChange = (value: string | number | boolean) => {
 .section-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 24px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-5) 0;
 }
 
 .subsection-title {
   font-size: 16px;
   font-weight: 500;
-  color: #333;
-  margin: 0 0 16px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-4) 0;
 }
 
 .settings-form {
@@ -102,19 +102,19 @@ const handleTwoFactorChange = (value: string | number | boolean) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: #f9fafb;
-  border-radius: 8px;
+  padding: var(--ds-space-4);
+  background: var(--el-fill-color-lighter);
+  border-radius: var(--ds-radius-2);
 }
 
 .two-factor-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .two-factor-info p {
   margin: 0;
-  color: #666;
+  color: var(--ds-color-text-secondary);
 }
 </style>

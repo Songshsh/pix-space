@@ -84,17 +84,17 @@ const handleSubmit = () => {
 
 <style scoped>
 .login-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--ds-color-white-5);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 3rem;
+  border: 1px solid var(--ds-color-white-10);
+  border-radius: var(--ds-radius-4);
+  padding: var(--ds-space-8);
   width: 100%;
   max-width: 450px;
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 0 20px rgba(255, 255, 255, 0.02);
+    0 20px 60px var(--ds-color-black-30),
+    0 0 0 1px var(--ds-color-white-5),
+    inset 0 0 20px var(--ds-color-white-2);
   animation: fadeInUp 1s ease-out 0.3s both;
   position: relative;
   overflow: hidden;
@@ -109,94 +109,95 @@ const handleSubmit = () => {
   height: 4px;
   background: linear-gradient(
     to right,
-    var(--ds-color-primary),
-    var(--ds-color-primary-dark),
-    var(--ds-color-primary-light)
+    var(--el-color-primary),
+    var(--el-color-primary-dark-2),
+    var(--el-color-primary-light-3)
   );
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--ds-radius-4) var(--ds-radius-4) 0 0;
 }
 
 .login-card h2 {
   font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #fff;
+  margin-bottom: var(--ds-space-6);
+  color: var(--ds-color-text-inverse);
   text-align: center;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--ds-space-5);
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #a0a0e0;
+  margin-bottom: var(--ds-space-2);
+  color: var(--ds-color-text-muted);
   font-weight: 500;
 }
 
 .form-control {
   width: 100%;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  color: #fff;
+  padding: var(--ds-space-4);
+  background: var(--ds-color-white-7);
+  border: 1px solid var(--ds-color-white-10);
+  border-radius: var(--ds-radius-2);
+  color: var(--ds-color-text-inverse);
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: var(--ds-color-primary);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--el-color-primary);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--el-color-primary) 20%, transparent);
+  background: var(--ds-color-white-10);
 }
 
 .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--ds-color-white-40);
 }
 
 .remember-forgot {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--ds-space-6);
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
-  color: #a0a0e0;
+  color: var(--ds-color-text-muted);
   cursor: pointer;
 }
 
 .checkbox-label input {
-  margin-right: 0.5rem;
-  accent-color: var(--ds-color-primary);
+  margin-right: var(--ds-space-2);
+  accent-color: var(--el-color-primary);
 }
 
 .forgot-password {
-  color: var(--ds-color-primary);
+  color: var(--el-color-primary);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .forgot-password:hover {
-  color: var(--ds-color-primary-dark);
+  color: var(--el-color-primary-dark-2);
   text-decoration: underline;
 }
 
 .login-btn {
   width: 100%;
-  padding: 1rem;
+  padding: var(--ds-space-4);
   background: linear-gradient(
     to right,
-    var(--ds-color-primary),
-    var(--ds-color-primary-dark)
+    var(--el-color-primary),
+    var(--el-color-primary-dark-2)
   );
   border: none;
-  border-radius: 10px;
-  color: white;
+  border-radius: var(--ds-radius-2);
+  color: var(--ds-color-text-inverse);
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -207,7 +208,8 @@ const handleSubmit = () => {
 
 .login-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 20px
+    color-mix(in srgb, var(--el-color-primary) 30%, transparent);
 }
 
 .login-btn:active:not(:disabled) {
@@ -229,7 +231,7 @@ const handleSubmit = () => {
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    var(--ds-color-white-20),
     transparent
   );
   transform: rotate(30deg);
@@ -238,12 +240,12 @@ const handleSubmit = () => {
 
 .signup-link {
   text-align: center;
-  color: #a0a0e0;
-  margin-top: 2rem;
+  color: var(--ds-color-text-muted);
+  margin-top: var(--ds-space-6);
 }
 
 .signup-link a {
-  color: var(--ds-color-primary);
+  color: var(--el-color-primary);
   text-decoration: none;
   font-weight: 600;
 }

@@ -47,34 +47,34 @@ const notificationSettings = reactive({
 .section-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 24px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-5) 0;
 }
 
 .notification-settings {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--ds-space-4);
 }
 
 .notification-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: #f9fafb;
-  border-radius: 8px;
+  padding: var(--ds-space-4);
+  background: var(--el-fill-color-lighter);
+  border-radius: var(--ds-radius-2);
 }
 
 .notification-title {
   font-weight: 500;
-  color: #333;
-  margin: 0 0 4px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-1) 0;
 }
 
 .notification-desc {
   font-size: 13px;
-  color: #999;
+  color: var(--ds-color-text-tertiary);
   margin: 0;
 }
 </style>

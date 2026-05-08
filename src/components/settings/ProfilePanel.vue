@@ -5,7 +5,7 @@
       <el-form-item label="头像">
         <div class="avatar-upload">
           <el-avatar :size="80" :icon="UserFilled" />
-          <el-button type="primary" size="small" style="margin-left: 16px">
+          <el-button type="primary" size="small" class="avatar-upload-btn">
             更换头像
           </el-button>
         </div>
@@ -55,8 +55,8 @@ const handleSaveProfile = () => {
 .section-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 24px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-5) 0;
 }
 
 .settings-form {
@@ -66,5 +66,9 @@ const handleSaveProfile = () => {
 .avatar-upload {
   display: flex;
   align-items: center;
+}
+
+.avatar-upload-btn {
+  margin-left: var(--ds-space-4);
 }
 </style>

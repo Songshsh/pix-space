@@ -192,14 +192,14 @@ watch(searchKeyword, () => {
 }
 
 .breadcrumb-container {
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: var(--ds-space-4);
+  padding-bottom: var(--ds-space-4);
+  border-bottom: 1px solid var(--ds-color-border);
 }
 
 .pagination-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: var(--ds-space-4);
 }
 </style>

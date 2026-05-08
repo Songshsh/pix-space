@@ -55,14 +55,14 @@ defineEmits<{
 
 <style scoped>
 .sidebar-card {
-  margin-bottom: 16px;
+  margin-bottom: var(--ds-space-4);
 }
 
 .sidebar-title {
   font-size: 14px;
   font-weight: 600;
-  color: #333;
-  margin: 0 0 12px 0;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-3) 0;
 }
 
 .sidebar-card :deep(.el-menu) {
@@ -85,12 +85,12 @@ defineEmits<{
 .tags-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--ds-space-2);
 }
 
 .tag-item {
   cursor: pointer;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: var(--ds-space-2);
+  padding-right: var(--ds-space-2);
 }
 </style>

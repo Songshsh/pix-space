@@ -49,7 +49,7 @@
                 :model-value="selectedImages.includes(image.id.toString())"
               />
             </div>
-            <el-icon :size="48" color="rgba(255,255,255,0.3)">
+            <el-icon :size="48" color="var(--ds-color-white-30)">
               <Picture />
             </el-icon>
           </div>
@@ -62,7 +62,13 @@
                 size="small"
                 @click.stop="$emit('toggle-favorite', image)"
               >
-                <el-icon :color="image.favorite ? '#f56c6c' : '#666'">
+                <el-icon
+                  :color="
+                    image.favorite
+                      ? 'var(--ds-color-danger)'
+                      : 'var(--ds-color-text-secondary)'
+                  "
+                >
                   <Star />
                 </el-icon>
               </el-button>
@@ -71,7 +77,9 @@
                 @command="(cmd: string) => handleCommand(cmd, image)"
               >
                 <el-button text circle size="small" @click.stop>
-                  <el-icon color="#666"><MoreFilled /></el-icon>
+                  <el-icon color="var(--ds-color-text-secondary)"
+                    ><MoreFilled
+                  /></el-icon>
                 </el-button>
                 <template #dropdown>
                   <el-dropdown-menu>
@@ -124,7 +132,7 @@
           :style="{ background: row.color }"
           @click="$emit('click-image', row)"
         >
-          <el-icon :size="24" color="rgba(255,255,255,0.3)">
+          <el-icon :size="24" color="var(--ds-color-white-30)">
             <Picture />
           </el-icon>
         </div>
@@ -287,12 +295,12 @@ onMounted(() => {
 .images-grid-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  padding-bottom: 16px;
+  gap: var(--ds-space-4);
+  padding-bottom: var(--ds-space-4);
 }
 
 .image-card {
-  border-radius: 8px;
+  border-radius: var(--ds-radius-2);
   overflow: hidden;
   cursor: pointer;
   transition: all 0.2s;
@@ -306,9 +314,9 @@ onMounted(() => {
 .image-card:hover,
 .image-card:focus {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--ds-shadow-1);
   outline: none;
-  border-color: var(--ds-color-primary-light, #f093fb);
+  border-color: var(--el-color-primary);
 }
 
 .image-card.selected {
@@ -325,14 +333,14 @@ onMounted(() => {
 
 .image-checkbox {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: var(--ds-space-2);
+  left: var(--ds-space-2);
   z-index: 10;
 }
 
 .image-overlay {
-  padding: 12px;
-  background: #fff;
+  padding: var(--ds-space-3);
+  background: var(--ds-color-bg-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -340,23 +348,23 @@ onMounted(() => {
 
 .image-title {
   font-size: 14px;
-  color: #333;
+  color: var(--ds-color-text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1;
-  margin-right: 8px;
+  margin-right: var(--ds-space-2);
 }
 
 .image-actions {
   display: flex;
-  gap: 4px;
+  gap: var(--ds-space-1);
 }
 
 .table-preview {
   width: 48px;
   height: 48px;
-  border-radius: 4px;
+  border-radius: var(--ds-radius-1);
   display: flex;
   align-items: center;
   justify-content: center;
