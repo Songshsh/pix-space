@@ -83,11 +83,11 @@
 
 ## 5. 视觉与样式对齐要求
 
-- 背景色：`#f5f6f7`
-- Header：`64px` 高度，白底 + 轻阴影
-- 搜索框：宽 `800px`，高 `40px`，圆角 `20px`，底色 `#f0f2f5`
-- tags pill：高 `32px`，圆角 `16px`
-- 卡片：白底、圆角 `12px`、轻阴影；hover 上移与阴影增强
+- 背景色：实现时映射 `src/styles/tokens.css`（如 `--ds-color-bg-tertiary`）
+- Header：`64px` 高度，白底 + 轻阴影（如 `--ds-shadow-1`）
+- 搜索框：宽 `800px`，高 `40px`，圆角使用 `--ds-radius-pill`，底色使用 `--ds-color-bg-secondary`
+- tags pill：高 `32px`，圆角使用 `--ds-radius-pill`
+- 卡片：白底、圆角使用 `--ds-radius-3`、阴影使用 `--ds-shadow-1`；hover 上移与阴影增强
 
 ## 6. 实现拆分建议
 

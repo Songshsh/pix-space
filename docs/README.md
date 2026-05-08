@@ -20,6 +20,7 @@
 
 - [2026-04-24-material-gallery-portal-design.md](superpowers/specs/2026-04-24-material-gallery-portal-design.md)：前台设计方案
 - [2026-04-23-mock-roles-and-menu-access-design.md](superpowers/specs/2026-04-23-mock-roles-and-menu-access-design.md)：模拟角色测试账号与菜单权限体系设计
+- [2026-04-30-explore-search-pen-to-code-design.md](superpowers/specs/2026-04-30-explore-search-pen-to-code-design.md)：Explore 搜索与 pen 转码方案
 
 ## 工作剧本
 

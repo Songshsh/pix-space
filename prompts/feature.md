@@ -6,7 +6,7 @@
 
 先读取以下文档（如果尚未读取）：
 
-- `.trae/ai-rules.md`
+- `.trae/rules/project_rules.md`
 - `docs/FRONTEND_SPEC.md`
 - 对应领域的 README（例如新增接口时阅读 `src/api/README.md`）
 
