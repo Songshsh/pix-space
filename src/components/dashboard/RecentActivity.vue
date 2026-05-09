@@ -27,6 +27,6 @@ defineProps<{
 
 <style scoped>
 .activity-card {
-  margin-bottom: 16px;
+  margin-bottom: var(--ds-space-4);
 }
 </style>

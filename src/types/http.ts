@@ -10,11 +10,6 @@ declare module 'axios' {
 
 export type { AxiosRequestConfig };
 
-export interface User {
-  email: string;
-  role: string; // e.g. 'admin', 'user'
-}
-
 export interface ApiResponse<T = unknown> {
   code: number; // 0 indicates success
   message: string; // Error or success message

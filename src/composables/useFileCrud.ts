@@ -35,7 +35,7 @@ export function useFileCrud(
       ElMessage.warning(error);
       return;
     }
-    ElMessage.success('文件夹创建成功');
+    ElMessage.info('文件夹创建功能开发中');
     folderDialogVisible.value = false;
   };
 
@@ -57,8 +57,8 @@ export function useFileCrud(
       .catch(() => {});
   };
 
-  const handleMove = (file: FileItem) => {
-    ElMessage.info(`移动文件: ${file.name}`);
+  const handleMove = (_file: FileItem) => {
+    ElMessage.info('移动文件功能开发中');
   };
 
   const handleDeleteFile = (file: FileItem) => {

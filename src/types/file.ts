@@ -2,7 +2,7 @@ export interface FileItem {
   id: number;
   name: string;
   type: string;
-  size: string;
+  size: number;
   modifiedAt: string;
 }
 

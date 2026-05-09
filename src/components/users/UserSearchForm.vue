@@ -50,12 +50,12 @@ const emit = defineEmits<{
 
 <style scoped>
 .search-card {
-  margin-bottom: 16px;
+  margin-bottom: var(--ds-space-4);
 }
 
 .search-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--ds-space-2);
 }
 </style>

@@ -64,7 +64,7 @@
               >
                 <el-icon
                   :color="
-                    image.favorite
+                    image.isFavorite
                       ? 'var(--ds-color-danger)'
                       : 'var(--ds-color-text-secondary)'
                   "
@@ -145,7 +145,11 @@
         </span>
       </template>
     </el-table-column>
-    <el-table-column prop="size" label="大小" width="100" />
+    <el-table-column label="大小" width="100">
+      <template #default="{ row }">
+        {{ formatFileSize(row.size) }}
+      </template>
+    </el-table-column>
     <el-table-column prop="createdAt" label="上传时间" width="180" />
     <el-table-column label="操作" width="150" fixed="right">
       <template #default="{ row }">
@@ -199,6 +203,7 @@ import {
 import type { Image } from '../../types/image';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { useElementSize } from '@vueuse/core';
+import { formatFileSize } from '../../utils/fileDisplay';
 
 const props = defineProps<{
   viewMode: string;
@@ -307,8 +312,7 @@ onMounted(() => {
   border: 2px solid transparent;
   display: flex;
   flex-direction: column;
-  height: 220px; /* Force fixed height for virtual scrolling */
-  box-sizing: border-box;
+  height: 220px;
 }
 
 .image-card:hover,

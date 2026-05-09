@@ -5,6 +5,105 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>%VITE_APP_TITLE%</title>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const pathname = window.location.pathname || '/';
+        const isAdmin = pathname.startsWith('/admin') || pathname === '/login';
+
+        const parseRgbToHex = (value) => {
+          const match = value
+            .replace(/\s+/g, '')
+            .match(/^rgba?\((\d+),(\d+),(\d+)(?:,([\d.]+))?\)$/i);
+          if (!match) return null;
+          const r = Math.max(0, Math.min(255, Number(match[1])));
+          const g = Math.max(0, Math.min(255, Number(match[2])));
+          const b = Math.max(0, Math.min(255, Number(match[3])));
+          return (
+            '#' +
+            [r, g, b]
+              .map((n) => n.toString(16).padStart(2, '0'))
+              .join('')
+              .toLowerCase()
+          );
+        };
+
+        const normalizeToHex = (value) => {
+          const v = String(value || '').trim();
+          if (!v) return null;
+          if (v.startsWith('#')) return v.toLowerCase();
+          if (v.startsWith('var(')) return null;
+          return parseRgbToHex(v);
+        };
+
+        const applyPrimaryColor = (value) => {
+          const hexColor = normalizeToHex(value);
+          if (!hexColor) return;
+
+          root.style.setProperty('--el-color-primary', hexColor);
+
+          const hasColorMix =
+            typeof CSS !== 'undefined' &&
+            CSS.supports('color', 'color-mix(in srgb, black 50%, white)');
+          if (hasColorMix) {
+            for (let i = 1; i <= 9; i++) {
+              const ratio = 100 - i * 10;
+              root.style.setProperty(
+                `--el-color-primary-light-${i}`,
+                `color-mix(in srgb, var(--el-color-primary) ${ratio}%, white)`
+              );
+            }
+            root.style.setProperty(
+              '--el-color-primary-dark-2',
+              'color-mix(in srgb, var(--el-color-primary) 80%, black)'
+            );
+            return;
+          }
+
+          const hex = hexColor.replace('#', '');
+          const r = parseInt(hex.substring(0, 2), 16);
+          const g = parseInt(hex.substring(2, 4), 16);
+          const b = parseInt(hex.substring(4, 6), 16);
+
+          for (let i = 1; i <= 9; i++) {
+            const mixRatio = i * 0.1;
+            const mixR = Math.round(255 * mixRatio + r * (1 - mixRatio));
+            const mixG = Math.round(255 * mixRatio + g * (1 - mixRatio));
+            const mixB = Math.round(255 * mixRatio + b * (1 - mixRatio));
+            root.style.setProperty(
+              `--el-color-primary-light-${i}`,
+              `rgb(${mixR}, ${mixG}, ${mixB})`
+            );
+          }
+
+          const darkRatio = 0.2;
+          const darkR = Math.round(r * (1 - darkRatio));
+          const darkG = Math.round(g * (1 - darkRatio));
+          const darkB = Math.round(b * (1 - darkRatio));
+          root.style.setProperty(
+            '--el-color-primary-dark-2',
+            `rgb(${darkR}, ${darkG}, ${darkB})`
+          );
+        };
+
+        const getAdminPrimaryColor = () => {
+          try {
+            const raw = window.localStorage.getItem('pix-space-settings-store');
+            if (!raw) return '';
+            const parsed = JSON.parse(raw);
+            return typeof parsed.primaryColor === 'string'
+              ? parsed.primaryColor
+              : '';
+          } catch {
+            return '';
+          }
+        };
+
+        const portalPrimaryColor = '#8b5cf6';
+        const adminPrimaryColor = isAdmin ? getAdminPrimaryColor() : '';
+        applyPrimaryColor(adminPrimaryColor || portalPrimaryColor);
+      })();
+    </script>
   </head>
 
   <body>
@@ -16,7 +115,7 @@
           align-items: center;
           height: 100vh;
           width: 100vw;
-          background-color: #f0f2f5;
+          background-color: var(--ds-color-bg-secondary, #f0f2f5);
           font-family:
             -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             'Helvetica Neue', Arial, sans-serif;
@@ -24,9 +123,9 @@
         .initial-loading-spinner {
           width: 40px;
           height: 40px;
-          border: 3px solid rgba(102, 126, 234, 0.2);
+          border: 3px solid rgba(0, 0, 0, 0.08);
           border-radius: 50%;
-          border-top-color: #667eea;
+          border-top-color: var(--el-color-primary, #667eea);
           animation: initial-spin 1s ease-in-out infinite;
         }
         @keyframes initial-spin {

@@ -81,7 +81,7 @@ watch(
   align-items: flex-end;
   justify-content: space-around;
   height: 240px;
-  padding: 0 var(--ds-space-4-5);
+  padding: 0 var(--ds-space-5-0);
 }
 
 .chart-bar {
@@ -113,7 +113,7 @@ watch(
 .chart-labels {
   display: flex;
   justify-content: space-around;
-  padding: var(--ds-space-3) var(--ds-space-4-5) 0;
+  padding: var(--ds-space-3) var(--ds-space-5-0) 0;
   font-size: 12px;
   color: var(--ds-color-text-tertiary);
 }

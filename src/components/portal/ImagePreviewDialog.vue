@@ -86,7 +86,7 @@ const handleViewDetail = () => {
 
 .close {
   position: absolute;
-  top: var(--ds-space-4-5);
+  top: var(--ds-space-5-0);
   right: var(--ds-space-7);
   font-size: 24px;
   color: var(--ds-color-text-tertiary);
@@ -102,7 +102,6 @@ const handleViewDetail = () => {
   gap: var(--ds-space-7);
   padding: var(--ds-space-7);
   height: 900px;
-  box-sizing: border-box;
 }
 
 .left {

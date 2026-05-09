@@ -493,7 +493,7 @@ const handleViewDetail = (id: string) => {
 
 .state-actions--empty {
   width: 100%;
-  gap: var(--ds-space-4-5);
+  gap: var(--ds-space-5-0);
 }
 
 .state-hot {

@@ -31,3 +31,15 @@ export function getFileNameError(name: string): string | null {
   if (/[<>:"/\\|?*]/.test(value)) return '名称包含非法字符';
   return null;
 }
+
+export function formatFileSize(bytes: number): string {
+  if (bytes <= 0) return '-';
+  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  let i = 0;
+  let size = bytes;
+  while (size >= 1024 && i < units.length - 1) {
+    size /= 1024;
+    i++;
+  }
+  return `${size % 1 === 0 ? size : size.toFixed(1)} ${units[i]}`;
+}

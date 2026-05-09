@@ -21,5 +21,4 @@ export interface UserInfoResult {
 export interface ChangePasswordForm {
   oldPassword?: string;
   newPassword?: string;
-  [key: string]: unknown;
 }

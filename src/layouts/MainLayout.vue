@@ -190,7 +190,7 @@ const handleLogout = async () => {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 
 .logo-icon {

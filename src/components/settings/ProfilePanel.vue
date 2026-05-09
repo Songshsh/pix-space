@@ -38,16 +38,19 @@
 
 <script setup lang="ts">
 import { UserFilled } from '@element-plus/icons-vue';
+import { useUserStore } from '../../stores/user';
+
+const userStore = useUserStore();
 
 const profileForm = reactive({
-  username: '张三',
-  email: 'zhangsan@example.com',
-  phone: '138****8888',
-  bio: '这是一段个人简介...',
+  username: userStore.name || '',
+  email: userStore.email || '',
+  phone: '',
+  bio: '',
 });
 
 const handleSaveProfile = () => {
-  ElMessage.success('个人资料已保存');
+  ElMessage.info('保存个人资料功能开发中');
 };
 </script>
 

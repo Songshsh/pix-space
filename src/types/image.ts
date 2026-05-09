@@ -2,10 +2,9 @@ export interface Image {
   id: string;
   title: string;
   url: string;
-  size: string;
+  size: number;
   createdAt: string;
   color?: string;
-  favorite?: boolean;
   isFavorite?: boolean;
   tags?: string[];
 }

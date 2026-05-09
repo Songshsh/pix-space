@@ -78,19 +78,19 @@ defineEmits<{
 
 <style scoped>
 .toolbar-card {
-  margin-bottom: 16px;
+  margin-bottom: var(--ds-space-4);
 }
 .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--ds-space-3);
 }
 .toolbar-left,
 .toolbar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--ds-space-2);
 }
 </style>

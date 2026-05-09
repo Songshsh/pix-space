@@ -28,19 +28,22 @@ export const requestRaw = axios.create(baseConfig);
 let isHandlingUnauthorized = false;
 
 function normalizeError(error: unknown): NormalizedRequestError {
-  const err = error as {
-    response?: { status?: number; data?: { message?: string } };
-    code?: string;
-    request?: unknown;
-    message?: string;
-    config?: InternalAxiosRequestConfig;
-  };
+  const isAxiosErr = axios.isAxiosError(error);
+  const err = isAxiosErr
+    ? error
+    : (error as {
+        response?: { status?: number; data?: { message?: string } };
+        code?: string;
+        request?: unknown;
+        message?: string;
+        config?: InternalAxiosRequestConfig;
+      });
   const status = err.response?.status || 0;
   const code = err.code;
-  const data = err.response?.data;
+  const data = isAxiosErr ? err.response?.data : err.response?.data;
   const isTimeout = code === 'ECONNABORTED' || err.message?.includes('timeout');
   const isCanceled =
-    (typeof axios.isCancel === 'function' && axios.isCancel(err)) ||
+    (typeof axios.isCancel === 'function' && axios.isCancel(error)) ||
     code === 'ERR_CANCELED';
   const isNetworkError = !err.response && Boolean(err.request);
   const message =

@@ -74,7 +74,7 @@ const handleMenuSelect = (key: string) => {
 }
 
 .menu-card {
-  margin-bottom: 16px;
+  margin-bottom: var(--ds-space-4);
 }
 
 .menu-card :deep(.el-card__body) {

@@ -125,8 +125,8 @@ const loadFiles = async () => {
     )) as ListResult<FileItem>;
     files.value = result.list || [];
     pagination.total = result.total || 0;
-  } catch (error) {
-    console.error('Failed to load files:', error);
+  } catch {
+    // request layer handles error notification
   } finally {
     loading.value = false;
   }

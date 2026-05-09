@@ -2,52 +2,59 @@
   <div class="login-card">
     <h2>欢迎登录</h2>
 
-    <form @submit.prevent="handleSubmit">
-      <div class="form-group">
-        <label for="email">邮箱账号</label>
-        <input
-          id="email"
+    <el-form
+      ref="formRef"
+      :model="form"
+      :rules="formRules"
+      @submit.prevent="handleSubmit"
+    >
+      <el-form-item prop="email">
+        <el-input
           v-model="form.email"
           type="email"
           data-testid="email-input"
-          class="form-control"
           placeholder="请输入您的邮箱"
-          required
-        />
-      </div>
+          size="large"
+        >
+          <template #prefix>
+            <el-icon><Message /></el-icon>
+          </template>
+        </el-input>
+      </el-form-item>
 
-      <div class="form-group">
-        <label for="password">密码</label>
-        <input
-          id="password"
+      <el-form-item prop="password">
+        <el-input
           v-model="form.password"
           type="password"
           data-testid="password-input"
-          class="form-control"
           placeholder="请输入您的密码"
-          required
-        />
-      </div>
+          size="large"
+          show-password
+        >
+          <template #prefix>
+            <el-icon><Lock /></el-icon>
+          </template>
+        </el-input>
+      </el-form-item>
 
       <div class="remember-forgot">
-        <label class="checkbox-label">
-          <input v-model="form.remember" type="checkbox" />
-          <span>保持登录状态</span>
-        </label>
+        <el-checkbox v-model="form.remember">保持登录状态</el-checkbox>
         <a href="#" class="forgot-password">忘记密码？</a>
       </div>
 
-      <button
-        type="submit"
-        data-testid="login-submit-btn"
-        class="login-btn"
-        :disabled="isLoggingIn"
-      >
-        <el-icon v-if="isLoggingIn" class="is-loading"><Loading /></el-icon>
-        <el-icon v-else><Promotion /></el-icon>
-        {{ loginBtnText }}
-      </button>
-    </form>
+      <el-form-item>
+        <el-button
+          type="primary"
+          data-testid="login-submit-btn"
+          class="login-btn"
+          size="large"
+          :loading="isLoggingIn"
+          native-type="submit"
+        >
+          {{ loginBtnText }}
+        </el-button>
+      </el-form-item>
+    </el-form>
 
     <div class="signup-link">
       <p>还没有账号？ <a href="#">立即注册</a></p>
@@ -56,8 +63,9 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
-import { Loading, Promotion } from '@element-plus/icons-vue';
+import { reactive, computed, ref } from 'vue';
+import { Lock, Message } from '@element-plus/icons-vue';
+import type { FormInstance, FormRules } from 'element-plus';
 
 const props = defineProps<{
   isLoggingIn: boolean;
@@ -67,17 +75,33 @@ const emit = defineEmits<{
   (e: 'login', payload: { email: string; password: string }): void;
 }>();
 
+const formRef = ref<FormInstance>();
+
 const form = reactive({
   email: '',
   password: '',
   remember: false,
 });
 
+const formRules = reactive<FormRules>({
+  email: [
+    { required: true, message: '请输入邮箱', trigger: 'blur' },
+    { type: 'email', message: '请输入有效的邮箱地址', trigger: 'blur' },
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, message: '密码长度不能少于6位', trigger: 'blur' },
+  ],
+});
+
 const loginBtnText = computed(() => {
   return props.isLoggingIn ? '正在登录...' : '立即登录';
 });
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
+  if (!formRef.value) return;
+  const valid = await formRef.value.validate().catch(() => false);
+  if (!valid) return;
   emit('login', { email: form.email, password: form.password });
 };
 </script>
@@ -123,38 +147,39 @@ const handleSubmit = () => {
   text-align: center;
 }
 
-.form-group {
+.login-card :deep(.el-form-item) {
   margin-bottom: var(--ds-space-5);
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: var(--ds-space-2);
-  color: var(--ds-color-text-muted);
-  font-weight: 500;
-}
-
-.form-control {
-  width: 100%;
-  padding: var(--ds-space-4);
+.login-card :deep(.el-input__wrapper) {
   background: var(--ds-color-white-7);
   border: 1px solid var(--ds-color-white-10);
+  box-shadow: none;
   border-radius: var(--ds-radius-2);
-  color: var(--ds-color-text-inverse);
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  height: 48px;
 }
 
-.form-control:focus {
-  outline: none;
+.login-card :deep(.el-input__wrapper.is-focus) {
   border-color: var(--el-color-primary);
   box-shadow: 0 0 0 3px
     color-mix(in srgb, var(--el-color-primary) 20%, transparent);
   background: var(--ds-color-white-10);
 }
 
-.form-control::placeholder {
+.login-card :deep(.el-input__inner) {
+  color: var(--ds-color-text-inverse);
+}
+
+.login-card :deep(.el-input__inner::placeholder) {
   color: var(--ds-color-white-40);
+}
+
+.login-card :deep(.el-input__prefix .el-icon) {
+  color: var(--ds-color-white-40);
+}
+
+.login-card :deep(.el-form-item__error) {
+  color: var(--ds-color-danger);
 }
 
 .remember-forgot {
@@ -164,22 +189,15 @@ const handleSubmit = () => {
   margin-bottom: var(--ds-space-6);
 }
 
-.checkbox-label {
-  display: flex;
-  align-items: center;
+.login-card :deep(.el-checkbox__label) {
   color: var(--ds-color-text-muted);
-  cursor: pointer;
-}
-
-.checkbox-label input {
-  margin-right: var(--ds-space-2);
-  accent-color: var(--el-color-primary);
 }
 
 .forgot-password {
   color: var(--el-color-primary);
   text-decoration: none;
   transition: color 0.3s ease;
+  font-size: 14px;
 }
 
 .forgot-password:hover {
@@ -189,19 +207,16 @@ const handleSubmit = () => {
 
 .login-btn {
   width: 100%;
-  padding: var(--ds-space-4);
+  height: 48px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--ds-radius-2);
   background: linear-gradient(
     to right,
     var(--el-color-primary),
     var(--el-color-primary-dark-2)
   );
   border: none;
-  border-radius: var(--ds-radius-2);
-  color: var(--ds-color-text-inverse);
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -214,28 +229,6 @@ const handleSubmit = () => {
 
 .login-btn:active:not(:disabled) {
   transform: translateY(0);
-}
-
-.login-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.login-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--ds-color-white-20),
-    transparent
-  );
-  transform: rotate(30deg);
-  animation: shine 3s infinite;
 }
 
 .signup-link {
@@ -252,15 +245,6 @@ const handleSubmit = () => {
 
 .signup-link a:hover {
   text-decoration: underline;
-}
-
-@keyframes shine {
-  0% {
-    transform: translateX(-100%) rotate(30deg);
-  }
-  100% {
-    transform: translateX(100%) rotate(30deg);
-  }
 }
 
 @keyframes fadeInUp {

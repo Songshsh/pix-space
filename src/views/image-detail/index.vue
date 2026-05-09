@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ElButton } from 'element-plus';
 import type { Image } from '../../types/image';
+import { formatFileSize } from '../../utils/fileDisplay';
 
 const route = useRoute();
 const router = useRouter();
@@ -13,14 +14,14 @@ const viewState = ref<ViewState>('loading');
 
 const imageId = computed(() => route.params.id as string);
 
-const mockImage: Image = {
+const mockImage = computed<Image>(() => ({
   id: imageId.value,
   title: '极简主义 3D 渲染图',
   url: '',
-  size: '4.2 MB',
+  size: 4404019,
   createdAt: '2026-05-06',
   tags: ['3D渲染', '极简'],
-};
+}));
 
 const author = {
   name: '作者名称',
@@ -29,7 +30,7 @@ const author = {
 const imageMeta = {
   dimensions: '3840 x 2160 px',
   format: 'PNG',
-  size: '4.2 MB',
+  size: formatFileSize(mockImage.value.size),
 };
 
 const handleCollect = () => {
@@ -198,7 +199,6 @@ setTimeout(() => {
   width: 980px;
   background-color: var(--el-fill-color-lighter);
   padding: var(--ds-space-7);
-  box-sizing: border-box;
 }
 
 .main-image {
@@ -219,7 +219,6 @@ setTimeout(() => {
 .right-col {
   width: 412px;
   padding: var(--ds-space-6) var(--ds-space-5);
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: var(--ds-space-5);

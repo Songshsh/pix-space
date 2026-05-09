@@ -2,25 +2,49 @@
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { Search } from '@element-plus/icons-vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useSettingsStore } from '@/stores/settings';
 
 const route = useRoute();
 const router = useRouter();
-const settingsStore = useSettingsStore();
 const searchQuery = ref('');
 
-onMounted(() => {
+function parseRgbToHex(value: string): string | null {
+  const match = value
+    .replace(/\s+/g, '')
+    .match(/^rgba?\((\d+),(\d+),(\d+)(?:,([\d.]+))?\)$/i);
+  if (!match) return null;
+  const r = Math.max(0, Math.min(255, Number(match[1])));
+  const g = Math.max(0, Math.min(255, Number(match[2])));
+  const b = Math.max(0, Math.min(255, Number(match[3])));
+  return (
+    '#' +
+    [r, g, b]
+      .map((n) => n.toString(16).padStart(2, '0'))
+      .join('')
+      .toLowerCase()
+  );
+}
+
+function resolveCssVar(value: string, el: HTMLElement): string {
+  const trimmed = value.trim();
+  const match = trimmed.match(/^var\((--[^)]+)\)$/);
+  if (!match) return trimmed;
+  const styles = getComputedStyle(el);
+  return styles.getPropertyValue(match[1]).trim();
+}
+
+function normalizeToHex(value: string, el: HTMLElement): string | null {
+  let v = resolveCssVar(value, el);
+  v = resolveCssVar(v, el);
+  if (v.startsWith('#')) return v;
+  return parseRgbToHex(v);
+}
+
+function applyPrimaryColorToRoot(value: string) {
   const root = document.documentElement;
-  const portalEl = document.querySelector(
-    '.portal-layout.portal-theme'
-  ) as HTMLElement | null;
-  const primary = portalEl
-    ? getComputedStyle(portalEl)
-        .getPropertyValue('--portal-color-primary')
-        .trim()
-    : '';
-  if (!primary) return;
-  root.style.setProperty('--el-color-primary', primary);
+  const hexColor = normalizeToHex(value, root);
+  if (!hexColor) return;
+
+  root.style.setProperty('--el-color-primary', hexColor);
 
   const hasColorMix =
     typeof CSS !== 'undefined' &&
@@ -40,7 +64,7 @@ onMounted(() => {
     return;
   }
 
-  const hex = primary.replace('#', '');
+  const hex = hexColor.replace('#', '');
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
@@ -64,10 +88,37 @@ onMounted(() => {
     '--el-color-primary-dark-2',
     `rgb(${darkR}, ${darkG}, ${darkB})`
   );
+}
+
+function getAdminPrimaryColorFromStorage(): string {
+  if (typeof window === 'undefined') return '';
+  const raw = window.localStorage.getItem('pix-space-settings-store');
+  if (!raw) return '';
+  try {
+    const parsed = JSON.parse(raw) as { primaryColor?: unknown };
+    return typeof parsed.primaryColor === 'string' ? parsed.primaryColor : '';
+  } catch {
+    return '';
+  }
+}
+
+onMounted(() => {
+  const portalEl = document.querySelector(
+    '.portal-layout.portal-theme'
+  ) as HTMLElement | null;
+  const primary = portalEl
+    ? getComputedStyle(portalEl)
+        .getPropertyValue('--portal-color-primary')
+        .trim()
+    : '';
+  if (!primary) return;
+  applyPrimaryColorToRoot(primary);
 });
 
 onUnmounted(() => {
-  settingsStore.applyPrimaryColor();
+  const primaryColor = getAdminPrimaryColorFromStorage();
+  if (!primaryColor) return;
+  applyPrimaryColorToRoot(primaryColor);
 });
 
 const syncQueryFromRoute = () => {
@@ -257,6 +308,5 @@ const goAdmin = () => {
   max-width: 1440px;
   margin: 0 auto;
   padding: var(--ds-space-5);
-  box-sizing: border-box;
 }
 </style>

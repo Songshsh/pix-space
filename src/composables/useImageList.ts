@@ -13,6 +13,7 @@ export function useImageList() {
   const images = ref<Image[]>([]);
   const totalImages = ref(0);
   const loading = ref(false);
+  const error = ref<string | null>(null);
 
   const currentPage = ref(1);
   const pageSize = ref(12);
@@ -27,6 +28,7 @@ export function useImageList() {
 
   const loadImages = async () => {
     loading.value = true;
+    error.value = null;
     try {
       const result = await getImageList(
         {
@@ -44,12 +46,12 @@ export function useImageList() {
         id: img.id || String(index + 1),
         title: img.title || '未命名',
         createdAt: img.createdAt || '',
-        favorite: Boolean(img.favorite),
+        isFavorite: Boolean(img.isFavorite),
         color: PREVIEW_COLORS[index % PREVIEW_COLORS.length],
       }));
       totalImages.value = result?.total || images.value.length;
-    } catch (error) {
-      console.error('Failed to load images:', error);
+    } catch (err) {
+      error.value = err instanceof Error ? err.message : '加载图片失败';
     } finally {
       loading.value = false;
     }
@@ -89,6 +91,7 @@ export function useImageList() {
     images,
     totalImages,
     loading,
+    error,
     currentPage,
     pageSize,
     searchQuery,

@@ -49,14 +49,8 @@ const starryBg = ref<InstanceType<typeof StarryBackground> | null>(null);
 const allowMockAuth = import.meta.env.VITE_ALLOW_MOCK_AUTH === 'true';
 
 const handleLogin = async (payload: { email: string; password: string }) => {
-  if (!payload.email || !payload.password) {
-    ElMessage.warning('请填写邮箱和密码');
-    return;
-  }
-
   isLoggingIn.value = true;
 
-  // Create star burst effect
   if (starryBg.value) {
     starryBg.value.triggerBurst();
   }
@@ -93,7 +87,6 @@ const handleLogin = async (payload: { email: string; password: string }) => {
       router.push((route.query.redirect || '/admin/dashboard').toString());
       return;
     }
-    // 拦截器已经处理了 error 的提示，不需手写 ElMessage.error
     console.error('Login failed', error);
   } finally {
     isLoggingIn.value = false;
@@ -102,13 +95,6 @@ const handleLogin = async (payload: { email: string; password: string }) => {
 </script>
 
 <style scoped>
-/* Base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .login-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;

@@ -54,9 +54,14 @@ async function bootstrap() {
   app.use(pinia);
   app.use(router);
 
-  const settingsStore = useSettingsStore(pinia);
-  settingsStore.applyTheme();
-  settingsStore.applyPrimaryColor();
+  const pathname = window.location.pathname;
+  const shouldInitAdminSettings =
+    pathname.startsWith('/admin') || pathname === '/login';
+  if (shouldInitAdminSettings) {
+    const settingsStore = useSettingsStore(pinia);
+    settingsStore.applyTheme();
+    settingsStore.applyPrimaryColor();
+  }
 
   const userStore = useUserStore(pinia);
   await bootstrapAuth(userStore);

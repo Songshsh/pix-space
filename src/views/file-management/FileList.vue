@@ -19,7 +19,11 @@
         </div>
       </template>
     </el-table-column>
-    <el-table-column prop="size" label="大小" width="120" />
+    <el-table-column label="大小" width="120">
+      <template #default="{ row }">
+        {{ formatFileSize(row.size) }}
+      </template>
+    </el-table-column>
     <el-table-column prop="type" label="类型" width="100">
       <template #default="{ row }">
         <el-tag size="small">{{ row.type }}</el-tag>
@@ -61,7 +65,11 @@
 
 <script setup lang="ts">
 import type { FileItem } from '../../types/file';
-import { getFileColor, getFileIcon } from '../../utils/fileDisplay';
+import {
+  getFileColor,
+  getFileIcon,
+  formatFileSize,
+} from '../../utils/fileDisplay';
 
 defineProps<{
   files: FileItem[];

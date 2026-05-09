@@ -32,7 +32,7 @@ const userForm = reactive<UserFormType>({
   username: '',
   email: '',
   password: '',
-  role: '用户',
+  role: 'user',
   status: 'active',
 });
 
@@ -70,21 +70,21 @@ const handleDelete = (row: User) => {
     type: 'warning',
   })
     .then(() => {
-      ElMessage.success('删除成功');
+      ElMessage.info('删除用户功能开发中');
     })
     .catch(() => {});
 };
 
-const handleStatusChange = (row: User) => {
-  ElMessage.success(`用户 "${row.username}" 状态已更新`);
+const handleStatusChange = (_row: User) => {
+  ElMessage.info('更新用户状态功能开发中');
 };
 
-const handleViewPermissions = (row: User) => {
-  ElMessage.info(`查看用户 "${row.username}" 的权限`);
+const handleViewPermissions = (_row: User) => {
+  ElMessage.info('查看用户权限功能开发中');
 };
 
 const handleSubmit = () => {
-  ElMessage.success(isEdit.value ? '编辑成功' : '添加成功');
+  ElMessage.info(isEdit.value ? '编辑用户功能开发中' : '添加用户功能开发中');
   dialogVisible.value = false;
 };
 
@@ -97,7 +97,7 @@ const resetForm = () => {
   userForm.username = '';
   userForm.email = '';
   userForm.password = '';
-  userForm.role = '用户';
+  userForm.role = 'user';
   userForm.status = 'active';
 };
 
@@ -124,8 +124,8 @@ const loadUsers = async () => {
     });
     tableData.value = result?.list || [];
     pagination.total = result?.total || 0;
-  } catch (error) {
-    console.error('Failed to load users:', error);
+  } catch {
+    // request layer handles error notification
   } finally {
     loading.value = false;
   }

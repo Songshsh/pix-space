@@ -322,29 +322,18 @@ const renameImage = (image: Image) => {
     });
 };
 
-const changeTags = (image: Image) => {
-  ElMessage.info(`更换标签功能开发中: ${image.title}`);
+const changeTags = (_image: Image) => {
+  ElMessage.info('更换标签功能开发中');
 };
 
-const downloadImage = (image: Image) => {
-  ElMessage.success(`开始下载图片: ${image.title}`);
+const downloadImage = (_image: Image) => {
+  ElMessage.info('下载图片功能开发中');
 };
 
 const copyImageLink = async (image: Image) => {
   try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(image.url);
-      ElMessage.success('链接已复制到剪贴板');
-    } else {
-      // fallback
-      const input = document.createElement('input');
-      input.value = image.url;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      ElMessage.success('链接已复制到剪贴板');
-    }
+    await navigator.clipboard.writeText(image.url);
+    ElMessage.success('链接已复制到剪贴板');
   } catch {
     ElMessage.error('复制失败');
   }
@@ -352,15 +341,13 @@ const copyImageLink = async (image: Image) => {
 
 const handleBatchDownload = () => {
   if (selectedImages.value.length === 0) return;
-  ElMessage.success(`开始批量下载 ${selectedImages.value.length} 张图片`);
+  ElMessage.info('批量下载功能开发中');
 };
 
 const handleBatchFavorite = () => {
   if (selectedImages.value.length === 0) return;
   images.value.forEach((img: Image) => {
     if (selectedImages.value.includes(img.id.toString())) {
-      img.favorite = true;
-      // also set isFavorite if they use both fields in mock data
       img.isFavorite = true;
     }
   });
@@ -446,7 +433,7 @@ const handleBatchDelete = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--ds-space-4-5);
+  margin-bottom: var(--ds-space-5-0);
   padding-bottom: var(--ds-space-4);
   border-bottom: 1px solid var(--el-border-color-lighter);
   min-height: 48px;
@@ -517,7 +504,7 @@ const handleBatchDelete = () => {
 .pagination-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: var(--ds-space-4-5);
+  margin-top: var(--ds-space-5-0);
   padding-top: var(--ds-space-4);
   border-top: 1px solid var(--el-border-color-lighter);
 }

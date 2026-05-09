@@ -64,7 +64,7 @@ const getTypeTag = (type: string) => {
 
 <style scoped>
 .table-row {
-  margin-bottom: 24px;
+  margin-bottom: var(--ds-space-5);
 }
 
 .card-header {

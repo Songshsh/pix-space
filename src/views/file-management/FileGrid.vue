@@ -36,7 +36,9 @@
           </div>
           <div class="file-info">
             <p class="file-name">{{ file.name }}</p>
-            <p class="file-meta">{{ file.size }} · {{ file.modifiedAt }}</p>
+            <p class="file-meta">
+              {{ formatFileSize(file.size) }} · {{ file.modifiedAt }}
+            </p>
           </div>
           <div class="file-actions">
             <el-dropdown trigger="click">
@@ -86,7 +88,11 @@ import {
 import type { FileItem } from '../../types/file';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { useElementSize } from '@vueuse/core';
-import { getFileColor, getFileIcon } from '../../utils/fileDisplay';
+import {
+  getFileColor,
+  getFileIcon,
+  formatFileSize,
+} from '../../utils/fileDisplay';
 
 const props = defineProps<{
   files: FileItem[];
@@ -167,8 +173,7 @@ onMounted(() => {
   border-radius: var(--ds-radius-2);
   cursor: pointer;
   transition: all 0.2s;
-  height: 140px; /* Force fixed height for consistent virtual scrolling */
-  box-sizing: border-box;
+  height: 140px;
 }
 .file-item:hover {
   border-color: var(--el-color-primary);
