@@ -1,4 +1,4 @@
 .portal-theme {
-  --portal-color-primary: #8b5cf6;
+  --portal-color-primary: var(--ds-color-brand-violet);
   --portal-color-primary-dark: var(--el-color-primary-dark-2);
 }

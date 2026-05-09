@@ -6,14 +6,6 @@ export const useSettingsStore = defineStore(
   'settings',
   () => {
     const theme = ref<'light' | 'dark' | 'auto'>('light');
-    const primaryColor = ref<string>(
-      (() => {
-        if (typeof window === 'undefined') return '';
-        const el = document.documentElement;
-        const styles = getComputedStyle(el);
-        return styles.getPropertyValue('--el-color-primary').trim();
-      })()
-    );
     const collapsedSidebar = ref<boolean>(false);
 
     const isDark = useDark();
@@ -50,6 +42,16 @@ export const useSettingsStore = defineStore(
       return parseRgbToHex(v);
     }
 
+    const primaryColor = ref<string>(
+      (() => {
+        if (typeof window === 'undefined') return '';
+        const el = document.documentElement;
+        const styles = getComputedStyle(el);
+        const raw = styles.getPropertyValue('--el-color-primary').trim();
+        return normalizeToHex(raw, el) ?? raw;
+      })()
+    );
+
     function applyTheme() {
       if (theme.value === 'auto') {
         // If auto, useDark's default behavior handles it by matching media query
@@ -65,6 +67,10 @@ export const useSettingsStore = defineStore(
       const el = document.documentElement;
       const hexColor = normalizeToHex(primaryColor.value, el);
       if (!hexColor) return;
+      if (primaryColor.value !== hexColor) {
+        primaryColor.value = hexColor;
+        return;
+      }
 
       useCssVar('--el-color-primary', el).value = hexColor;
 

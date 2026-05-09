@@ -40,16 +40,21 @@ const themeColors = computed(() => {
   if (typeof window === 'undefined') return [];
   const styles = getComputedStyle(document.documentElement);
   const vars = [
-    '--el-color-primary',
+    '--ds-color-brand-violet',
+    '--ds-color-brand-primary',
+    '--ds-color-brand-primary-dark',
     '--ds-color-warning',
     '--ds-color-success',
     '--ds-color-danger',
-    '--el-color-primary-dark-2',
-    '--el-color-primary-light-3',
   ];
-  return vars
+  const colors = vars
     .map((name) => styles.getPropertyValue(name).trim())
-    .filter((value) => value);
+    .filter((value) => value)
+    .map((value) => value.toLowerCase());
+  const uniq = Array.from(new Set(colors));
+  const current = appearanceSettings.primaryColor?.trim?.().toLowerCase?.();
+  if (current && !uniq.includes(current)) uniq.unshift(current);
+  return uniq;
 });
 </script>
 
