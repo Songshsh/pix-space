@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>%VITE_APP_TITLE%</title>
     <script>
+      // 注意：parseRgbToHex / normalizeToHex / applyPrimaryColor 与 src/utils/theme.ts 保持同步，修改时需同步更新
       (() => {
         const root = document.documentElement;
         const pathname = window.location.pathname || '/';
@@ -91,7 +92,8 @@
             const raw = window.localStorage.getItem('pix-space-settings-store');
             if (!raw) return '';
             const parsed = JSON.parse(raw);
-            return typeof parsed.primaryColor === 'string'
+            if (typeof parsed.primaryColor !== 'string') return '';
+            return /^#[0-9a-f]{6}$/i.test(parsed.primaryColor)
               ? parsed.primaryColor
               : '';
           } catch {

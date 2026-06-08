@@ -11,6 +11,19 @@
     "property-no-vendor-prefix": null,
     "rule-empty-line-before": null,
     "selector-class-pattern": null,
-    "shorthand-property-no-redundant-values": null
-  }
+    "shorthand-property-no-redundant-values": null,
+    "declaration-property-value-disallowed-list": {
+      "/^(color|background|background-color|border-color|outline-color|fill|stroke)$/": [
+        "/#(?!([0-9a-fA-F])\\1\\1\\b)(?!([0-9a-fA-F]{2})\\2\\2\\b)[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?(?:[0-9a-fA-F]{2})?\\b/"
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "files": ["src/styles/tokens.css"],
+      "rules": {
+        "declaration-property-value-disallowed-list": null
+      }
+    }
+  ]
 }

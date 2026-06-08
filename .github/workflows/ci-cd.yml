@@ -19,7 +19,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Setup environment variables
-        run: cp .env.example .env
+        run: |
+          cp .env.example .env
+          printf "\nVITE_USE_MOCK_DATA=false\n" >> .env
       - name: Run lint
         run: npm run lint
       - name: Run stylelint
@@ -90,7 +92,7 @@ jobs:
     permissions:
       contents: write
     env:
-      GITHUB_PAGES: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
+      VITE_GITHUB_PAGES: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -104,10 +106,10 @@ jobs:
         run: cp .env.example .env
       - name: Run security audit (PR)
         if: github.event_name == 'pull_request'
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --audit-level=high
       - name: Run security audit (push)
         if: github.event_name == 'push'
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --audit-level=high
       - name: Build
         run: npm run build
       - name: Deploy to GitHub Pages

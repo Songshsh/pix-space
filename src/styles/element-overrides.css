@@ -2,7 +2,99 @@
   opacity: 0.5;
 }
 
-.el-image-viewer__img {
-  max-width: 85% !important;
-  max-height: 95% !important;
+:root .el-image-viewer__img {
+  max-width: 85%;
+  max-height: 95%;
+}
+
+:root .el-button + .el-button {
+  margin-left: var(--ds-space-2);
+}
+
+.board-edit-dialog .el-dialog__header,
+.board-upload-dialog .el-dialog__header,
+.board-dialog .el-dialog__header {
+  border-bottom: 1px solid var(--ds-color-border);
+  padding-bottom: var(--ds-space-4);
+  margin-right: 0;
+}
+
+.board-edit-dialog .el-dialog__body,
+.board-upload-dialog .el-dialog__body,
+.board-dialog .el-dialog__body {
+  padding-top: var(--ds-space-6);
+}
+
+.board-edit-dialog .el-dialog__footer,
+.board-upload-dialog .el-dialog__footer,
+.board-dialog .el-dialog__footer {
+  border-top: 1px solid var(--ds-color-border);
+  padding-top: var(--ds-space-4);
+}
+
+.image-preview-dialog .el-dialog {
+  border-radius: var(--ds-radius-3);
+  overflow: hidden;
+}
+
+.image-preview-dialog .el-dialog__header {
+  display: none;
+}
+
+.image-preview-dialog .el-dialog__body {
+  padding: 0;
+}
+
+.image-preview-modal {
+  background: transparent;
+}
+
+.admin-layout-sidebar-menu .el-menu-item {
+  color: var(--ds-color-overlay-white-dim);
+  height: 48px;
+  line-height: 48px;
+  margin: var(--ds-space-1) 0;
+  border-radius: var(--ds-radius-2);
+}
+
+.admin-layout-sidebar-menu .el-menu-item:hover {
+  background: var(--ds-color-overlay-white-subtle);
+  color: var(--ds-color-text-inverse);
+}
+
+.admin-layout-sidebar-menu .el-menu-item.is-active {
+  background: linear-gradient(
+    90deg,
+    var(--el-color-primary-light-9) 0%,
+    var(--el-color-primary-light-8) 100%
+  );
+  color: var(--el-color-primary);
+}
+
+.admin-layout-sidebar-menu .el-menu-item .el-icon {
+  font-size: 18px;
+}
+
+.sidebar-card .el-menu {
+  border-right: none;
+}
+
+.sidebar-card .el-menu-item {
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.state-hot-pill .el-tag__content,
+.related-pill .el-tag__content {
+  font-size: 12px;
+}
+
+.state-hot-pill.el-tag,
+.related-pill.el-tag {
+  cursor: pointer;
+  background-color: var(--ds-color-bg-secondary);
+  border-color: transparent;
+  color: var(--ds-color-text-secondary);
 }

@@ -8,8 +8,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit",
-    "prelint": "node -e \"const fs=require('fs'); if(!fs.existsSync('.eslintrc-auto-import.json')) fs.writeFileSync('.eslintrc-auto-import.json', '{\\\"globals\\\":{}}');\"",
-    "lint": "npm run prelint && eslint . --ext .js,.vue,.ts,.tsx",
+    "lint": "eslint . --ext .js,.vue,.ts,.tsx --cache --cache-location node_modules/.cache/eslint",
+    "lint:fix": "eslint . --ext .js,.vue,.ts,.tsx --fix --cache --cache-location node_modules/.cache/eslint",
     "lint:style": "stylelint \"src/**/*.{css,vue}\"",
     "lint:style:fix": "stylelint \"src/**/*.{css,vue}\" --fix",
     "format": "prettier --write .",
@@ -36,6 +36,7 @@
     "@vueuse/core": "^14.2.1",
     "axios": "^1.15.0",
     "element-plus": "^2.13.5",
+    "fflate": "^0.8.3",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
@@ -115,9 +116,9 @@
     "dist"
   ],
   "overrides": {
-    "esbuild": "^0.25.0",
-    "lodash": "^4.18.1",
-    "tmp": "^0.2.5"
+    "esbuild": "0.25.0",
+    "lodash": "4.17.21",
+    "tmp": "0.2.5"
   },
   "engines": {
     "node": ">=20.19.0",
@@ -125,7 +126,6 @@
   },
   "lint-staged": {
     "*.{js,ts,vue,jsx,tsx}": [
-      "npm run prelint",
       "eslint --max-warnings 0",
       "prettier --write"
     ],

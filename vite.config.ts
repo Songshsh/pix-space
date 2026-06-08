@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { fileURLToPath, URL } from 'node:url';
@@ -8,52 +8,68 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import viteCompression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: process.env.GITHUB_PAGES === 'true' ? '/pix-space/' : '/',
-  plugins: [
-    vue(),
-    vueJsx(),
-    AutoImport({
-      imports: [
-        'vue',
-        'vue-router',
-        {
-          'element-plus': ['ElMessage', 'ElMessageBox'],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), 'VITE_');
+  const isProduction = mode === 'production';
+
+  return {
+    base: env.VITE_GITHUB_PAGES === 'true' ? '/pix-space/' : '/',
+    plugins: [
+      vue(),
+      vueJsx(),
+      AutoImport({
+        imports: [
+          'vue',
+          'vue-router',
+          {
+            'element-plus': ['ElMessage', 'ElMessageBox'],
+          },
+        ],
+        resolvers: [ElementPlusResolver()],
+        eslintrc: {
+          enabled: true,
+          filepath: './.eslintrc-auto-import.json',
         },
-      ],
-      resolvers: [ElementPlusResolver()],
-      eslintrc: {
-        enabled: true,
-      },
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    }),
-    viteCompression({
-      algorithm: 'gzip',
-      ext: '.gz',
-    }),
-  ],
-  server: {
-    host: '127.0.0.1',
-    port: 5173,
-  },
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+      ...(isProduction
+        ? [
+            viteCompression({
+              algorithm: 'gzip',
+              ext: '.gz',
+            }),
+            viteCompression({
+              algorithm: 'brotliCompress',
+              ext: '.br',
+            }),
+          ]
+        : []),
+    ],
+    server: {
+      host: '127.0.0.1',
+      port: 5173,
     },
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vue-vendor': ['vue', 'pinia', 'vue-router'],
-          icons: ['@element-plus/icons-vue'],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
+    },
+    build: {
+      target: 'es2020',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vue-vendor': ['vue', 'pinia', 'vue-router', 'axios'],
+            'element-plus': ['element-plus'],
+            icons: ['@element-plus/icons-vue'],
+          },
         },
       },
     },
-  },
-  esbuild: {
-    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
-  },
+    esbuild: {
+      drop: isProduction ? ['console', 'debugger'] : [],
+    },
+  };
 });
