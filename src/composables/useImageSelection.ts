@@ -1,17 +1,15 @@
-import { ref, computed, type Ref } from 'vue';
+import type { Ref } from 'vue';
 import type { Image } from '../types/image';
 
 export function useImageSelection(imagesRef: Ref<Image[]>) {
   const selectedImages = ref<string[]>([]);
 
+  const selectedSet = computed(() => new Set(selectedImages.value));
+
   const isAllSelected = computed(() => {
     const images = imagesRef.value;
-    return (
-      images.length > 0 &&
-      images.every((img: Image) =>
-        selectedImages.value.includes(img.id.toString())
-      )
-    );
+    const set = selectedSet.value;
+    return images.length > 0 && images.every((img) => set.has(img.id));
   });
 
   const isIndeterminate = computed(() => {
@@ -23,20 +21,18 @@ export function useImageSelection(imagesRef: Ref<Image[]>) {
   });
 
   const toggleSelect = (image: Image) => {
-    const index = selectedImages.value.indexOf(image.id.toString());
+    const id = image.id;
+    const index = selectedImages.value.indexOf(id);
     if (index > -1) {
       selectedImages.value.splice(index, 1);
     } else {
-      selectedImages.value.push(image.id.toString());
+      selectedImages.value.push(id);
     }
   };
 
-  const toggleSelectAll = (val?: boolean | Event) => {
-    const target = typeof val === 'boolean' ? val : !isAllSelected.value;
-    if (target) {
-      selectedImages.value = imagesRef.value.map((img: Image) =>
-        img.id.toString()
-      );
+  const toggleSelectAll = (val: boolean) => {
+    if (val) {
+      selectedImages.value = imagesRef.value.map((img) => img.id);
     } else {
       selectedImages.value = [];
     }
@@ -45,6 +41,17 @@ export function useImageSelection(imagesRef: Ref<Image[]>) {
   const clearSelection = () => {
     selectedImages.value = [];
   };
+
+  watch(
+    imagesRef,
+    (images) => {
+      const validIds = new Set(images.map((image) => image.id));
+      selectedImages.value = selectedImages.value.filter((id) =>
+        validIds.has(id)
+      );
+    },
+    { deep: false }
+  );
 
   return {
     selectedImages,

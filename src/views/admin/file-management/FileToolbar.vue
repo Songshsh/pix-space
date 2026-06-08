@@ -2,16 +2,20 @@
   <el-card class="toolbar-card">
     <div class="toolbar">
       <div class="toolbar-left">
-        <el-button v-if="canEdit" type="primary" @click="$emit('upload')">
+        <el-button
+          v-permission="'admin'"
+          type="primary"
+          @click="$emit('upload')"
+        >
           <el-icon><Upload /></el-icon>
           上传文件
         </el-button>
-        <el-button v-if="canEdit" @click="$emit('create-folder')">
+        <el-button v-permission="'admin'" @click="$emit('create-folder')">
           <el-icon><FolderAdd /></el-icon>
           新建文件夹
         </el-button>
         <el-button
-          v-if="canEdit"
+          v-permission="'admin'"
           :disabled="selectedCount === 0"
           @click="$emit('batch-delete')"
         >
@@ -24,14 +28,14 @@
           :model-value="searchKeyword"
           placeholder="搜索文件..."
           clearable
-          style="width: 250px"
+          class="toolbar-search"
           @update:model-value="$emit('update:searchKeyword', $event)"
         >
           <template #prefix>
             <el-icon><Search /></el-icon>
           </template>
         </el-input>
-        <el-button-group style="margin-left: 12px">
+        <el-button-group class="view-mode-group">
           <el-button
             :type="viewMode === 'grid' ? 'primary' : ''"
             @click="$emit('update:viewMode', 'grid')"
@@ -62,14 +66,13 @@ import {
 
 defineProps<{
   searchKeyword: string;
-  viewMode: string;
+  viewMode: 'grid' | 'list';
   selectedCount: number;
-  canEdit?: boolean;
 }>();
 
 defineEmits<{
   (e: 'update:searchKeyword', value: string): void;
-  (e: 'update:viewMode', value: string): void;
+  (e: 'update:viewMode', value: 'grid' | 'list'): void;
   (e: 'upload'): void;
   (e: 'create-folder'): void;
   (e: 'batch-delete'): void;
@@ -91,6 +94,13 @@ defineEmits<{
 .toolbar-right {
   display: flex;
   align-items: center;
-  gap: var(--ds-space-2);
+}
+
+.toolbar-search {
+  width: 250px;
+}
+
+.view-mode-group {
+  margin-left: var(--ds-space-3);
 }
 </style>

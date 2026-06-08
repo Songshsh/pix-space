@@ -12,9 +12,13 @@
           </div>
         </div>
         <div class="stat-footer">
-          <span class="trend up">
-            <el-icon><Top /></el-icon>
-            +12%
+          <span class="trend" :class="stats.totalImagesTrend.direction">
+            <el-icon
+              ><component
+                :is="stats.totalImagesTrend.direction === 'up' ? Top : Bottom"
+            /></el-icon>
+            {{ stats.totalImagesTrend.direction === 'up' ? '+' : '-'
+            }}{{ stats.totalImagesTrend.value }}%
           </span>
           <span>较上周</span>
         </div>
@@ -33,9 +37,13 @@
           </div>
         </div>
         <div class="stat-footer">
-          <span class="trend up">
-            <el-icon><Top /></el-icon>
-            +8%
+          <span class="trend" :class="stats.totalUsersTrend.direction">
+            <el-icon
+              ><component
+                :is="stats.totalUsersTrend.direction === 'up' ? Top : Bottom"
+            /></el-icon>
+            {{ stats.totalUsersTrend.direction === 'up' ? '+' : '-'
+            }}{{ stats.totalUsersTrend.value }}%
           </span>
           <span>较上周</span>
         </div>
@@ -54,9 +62,13 @@
           </div>
         </div>
         <div class="stat-footer">
-          <span class="trend up">
-            <el-icon><Top /></el-icon>
-            +5%
+          <span class="trend" :class="stats.totalFilesTrend.direction">
+            <el-icon
+              ><component
+                :is="stats.totalFilesTrend.direction === 'up' ? Top : Bottom"
+            /></el-icon>
+            {{ stats.totalFilesTrend.direction === 'up' ? '+' : '-'
+            }}{{ stats.totalFilesTrend.value }}%
           </span>
           <span>较上周</span>
         </div>
@@ -75,9 +87,13 @@
           </div>
         </div>
         <div class="stat-footer">
-          <span class="trend down">
-            <el-icon><Bottom /></el-icon>
-            -3%
+          <span class="trend" :class="stats.totalViewsTrend.direction">
+            <el-icon
+              ><component
+                :is="stats.totalViewsTrend.direction === 'up' ? Top : Bottom"
+            /></el-icon>
+            {{ stats.totalViewsTrend.direction === 'up' ? '+' : '-'
+            }}{{ stats.totalViewsTrend.value }}%
           </span>
           <span>较上周</span>
         </div>
@@ -104,7 +120,7 @@ defineProps<{
 
 <style scoped>
 .stats-row {
-  margin-bottom: var(--ds-space-5);
+  margin-bottom: var(--ds-space-6);
 }
 
 .stat-card {

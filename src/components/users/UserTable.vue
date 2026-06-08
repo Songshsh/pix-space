@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { usePermission } from '../../composables/usePermission';
 import { Plus } from '@element-plus/icons-vue';
 import type { User, Pagination } from '../../types/user';
 
-defineProps<{
+const props = defineProps<{
   tableData: User[];
   loading: boolean;
+  currentUserId?: number | null;
 }>();
-
-const { hasPermission } = usePermission();
-const canEdit = hasPermission(['admin']);
 
 const pagination = defineModel<Pagination>('pagination', { required: true });
 
@@ -17,7 +14,7 @@ const emit = defineEmits<{
   (e: 'add'): void;
   (e: 'edit', row: User): void;
   (e: 'delete', row: User): void;
-  (e: 'statusChange', row: User): void;
+  (e: 'statusChange', row: User, status: User['status']): void;
   (e: 'viewPermissions', row: User): void;
   (e: 'sizeChange', size: number): void;
   (e: 'currentChange', page: number): void;
@@ -27,14 +24,26 @@ const ROLE_TYPES: Record<
   string,
   'primary' | 'success' | 'warning' | 'info' | 'danger'
 > = {
-  管理员: 'danger',
-  编辑: 'warning',
-  用户: 'info',
+  admin: 'danger',
+  viewer: 'warning',
+  user: 'info',
+};
+
+const ROLE_LABELS: Record<string, string> = {
+  admin: '管理员',
+  viewer: '访客',
+  user: '用户',
 };
 
 const getRoleType = (role: string) => {
   return ROLE_TYPES[role] || 'info';
 };
+
+const getRoleLabel = (role: string) => {
+  return ROLE_LABELS[role] || role;
+};
+
+const isCurrentUserRow = (row: User) => row.id === props.currentUserId;
 </script>
 
 <template>
@@ -42,7 +51,7 @@ const getRoleType = (role: string) => {
     <template #header>
       <div class="card-header">
         <span>用户列表</span>
-        <el-button v-if="canEdit" type="primary" @click="emit('add')">
+        <el-button v-permission="'admin'" type="primary" @click="emit('add')">
           <el-icon><Plus /></el-icon>
           添加用户
         </el-button>
@@ -63,16 +72,19 @@ const getRoleType = (role: string) => {
       <el-table-column prop="email" label="邮箱" min-width="200" />
       <el-table-column prop="role" label="角色" width="100">
         <template #default="{ row }">
-          <el-tag :type="getRoleType(row.role)">{{ row.role }}</el-tag>
+          <el-tag :type="getRoleType(row.role)">{{
+            getRoleLabel(row.role)
+          }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="100">
         <template #default="{ row }">
           <el-switch
-            v-model="row.status"
+            :model-value="row.status"
             active-value="active"
             inactive-value="inactive"
-            @change="emit('statusChange', row)"
+            :disabled="isCurrentUserRow(row)"
+            @change="emit('statusChange', row, $event as User['status'])"
           />
         </template>
       </el-table-column>
@@ -80,7 +92,7 @@ const getRoleType = (role: string) => {
       <el-table-column label="操作" width="200" fixed="right">
         <template #default="{ row }">
           <el-button
-            v-if="canEdit"
+            v-permission="'admin'"
             type="primary"
             link
             size="small"
@@ -97,10 +109,11 @@ const getRoleType = (role: string) => {
             权限
           </el-button>
           <el-button
-            v-if="canEdit"
+            v-permission="'admin'"
             type="danger"
             link
             size="small"
+            :disabled="isCurrentUserRow(row)"
             @click="emit('delete', row)"
           >
             删除
@@ -133,6 +146,6 @@ const getRoleType = (role: string) => {
 .pagination-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: var(--ds-space-4);
 }
 </style>

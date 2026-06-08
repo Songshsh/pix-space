@@ -4,31 +4,43 @@
     <el-form :model="profileForm" label-width="100px" class="settings-form">
       <el-form-item label="头像">
         <div class="avatar-upload">
-          <el-avatar :size="80" :icon="UserFilled" />
-          <el-button type="primary" size="small" class="avatar-upload-btn">
+          <el-avatar :size="80" :src="profileForm.avatar" :icon="UserFilled" />
+          <input
+            ref="fileInputRef"
+            type="file"
+            accept="image/*"
+            class="hidden-file-input"
+            @change="handleFileChange"
+          />
+          <el-button
+            type="primary"
+            size="small"
+            class="avatar-upload-btn"
+            @click="openFilePicker"
+          >
             更换头像
           </el-button>
         </div>
       </el-form-item>
       <el-form-item label="用户名">
-        <el-input v-model="profileForm.username" style="max-width: 400px" />
+        <el-input v-model="profileForm.username" class="field-input" />
       </el-form-item>
       <el-form-item label="邮箱">
-        <el-input v-model="profileForm.email" style="max-width: 400px" />
+        <el-input v-model="profileForm.email" class="field-input" />
       </el-form-item>
       <el-form-item label="手机号">
-        <el-input v-model="profileForm.phone" style="max-width: 400px" />
+        <el-input v-model="profileForm.phone" class="field-input" />
       </el-form-item>
       <el-form-item label="个人简介">
         <el-input
           v-model="profileForm.bio"
           type="textarea"
           :rows="4"
-          style="max-width: 400px"
+          class="field-input"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="handleSaveProfile"
+        <el-button type="primary" :loading="saving" @click="emit('save')"
           >保存修改</el-button
         >
       </el-form-item>
@@ -38,30 +50,37 @@
 
 <script setup lang="ts">
 import { UserFilled } from '@element-plus/icons-vue';
-import { useUserStore } from '../../stores/user';
+import type { ProfilePanelForm } from './types';
 
-const userStore = useUserStore();
+defineProps<{
+  saving?: boolean;
+}>();
 
-const profileForm = reactive({
-  username: userStore.name || '',
-  email: userStore.email || '',
-  phone: '',
-  bio: '',
+const emit = defineEmits<{
+  save: [];
+  avatarChange: [file: File];
+}>();
+
+const profileForm = defineModel<ProfilePanelForm>('profile', {
+  required: true,
 });
 
-const handleSaveProfile = () => {
-  ElMessage.info('保存个人资料功能开发中');
+const fileInputRef = ref<HTMLInputElement>();
+
+const openFilePicker = () => {
+  fileInputRef.value?.click();
+};
+
+const handleFileChange = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+  if (!file) return;
+  emit('avatarChange', file);
+  input.value = '';
 };
 </script>
 
 <style scoped>
-.section-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ds-color-text-primary);
-  margin: 0 0 var(--ds-space-5) 0;
-}
-
 .settings-form {
   max-width: 600px;
 }
@@ -73,5 +92,13 @@ const handleSaveProfile = () => {
 
 .avatar-upload-btn {
   margin-left: var(--ds-space-4);
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.field-input {
+  max-width: 400px;
 }
 </style>

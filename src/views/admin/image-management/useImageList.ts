@@ -1,6 +1,6 @@
-import { getImageList } from '../api/image';
-import type { Image } from '../types/image';
-import { PREVIEW_COLORS } from '../constants/image';
+import { getImageList } from '../../../api/image';
+import { PREVIEW_COLORS } from '../../../constants/image';
+import type { Image } from '../../../types/image';
 import { useDebounceFn } from '@vueuse/core';
 
 const COLLECTION_TITLES: Record<string, string> = {
@@ -8,6 +8,14 @@ const COLLECTION_TITLES: Record<string, string> = {
   recent: '最近上传',
   favorites: '我的收藏',
 };
+
+function hashString(input: string) {
+  let hash = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    hash = (hash * 31 + input.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
 
 export function useImageList() {
   const images = ref<Image[]>([]);
@@ -22,11 +30,14 @@ export function useImageList() {
   const activeCollection = ref<string>('all');
   const activeTag = ref<string>('');
 
+  let requestSeq = 0;
+
   const collectionTitle = computed(() => {
     return COLLECTION_TITLES[activeCollection.value] || '全部图片';
   });
 
   const loadImages = async () => {
+    const currentSeq = (requestSeq += 1);
     loading.value = true;
     error.value = null;
     try {
@@ -37,54 +48,70 @@ export function useImageList() {
           query: searchQuery.value,
           sortBy: sortBy.value,
           collection: activeCollection.value,
+          tag: activeTag.value || undefined,
         },
         { silentError: true }
       );
+      if (currentSeq !== requestSeq) return;
       const list = result?.list || [];
       images.value = list.map((img: Image, index: number) => ({
         ...img,
-        id: img.id || String(index + 1),
+        id:
+          img.id ||
+          `img-${hashString(
+            String(
+              img.url ||
+                `${img.title || ''}-${img.createdAt || ''}-${img.size || ''}`
+            ) || String(index)
+          )}`,
         title: img.title || '未命名',
         createdAt: img.createdAt || '',
         isFavorite: Boolean(img.isFavorite),
-        color: PREVIEW_COLORS[index % PREVIEW_COLORS.length],
+        color: img.color || PREVIEW_COLORS[index % PREVIEW_COLORS.length],
       }));
       totalImages.value = result?.total || images.value.length;
     } catch (err) {
+      if (currentSeq !== requestSeq) return;
       error.value = err instanceof Error ? err.message : '加载图片失败';
     } finally {
-      loading.value = false;
+      if (currentSeq === requestSeq) {
+        loading.value = false;
+      }
     }
   };
 
-  const debouncedSearch = useDebounceFn(() => {
-    currentPage.value = 1;
-    loadImages();
-  }, 500);
+  const debouncedLoadImages = useDebounceFn(loadImages, 500);
 
   const handleSearch = () => {
-    debouncedSearch();
+    currentPage.value = 1;
+    debouncedLoadImages();
   };
 
   const handleCollectionSelect = (key: string) => {
     activeCollection.value = key;
     activeTag.value = '';
     currentPage.value = 1;
-    loadImages();
   };
 
   const handleTagSelect = (tag: string) => {
     activeTag.value = tag;
     activeCollection.value = 'all';
     currentPage.value = 1;
-    loadImages();
   };
 
   watch(
-    () => [currentPage.value, pageSize.value],
+    () =>
+      [
+        currentPage.value,
+        pageSize.value,
+        activeCollection.value,
+        activeTag.value,
+        sortBy.value,
+      ] as const,
     () => {
       loadImages();
-    }
+    },
+    { immediate: true }
   );
 
   return {

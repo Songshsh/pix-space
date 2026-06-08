@@ -8,6 +8,9 @@ describe('FileToolbar.vue', () => {
   beforeEach(() => {
     wrapper = mount(FileToolbar, {
       global: {
+        directives: {
+          permission: {},
+        },
         stubs: {
           'el-card': { template: '<div class="el-card"><slot /></div>' },
           'el-button': {
@@ -36,7 +39,6 @@ describe('FileToolbar.vue', () => {
         searchKeyword: '',
         viewMode: 'grid',
         selectedCount: 0,
-        canEdit: true,
       },
     });
   });

@@ -3,11 +3,6 @@
     <template #header>
       <div class="card-header">
         <span>访问趋势</span>
-        <el-radio-group v-model="chartPeriod" size="small">
-          <el-radio-button label="week">本周</el-radio-button>
-          <el-radio-button label="month">本月</el-radio-button>
-          <el-radio-button label="year">本年</el-radio-button>
-        </el-radio-group>
       </div>
     </template>
     <div class="chart-placeholder">
@@ -33,29 +28,9 @@
 <script setup lang="ts">
 import type { ChartData } from '../../types/dashboard';
 
-const props = defineProps<{
+defineProps<{
   chartData: ChartData[];
-  period: string;
 }>();
-
-const emit = defineEmits<{
-  (e: 'update:period', value: string): void;
-}>();
-
-const chartPeriod = ref(props.period);
-
-watch(chartPeriod, (newVal) => {
-  emit('update:period', newVal);
-});
-
-watch(
-  () => props.period,
-  (newVal) => {
-    if (chartPeriod.value !== newVal) {
-      chartPeriod.value = newVal;
-    }
-  }
-);
 </script>
 
 <style scoped>
@@ -81,7 +56,7 @@ watch(
   align-items: flex-end;
   justify-content: space-around;
   height: 240px;
-  padding: 0 var(--ds-space-5-0);
+  padding: 0 var(--ds-space-5);
 }
 
 .chart-bar {
@@ -113,7 +88,7 @@ watch(
 .chart-labels {
   display: flex;
   justify-content: space-around;
-  padding: var(--ds-space-3) var(--ds-space-5-0) 0;
+  padding: var(--ds-space-3) var(--ds-space-5) 0;
   font-size: 12px;
   color: var(--ds-color-text-tertiary);
 }

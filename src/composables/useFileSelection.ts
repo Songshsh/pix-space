@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import type { FileItem } from '../types/file';
 
 export function useFileSelection() {

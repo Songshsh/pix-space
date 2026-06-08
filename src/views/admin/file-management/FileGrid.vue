@@ -22,7 +22,7 @@
         class="file-grid-row"
       >
         <div
-          v-for="file in getRowItems(virtualRow.index)"
+          v-for="file in getRowItems(props.files, virtualRow.index)"
           :key="file.id"
           class="file-item"
           :class="{ selected: selectedFiles.includes(file.id) }"
@@ -42,7 +42,7 @@
           </div>
           <div class="file-actions">
             <el-dropdown trigger="click">
-              <el-button text circle>
+              <el-button text circle @click.stop>
                 <el-icon><MoreFilled /></el-icon>
               </el-button>
               <template #dropdown>
@@ -51,16 +51,13 @@
                     <el-icon><Download /></el-icon>下载
                   </el-dropdown-item>
                   <el-dropdown-item
-                    v-if="canEdit"
+                    v-permission="'admin'"
                     @click="$emit('rename', file)"
                   >
                     <el-icon><Edit /></el-icon>重命名
                   </el-dropdown-item>
-                  <el-dropdown-item v-if="canEdit" @click="$emit('move', file)">
-                    <el-icon><Rank /></el-icon>移动
-                  </el-dropdown-item>
                   <el-dropdown-item
-                    v-if="canEdit"
+                    v-permission="'admin'"
                     divided
                     @click="$emit('delete', file)"
                   >
@@ -77,27 +74,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, inject } from 'vue';
-import {
-  Delete,
-  Download,
-  Edit,
-  MoreFilled,
-  Rank,
-} from '@element-plus/icons-vue';
-import type { FileItem } from '../../types/file';
-import { useVirtualizer } from '@tanstack/vue-virtual';
-import { useElementSize } from '@vueuse/core';
+import { Delete, Download, Edit, MoreFilled } from '@element-plus/icons-vue';
+import type { FileItem } from '../../../types/file';
+import { useVirtualGrid } from '../../../composables/useVirtualGrid';
 import {
   getFileColor,
   getFileIcon,
   formatFileSize,
-} from '../../utils/fileDisplay';
+} from '../../../utils/fileDisplay';
 
 const props = defineProps<{
   files: FileItem[];
   selectedFiles: number[];
-  canEdit?: boolean;
 }>();
 
 defineEmits<{
@@ -105,48 +93,18 @@ defineEmits<{
   (e: 'open-file', file: FileItem): void;
   (e: 'download', file: FileItem): void;
   (e: 'rename', file: FileItem): void;
-  (e: 'move', file: FileItem): void;
   (e: 'delete', file: FileItem): void;
 }>();
 
 const containerRef = ref<HTMLElement | null>(null);
-const scrollElement = ref<HTMLElement | null>(null);
 
-const { width: containerWidth } = useElementSize(containerRef);
+const totalItems = computed(() => props.files.length);
 
-const itemMinWidth = 180;
-const itemHeight = 140;
-const gap = 16;
-
-const columns = computed(() => {
-  const width =
-    containerWidth.value || (containerRef.value?.clientWidth ?? 1000);
-  return Math.max(1, Math.floor((width + gap) / (itemMinWidth + gap)));
-});
-
-const totalRows = computed(() => Math.ceil(props.files.length / columns.value));
-
-const virtualizer = useVirtualizer({
-  get count() {
-    return totalRows.value;
-  },
-  getScrollElement: () => scrollElement.value,
-  estimateSize: () => itemHeight + gap,
-  overscan: 3,
-});
-
-const getRowItems = (rowIndex: number) => {
-  const start = rowIndex * columns.value;
-  const end = start + columns.value;
-  return props.files.slice(start, end);
-};
-
-const scrollContainer = inject<() => HTMLElement | null>('scrollContainer');
-
-onMounted(() => {
-  scrollElement.value = scrollContainer
-    ? scrollContainer()
-    : (document.querySelector('.main-content') as HTMLElement);
+const { virtualizer, getRowItems } = useVirtualGrid({
+  containerRef,
+  itemMinWidth: 180,
+  itemHeight: 140,
+  totalItems,
 });
 </script>
 
@@ -177,12 +135,11 @@ onMounted(() => {
 }
 .file-item:hover {
   border-color: var(--el-color-primary);
-  box-shadow: 0 2px 8px
-    color-mix(in srgb, var(--el-color-primary) 10%, transparent);
+  box-shadow: var(--ds-shadow-1);
 }
 .file-item.selected {
   border-color: var(--el-color-primary);
-  background: color-mix(in srgb, var(--el-color-primary) 5%, transparent);
+  background: var(--el-color-primary-light-9);
 }
 
 .file-icon {

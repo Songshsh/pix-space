@@ -5,6 +5,7 @@ import type {
   UserForm,
   UserListParams,
   UserListResponse,
+  UpdateUserStatusPayload,
 } from '../types/user';
 
 export function getUserList(
@@ -29,6 +30,17 @@ export function updateUser(
   return request.put(`/users/${id}`, data, config);
 }
 
-export function deleteUser(id: string | number, config?: AxiosRequestConfig) {
+export function deleteUser(
+  id: string | number,
+  config?: AxiosRequestConfig
+): Promise<boolean> {
   return request.delete(`/users/${id}`, config);
+}
+
+export function updateUserStatus(
+  id: string | number,
+  data: UpdateUserStatusPayload,
+  config?: AxiosRequestConfig
+): Promise<User> {
+  return request.patch(`/users/${id}/status`, data, config);
 }

@@ -1,10 +1,17 @@
-export function getDashboardMock() {
+import type { DashboardData } from '../types/dashboard';
+import { FileType } from '../utils/fileDisplay';
+
+export function getDashboardMock(): DashboardData {
   return {
     stats: {
       totalImages: 1284,
       totalUsers: 356,
       totalFiles: 4521,
       totalViews: 28945,
+      totalImagesTrend: { value: 12, direction: 'up' },
+      totalUsersTrend: { value: 8, direction: 'up' },
+      totalFilesTrend: { value: 5, direction: 'up' },
+      totalViewsTrend: { value: 3, direction: 'down' },
     },
     chartData: [
       { label: '周一', value: 65 },
@@ -29,35 +36,35 @@ export function getDashboardMock() {
     recentUploads: [
       {
         name: 'landscape-001.jpg',
-        type: '图片',
+        type: FileType.Image,
         size: '2.4 MB',
         uploader: '张三',
         time: '2024-01-15 14:30',
       },
       {
         name: 'document.pdf',
-        type: '文档',
+        type: FileType.Document,
         size: '1.2 MB',
         uploader: '李四',
         time: '2024-01-15 13:20',
       },
       {
         name: 'profile.png',
-        type: '图片',
+        type: FileType.Image,
         size: '856 KB',
         uploader: '王五',
         time: '2024-01-15 12:15',
       },
       {
         name: 'video-clip.mp4',
-        type: '视频',
+        type: FileType.Video,
         size: '45.6 MB',
         uploader: '张三',
         time: '2024-01-15 11:00',
       },
       {
         name: 'data-export.xlsx',
-        type: '表格',
+        type: FileType.Spreadsheet,
         size: '324 KB',
         uploader: '李四',
         time: '2024-01-15 10:30',

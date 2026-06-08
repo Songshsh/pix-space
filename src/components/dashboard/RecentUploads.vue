@@ -22,14 +22,6 @@
           <el-table-column prop="size" label="大小" width="100" />
           <el-table-column prop="uploader" label="上传者" width="120" />
           <el-table-column prop="time" label="上传时间" width="180" />
-          <el-table-column label="操作" width="120" fixed="right">
-            <template #default>
-              <el-button type="primary" link size="small">查看</el-button>
-              <el-button v-if="canEdit" type="danger" link size="small"
-                >删除</el-button
-              >
-            </template>
-          </el-table-column>
         </el-table>
       </el-card>
     </el-col>
@@ -37,15 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import { usePermission } from '../../composables/usePermission';
 import type { RecentUpload } from '../../types/dashboard';
+import { FileType } from '../../utils/fileDisplay';
 
 defineProps<{
   uploads: RecentUpload[];
 }>();
-
-const { hasPermission } = usePermission();
-const canEdit = hasPermission(['admin', 'user']);
 
 const emit = defineEmits<{
   (e: 'view-all'): void;
@@ -53,10 +42,10 @@ const emit = defineEmits<{
 
 const getTypeTag = (type: string) => {
   const typeMap: Record<string, 'primary' | 'success' | 'warning' | 'info'> = {
-    图片: 'primary',
-    文档: 'success',
-    视频: 'warning',
-    表格: 'info',
+    [FileType.Image]: 'primary',
+    [FileType.Document]: 'success',
+    [FileType.Video]: 'warning',
+    [FileType.Spreadsheet]: 'info',
   };
   return typeMap[type] || 'info';
 };
@@ -64,7 +53,7 @@ const getTypeTag = (type: string) => {
 
 <style scoped>
 .table-row {
-  margin-bottom: var(--ds-space-5);
+  margin-bottom: var(--ds-space-6);
 }
 
 .card-header {

@@ -32,6 +32,7 @@ const emit = defineEmits<{
           v-model="modelValue.status"
           placeholder="请选择状态"
           clearable
+          class="status-select"
         >
           <el-option label="启用" value="active" />
           <el-option label="禁用" value="inactive" />
@@ -57,5 +58,9 @@ const emit = defineEmits<{
   display: flex;
   flex-wrap: wrap;
   gap: var(--ds-space-2);
+}
+
+.status-select {
+  min-width: 120px;
 }
 </style>

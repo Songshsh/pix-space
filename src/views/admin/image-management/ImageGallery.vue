@@ -26,10 +26,10 @@
         class="images-grid-row"
       >
         <div
-          v-for="image in getRowItems(virtualRow.index)"
+          v-for="image in getRowItems(props.images, virtualRow.index)"
           :key="image.id"
           class="image-card"
-          :class="{ selected: selectedImages.includes(image.id.toString()) }"
+          :class="{ selected: selectedImages.includes(image.id) }"
           tabindex="0"
           role="button"
           aria-label="查看图片"
@@ -37,19 +37,21 @@
           @keydown.enter.prevent="$emit('click-image', image)"
           @keydown.space.prevent="$emit('toggle-select', image)"
         >
-          <div class="image-preview" :style="{ background: image.color }">
+          <div class="image-preview" :style="getPreviewStyle(image)">
             <div
               class="image-checkbox"
               :class="{
-                'is-checked': selectedImages.includes(image.id.toString()),
+                'is-checked': selectedImages.includes(image.id),
               }"
               @click.stop="$emit('toggle-select', image)"
             >
-              <el-checkbox
-                :model-value="selectedImages.includes(image.id.toString())"
-              />
+              <el-checkbox :model-value="selectedImages.includes(image.id)" />
             </div>
-            <el-icon :size="48" color="var(--ds-color-white-30)">
+            <el-icon
+              v-if="!image.url"
+              :size="48"
+              color="var(--ds-color-overlay-white-strong)"
+            >
               <Picture />
             </el-icon>
           </div>
@@ -86,10 +88,13 @@
                     <el-dropdown-item command="preview">
                       <el-icon><View /></el-icon>预览
                     </el-dropdown-item>
-                    <el-dropdown-item v-if="canEdit" command="rename">
+                    <el-dropdown-item v-permission="'admin'" command="rename">
                       <el-icon><Edit /></el-icon>重命名
                     </el-dropdown-item>
-                    <el-dropdown-item v-if="canEdit" command="change-tags">
+                    <el-dropdown-item
+                      v-permission="'admin'"
+                      command="change-tags"
+                    >
                       <el-icon><Discount /></el-icon>更换标签
                     </el-dropdown-item>
                     <el-dropdown-item command="copy-link">
@@ -99,7 +104,7 @@
                       <el-icon><Download /></el-icon>下载
                     </el-dropdown-item>
                     <el-dropdown-item
-                      v-if="canEdit"
+                      v-permission="'admin'"
                       command="delete"
                       divided
                       class="text-danger"
@@ -119,7 +124,7 @@
   <el-table
     v-else
     :data="images"
-    style="width: 100%"
+    class="images-table"
     @selection-change="
       (selection: Image[]) => $emit('selection-change', selection)
     "
@@ -129,10 +134,14 @@
       <template #default="{ row }">
         <div
           class="table-preview"
-          :style="{ background: row.color }"
+          :style="getPreviewStyle(row)"
           @click="$emit('click-image', row)"
         >
-          <el-icon :size="24" color="var(--ds-color-white-30)">
+          <el-icon
+            v-if="!row.url"
+            :size="24"
+            color="var(--ds-color-overlay-white-strong)"
+          >
             <Picture />
           </el-icon>
         </div>
@@ -163,16 +172,16 @@
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="preview">预览</el-dropdown-item>
-              <el-dropdown-item v-if="canEdit" command="rename"
+              <el-dropdown-item v-permission="'admin'" command="rename"
                 >重命名</el-dropdown-item
               >
-              <el-dropdown-item v-if="canEdit" command="change-tags"
+              <el-dropdown-item v-permission="'admin'" command="change-tags"
                 >更换标签</el-dropdown-item
               >
               <el-dropdown-item command="copy-link">复制链接</el-dropdown-item>
               <el-dropdown-item command="download">下载</el-dropdown-item>
               <el-dropdown-item
-                v-if="canEdit"
+                v-permission="'admin'"
                 command="delete"
                 divided
                 class="text-danger"
@@ -187,7 +196,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, inject } from 'vue';
 import {
   Delete,
   Edit,
@@ -200,16 +208,14 @@ import {
   Link,
   View,
 } from '@element-plus/icons-vue';
-import type { Image } from '../../types/image';
-import { useVirtualizer } from '@tanstack/vue-virtual';
-import { useElementSize } from '@vueuse/core';
-import { formatFileSize } from '../../utils/fileDisplay';
+import type { Image } from '../../../types/image';
+import { useVirtualGrid } from '../../../composables/useVirtualGrid';
+import { formatFileSize } from '../../../utils/fileDisplay';
 
 const props = defineProps<{
-  viewMode: string;
+  viewMode: 'grid' | 'list';
   images: Image[];
   selectedImages: string[];
-  canEdit?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -250,50 +256,34 @@ const handleCommand = (command: string, image: Image) => {
 };
 
 const containerRef = ref<HTMLElement | null>(null);
-const scrollElement = ref<HTMLElement | null>(null);
 
-const { width: containerWidth } = useElementSize(containerRef);
+const totalItems = computed(() => props.images.length);
 
-const itemMinWidth = 200;
-const itemHeight = 220;
-const gap = 16;
-
-const columns = computed(() => {
-  const width =
-    containerWidth.value || (containerRef.value?.clientWidth ?? 1000);
-  return Math.max(1, Math.floor((width + gap) / (itemMinWidth + gap)));
+const { virtualizer, getRowItems } = useVirtualGrid({
+  containerRef,
+  itemMinWidth: 200,
+  itemHeight: 220,
+  totalItems,
 });
 
-const totalRows = computed(() =>
-  Math.ceil(props.images.length / columns.value)
-);
-
-const virtualizer = useVirtualizer({
-  get count() {
-    return totalRows.value;
-  },
-  getScrollElement: () => scrollElement.value,
-  estimateSize: () => itemHeight + gap,
-  overscan: 3,
-});
-
-const getRowItems = (rowIndex: number) => {
-  const start = rowIndex * columns.value;
-  const end = start + columns.value;
-  return props.images.slice(start, end);
+const getPreviewStyle = (image: Image) => {
+  if (image.url) {
+    return {
+      backgroundImage: `url(${image.url})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  }
+  return { background: image.color };
 };
-
-const scrollContainer = inject<() => HTMLElement | null>('scrollContainer');
-
-onMounted(() => {
-  scrollElement.value = scrollContainer
-    ? scrollContainer()
-    : (document.querySelector('.main-content') as HTMLElement);
-});
 </script>
 
 <style scoped>
 .images-grid-viewport {
+  width: 100%;
+}
+
+.images-table {
   width: 100%;
 }
 
@@ -339,7 +329,7 @@ onMounted(() => {
   position: absolute;
   top: var(--ds-space-2);
   left: var(--ds-space-2);
-  z-index: 10;
+  z-index: var(--ds-z-dropdown);
 }
 
 .image-overlay {

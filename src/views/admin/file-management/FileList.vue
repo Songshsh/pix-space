@@ -1,21 +1,24 @@
 <template>
   <el-table
     :data="files"
-    style="width: 100%"
+    class="file-table"
     @selection-change="$emit('selection-change', $event)"
+    @row-dblclick="$emit('open-file', $event)"
   >
     <el-table-column type="selection" width="55" />
     <el-table-column label="名称" min-width="300">
       <template #default="{ row }">
         <div class="file-name-cell">
-          <el-icon
-            :size="24"
-            :color="getFileColor(row.type)"
-            style="margin-right: 8px"
-          >
+          <el-icon :size="24" :color="getFileColor(row.type)" class="file-icon">
             <component :is="getFileIcon(row.type)" />
           </el-icon>
-          <span>{{ row.name }}</span>
+          <el-button
+            link
+            class="file-name-link"
+            @click="$emit('open-file', row)"
+          >
+            {{ row.name }}
+          </el-button>
         </div>
       </template>
     </el-table-column>
@@ -41,7 +44,7 @@
           下载
         </el-button>
         <el-button
-          v-if="canEdit"
+          v-permission="'admin'"
           type="primary"
           link
           size="small"
@@ -50,7 +53,7 @@
           重命名
         </el-button>
         <el-button
-          v-if="canEdit"
+          v-permission="'admin'"
           type="danger"
           link
           size="small"
@@ -64,20 +67,20 @@
 </template>
 
 <script setup lang="ts">
-import type { FileItem } from '../../types/file';
+import type { FileItem } from '../../../types/file';
 import {
   getFileColor,
   getFileIcon,
   formatFileSize,
-} from '../../utils/fileDisplay';
+} from '../../../utils/fileDisplay';
 
 defineProps<{
   files: FileItem[];
-  canEdit?: boolean;
 }>();
 
 defineEmits<{
   (e: 'selection-change', selection: FileItem[]): void;
+  (e: 'open-file', file: FileItem): void;
   (e: 'download', file: FileItem): void;
   (e: 'rename', file: FileItem): void;
   (e: 'delete', file: FileItem): void;
@@ -85,8 +88,21 @@ defineEmits<{
 </script>
 
 <style scoped>
+.file-table {
+  width: 100%;
+}
+
 .file-name-cell {
   display: flex;
   align-items: center;
+}
+
+.file-icon {
+  margin-right: var(--ds-space-2);
+}
+
+.file-name-link {
+  padding: 0;
+  color: inherit;
 }
 </style>

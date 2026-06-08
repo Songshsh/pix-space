@@ -7,50 +7,71 @@
           <p class="notification-title">系统通知</p>
           <p class="notification-desc">接收系统更新和维护通知</p>
         </div>
-        <el-switch v-model="notificationSettings.system" />
+        <el-switch
+          v-model="notificationSettings.system"
+          :loading="saving"
+          :disabled="saving || !ready"
+          @change="emit('update')"
+        />
       </div>
       <div class="notification-item">
         <div class="notification-info">
           <p class="notification-title">邮件通知</p>
           <p class="notification-desc">接收重要活动的邮件提醒</p>
         </div>
-        <el-switch v-model="notificationSettings.email" />
+        <el-switch
+          v-model="notificationSettings.email"
+          :loading="saving"
+          :disabled="saving || !ready"
+          @change="emit('update')"
+        />
       </div>
       <div class="notification-item">
         <div class="notification-info">
           <p class="notification-title">上传提醒</p>
           <p class="notification-desc">当有新文件上传时通知</p>
         </div>
-        <el-switch v-model="notificationSettings.upload" />
+        <el-switch
+          v-model="notificationSettings.upload"
+          :loading="saving"
+          :disabled="saving || !ready"
+          @change="emit('update')"
+        />
       </div>
       <div class="notification-item">
         <div class="notification-info">
           <p class="notification-title">评论通知</p>
           <p class="notification-desc">当有人评论时通知</p>
         </div>
-        <el-switch v-model="notificationSettings.comment" />
+        <el-switch
+          v-model="notificationSettings.comment"
+          :loading="saving"
+          :disabled="saving || !ready"
+          @change="emit('update')"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const notificationSettings = reactive({
-  system: true,
-  email: true,
-  upload: false,
-  comment: true,
+import type { NotificationSettingsForm } from './types';
+
+defineProps<{
+  ready?: boolean;
+  saving?: boolean;
+}>();
+
+const emit = defineEmits<{
+  update: [];
+}>();
+
+const notificationSettings = defineModel<NotificationSettingsForm>('settings', {
+  required: true,
 });
 </script>
 
 <style scoped>
-.section-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ds-color-text-primary);
-  margin: 0 0 var(--ds-space-5) 0;
-}
-
 .notification-settings {
   display: flex;
   flex-direction: column;

@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { Clock, Picture, Star } from '@element-plus/icons-vue';
-import type { ImageTag } from '../../types/image';
+import type { ImageTag } from '../../../types/image';
 
 defineProps<{
   activeCollection: string;
@@ -58,13 +58,6 @@ defineEmits<{
   margin-bottom: var(--ds-space-4);
 }
 
-.sidebar-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ds-color-text-primary);
-  margin: 0 0 var(--ds-space-3) 0;
-}
-
 .sidebar-card :deep(.el-menu) {
   border-right: none;
 }
@@ -74,6 +67,13 @@ defineEmits<{
   line-height: 40px;
   display: flex;
   align-items: center;
+}
+
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ds-color-text-primary);
+  margin: 0 0 var(--ds-space-3) 0;
 }
 
 .menu-badge {

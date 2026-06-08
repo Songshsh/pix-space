@@ -1,8 +1,19 @@
+import type { FileTypeEnum } from '../utils/fileDisplay';
+
+export interface StatTrend {
+  value: number;
+  direction: 'up' | 'down';
+}
+
 export interface DashboardStats {
   totalImages: number;
   totalUsers: number;
   totalFiles: number;
   totalViews: number;
+  totalImagesTrend: StatTrend;
+  totalUsersTrend: StatTrend;
+  totalFilesTrend: StatTrend;
+  totalViewsTrend: StatTrend;
 }
 
 export interface ChartData {
@@ -18,7 +29,7 @@ export interface RecentActivity {
 
 export interface RecentUpload {
   name: string;
-  type: string;
+  type: FileTypeEnum;
   size: string;
   uploader: string;
   time: string;

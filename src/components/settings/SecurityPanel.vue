@@ -1,33 +1,42 @@
 <template>
   <div class="security-panel">
     <h3 class="section-title">安全设置</h3>
-    <el-form :model="securityForm" label-width="100px" class="settings-form">
-      <el-form-item label="当前密码">
+    <el-form
+      :ref="setInternalFormRef"
+      :model="securityForm"
+      :rules="rules"
+      label-width="100px"
+      class="settings-form"
+    >
+      <el-form-item prop="oldPassword" label="当前密码">
         <el-input
-          v-model="securityForm.currentPassword"
+          v-model="securityForm.oldPassword"
           type="password"
           show-password
-          style="max-width: 400px"
+          class="field-input"
         />
       </el-form-item>
-      <el-form-item label="新密码">
+      <el-form-item prop="newPassword" label="新密码">
         <el-input
           v-model="securityForm.newPassword"
           type="password"
           show-password
-          style="max-width: 400px"
+          class="field-input"
         />
       </el-form-item>
-      <el-form-item label="确认密码">
+      <el-form-item prop="confirmPassword" label="确认密码">
         <el-input
           v-model="securityForm.confirmPassword"
           type="password"
           show-password
-          style="max-width: 400px"
+          class="field-input"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="handleChangePassword"
+        <el-button
+          type="primary"
+          :loading="submitting"
+          @click="handleChangePassword"
           >修改密码</el-button
         >
       </el-form-item>
@@ -39,12 +48,14 @@
     <div class="two-factor">
       <div class="two-factor-info">
         <p>启用两步验证可以提高账户安全性</p>
-        <el-tag :type="securityForm.twoFactorEnabled ? 'success' : 'info'">
-          {{ securityForm.twoFactorEnabled ? '已启用' : '未启用' }}
+        <el-tag :type="twoFactorEnabled ? 'success' : 'info'">
+          {{ twoFactorEnabled ? '已启用' : '未启用' }}
         </el-tag>
       </div>
       <el-switch
-        v-model="securityForm.twoFactorEnabled"
+        v-model="twoFactorEnabled"
+        :loading="twoFactorSaving"
+        :disabled="twoFactorSaving || preferencesLoading"
         @change="handleTwoFactorChange"
       />
     </div>
@@ -52,48 +63,48 @@
 </template>
 
 <script setup lang="ts">
-const securityForm = reactive({
-  currentPassword: '',
-  newPassword: '',
-  confirmPassword: '',
-  twoFactorEnabled: false,
+import type { ComponentPublicInstance } from 'vue';
+import type { FormInstance, FormRules } from 'element-plus';
+import type { SecurityPanelForm } from './types';
+
+defineProps<{
+  submitting?: boolean;
+  preferencesLoading?: boolean;
+  twoFactorSaving?: boolean;
+  rules: FormRules<SecurityPanelForm>;
+}>();
+
+const emit = defineEmits<{
+  submit: [];
+  toggleTwoFactor: [value: boolean];
+  'update:formRef': [value: FormInstance | undefined];
+}>();
+
+const securityForm = defineModel<SecurityPanelForm>('form', {
+  required: true,
+});
+const twoFactorEnabled = defineModel<boolean>('twoFactorEnabled', {
+  required: true,
 });
 
-const handleChangePassword = () => {
-  if (!securityForm.currentPassword || !securityForm.newPassword) {
-    ElMessage.warning('请填写完整的密码信息');
-    return;
-  }
-  if (securityForm.newPassword !== securityForm.confirmPassword) {
-    ElMessage.error('两次输入的密码不一致');
-    return;
-  }
-  ElMessage.success('密码修改成功');
-  securityForm.currentPassword = '';
-  securityForm.newPassword = '';
-  securityForm.confirmPassword = '';
+const setInternalFormRef = (
+  instance: Element | ComponentPublicInstance | null
+) => {
+  emit('update:formRef', (instance as FormInstance | null) ?? undefined);
 };
 
 const handleTwoFactorChange = (value: string | number | boolean) => {
-  ElMessage.success(value ? '两步验证已启用' : '两步验证已关闭');
+  const normalizedValue = Boolean(value);
+  twoFactorEnabled.value = normalizedValue;
+  emit('toggleTwoFactor', normalizedValue);
+};
+
+const handleChangePassword = () => {
+  emit('submit');
 };
 </script>
 
 <style scoped>
-.section-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ds-color-text-primary);
-  margin: 0 0 var(--ds-space-5) 0;
-}
-
-.subsection-title {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--ds-color-text-primary);
-  margin: 0 0 var(--ds-space-4) 0;
-}
-
 .settings-form {
   max-width: 600px;
 }
@@ -116,5 +127,9 @@ const handleTwoFactorChange = (value: string | number | boolean) => {
 .two-factor-info p {
   margin: 0;
   color: var(--ds-color-text-secondary);
+}
+
+.field-input {
+  max-width: 400px;
 }
 </style>

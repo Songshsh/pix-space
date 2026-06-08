@@ -11,16 +11,17 @@
       </el-form-item>
       <el-form-item label="主题色">
         <div class="color-picker">
-          <div
+          <button
             v-for="color in themeColors"
             :key="color"
+            type="button"
             class="color-item"
             :class="{
               active: appearanceSettings.primaryColor === color,
             }"
             :style="{ background: color }"
             @click="appearanceSettings.primaryColor = color"
-          />
+          ></button>
         </div>
       </el-form-item>
       <el-form-item label="侧边栏">
@@ -32,40 +33,18 @@
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from '@/stores/settings';
+import type { AppearanceSettingsForm } from './types';
 
-const appearanceSettings = useSettingsStore();
+defineProps<{
+  themeColors: string[];
+}>();
 
-const themeColors = computed(() => {
-  if (typeof window === 'undefined') return [];
-  const styles = getComputedStyle(document.documentElement);
-  const vars = [
-    '--ds-color-brand-violet',
-    '--ds-color-brand-primary',
-    '--ds-color-brand-primary-dark',
-    '--ds-color-warning',
-    '--ds-color-success',
-    '--ds-color-danger',
-  ];
-  const colors = vars
-    .map((name) => styles.getPropertyValue(name).trim())
-    .filter((value) => value)
-    .map((value) => value.toLowerCase());
-  const uniq = Array.from(new Set(colors));
-  const current = appearanceSettings.primaryColor?.trim?.().toLowerCase?.();
-  if (current && !uniq.includes(current)) uniq.unshift(current);
-  return uniq;
+const appearanceSettings = defineModel<AppearanceSettingsForm>('settings', {
+  required: true,
 });
 </script>
 
 <style scoped>
-.section-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ds-color-text-primary);
-  margin: 0 0 var(--ds-space-5) 0;
-}
-
 .settings-form {
   max-width: 600px;
 }
@@ -76,12 +55,14 @@ const themeColors = computed(() => {
 }
 
 .color-item {
+  appearance: none;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   cursor: pointer;
   transition: transform 0.2s;
   border: 2px solid transparent;
+  padding: 0;
 }
 
 .color-item:hover {

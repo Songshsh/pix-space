@@ -4,6 +4,8 @@ import type { UserForm } from '../../types/user';
 
 const props = defineProps<{
   isEdit: boolean;
+  submitting?: boolean;
+  disableRoleStatus?: boolean;
 }>();
 
 const visible = defineModel<boolean>('visible', { required: true });
@@ -16,15 +18,17 @@ const emit = defineEmits<{
 
 const formRef = ref<FormInstance | null>(null);
 
-const formRules: FormRules = {
+const formRules = computed<FormRules>(() => ({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   email: [
     { required: true, message: '请输入邮箱', trigger: 'blur' },
     { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' },
   ],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+  password: props.isEdit
+    ? []
+    : [{ required: true, message: '请输入密码', trigger: 'blur' }],
   role: [{ required: true, message: '请选择角色', trigger: 'change' }],
-};
+}));
 
 const dialogTitle = computed(() => (props.isEdit ? '编辑用户' : '添加用户'));
 
@@ -63,7 +67,11 @@ const handleClose = () => {
         <el-input v-model="userForm.username" placeholder="请输入用户名" />
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="userForm.email" placeholder="请输入邮箱" />
+        <el-input
+          v-model="userForm.email"
+          placeholder="请输入邮箱"
+          autocomplete="off"
+        />
       </el-form-item>
       <el-form-item v-if="!isEdit" label="密码" prop="password">
         <el-input
@@ -71,17 +79,22 @@ const handleClose = () => {
           type="password"
           placeholder="请输入密码"
           show-password
+          autocomplete="new-password"
         />
       </el-form-item>
       <el-form-item label="角色" prop="role">
-        <el-select v-model="userForm.role" placeholder="请选择角色">
-          <el-option label="管理员" value="管理员" />
-          <el-option label="编辑" value="编辑" />
-          <el-option label="用户" value="用户" />
+        <el-select
+          v-model="userForm.role"
+          placeholder="请选择角色"
+          :disabled="disableRoleStatus"
+        >
+          <el-option label="管理员" value="admin" />
+          <el-option label="访客" value="viewer" />
+          <el-option label="用户" value="user" />
         </el-select>
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-radio-group v-model="userForm.status">
+        <el-radio-group v-model="userForm.status" :disabled="disableRoleStatus">
           <el-radio label="active">启用</el-radio>
           <el-radio label="inactive">禁用</el-radio>
         </el-radio-group>
@@ -89,7 +102,9 @@ const handleClose = () => {
     </el-form>
     <template #footer>
       <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="handleSubmit">确定</el-button>
+      <el-button type="primary" :loading="submitting" @click="handleSubmit">
+        确定
+      </el-button>
     </template>
   </el-dialog>
 </template>
