@@ -1,125 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { Search } from '@element-plus/icons-vue';
-import { useRoute, useRouter } from 'vue-router';
+import PortalHeaderActions from '../components/portal/PortalHeaderActions.vue';
 
 const route = useRoute();
 const router = useRouter();
 const searchQuery = ref('');
-
-function parseRgbToHex(value: string): string | null {
-  const match = value
-    .replace(/\s+/g, '')
-    .match(/^rgba?\((\d+),(\d+),(\d+)(?:,([\d.]+))?\)$/i);
-  if (!match) return null;
-  const r = Math.max(0, Math.min(255, Number(match[1])));
-  const g = Math.max(0, Math.min(255, Number(match[2])));
-  const b = Math.max(0, Math.min(255, Number(match[3])));
-  return (
-    '#' +
-    [r, g, b]
-      .map((n) => n.toString(16).padStart(2, '0'))
-      .join('')
-      .toLowerCase()
-  );
-}
-
-function resolveCssVar(value: string, el: HTMLElement): string {
-  const trimmed = value.trim();
-  const match = trimmed.match(/^var\((--[^)]+)\)$/);
-  if (!match) return trimmed;
-  const styles = getComputedStyle(el);
-  return styles.getPropertyValue(match[1]).trim();
-}
-
-function normalizeToHex(value: string, el: HTMLElement): string | null {
-  let v = resolveCssVar(value, el);
-  v = resolveCssVar(v, el);
-  if (v.startsWith('#')) return v;
-  return parseRgbToHex(v);
-}
-
-function applyPrimaryColorToRoot(value: string) {
-  const root = document.documentElement;
-  const hexColor = normalizeToHex(value, root);
-  if (!hexColor) return;
-
-  root.style.setProperty('--el-color-primary', hexColor);
-
-  const hasColorMix =
-    typeof CSS !== 'undefined' &&
-    CSS.supports('color', 'color-mix(in srgb, black 50%, white)');
-  if (hasColorMix) {
-    for (let i = 1; i <= 9; i++) {
-      const ratio = 100 - i * 10;
-      root.style.setProperty(
-        `--el-color-primary-light-${i}`,
-        `color-mix(in srgb, var(--el-color-primary) ${ratio}%, white)`
-      );
-    }
-    root.style.setProperty(
-      '--el-color-primary-dark-2',
-      'color-mix(in srgb, var(--el-color-primary) 80%, black)'
-    );
-    return;
-  }
-
-  const hex = hexColor.replace('#', '');
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-
-  for (let i = 1; i <= 9; i++) {
-    const mixRatio = i * 0.1;
-    const mixR = Math.round(255 * mixRatio + r * (1 - mixRatio));
-    const mixG = Math.round(255 * mixRatio + g * (1 - mixRatio));
-    const mixB = Math.round(255 * mixRatio + b * (1 - mixRatio));
-    root.style.setProperty(
-      `--el-color-primary-light-${i}`,
-      `rgb(${mixR}, ${mixG}, ${mixB})`
-    );
-  }
-
-  const darkRatio = 0.2;
-  const darkR = Math.round(r * (1 - darkRatio));
-  const darkG = Math.round(g * (1 - darkRatio));
-  const darkB = Math.round(b * (1 - darkRatio));
-  root.style.setProperty(
-    '--el-color-primary-dark-2',
-    `rgb(${darkR}, ${darkG}, ${darkB})`
-  );
-}
-
-function getAdminPrimaryColorFromStorage(): string {
-  if (typeof window === 'undefined') return '';
-  const raw = window.localStorage.getItem('pix-space-settings-store');
-  if (!raw) return '';
-  try {
-    const parsed = JSON.parse(raw) as { primaryColor?: unknown };
-    return typeof parsed.primaryColor === 'string' ? parsed.primaryColor : '';
-  } catch {
-    return '';
-  }
-}
-
-onMounted(() => {
-  const portalEl = document.querySelector(
-    '.portal-layout.portal-theme'
-  ) as HTMLElement | null;
-  const primary = portalEl
-    ? getComputedStyle(portalEl)
-        .getPropertyValue('--portal-color-primary')
-        .trim()
-    : '';
-  if (!primary) return;
-  applyPrimaryColorToRoot(primary);
-});
-
-onUnmounted(() => {
-  const primaryColor = getAdminPrimaryColorFromStorage();
-  if (!primaryColor) return;
-  applyPrimaryColorToRoot(primaryColor);
-});
 
 const syncQueryFromRoute = () => {
   const q = typeof route.query.q === 'string' ? route.query.q : '';
@@ -140,14 +25,10 @@ const submitSearch = () => {
 const clearSearch = () => {
   router.push({ path: '/explore' });
 };
-
-const goAdmin = () => {
-  router.push('/admin/dashboard');
-};
 </script>
 
 <template>
-  <div class="portal-layout portal-theme">
+  <div class="portal-layout">
     <header class="portal-header">
       <div class="header-container">
         <div class="logo" @click="router.push('/')">
@@ -159,7 +40,7 @@ const goAdmin = () => {
           <el-input
             v-model="searchQuery"
             placeholder="搜索高品质素材、灵感..."
-            class="search-input"
+            class="search-input portal-search-input"
             :prefix-icon="Search"
             clearable
             @keyup.enter="submitSearch"
@@ -167,21 +48,7 @@ const goAdmin = () => {
           />
         </div>
 
-        <div class="header-actions">
-          <el-button type="primary" round class="upload-btn">上传</el-button>
-          <el-dropdown trigger="click" placement="bottom-end">
-            <div class="avatar-wrapper">
-              <el-avatar :size="32" class="user-avatar">U</el-avatar>
-            </div>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item @click="goAdmin"
-                  >进入后台管理</el-dropdown-item
-                >
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </div>
+        <PortalHeaderActions :redirect-path="route.fullPath" />
       </div>
     </header>
 
@@ -202,7 +69,7 @@ const goAdmin = () => {
 .portal-header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: var(--ds-z-sticky);
   background-color: var(--ds-color-bg-primary);
   height: 64px;
   box-shadow: var(--ds-shadow-1);
@@ -213,7 +80,7 @@ const goAdmin = () => {
 .header-container {
   width: 100%;
   max-width: 1440px;
-  padding: 0 var(--ds-space-5);
+  padding: 0 var(--ds-space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -232,8 +99,8 @@ const goAdmin = () => {
   height: 36px;
   background: linear-gradient(
     135deg,
-    var(--portal-color-primary) 0%,
-    var(--portal-color-primary-dark) 100%
+    var(--el-color-primary) 0%,
+    var(--el-color-primary-dark-2) 100%
   );
   border-radius: var(--ds-radius-2);
   display: flex;
@@ -247,59 +114,30 @@ const goAdmin = () => {
 .logo-text {
   color: var(--ds-color-text-primary);
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .search-wrapper {
   flex: 1;
   max-width: 800px;
-  margin: 0 var(--ds-space-6);
+  margin: 0 var(--ds-space-7);
 }
 
-.search-input :deep(.el-input__wrapper) {
+.portal-search-input :deep(.el-input__wrapper) {
   background-color: var(--ds-color-bg-secondary);
   border-radius: var(--ds-radius-pill);
   box-shadow: none;
   height: 40px;
 }
 
-.search-input :deep(.el-input__wrapper.is-focus) {
+.portal-search-input :deep(.el-input__wrapper.is-focus) {
   box-shadow: 0 0 0 1px var(--el-color-primary) inset;
   background-color: var(--ds-color-bg-primary);
 }
 
-.search-input :deep(.el-input__inner) {
+.portal-search-input :deep(.el-input__inner) {
   color: var(--ds-color-text-primary);
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--ds-space-4);
-  min-width: 160px;
-  justify-content: flex-end;
-}
-
-.upload-btn {
-  padding: var(--ds-space-2) var(--ds-space-5);
-  font-weight: 500;
-}
-
-.avatar-wrapper {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-avatar {
-  background-color: var(--el-fill-color);
-  transition: transform 0.2s ease;
-}
-
-.user-avatar:hover {
-  transform: scale(1.05);
 }
 
 .portal-main {
@@ -307,6 +145,6 @@ const goAdmin = () => {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: var(--ds-space-5);
+  padding: var(--ds-space-6);
 }
 </style>

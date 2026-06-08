@@ -1,3 +1,5 @@
+import type { PaginatedData } from './http';
+
 export interface Image {
   id: string;
   title: string;
@@ -23,7 +25,4 @@ export interface ImageListParams {
   tag?: string;
 }
 
-export interface ImageListResponse {
-  list: Image[];
-  total: number;
-}
+export type ImageListResponse = PaginatedData<Image>;

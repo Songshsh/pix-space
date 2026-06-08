@@ -1,11 +1,22 @@
 import { Document, Folder, Picture, VideoPlay } from '@element-plus/icons-vue';
 import type { Component } from 'vue';
 
+export const FileType = {
+  Folder: 'folder',
+  Image: 'image',
+  Video: 'video',
+  Document: 'document',
+  Spreadsheet: 'spreadsheet',
+} as const;
+
+export type FileTypeEnum = (typeof FileType)[keyof typeof FileType];
+
 const FILE_ICONS: Record<string, Component> = {
-  文件夹: Folder,
-  图片: Picture,
-  视频: VideoPlay,
-  文档: Document,
+  [FileType.Folder]: Folder,
+  [FileType.Image]: Picture,
+  [FileType.Video]: VideoPlay,
+  [FileType.Document]: Document,
+  [FileType.Spreadsheet]: Document,
 };
 
 export function getFileIcon(type: string): Component {
@@ -13,10 +24,11 @@ export function getFileIcon(type: string): Component {
 }
 
 const FILE_COLORS: Record<string, string> = {
-  文件夹: 'var(--ds-color-warning)',
-  图片: 'var(--ds-color-success)',
-  视频: 'var(--el-color-primary-dark-2)',
-  文档: 'var(--el-color-primary)',
+  [FileType.Folder]: 'var(--ds-color-warning)',
+  [FileType.Image]: 'var(--ds-color-success)',
+  [FileType.Video]: 'var(--el-color-primary-dark-2)',
+  [FileType.Document]: 'var(--el-color-primary)',
+  [FileType.Spreadsheet]: 'var(--ds-color-success)',
 };
 
 export function getFileColor(type: string): string {
