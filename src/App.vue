@@ -1,44 +1,39 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <div v-if="!isAuthReady" class="app-loading">
-      <el-icon class="loading-icon"><Loading /></el-icon>
-      <span>初始化中...</span>
+    <div v-if="hasError" class="error-boundary">
+      <p>页面出现异常</p>
+      <el-button type="primary" @click="handleRetry">重试</el-button>
     </div>
-    <router-view v-else />
+    <router-view v-else :key="retryKey" />
   </el-config-provider>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Loading } from '@element-plus/icons-vue';
-import { useUserStore } from './stores/user';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 
-const userStore = useUserStore();
-const isAuthReady = computed(() => userStore.isAuthReady);
+const hasError = ref(false);
+const retryKey = ref(0);
+
+const handleRetry = () => {
+  retryKey.value += 1;
+  hasError.value = false;
+};
+
+onErrorCaptured(() => {
+  hasError.value = true;
+  return false;
+});
 </script>
 
 <style scoped>
-.app-loading {
-  min-height: 100vh;
+.error-boundary {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--ds-space-2);
-  color: var(--el-text-color-regular);
-  font-size: 14px;
-}
-
-.loading-icon {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  min-height: 100vh;
+  gap: var(--ds-space-4);
+  color: var(--ds-color-text-secondary);
+  font-size: 16px;
 }
 </style>

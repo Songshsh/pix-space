@@ -6,7 +6,7 @@ test.describe('Authentication Flow', () => {
 
     // Fill in credentials using data-testid
     await page.getByTestId('email-input').fill('admin@pixspace.test');
-    await page.getByTestId('password-input').fill('Admin123!');
+    await page.getByTestId('password-input').fill('mock-login-pass');
 
     // Submit form using data-testid
     await page.getByTestId('login-submit-btn').click();

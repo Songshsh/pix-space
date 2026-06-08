@@ -1,0 +1,50 @@
+.skeleton-line {
+  border-radius: var(--ds-radius-2);
+  background-color: var(--ds-color-bg-secondary);
+}
+
+.skeleton-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+
+.skeleton-block {
+  background-color: var(--ds-color-bg-secondary);
+}
+
+.skeleton-block--board-cover {
+  height: 220px;
+}
+
+.skeleton-block--image-cover {
+  height: 200px;
+}
+
+.skeleton-panel {
+  padding: var(--ds-space-4);
+}
+
+.skeleton-panel--compact {
+  padding: var(--ds-space-2) var(--ds-space-3) var(--ds-space-3);
+}
+
+.skeleton-line--lg {
+  width: 240px;
+  height: 16px;
+}
+
+.skeleton-line--md {
+  width: 320px;
+  height: 12px;
+}
+
+.skeleton-line--sm {
+  width: 160px;
+  height: 12px;
+}
+
+.skeleton-line--xs {
+  width: 120px;
+  height: 12px;
+}

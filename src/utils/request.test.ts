@@ -1,36 +1,23 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { createPinia, setActivePinia } from 'pinia';
 import { useUserStore } from '../stores/user';
 
-vi.mock('../router', () => ({
-  default: {
-    currentRoute: {
-      value: { path: '/admin/dashboard', fullPath: '/admin/dashboard' },
-    },
-    push: vi.fn(() => Promise.resolve()),
-  },
-}));
-
-import type { Mock } from 'vitest';
 import type { InternalAxiosRequestConfig } from 'axios';
-import router from '../router';
 import request from './request';
+import { AUTH_EXPIRED_EVENT } from './auth';
 
 beforeEach(() => {
-  (router.push as Mock).mockClear?.();
   setActivePinia(createPinia());
 });
 
 describe('request', () => {
-  it('attaches Authorization header from user store token', async () => {
-    const userStore = useUserStore();
-    userStore.login({ name: 'Bob', email: 'b@c.com' }, 't2');
-    let authorization: unknown;
+  it('uses credentials for authenticated requests', async () => {
+    let withCredentials: unknown;
 
     const result = await request.get('/ping', {
       adapter: async (config: unknown) => {
-        authorization = (config as InternalAxiosRequestConfig).headers
-          ?.Authorization;
+        withCredentials = (config as InternalAxiosRequestConfig)
+          .withCredentials;
         return {
           data: { code: 0, data: { ok: true } },
           status: 200,
@@ -41,13 +28,19 @@ describe('request', () => {
       },
     });
 
-    expect(authorization).toBe('Bearer t2');
+    expect(withCredentials).toBe(true);
     expect(result).toEqual({ ok: true });
   });
 
   it('logs out and redirects on 401', async () => {
     const userStore = useUserStore();
-    userStore.login({ name: 'Bob', email: 'b@c.com' }, 't3');
+    userStore.login({ id: 1, name: 'Bob', email: 'b@c.com', role: 'admin' });
+    window.history.pushState({}, '', '/admin/dashboard');
+    let eventRedirect = '';
+    const listener = (event: Event) => {
+      eventRedirect = String((event as CustomEvent).detail?.redirect || '');
+    };
+    window.addEventListener(AUTH_EXPIRED_EVENT, listener);
 
     await expect(
       request.get('/ping', {
@@ -65,10 +58,8 @@ describe('request', () => {
       })
     ).rejects.toMatchObject({ status: 401 });
 
+    window.removeEventListener(AUTH_EXPIRED_EVENT, listener);
     expect(userStore.isLoggedIn).toBe(false);
-    expect(router.push).toHaveBeenCalledWith({
-      path: '/login',
-      query: { redirect: '/admin/dashboard' },
-    });
+    expect(eventRedirect).toBe('/admin/dashboard');
   });
 });

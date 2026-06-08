@@ -1,18 +1,20 @@
+import type { PaginatedData } from './http';
+import type { UserRole } from '../utils/access';
+
 export interface User {
-  id: number | null;
+  id: number;
   username: string;
   email: string;
   avatar?: string;
-  role: string;
+  role: UserRole;
   status: 'active' | 'inactive';
-  createdAt?: string;
-  password?: string;
+  createdAt: string;
 }
 
 export interface UserSearchForm {
   username: string;
   email: string;
-  status: string;
+  status: '' | 'active' | 'inactive';
 }
 
 export interface Pagination {
@@ -29,16 +31,16 @@ export interface UserListParams {
   status?: string;
 }
 
-export interface UserListResponse {
-  list: User[];
-  total: number;
-}
+export type UserListResponse = PaginatedData<User>;
 
 export interface UserForm {
-  id: number | null;
   username: string;
   email: string;
   password?: string;
-  role: string;
+  role: UserRole;
   status: 'active' | 'inactive';
+}
+
+export interface UpdateUserStatusPayload {
+  status: User['status'];
 }

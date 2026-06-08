@@ -1,6 +1,5 @@
 <template>
-  <div class="starry-background">
-    <!-- Stars background -->
+  <div class="starry-background" @click="handleClick">
     <div id="stars" class="stars-container">
       <div
         v-for="(star, index) in stars"
@@ -16,13 +15,11 @@
       ></div>
     </div>
 
-    <!-- Nebulae and planets -->
     <div class="nebulae nebula-1"></div>
     <div class="nebulae nebula-2"></div>
     <div class="floating-planet planet-1"></div>
     <div class="floating-planet planet-2"></div>
 
-    <!-- Click burst stars (transient) -->
     <div
       v-for="(burst, index) in burstStars"
       :key="'burst-' + index"
@@ -33,8 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import { onUnmounted } from 'vue';
-
 interface Star {
   size: number;
   x: number;
@@ -53,22 +48,17 @@ interface BurstStar {
   duration: number;
 }
 
-// Star data
 const stars = ref<Star[]>([]);
 const comets = ref<Comet[]>([]);
 const burstStars = ref<BurstStar[]>([]);
 
 const props = defineProps<{
-  theme?: 'dark' | 'deep';
-  intensity?: 'low' | 'medium' | 'high';
   hideComets?: boolean;
 }>();
 
-// Constants
-const STAR_COUNT = 200;
+const STAR_COUNT = 80;
 const COMET_INTERVAL = 3000;
 
-// Interval and Timeout references
 const cometIntervalId = ref<ReturnType<typeof setInterval> | null>(null);
 const timeoutIds = new Set<ReturnType<typeof setTimeout>>();
 
@@ -80,7 +70,6 @@ const registerTimeout = (callback: () => void, ms: number) => {
   timeoutIds.add(id);
 };
 
-// Methods
 const starStyle = (star: Star) => {
   return {
     width: `${star.size}px`,
@@ -129,7 +118,6 @@ const createComet = () => {
 
   comets.value.push(comet);
 
-  // Remove comet after animation completes
   registerTimeout(() => {
     const index = comets.value.indexOf(comet);
     if (index > -1) {
@@ -167,7 +155,6 @@ const triggerBurst = () => {
 
 const handleClick = (event: MouseEvent) => {
   const target = event.target as HTMLElement;
-  // Don't create burst stars when clicking on stars or comets
   if (target.classList.contains('star') || target.classList.contains('comet')) {
     return;
   }
@@ -175,23 +162,17 @@ const handleClick = (event: MouseEvent) => {
   createBurstStar(event.clientX, event.clientY);
 };
 
-// Lifecycle
 onMounted(() => {
   generateStars();
 
-  // Create initial comets
   if (!props.hideComets) {
     for (let i = 0; i < 3; i++) {
       createComet();
     }
 
-    // Create new comet periodically
     const cometInterval = setInterval(createComet, COMET_INTERVAL);
     cometIntervalId.value = cometInterval;
   }
-
-  // Add click event listener
-  document.addEventListener('click', handleClick);
 });
 
 onUnmounted(() => {
@@ -200,7 +181,6 @@ onUnmounted(() => {
   }
   timeoutIds.forEach((id) => clearTimeout(id));
   timeoutIds.clear();
-  document.removeEventListener('click', handleClick);
 });
 
 defineExpose({
@@ -209,14 +189,22 @@ defineExpose({
 </script>
 
 <style scoped>
-/* Stars container */
+.starry-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--ds-z-base);
+}
+
 .stars-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: var(--ds-z-base);
 }
 
 .star {
@@ -224,6 +212,7 @@ defineExpose({
   background-color: var(--ds-color-text-inverse);
   border-radius: 50%;
   animation: twinkle 3s infinite alternate;
+  will-change: opacity;
 }
 
 .comet {
@@ -233,7 +222,7 @@ defineExpose({
   background: linear-gradient(
     to right,
     transparent,
-    var(--ds-color-white-80),
+    var(--ds-color-overlay-white-bright),
     transparent
   );
   transform-origin: top;
@@ -244,30 +233,33 @@ defineExpose({
   position: fixed;
   width: 8px;
   height: 8px;
-  z-index: 1000;
+  z-index: var(--ds-z-overlay);
   background: radial-gradient(
     circle,
     var(--ds-color-text-inverse),
-    var(--el-color-primary)
+    var(--ds-color-brand-primary)
   );
   animation: twinkle 0.8s ease-out forwards;
   transform-origin: center;
   pointer-events: none;
 }
 
-/* Nebulae and planets */
 .nebulae {
   position: absolute;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.3;
-  z-index: 0;
+  z-index: var(--ds-z-base);
 }
 
 .nebula-1 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, var(--el-color-primary), transparent);
+  background: radial-gradient(
+    circle,
+    var(--ds-color-brand-primary),
+    transparent
+  );
   top: 10%;
   left: 10%;
 }
@@ -277,7 +269,7 @@ defineExpose({
   height: 400px;
   background: radial-gradient(
     circle,
-    var(--el-color-primary-dark-2),
+    var(--ds-color-brand-primary-dark),
     transparent
   );
   bottom: 10%;
@@ -287,7 +279,7 @@ defineExpose({
 .floating-planet {
   position: absolute;
   border-radius: 50%;
-  z-index: 0;
+  z-index: var(--ds-z-base);
   animation: float 20s ease-in-out infinite;
 }
 
@@ -296,13 +288,12 @@ defineExpose({
   height: 100px;
   background: radial-gradient(
     circle at 30% 30%,
-    var(--el-color-primary),
+    var(--ds-color-brand-primary),
     var(--ds-color-space-deep)
   );
   top: 20%;
   right: 15%;
-  box-shadow: 0 0 40px
-    color-mix(in srgb, var(--el-color-primary) 30%, transparent);
+  box-shadow: var(--ds-shadow-glow-md);
 }
 
 .planet-2 {
@@ -310,20 +301,14 @@ defineExpose({
   height: 60px;
   background: radial-gradient(
     circle at 40% 40%,
-    var(--ds-color-starry-accent, var(--el-color-primary-light-3)),
+    var(--ds-color-brand-accent),
     var(--ds-color-space-deep)
   );
   bottom: 25%;
   left: 15%;
-  box-shadow: 0 0 30px
-    color-mix(
-      in srgb,
-      var(--ds-color-starry-accent, var(--el-color-primary-light-3)) 30%,
-      transparent
-    );
+  box-shadow: var(--ds-shadow-glow-sm);
 }
 
-/* Keyframes */
 @keyframes twinkle {
   0%,
   100% {
