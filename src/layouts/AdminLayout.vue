@@ -41,7 +41,9 @@
             <el-breadcrumb-item :to="{ path: '/admin/dashboard' }"
               >首页</el-breadcrumb-item
             >
-            <el-breadcrumb-item>{{ currentPageTitle }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="route.path !== '/admin/dashboard'">{{
+              currentPageTitle
+            }}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
 
@@ -104,7 +106,7 @@ import { useSettingsStore } from '../stores/settings';
 import { useUserStore } from '../stores/user';
 import { storeToRefs } from 'pinia';
 import { protectedChildrenRoutes, type MenuIconKey } from '../router';
-import { canAccess } from '../utils/access';
+import { canAccess, ADMIN_ACCESS_ROLES } from '../utils/access';
 import { scrollContainerKey } from '../composables/injectionKeys';
 import {
   applyAdminPrimaryColorToRoot,
@@ -158,7 +160,7 @@ const handleGoPortal = () => {
 };
 
 const handleGoSettings = () => {
-  const target = canAccess(['admin'], userStore.role)
+  const target = canAccess(ADMIN_ACCESS_ROLES, userStore.role)
     ? '/admin/settings'
     : '/account';
   router.push(target);
@@ -185,6 +187,8 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+@import '../styles/shared-logo.css';
+
 .admin-layout {
   height: 100vh;
   overflow: hidden;
@@ -217,23 +221,6 @@ onUnmounted(() => {
   gap: var(--ds-space-3);
 }
 
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(
-    135deg,
-    var(--el-color-primary) 0%,
-    var(--el-color-primary-dark-2) 100%
-  );
-  border-radius: var(--ds-radius-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ds-color-text-inverse);
-  font-weight: 700;
-  font-size: 14px;
-}
-
 .logo-text {
   color: var(--ds-color-text-inverse);
   font-size: 18px;
@@ -250,6 +237,11 @@ onUnmounted(() => {
 
 .sidebar-menu:not(.el-menu--collapse) {
   width: 100%;
+}
+
+.sidebar-menu.el-menu--collapse {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .sidebar-footer {

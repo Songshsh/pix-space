@@ -53,7 +53,7 @@
   color: var(--ds-color-overlay-white-dim);
   height: 48px;
   line-height: 48px;
-  margin: var(--ds-space-1) 0;
+  margin: var(--ds-space-1) var(--ds-space-2);
   border-radius: var(--ds-radius-2);
 }
 
@@ -73,6 +73,13 @@
 
 .admin-layout-sidebar-menu .el-menu-item .el-icon {
   font-size: 18px;
+}
+
+/* 收缩后菜单 icon 居中 */
+.admin-layout-sidebar-menu.el-menu--collapse .el-menu-tooltip__trigger {
+  padding-left: 0;
+  padding-right: 0;
+  justify-content: center;
 }
 
 .sidebar-card .el-menu {
