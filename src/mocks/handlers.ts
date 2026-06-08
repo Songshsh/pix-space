@@ -99,14 +99,21 @@ const mockAccounts: Array<{
   id: number;
   email: string;
   role: Role;
+  username: string;
 }> = [
-  { id: 1, email: 'admin@pixspace.test', role: 'admin' },
-  { id: 101, email: 'user@pixspace.test', role: 'user' },
+  { id: 1, email: 'admin@pixspace.test', role: 'admin', username: 'admin' },
+  { id: 101, email: 'user@pixspace.test', role: 'user', username: 'user' },
   {
     id: 102,
     email: 'viewer@pixspace.test',
     role: 'viewer',
+    username: 'viewer',
   },
+  { id: 201, email: 'user1@pixspace.test', role: 'user', username: 'User 1' },
+  { id: 202, email: 'user2@pixspace.test', role: 'user', username: 'User 2' },
+  { id: 203, email: 'user3@pixspace.test', role: 'user', username: 'User 3' },
+  { id: 204, email: 'user4@pixspace.test', role: 'user', username: 'User 4' },
+  { id: 205, email: 'user5@pixspace.test', role: 'user', username: 'User 5' },
 ];
 
 const passwordState = new Map<string, string>();
@@ -116,7 +123,7 @@ const profileState = new Map<string, MockProfile>(
     account.email,
     {
       id: account.id,
-      name: account.email.split('@')[0] || 'Demo',
+      name: account.username,
       email: account.email,
       role: account.role,
       avatar: '',

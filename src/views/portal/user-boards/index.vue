@@ -21,6 +21,7 @@ const {
   uploadsSort,
   summaryLoading,
   summaryError,
+  notFound,
   boardsState,
   uploadsState,
   likesState,
@@ -69,6 +70,7 @@ const onStatePrimaryAction = () => {
 <template>
   <div class="user-boards-page">
     <UserProfileCard
+      v-if="!notFound && !summaryError"
       :username="profile.username"
       :profile-name="profile.username"
       :bio="profile.bio"

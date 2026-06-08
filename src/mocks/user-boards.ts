@@ -141,6 +141,31 @@ const mockProfilesByUserId: Record<number, UserBoardsProfile> = {
     username: 'viewer',
     bio: '偏好浏览与收藏高质量素材',
   },
+  201: {
+    id: 201,
+    username: 'User 1',
+    bio: '热爱设计与创意',
+  },
+  202: {
+    id: 202,
+    username: 'User 2',
+    bio: '专注 UI 与交互设计',
+  },
+  203: {
+    id: 203,
+    username: 'User 3',
+    bio: '插画与品牌设计爱好者',
+  },
+  204: {
+    id: 204,
+    username: 'User 4',
+    bio: '3D 渲染与视觉实验',
+  },
+  205: {
+    id: 205,
+    username: 'User 5',
+    bio: '摄影与排版灵感收集',
+  },
 };
 
 const baseSeedUploads: UploadImage[] = [

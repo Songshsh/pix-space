@@ -579,6 +579,7 @@ export function useUserBoardsView() {
     uploadsSort,
     summaryLoading,
     summaryError,
+    notFound,
     boardsState,
     uploadsState,
     likesState,
