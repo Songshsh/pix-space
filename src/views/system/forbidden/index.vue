@@ -1,0 +1,34 @@
+<template>
+  <StarryStatusPage
+    code="403"
+    description="抱歉，您没有权限访问该页面"
+    button-text="返回首页"
+    @back="handleGoBack"
+  />
+</template>
+
+<script setup lang="ts">
+import StarryStatusPage from '../../../components/StarryStatusPage.vue';
+import { useUserStore } from '../../../stores/user';
+import { canAccessAdmin } from '../../../utils/access';
+
+const router = useRouter();
+const route = useRoute();
+const userStore = useUserStore();
+
+const handleGoBack = () => {
+  const from = route.query.from;
+  const fromPath = typeof from === 'string' ? from : '';
+  if (!userStore.isAuthenticated) {
+    router.push('/explore');
+    return;
+  }
+
+  if (fromPath.startsWith('/admin') && canAccessAdmin(userStore.role)) {
+    router.push('/admin/dashboard');
+    return;
+  }
+
+  router.push('/explore');
+};
+</script>

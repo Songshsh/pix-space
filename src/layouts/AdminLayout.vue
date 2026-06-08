@@ -1,10 +1,10 @@
 <template>
-  <el-container class="main-layout">
+  <el-container class="admin-layout">
     <el-aside :width="isCollapsed ? '64px' : '220px'" class="sidebar">
       <div class="sidebar-header">
         <div class="logo">
           <span class="logo-icon">PS</span>
-          <span v-show="!isCollapsed" class="logo-text">PixSpace</span>
+          <span v-show="!isCollapsed" class="logo-text">Pix Space</span>
         </div>
       </div>
 
@@ -13,14 +13,14 @@
         :collapse="isCollapsed"
         :collapse-transition="false"
         router
-        class="sidebar-menu"
+        class="sidebar-menu admin-layout-sidebar-menu"
       >
         <el-menu-item
           v-for="item in menuItems"
           :key="item.index"
           :index="item.index"
         >
-          <el-icon><component :is="item.icon" /></el-icon>
+          <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
           <template #title>{{ item.title }}</template>
         </el-menu-item>
       </el-menu>
@@ -48,16 +48,20 @@
         <div class="header-right">
           <el-dropdown trigger="click" placement="bottom-end">
             <span class="user-trigger">
-              <el-avatar :size="32" :icon="UserFilled" />
+              <el-avatar
+                :size="32"
+                :src="userStore.avatar"
+                :icon="UserFilled"
+              />
               <span class="user-name">{{ displayName }}</span>
               <el-icon class="arrow-icon"><ArrowDown /></el-icon>
             </span>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item disabled>{{ userLabel }}</el-dropdown-item>
-                <el-dropdown-item divided @click="handleGoProfile">
-                  <el-icon><User /></el-icon>
-                  个人中心
+                <el-dropdown-item divided @click="handleGoPortal">
+                  <el-icon><Monitor /></el-icon>
+                  前往前台
                 </el-dropdown-item>
                 <el-dropdown-item @click="handleGoSettings">
                   <el-icon><Setting /></el-icon>
@@ -87,6 +91,7 @@ import {
   Expand,
   Fold,
   Folder,
+  Monitor,
   Picture,
   Setting,
   SwitchButton,
@@ -94,21 +99,28 @@ import {
   UserFilled,
 } from '@element-plus/icons-vue';
 import { useUserDisplay } from '../composables/useUserDisplay';
-import { logout as logoutApi } from '../api/user';
+import { useLogout } from '../composables/useLogout';
 import { useSettingsStore } from '../stores/settings';
+import { useUserStore } from '../stores/user';
 import { storeToRefs } from 'pinia';
-import { provide, useTemplateRef } from 'vue';
-import { protectedChildrenRoutes, type MenuIconKey } from '../router/routes';
+import { protectedChildrenRoutes, type MenuIconKey } from '../router';
 import { canAccess } from '../utils/access';
+import { scrollContainerKey } from '../composables/injectionKeys';
+import {
+  applyAdminPrimaryColorToRoot,
+  applyPortalPrimaryColorToRoot,
+} from '../utils/theme';
 
 const router = useRouter();
 const route = useRoute();
-const { displayName, userLabel, userStore } = useUserDisplay();
+const { displayName, userLabel } = useUserDisplay();
+const { logout } = useLogout();
+const userStore = useUserStore();
 const settingsStore = useSettingsStore();
 const { collapsedSidebar: isCollapsed } = storeToRefs(settingsStore);
 
 const mainContentRef = useTemplateRef('mainContent');
-provide('scrollContainer', () => mainContentRef.value?.$el || null);
+provide(scrollContainerKey, () => mainContentRef.value?.$el || null);
 
 const iconMap: Record<MenuIconKey, unknown> = {
   DataAnalysis,
@@ -134,40 +146,52 @@ const menuItems = computed(() => {
         icon,
       };
     })
-    .filter((i) => Boolean(i.title) && Boolean(i.icon));
+    .filter((i) => Boolean(i.title));
 });
 
 const currentPageTitle = computed(() => {
   return (route.meta.title as string) || '首页';
 });
 
-const handleGoProfile = () => {
-  ElMessage.info('个人中心功能开发中');
+const handleGoPortal = () => {
+  router.push('/explore');
 };
 
 const handleGoSettings = () => {
-  router.push('/admin/settings');
+  const target = canAccess(['admin'], userStore.role)
+    ? '/admin/settings'
+    : '/account';
+  router.push(target);
 };
 
 const handleLogout = async () => {
-  try {
-    await logoutApi({ silentError: true });
-  } catch (error) {
-    void error;
-  }
-  userStore.logout();
-  ElMessage.success('已退出登录');
-  router.push('/login');
+  await logout();
 };
+
+onBeforeMount(() => {
+  applyAdminPrimaryColorToRoot(settingsStore.primaryColor);
+});
+
+watch(
+  () => settingsStore.primaryColor,
+  (value) => {
+    applyAdminPrimaryColorToRoot(value);
+  }
+);
+
+onUnmounted(() => {
+  applyPortalPrimaryColorToRoot();
+});
 </script>
 
 <style scoped>
-.main-layout {
+.admin-layout {
   height: 100vh;
   overflow: hidden;
 }
 
 .sidebar {
+  background: var(--ds-color-admin-sidebar-bg-start);
   background: linear-gradient(
     180deg,
     var(--ds-color-admin-sidebar-bg-start) 0%,
@@ -184,7 +208,7 @@ const handleLogout = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid var(--ds-color-white-8);
+  border-bottom: 1px solid var(--ds-color-overlay-white-subtle);
 }
 
 .logo {
@@ -228,46 +252,20 @@ const handleLogout = async () => {
   width: 100%;
 }
 
-:deep(.sidebar-menu .el-menu-item) {
-  color: var(--ds-color-white-65);
-  height: 48px;
-  line-height: 48px;
-  margin: var(--ds-space-1) 0;
-  border-radius: var(--ds-radius-2);
-}
-
-:deep(.sidebar-menu .el-menu-item:hover) {
-  background: var(--ds-color-white-8);
-  color: var(--ds-color-text-inverse);
-}
-
-:deep(.sidebar-menu .el-menu-item.is-active) {
-  background: linear-gradient(
-    90deg,
-    var(--el-color-primary-light-9) 0%,
-    var(--el-color-primary-light-8) 100%
-  );
-  color: var(--el-color-primary);
-}
-
-:deep(.sidebar-menu .el-menu-item .el-icon) {
-  font-size: 18px;
-}
-
 .sidebar-footer {
   padding: var(--ds-space-3);
-  border-top: 1px solid var(--ds-color-white-8);
+  border-top: 1px solid var(--ds-color-overlay-white-subtle);
   display: flex;
   justify-content: center;
 }
 
 .sidebar-footer .el-button {
-  color: var(--ds-color-white-65);
+  color: var(--ds-color-overlay-white-dim);
 }
 
 .sidebar-footer .el-button:hover {
   color: var(--ds-color-text-inverse);
-  background-color: var(--ds-color-white-8);
+  background-color: var(--ds-color-overlay-white-subtle);
 }
 
 .main-header {
@@ -276,7 +274,7 @@ const handleLogout = async () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--ds-space-5);
+  padding: 0 var(--ds-space-6);
   height: 56px;
   box-shadow: var(--ds-shadow-1);
 }
@@ -322,7 +320,7 @@ const handleLogout = async () => {
 
 .main-content {
   background: var(--ds-color-bg-secondary);
-  padding: var(--ds-space-5);
+  padding: var(--ds-space-6);
   overflow-y: auto;
 }
 </style>
