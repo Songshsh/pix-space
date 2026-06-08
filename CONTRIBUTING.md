@@ -6,14 +6,18 @@
 - 构建：`npm run build`
 - 预览构建产物：`npm run preview`
 - 代码检查（ESLint）：`npm run lint`
+- 代码检查并自动修复：`npm run lint:fix`
 - 样式检查（Stylelint）：`npm run lint:style`
+- 样式检查并自动修复：`npm run lint:style:fix`
 - 格式化（写入）：`npm run format`
 - 格式化检查：`npm run format:check`
 - 类型检查：`npm run typecheck`
 - 单元测试（Vitest）：`npm run test:unit`
+- 覆盖率测试（Vitest）：`npm run test:coverage`
 - E2E 测试（Playwright）：`npm run test:e2e`
 - CI 等价检查集：`npm run test`
 - 全量验证（CI + E2E + 构建）：`npm run test:all`
+- 交互式提交：`npm run commit`
 
 ## 本地开发
 

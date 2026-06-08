@@ -1,13 +1,13 @@
-# Pix Space - Explore 发现与搜索（portal-explore.pen 严格转码）设计方案
+# Pix Space - Explore 发现与搜索（基于历史原型 `portal-explore.pen` 严格转码）设计方案
 
 ## 元信息
 
-- 状态：草稿
+- Status：implemented
 - 目标读者：产品、前端、设计
-- 单一事实来源：`design/portal-explore.pen`
-- 范围：仅 C 端前台 `/explore` 发现态与搜索态；不包含详情页、上传流程与真实接口对接
-- 相关代码：`src/layouts/PortalLayout.vue`、`src/views/explore/index.vue`、`src/router/index.ts`
-- 验收方式：手工验收（对照 pen 的布局与样式）+ 关键交互最小测试
+- 单一事实来源：`design/portal-explore.pen`（历史原型文件名）
+- 范围：仅 C 端前台 `/explore` 发现态与搜索态；包含图片预览弹层与详情跳转入口；不包含上传流程
+- Entry points：`src/layouts/PortalLayout.vue`、`src/views/portal/explore/index.vue`、`src/components/portal/ImagePreviewDialog.vue`、`src/api/explore.ts`、`src/mocks/explore.ts`、`src/router/index.ts`
+- Acceptance checklist：手工验收（对照 pen 的布局与样式）+ 关键交互最小测试
 
 ## 1. 目标
 
@@ -50,8 +50,9 @@
 
 ### 3.2 交互
 
-- 点击类目 tag：仅改变激活态（mock 版本可不改变数据集，仅用于样式验收）
-- 点击卡片：本范围内不实现跳转或弹层，仅保留 hover/可点击态
+- 点击类目 tag：仅改变激活态（当前 mock 版本不改变数据集，仅用于样式验收）
+- 点击卡片：打开图片预览弹层，保持浏览流连续
+- 点击“查看详情”：跳转 `/image/:id`
 
 ## 4. 搜索态（对应 pen: Explore/搜索结果）
 
@@ -93,9 +94,16 @@
 
 - `src/layouts/PortalLayout.vue`
   - 负责输入框的 URL 同步（Enter 写入 q；clear 清空 q）
-- `src/views/explore/index.vue`
+- `src/api/explore.ts`
+  - Explore 页面统一接口封装
+- `src/mocks/explore.ts`
+  - Explore mock 数据单一来源
+- `src/views/portal/explore/index.vue`
   - 通过 `route.query.q` 判断发现态/搜索态
+  - 通过 `getExploreData()` 拉取页面数据，由 MSW 提供 mock 响应
   - 发现态与搜索态采用条件渲染，但复用同一套 masonry 卡片与样式体系
+- `src/components/portal/ImagePreviewDialog.vue`
+  - 承接 Explore 图片预览与详情跳转
 
 ## 7. 验收清单
 
@@ -106,3 +114,4 @@
 - 搜索态：
   - Result Bar / 排序 / 二级 tags / 相关搜索 / 瀑布流均可见
   - 不出现额外“清除”按钮
+- 点击卡片：打开图片预览弹层，并支持查看详情

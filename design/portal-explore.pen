@@ -4,7 +4,7 @@
     {
       "type": "frame",
       "id": "explore-page",
-      "name": "C端前台 - 发现页",
+      "name": "C\u7aef\u524d\u53f0 - \u53d1\u73b0\u9875",
       "x": 0,
       "y": 0,
       "width": 1440,
@@ -61,7 +61,7 @@
                   "id": "search-icon",
                   "x": 16,
                   "y": 11,
-                  "content": "🔍",
+                  "content": "\ud83d\udd0d",
                   "fontSize": 14,
                   "fill": "#999999"
                 },
@@ -70,7 +70,7 @@
                   "id": "search-placeholder",
                   "x": 40,
                   "y": 11,
-                  "content": "搜索高品质素材、灵感...",
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
                   "fontSize": 14,
                   "fill": "#999999"
                 }
@@ -92,7 +92,7 @@
                   "id": "upload-text",
                   "x": 22,
                   "y": 8,
-                  "content": "上传",
+                  "content": "\u4e0a\u4f20",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#ffffff"
@@ -106,7 +106,7 @@
               "y": 16,
               "width": 32,
               "height": 32,
-              "fill": "#d9d9d9",
+              "fill": "#8b5cf6",
               "cornerRadius": 16,
               "layout": "none",
               "children": [
@@ -149,7 +149,7 @@
                   "id": "tag-text-0",
                   "x": 16,
                   "y": 8,
-                  "content": "全部",
+                  "content": "\u5168\u90e8",
                   "fontSize": 14,
                   "fill": "#ffffff"
                 }
@@ -176,7 +176,7 @@
                   "id": "tag-text-1",
                   "x": 16,
                   "y": 8,
-                  "content": "UI设计",
+                  "content": "UI\u8bbe\u8ba1",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -203,7 +203,7 @@
                   "id": "tag-text-2",
                   "x": 16,
                   "y": 8,
-                  "content": "自然摄影",
+                  "content": "\u81ea\u7136\u6444\u5f71",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -230,7 +230,7 @@
                   "id": "tag-text-3",
                   "x": 16,
                   "y": 8,
-                  "content": "3D渲染",
+                  "content": "3D\u6e32\u67d3",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -257,7 +257,7 @@
                   "id": "tag-text-4",
                   "x": 16,
                   "y": 8,
-                  "content": "插画",
+                  "content": "\u63d2\u753b",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -284,7 +284,7 @@
                   "id": "tag-text-5",
                   "x": 16,
                   "y": 8,
-                  "content": "品牌设计",
+                  "content": "\u54c1\u724c\u8bbe\u8ba1",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -311,7 +311,7 @@
                   "id": "tag-text-6",
                   "x": 16,
                   "y": 8,
-                  "content": "排版",
+                  "content": "\u6392\u7248",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -338,7 +338,7 @@
                   "id": "tag-text-7",
                   "x": 16,
                   "y": 8,
-                  "content": "极简主义",
+                  "content": "\u6781\u7b80\u4e3b\u4e49",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -365,7 +365,7 @@
                   "id": "tag-text-8",
                   "x": 16,
                   "y": 8,
-                  "content": "电商",
+                  "content": "\u7535\u5546",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -392,7 +392,7 @@
                   "id": "tag-text-9",
                   "x": 16,
                   "y": 8,
-                  "content": "壁纸",
+                  "content": "\u58c1\u7eb8",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -419,7 +419,7 @@
                   "id": "tag-text-10",
                   "x": 16,
                   "y": 8,
-                  "content": "其它",
+                  "content": "\u5176\u5b83",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -478,7 +478,7 @@
                   "id": "card-title-0",
                   "x": 16,
                   "y": 316,
-                  "content": "灵感素材 1",
+                  "content": "\u7075\u611f\u7d20\u6750 1",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -499,7 +499,7 @@
                       "id": "card-tag-text-0-0",
                       "x": 8,
                       "y": 4,
-                      "content": "UI设计",
+                      "content": "UI\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -521,7 +521,7 @@
                       "id": "card-tag-text-0-1",
                       "x": 8,
                       "y": 4,
-                      "content": "极简主义",
+                      "content": "\u6781\u7b80\u4e3b\u4e49",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -552,7 +552,7 @@
                   "id": "card-view-detail-0",
                   "x": 194,
                   "y": 378,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -597,7 +597,7 @@
                   "id": "card-title-1",
                   "x": 16,
                   "y": 466,
-                  "content": "灵感素材 2",
+                  "content": "\u7075\u611f\u7d20\u6750 2",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -618,7 +618,7 @@
                       "id": "card-tag-text-1-0",
                       "x": 8,
                       "y": 4,
-                      "content": "3D渲染",
+                      "content": "3D\u6e32\u67d3",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -649,7 +649,7 @@
                   "id": "card-view-detail-1",
                   "x": 194,
                   "y": 528,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -694,7 +694,7 @@
                   "id": "card-title-2",
                   "x": 16,
                   "y": 216,
-                  "content": "灵感素材 3",
+                  "content": "\u7075\u611f\u7d20\u6750 3",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -715,7 +715,7 @@
                       "id": "card-tag-text-2-0",
                       "x": 8,
                       "y": 4,
-                      "content": "插画",
+                      "content": "\u63d2\u753b",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -737,7 +737,7 @@
                       "id": "card-tag-text-2-1",
                       "x": 8,
                       "y": 4,
-                      "content": "品牌设计",
+                      "content": "\u54c1\u724c\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -768,7 +768,7 @@
                   "id": "card-view-detail-2",
                   "x": 194,
                   "y": 278,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -813,7 +813,7 @@
                   "id": "card-title-3",
                   "x": 16,
                   "y": 396,
-                  "content": "灵感素材 4",
+                  "content": "\u7075\u611f\u7d20\u6750 4",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -834,7 +834,7 @@
                       "id": "card-tag-text-3-0",
                       "x": 8,
                       "y": 4,
-                      "content": "自然摄影",
+                      "content": "\u81ea\u7136\u6444\u5f71",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -865,7 +865,7 @@
                   "id": "card-view-detail-3",
                   "x": 194,
                   "y": 458,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -910,7 +910,7 @@
                   "id": "card-title-4",
                   "x": 16,
                   "y": 266,
-                  "content": "灵感素材 5",
+                  "content": "\u7075\u611f\u7d20\u6750 5",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -931,7 +931,7 @@
                       "id": "card-tag-text-4-0",
                       "x": 8,
                       "y": 4,
-                      "content": "排版",
+                      "content": "\u6392\u7248",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -953,7 +953,7 @@
                       "id": "card-tag-text-4-1",
                       "x": 8,
                       "y": 4,
-                      "content": "UI设计",
+                      "content": "UI\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -984,7 +984,7 @@
                   "id": "card-view-detail-4",
                   "x": 194,
                   "y": 328,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1029,7 +1029,7 @@
                   "id": "card-title-5",
                   "x": 16,
                   "y": 416,
-                  "content": "灵感素材 6",
+                  "content": "\u7075\u611f\u7d20\u6750 6",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1050,7 +1050,7 @@
                       "id": "card-tag-text-5-0",
                       "x": 8,
                       "y": 4,
-                      "content": "UI设计",
+                      "content": "UI\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1072,7 +1072,7 @@
                       "id": "card-tag-text-5-1",
                       "x": 8,
                       "y": 4,
-                      "content": "极简主义",
+                      "content": "\u6781\u7b80\u4e3b\u4e49",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1103,7 +1103,7 @@
                   "id": "card-view-detail-5",
                   "x": 194,
                   "y": 478,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1148,7 +1148,7 @@
                   "id": "card-title-6",
                   "x": 16,
                   "y": 266,
-                  "content": "灵感素材 7",
+                  "content": "\u7075\u611f\u7d20\u6750 7",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1169,7 +1169,7 @@
                       "id": "card-tag-text-6-0",
                       "x": 8,
                       "y": 4,
-                      "content": "3D渲染",
+                      "content": "3D\u6e32\u67d3",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1200,7 +1200,7 @@
                   "id": "card-view-detail-6",
                   "x": 194,
                   "y": 328,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1245,7 +1245,7 @@
                   "id": "card-title-7",
                   "x": 16,
                   "y": 336,
-                  "content": "灵感素材 8",
+                  "content": "\u7075\u611f\u7d20\u6750 8",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1266,7 +1266,7 @@
                       "id": "card-tag-text-7-0",
                       "x": 8,
                       "y": 4,
-                      "content": "插画",
+                      "content": "\u63d2\u753b",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1288,7 +1288,7 @@
                       "id": "card-tag-text-7-1",
                       "x": 8,
                       "y": 4,
-                      "content": "品牌设计",
+                      "content": "\u54c1\u724c\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1319,7 +1319,7 @@
                   "id": "card-view-detail-7",
                   "x": 194,
                   "y": 398,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1364,7 +1364,7 @@
                   "id": "card-title-8",
                   "x": 16,
                   "y": 296,
-                  "content": "灵感素材 9",
+                  "content": "\u7075\u611f\u7d20\u6750 9",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1385,7 +1385,7 @@
                       "id": "card-tag-text-8-0",
                       "x": 8,
                       "y": 4,
-                      "content": "自然摄影",
+                      "content": "\u81ea\u7136\u6444\u5f71",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1416,7 +1416,7 @@
                   "id": "card-view-detail-8",
                   "x": 194,
                   "y": 358,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1461,7 +1461,7 @@
                   "id": "card-title-9",
                   "x": 16,
                   "y": 416,
-                  "content": "灵感素材 10",
+                  "content": "\u7075\u611f\u7d20\u6750 10",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1482,7 +1482,7 @@
                       "id": "card-tag-text-9-0",
                       "x": 8,
                       "y": 4,
-                      "content": "排版",
+                      "content": "\u6392\u7248",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1504,7 +1504,7 @@
                       "id": "card-tag-text-9-1",
                       "x": 8,
                       "y": 4,
-                      "content": "UI设计",
+                      "content": "UI\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1535,7 +1535,7 @@
                   "id": "card-view-detail-9",
                   "x": 194,
                   "y": 478,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1580,7 +1580,7 @@
                   "id": "card-title-10",
                   "x": 16,
                   "y": 366,
-                  "content": "灵感素材 11",
+                  "content": "\u7075\u611f\u7d20\u6750 11",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1601,7 +1601,7 @@
                       "id": "card-tag-text-10-0",
                       "x": 8,
                       "y": 4,
-                      "content": "UI设计",
+                      "content": "UI\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1623,7 +1623,7 @@
                       "id": "card-tag-text-10-1",
                       "x": 8,
                       "y": 4,
-                      "content": "极简主义",
+                      "content": "\u6781\u7b80\u4e3b\u4e49",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1654,7 +1654,7 @@
                   "id": "card-view-detail-10",
                   "x": 194,
                   "y": 428,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1699,7 +1699,7 @@
                   "id": "card-title-11",
                   "x": 16,
                   "y": 216,
-                  "content": "灵感素材 12",
+                  "content": "\u7075\u611f\u7d20\u6750 12",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1720,7 +1720,7 @@
                       "id": "card-tag-text-11-0",
                       "x": 8,
                       "y": 4,
-                      "content": "3D渲染",
+                      "content": "3D\u6e32\u67d3",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1751,7 +1751,7 @@
                   "id": "card-view-detail-11",
                   "x": 194,
                   "y": 278,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1796,7 +1796,7 @@
                   "id": "card-title-12",
                   "x": 16,
                   "y": 466,
-                  "content": "灵感素材 13",
+                  "content": "\u7075\u611f\u7d20\u6750 13",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1817,7 +1817,7 @@
                       "id": "card-tag-text-12-0",
                       "x": 8,
                       "y": 4,
-                      "content": "插画",
+                      "content": "\u63d2\u753b",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1839,7 +1839,7 @@
                       "id": "card-tag-text-12-1",
                       "x": 8,
                       "y": 4,
-                      "content": "品牌设计",
+                      "content": "\u54c1\u724c\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1870,7 +1870,7 @@
                   "id": "card-view-detail-12",
                   "x": 194,
                   "y": 528,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -1915,7 +1915,7 @@
                   "id": "card-title-13",
                   "x": 16,
                   "y": 316,
-                  "content": "灵感素材 14",
+                  "content": "\u7075\u611f\u7d20\u6750 14",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -1936,7 +1936,7 @@
                       "id": "card-tag-text-13-0",
                       "x": 8,
                       "y": 4,
-                      "content": "自然摄影",
+                      "content": "\u81ea\u7136\u6444\u5f71",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -1967,7 +1967,7 @@
                   "id": "card-view-detail-13",
                   "x": 194,
                   "y": 378,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -2012,7 +2012,7 @@
                   "id": "card-title-14",
                   "x": 16,
                   "y": 266,
-                  "content": "灵感素材 15",
+                  "content": "\u7075\u611f\u7d20\u6750 15",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -2033,7 +2033,7 @@
                       "id": "card-tag-text-14-0",
                       "x": 8,
                       "y": 4,
-                      "content": "排版",
+                      "content": "\u6392\u7248",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -2055,7 +2055,7 @@
                       "id": "card-tag-text-14-1",
                       "x": 8,
                       "y": 4,
-                      "content": "UI设计",
+                      "content": "UI\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -2086,9 +2086,206 @@
                   "id": "card-view-detail-14",
                   "x": 194,
                   "y": 328,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "avatar-menu-admin-user",
+          "name": "Avatar Menu (admin/user)",
+          "x": 1248,
+          "y": 76,
+          "width": 176,
+          "height": 160,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000014",
+            "offset": {
+              "x": 0,
+              "y": 6
+            },
+            "blur": 18,
+            "spread": 0
+          },
+          "children": [
+            {
+              "type": "frame",
+              "id": "avatar-menu-admin-user__item-0",
+              "x": 0,
+              "y": 0,
+              "width": 176,
+              "height": 40,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "avatar-menu-admin-user__text-0",
+                  "x": 16,
+                  "y": 12,
+                  "content": "\u4e2a\u4eba\u4e3b\u9875",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "avatar-menu-admin-user__item-1",
+              "x": 0,
+              "y": 40,
+              "width": 176,
+              "height": 40,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "avatar-menu-admin-user__text-1",
+                  "x": 16,
+                  "y": 12,
+                  "content": "\u4e2a\u4eba\u4e2d\u5fc3",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "avatar-menu-admin-user__item-2",
+              "x": 0,
+              "y": 80,
+              "width": 176,
+              "height": 40,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "avatar-menu-admin-user__text-2",
+                  "x": 16,
+                  "y": 12,
+                  "content": "\u9000\u51fa\u767b\u5f55",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "avatar-menu-admin-user__item-3",
+              "x": 0,
+              "y": 120,
+              "width": 176,
+              "height": 40,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "avatar-menu-admin-user__text-3",
+                  "x": 16,
+                  "y": 12,
+                  "content": "\u540e\u53f0\u7ba1\u7406",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "avatar-menu-viewer",
+          "name": "Avatar Menu (viewer)",
+          "x": 1248,
+          "y": 260,
+          "width": 176,
+          "height": 120,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000014",
+            "offset": {
+              "x": 0,
+              "y": 6
+            },
+            "blur": 18,
+            "spread": 0
+          },
+          "children": [
+            {
+              "type": "frame",
+              "id": "avatar-menu-viewer__item-0",
+              "x": 0,
+              "y": 0,
+              "width": 176,
+              "height": 40,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "avatar-menu-viewer__text-0",
+                  "x": 16,
+                  "y": 12,
+                  "content": "\u4e2a\u4eba\u4e3b\u9875",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "avatar-menu-viewer__item-1",
+              "x": 0,
+              "y": 40,
+              "width": 176,
+              "height": 40,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "avatar-menu-viewer__text-1",
+                  "x": 16,
+                  "y": 12,
+                  "content": "\u4e2a\u4eba\u4e2d\u5fc3",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "avatar-menu-viewer__item-2",
+              "x": 0,
+              "y": 80,
+              "width": 176,
+              "height": 40,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "avatar-menu-viewer__text-2",
+                  "x": 16,
+                  "y": 12,
+                  "content": "\u9000\u51fa\u767b\u5f55",
+                  "fontSize": 14,
+                  "fill": "#333333"
                 }
               ]
             }
@@ -2105,12 +2302,11 @@
           "content": "This is the Portal Explore page layout based on Pix Space C-end design plan. It features a top header, category tags, and a masonry grid. Enhance the visual details, add hover effects or realistic image placeholders if needed."
         }
       ]
-    }
-    ,
+    },
     {
       "type": "frame",
       "id": "explore-search-page",
-      "name": "Explore/搜索结果",
+      "name": "Explore/\u641c\u7d22\u7ed3\u679c",
       "x": 0,
       "y": 1800,
       "width": 1440,
@@ -2133,7 +2329,10 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           },
@@ -2164,7 +2363,7 @@
                   "id": "explore-search-page__search-icon",
                   "x": 16,
                   "y": 12,
-                  "content": "🔍",
+                  "content": "\ud83d\udd0d",
                   "fontSize": 14,
                   "fill": "#999999"
                 },
@@ -2173,7 +2372,7 @@
                   "id": "explore-search-page__search-query",
                   "x": 40,
                   "y": 12,
-                  "content": "UI设计",
+                  "content": "UI\u8bbe\u8ba1",
                   "fontSize": 14,
                   "fill": "#333333"
                 },
@@ -2182,7 +2381,7 @@
                   "id": "explore-search-page__search-clear",
                   "x": 772,
                   "y": 12,
-                  "content": "✕",
+                  "content": "\u2715",
                   "fontSize": 14,
                   "fill": "#999999"
                 }
@@ -2204,7 +2403,7 @@
                   "id": "explore-search-page__upload-text",
                   "x": 22,
                   "y": 6,
-                  "content": "上传",
+                  "content": "\u4e0a\u4f20",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#ffffff"
@@ -2218,7 +2417,7 @@
               "y": 16,
               "width": 32,
               "height": 32,
-              "fill": "#d9d9d9",
+              "fill": "#8b5cf6",
               "cornerRadius": 16,
               "layout": "none",
               "children": [
@@ -2251,7 +2450,7 @@
               "id": "explore-search-page__result-title",
               "x": 0,
               "y": 4,
-              "content": "“UI设计”",
+              "content": "\u201cUI\u8bbe\u8ba1\u201d",
               "fontSize": 18,
               "fontWeight": "700",
               "fill": "#333333"
@@ -2261,7 +2460,7 @@
               "id": "explore-search-page__result-count",
               "x": 0,
               "y": 32,
-              "content": "共 2,431 个结果",
+              "content": "\u5171 2,431 \u4e2a\u7ed3\u679c",
               "fontSize": 12,
               "fill": "#999999"
             },
@@ -2292,7 +2491,7 @@
                       "id": "explore-search-page__sort-newest-text",
                       "x": 24,
                       "y": 4,
-                      "content": "最新",
+                      "content": "\u6700\u65b0",
                       "fontSize": 12,
                       "fill": "#ffffff"
                     }
@@ -2314,7 +2513,7 @@
                       "id": "explore-search-page__sort-hot-text",
                       "x": 24,
                       "y": 4,
-                      "content": "最热",
+                      "content": "\u6700\u70ed",
                       "fontSize": 12,
                       "fill": "#666666"
                     }
@@ -2349,7 +2548,7 @@
                   "id": "explore-search-page__tag-text-0",
                   "x": 16,
                   "y": 6,
-                  "content": "全部",
+                  "content": "\u5168\u90e8",
                   "fontSize": 14,
                   "fill": "#ffffff"
                 }
@@ -2365,14 +2564,18 @@
               "height": 32,
               "fill": "#ffffff",
               "cornerRadius": 16,
-              "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+              "stroke": {
+                "align": "inside",
+                "thickness": 0,
+                "fill": "#e8e8e8"
+              },
               "children": [
                 {
                   "type": "text",
                   "id": "explore-search-page__tag-text-1",
                   "x": 16,
                   "y": 6,
-                  "content": "极简主义",
+                  "content": "\u6781\u7b80\u4e3b\u4e49",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -2388,14 +2591,18 @@
               "height": 32,
               "fill": "#ffffff",
               "cornerRadius": 16,
-              "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+              "stroke": {
+                "align": "inside",
+                "thickness": 0,
+                "fill": "#e8e8e8"
+              },
               "children": [
                 {
                   "type": "text",
                   "id": "explore-search-page__tag-text-2",
                   "x": 16,
                   "y": 6,
-                  "content": "排版",
+                  "content": "\u6392\u7248",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -2411,14 +2618,18 @@
               "height": 32,
               "fill": "#ffffff",
               "cornerRadius": 16,
-              "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+              "stroke": {
+                "align": "inside",
+                "thickness": 0,
+                "fill": "#e8e8e8"
+              },
               "children": [
                 {
                   "type": "text",
                   "id": "explore-search-page__tag-text-3",
                   "x": 16,
                   "y": 6,
-                  "content": "品牌设计",
+                  "content": "\u54c1\u724c\u8bbe\u8ba1",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -2434,14 +2645,18 @@
               "height": 32,
               "fill": "#ffffff",
               "cornerRadius": 16,
-              "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+              "stroke": {
+                "align": "inside",
+                "thickness": 0,
+                "fill": "#e8e8e8"
+              },
               "children": [
                 {
                   "type": "text",
                   "id": "explore-search-page__tag-text-4",
                   "x": 16,
                   "y": 6,
-                  "content": "电商",
+                  "content": "\u7535\u5546",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -2457,14 +2672,18 @@
               "height": 32,
               "fill": "#ffffff",
               "cornerRadius": 16,
-              "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+              "stroke": {
+                "align": "inside",
+                "thickness": 0,
+                "fill": "#e8e8e8"
+              },
               "children": [
                 {
                   "type": "text",
                   "id": "explore-search-page__tag-text-5",
                   "x": 16,
                   "y": 6,
-                  "content": "其它",
+                  "content": "\u5176\u5b83",
                   "fontSize": 14,
                   "fill": "#666666"
                 }
@@ -2484,7 +2703,11 @@
           "height": 56,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -2492,7 +2715,7 @@
               "id": "explore-search-page__related-title",
               "x": 16,
               "y": 24,
-              "content": "相关搜索",
+              "content": "\u76f8\u5173\u641c\u7d22",
               "fontSize": 12,
               "fill": "#999999"
             },
@@ -2512,7 +2735,7 @@
                   "id": "explore-search-page__related-text-0",
                   "x": 14,
                   "y": 6,
-                  "content": "设计系统",
+                  "content": "\u8bbe\u8ba1\u7cfb\u7edf",
                   "fontSize": 12,
                   "fill": "#666666"
                 }
@@ -2534,7 +2757,7 @@
                   "id": "explore-search-page__related-text-1",
                   "x": 19,
                   "y": 6,
-                  "content": "UI组件库",
+                  "content": "UI\u7ec4\u4ef6\u5e93",
                   "fontSize": 12,
                   "fill": "#666666"
                 }
@@ -2578,7 +2801,7 @@
                   "id": "explore-search-page__related-text-3",
                   "x": 14,
                   "y": 6,
-                  "content": "移动端界面",
+                  "content": "\u79fb\u52a8\u7aef\u754c\u9762",
                   "fontSize": 12,
                   "fill": "#666666"
                 }
@@ -2611,7 +2834,10 @@
                 "type": "shadow",
                 "shadowType": "outer",
                 "color": "#0000000a",
-                "offset": { "x": 0, "y": 4 },
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
                 "blur": 12,
                 "spread": 0
               },
@@ -2632,7 +2858,7 @@
                   "id": "explore-search-page__card-title-0",
                   "x": 16,
                   "y": 316,
-                  "content": "灵感素材 1",
+                  "content": "\u7075\u611f\u7d20\u6750 1",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -2653,7 +2879,7 @@
                       "id": "explore-search-page__card-tag-text-0-0",
                       "x": 8,
                       "y": 4,
-                      "content": "UI设计",
+                      "content": "UI\u8bbe\u8ba1",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -2684,7 +2910,7 @@
                   "id": "explore-search-page__card-view-detail-0",
                   "x": 194,
                   "y": 380,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -2705,7 +2931,10 @@
                 "type": "shadow",
                 "shadowType": "outer",
                 "color": "#0000000a",
-                "offset": { "x": 0, "y": 4 },
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
                 "blur": 12,
                 "spread": 0
               },
@@ -2726,7 +2955,7 @@
                   "id": "explore-search-page__card-title-1",
                   "x": 16,
                   "y": 468,
-                  "content": "灵感素材 2",
+                  "content": "\u7075\u611f\u7d20\u6750 2",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -2747,7 +2976,7 @@
                       "id": "explore-search-page__card-tag-text-1-0",
                       "x": 8,
                       "y": 4,
-                      "content": "3D渲染",
+                      "content": "3D\u6e32\u67d3",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -2778,7 +3007,7 @@
                   "id": "explore-search-page__card-view-detail-1",
                   "x": 194,
                   "y": 528,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -2799,7 +3028,10 @@
                 "type": "shadow",
                 "shadowType": "outer",
                 "color": "#0000000a",
-                "offset": { "x": 0, "y": 4 },
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
                 "blur": 12,
                 "spread": 0
               },
@@ -2820,7 +3052,7 @@
                   "id": "explore-search-page__card-title-2",
                   "x": 16,
                   "y": 268,
-                  "content": "灵感素材 3",
+                  "content": "\u7075\u611f\u7d20\u6750 3",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "fill": "#333333"
@@ -2841,7 +3073,7 @@
                       "id": "explore-search-page__card-tag-text-2-0",
                       "x": 8,
                       "y": 4,
-                      "content": "插画",
+                      "content": "\u63d2\u753b",
                       "fontSize": 10,
                       "fill": "#666666"
                     }
@@ -2872,7 +3104,7 @@
                   "id": "explore-search-page__card-view-detail-2",
                   "x": 194,
                   "y": 328,
-                  "content": "查看详情",
+                  "content": "\u67e5\u770b\u8be6\u60c5",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -2881,12 +3113,11 @@
           ]
         }
       ]
-    }
-    ,
+    },
     {
       "type": "frame",
       "id": "explore-search-empty",
-      "name": "Explore/搜索结果/空",
+      "name": "Explore/\u641c\u7d22\u7ed3\u679c/\u7a7a",
       "x": 0,
       "y": 3800,
       "width": 1440,
@@ -2900,7 +3131,7 @@
           "id": "explore-search-empty__title",
           "x": 24,
           "y": 24,
-          "content": "Explore/搜索结果 - 空状态",
+          "content": "Explore/\u641c\u7d22\u7ed3\u679c - \u7a7a\u72b6\u6001",
           "fontSize": 14,
           "fill": "#999999"
         },
@@ -2917,7 +3148,10 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           }
@@ -2931,7 +3165,11 @@
           "height": 860,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -2960,7 +3198,7 @@
                       "id": "explore-search-empty__icon-text",
                       "x": 20,
                       "y": 16,
-                      "content": "🔍",
+                      "content": "\ud83d\udd0d",
                       "fontSize": 24,
                       "fill": "#999999"
                     }
@@ -2971,7 +3209,7 @@
                   "id": "explore-search-empty__empty-title",
                   "x": 124,
                   "y": 88,
-                  "content": "暂无结果",
+                  "content": "\u6682\u65e0\u7ed3\u679c",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "fill": "#333333"
@@ -2981,7 +3219,7 @@
                   "id": "explore-search-empty__empty-desc",
                   "x": 118,
                   "y": 120,
-                  "content": "换个关键词试试",
+                  "content": "\u6362\u4e2a\u5173\u952e\u8bcd\u8bd5\u8bd5",
                   "fontSize": 12,
                   "fill": "#999999"
                 },
@@ -2990,7 +3228,7 @@
                   "id": "explore-search-empty__hot-title",
                   "x": 136,
                   "y": 192,
-                  "content": "热门搜索",
+                  "content": "\u70ed\u95e8\u641c\u7d22",
                   "fontSize": 12,
                   "fill": "#999999"
                 },
@@ -3010,7 +3248,7 @@
                       "id": "explore-search-empty__hot-text-0",
                       "x": 14,
                       "y": 6,
-                      "content": "设计系统",
+                      "content": "\u8bbe\u8ba1\u7cfb\u7edf",
                       "fontSize": 12,
                       "fill": "#666666"
                     }
@@ -3032,7 +3270,7 @@
                       "id": "explore-search-empty__hot-text-1",
                       "x": 19,
                       "y": 6,
-                      "content": "UI组件库",
+                      "content": "UI\u7ec4\u4ef6\u5e93",
                       "fontSize": 12,
                       "fill": "#666666"
                     }
@@ -3076,7 +3314,7 @@
                       "id": "explore-search-empty__hot-text-3",
                       "x": 14,
                       "y": 6,
-                      "content": "移动端界面",
+                      "content": "\u79fb\u52a8\u7aef\u754c\u9762",
                       "fontSize": 12,
                       "fill": "#666666"
                     }
@@ -3087,7 +3325,7 @@
                   "id": "explore-search-empty__back",
                   "x": 136,
                   "y": 328,
-                  "content": "返回发现",
+                  "content": "\u8fd4\u56de\u53d1\u73b0",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
                 }
@@ -3100,7 +3338,7 @@
     {
       "type": "frame",
       "id": "explore-search-loading",
-      "name": "Explore/搜索结果/加载",
+      "name": "Explore/\u641c\u7d22\u7ed3\u679c/\u52a0\u8f7d",
       "x": 0,
       "y": 5000,
       "width": 1440,
@@ -3114,7 +3352,7 @@
           "id": "explore-search-loading__title",
           "x": 24,
           "y": 24,
-          "content": "Explore/搜索结果 - 加载状态",
+          "content": "Explore/\u641c\u7d22\u7ed3\u679c - \u52a0\u8f7d\u72b6\u6001",
           "fontSize": 14,
           "fill": "#999999"
         },
@@ -3131,7 +3369,10 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           }
@@ -3145,7 +3386,11 @@
           "height": 860,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -3172,9 +3417,9 @@
                     {
                       "type": "text",
                       "id": "explore-search-loading__loader-text",
-                  "x": 28,
+                      "x": 28,
                       "y": 18,
-                      "content": "…",
+                      "content": "\u2026",
                       "fontSize": 24,
                       "fontWeight": "700",
                       "fill": "#999999"
@@ -3186,7 +3431,7 @@
                   "id": "explore-search-loading__loading-text",
                   "x": 142,
                   "y": 88,
-                  "content": "加载中",
+                  "content": "\u52a0\u8f7d\u4e2d",
                   "fontSize": 12,
                   "fill": "#999999"
                 }
@@ -3199,7 +3444,7 @@
     {
       "type": "frame",
       "id": "explore-search-error",
-      "name": "Explore/搜索结果/错误",
+      "name": "Explore/\u641c\u7d22\u7ed3\u679c/\u9519\u8bef",
       "x": 0,
       "y": 6200,
       "width": 1440,
@@ -3213,7 +3458,7 @@
           "id": "explore-search-error__title",
           "x": 24,
           "y": 24,
-          "content": "Explore/搜索结果 - 错误状态",
+          "content": "Explore/\u641c\u7d22\u7ed3\u679c - \u9519\u8bef\u72b6\u6001",
           "fontSize": 14,
           "fill": "#999999"
         },
@@ -3230,7 +3475,10 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           }
@@ -3244,7 +3492,11 @@
           "height": 860,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -3285,7 +3537,7 @@
                   "id": "explore-search-error__error-title",
                   "x": 124,
                   "y": 88,
-                  "content": "加载失败",
+                  "content": "\u52a0\u8f7d\u5931\u8d25",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "fill": "#333333"
@@ -3295,7 +3547,7 @@
                   "id": "explore-search-error__error-desc",
                   "x": 112,
                   "y": 120,
-                  "content": "请检查网络后重试",
+                  "content": "\u8bf7\u68c0\u67e5\u7f51\u7edc\u540e\u91cd\u8bd5",
                   "fontSize": 12,
                   "fill": "#999999"
                 },
@@ -3315,7 +3567,7 @@
                       "id": "explore-search-error__error-retry-text",
                       "x": 36,
                       "y": 8,
-                      "content": "重试",
+                      "content": "\u91cd\u8bd5",
                       "fontSize": 12,
                       "fontWeight": "600",
                       "fill": "#ffffff"
@@ -3327,9 +3579,409 @@
                   "id": "explore-search-error__error-back",
                   "x": 136,
                   "y": 208,
-                  "content": "返回发现",
+                  "content": "\u8fd4\u56de\u53d1\u73b0",
                   "fontSize": 12,
                   "fill": "#8b5cf6"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "explore-image-preview-dialog",
+      "name": "Explore/\u56fe\u7247\u9884\u89c8\u5f39\u7a97",
+      "x": 0,
+      "y": 7400,
+      "width": 1440,
+      "height": 1100,
+      "fill": "#f5f6f7",
+      "clip": true,
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "explore-image-preview-dialog__overlay",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1100,
+          "fill": "#000000a6",
+          "layout": "none",
+          "children": []
+        },
+        {
+          "type": "frame",
+          "id": "explore-image-preview-dialog__notes",
+          "x": 64,
+          "y": 40,
+          "width": 420,
+          "height": 88,
+          "fill": "#ffffff",
+          "cornerRadius": 20,
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000014",
+            "offset": {
+              "x": 0,
+              "y": 8
+            },
+            "blur": 18,
+            "spread": 0
+          },
+          "children": [
+            {
+              "type": "text",
+              "id": "explore-image-preview-dialog__notes-trigger",
+              "x": 20,
+              "y": 20,
+              "content": "\u89e6\u53d1\u5165\u53e3\uff1a\u53d1\u73b0\u9875\u7d20\u6750\u5361\u7247\u70b9\u51fb",
+              "fontSize": 14,
+              "fontWeight": "600",
+              "fill": "#333333"
+            },
+            {
+              "type": "text",
+              "id": "explore-image-preview-dialog__notes-close",
+              "x": 20,
+              "y": 48,
+              "content": "\u5173\u95ed\u65b9\u5f0f\uff1a\u70b9\u51fb\u8499\u5c42 / \u5de5\u5177\u680f\u5173\u95ed / Esc",
+              "fontSize": 13,
+              "fill": "#666666"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "explore-image-preview-dialog__panel",
+          "x": 80,
+          "y": 116,
+          "width": 1280,
+          "height": 904,
+          "fill": null,
+          "cornerRadius": 24,
+          "layout": "none",
+          "effect": null,
+          "children": [
+            {
+              "type": "frame",
+              "id": "explore-image-preview-dialog__image-stage",
+              "x": 76,
+              "y": 56,
+              "width": 1092,
+              "height": 816,
+              "fill": null,
+              "cornerRadius": 0,
+              "stroke": null,
+              "layout": "none",
+              "effect": null,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__image-surface",
+                  "x": 56,
+                  "y": 40,
+                  "width": 980,
+                  "height": 736,
+                  "fill": "#f0ebf8",
+                  "cornerRadius": 28,
+                  "layout": "none",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000029",
+                    "offset": {
+                      "x": 0,
+                      "y": 16
+                    },
+                    "blur": 36,
+                    "spread": 0
+                  },
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__info-card",
+                  "x": 410,
+                  "y": 688,
+                  "width": 171,
+                  "height": 56,
+                  "fill": "#00000066",
+                  "cornerRadius": 16,
+                  "stroke": null,
+                  "layout": "none",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000029",
+                    "offset": {
+                      "x": 0,
+                      "y": 8
+                    },
+                    "blur": 20,
+                    "spread": 0
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__info-title",
+                      "x": 12,
+                      "y": 10,
+                      "content": "\u6781\u7b80\u98ce Dashboard UI",
+                      "fontSize": 15,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    },
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__info-meta",
+                      "x": 12,
+                      "y": 32,
+                      "content": "Alex \u00b7 UI\u8bbe\u8ba1 \u00b7 Dashboard",
+                      "fontSize": 11,
+                      "fill": "#ffffffcc"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__nav-prev",
+                  "x": 24,
+                  "y": 346,
+                  "width": 44,
+                  "height": 44,
+                  "fill": "#0000006b",
+                  "cornerRadius": 22,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__nav-prev-text",
+                      "x": 16,
+                      "y": 12,
+                      "content": "\u2039",
+                      "fontSize": 20,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__nav-next",
+                  "x": 1024,
+                  "y": 346,
+                  "width": 44,
+                  "height": 44,
+                  "fill": "#0000006b",
+                  "cornerRadius": 22,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__nav-next-text",
+                      "x": 16,
+                      "y": 12,
+                      "content": "\u203a",
+                      "fontSize": 20,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "explore-image-preview-dialog__toolbar",
+              "x": 1196,
+              "y": 180,
+              "width": 84,
+              "height": 500,
+              "fill": "#00000073",
+              "cornerRadius": 28,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#ffffff1a"
+              },
+              "layout": "none",
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#00000033",
+                "offset": {
+                  "x": 0,
+                  "y": 18
+                },
+                "blur": 40,
+                "spread": 0
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__tool-zoom-in",
+                  "x": 16,
+                  "y": 16,
+                  "width": 52,
+                  "height": 52,
+                  "fill": "#ffffff14",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__tool-zoom-in-text",
+                      "x": 20,
+                      "y": 14,
+                      "content": "+",
+                      "fontSize": 20,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__tool-zoom-out",
+                  "x": 16,
+                  "y": 80,
+                  "width": 52,
+                  "height": 52,
+                  "fill": "#ffffff14",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__tool-zoom-out-text",
+                      "x": 22,
+                      "y": 14,
+                      "content": "-",
+                      "fontSize": 20,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__tool-reset",
+                  "x": 16,
+                  "y": 144,
+                  "width": 52,
+                  "height": 52,
+                  "fill": "#ffffff14",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__tool-reset-text",
+                      "x": 13,
+                      "y": 18,
+                      "content": "1:1",
+                      "fontSize": 14,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__tool-rotate",
+                  "x": 16,
+                  "y": 208,
+                  "width": 52,
+                  "height": 52,
+                  "fill": "#ffffff14",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__tool-rotate-text",
+                      "x": 16,
+                      "y": 16,
+                      "content": "\u21bb",
+                      "fontSize": 18,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__tool-download",
+                  "x": 16,
+                  "y": 272,
+                  "width": 52,
+                  "height": 52,
+                  "fill": "#ffffff14",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__tool-download-text",
+                      "x": 17,
+                      "y": 16,
+                      "content": "\u2193",
+                      "fontSize": 18,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__tool-detail",
+                  "x": 16,
+                  "y": 336,
+                  "width": 52,
+                  "height": 52,
+                  "fill": "#ffffff14",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__tool-detail-text",
+                      "x": 14,
+                      "y": 18,
+                      "content": "\u8be6",
+                      "fontSize": 14,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "explore-image-preview-dialog__tool-close",
+                  "x": 16,
+                  "y": 420,
+                  "width": 52,
+                  "height": 52,
+                  "fill": "#ffffff14",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "explore-image-preview-dialog__tool-close-text",
+                      "x": 18,
+                      "y": 16,
+                      "content": "\u2715",
+                      "fontSize": 16,
+                      "fontWeight": "700",
+                      "fill": "#ffffff"
+                    }
+                  ]
                 }
               ]
             }

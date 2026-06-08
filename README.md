@@ -2,8 +2,8 @@
 
 Pix Space 是一个素材空间的前端项目，当前为“双入口”形态：
 
-- **前台**：`/explore` 灵感发现页（目前以原型/模拟数据为主）。
-- **后台**：`/admin/...` 管理端（登录后可访问，包含权限控制）。
+- **前台**：以 `/explore` 为核心入口，已包含发现、图片详情、个人中心、个人画板与画板详情等页面。
+- **后台**：`/admin/...` 管理端（当前仅 `admin` 可访问）。
 
 ## 技术栈
 
@@ -42,7 +42,6 @@ cp .env.example .env
 - `VITE_APP_TITLE`：站点标题
 - `VITE_APP_API_BASE_URL`：后端 API 基地址
 - `VITE_USE_MOCK_DATA`：是否使用模拟数据（推荐开发期保持 `true`）
-- `VITE_ALLOW_MOCK_AUTH`：登录接口不可用时是否允许模拟登录（默认 `false`）
 
 3. 启动开发服务器
 
@@ -52,8 +51,26 @@ npm run dev
 
 ## 页面入口
 
-- Portal（无需登录）：`/explore`
-- Admin（需要登录）：`/admin/dashboard`
+- Portal（主要公开入口）
+  - `/explore`
+  - `/image/:id`
+  - `/u/:userId/boards`
+  - `/board/:id`
+- Portal（认证相关）
+  - `/login`
+  - `/register`
+  - `/forgot-password`
+- Portal（登录后可访问）
+  - `/account`
+- System
+  - `/403`
+  - `/404`
+- Admin（仅 `admin` 可访问）
+  - `/admin/dashboard`
+  - `/admin/images`
+  - `/admin/files`
+  - `/admin/users`
+  - `/admin/settings`
 
 完整路由、权限与菜单约定见 [docs/FRONTEND_SPEC.md](docs/FRONTEND_SPEC.md)。
 
@@ -65,12 +82,10 @@ npm run dev
   - 设置 `VITE_USE_MOCK_DATA=true`
 - 接入真实后端
   - 设置 `VITE_USE_MOCK_DATA=false`
-  - 配置 `VITE_APP_API_BASE_URL` 指向后端
+  - 必须配置 `VITE_APP_API_BASE_URL` 指向后端，否则应用会在启动阶段直接报错
 
 模拟登录账号（仅在 `VITE_USE_MOCK_DATA=true` 时生效）：
 见 [src/mocks/README.md](src/mocks/README.md)。
-
-如果后端登录接口不可用、且你希望临时绕过登录（非 MSW 模式），可设置 `VITE_ALLOW_MOCK_AUTH=true`，此时任意邮箱/密码都会走模拟登录（默认角色为 `user`）。
 
 相关约定与文档入口：
 
@@ -106,7 +121,7 @@ pix-space/
     ├── api/                  # API 定义
     ├── components/           # 可复用组件
     ├── composables/          # 组合式逻辑
-    ├── layouts/              # PortalLayout / MainLayout
+    ├── layouts/              # PortalLayout / AdminLayout
     ├── router/               # 路由与权限控制
     ├── stores/               # Pinia stores
     ├── styles/               # tokens 与全局样式

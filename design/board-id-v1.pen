@@ -4,7 +4,7 @@
     {
       "type": "frame",
       "id": "board-detail-success",
-      "name": "BoardDetail/成功 - /board/:id",
+      "name": "BoardDetail/\u6210\u529f - /board/:id",
       "x": 0,
       "y": 0,
       "width": 1440,
@@ -27,12 +27,24 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-success__logo", "x": 24, "y": 22, "content": "Pix Space", "fontSize": 20, "fontWeight": "bold", "fill": "#333333" },
+            {
+              "type": "text",
+              "id": "board-detail-success__logo",
+              "x": 24,
+              "y": 22,
+              "content": "Pix Space",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "fill": "#333333"
+            },
             {
               "type": "frame",
               "id": "board-detail-success__search",
@@ -44,12 +56,72 @@
               "cornerRadius": 20,
               "layout": "none",
               "children": [
-                { "type": "text", "id": "board-detail-success__search-icon", "x": 16, "y": 11, "content": "🔍", "fontSize": 14, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-success__search-placeholder", "x": 40, "y": 11, "content": "搜索高品质素材、灵感...", "fontSize": 14, "fill": "#999999" }
+                {
+                  "type": "text",
+                  "id": "board-detail-success__search-icon",
+                  "x": 16,
+                  "y": 11,
+                  "content": "\ud83d\udd0d",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__search-placeholder",
+                  "x": 40,
+                  "y": 11,
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                }
               ]
             },
-            { "type": "frame", "id": "board-detail-success__upload", "x": 1296, "y": 16, "width": 72, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-success__upload-text", "x": 22, "y": 8, "content": "上传", "fontSize": 14, "fontWeight": "500", "fill": "#ffffff" }] },
-            { "type": "frame", "id": "board-detail-success__avatar", "x": 1384, "y": 16, "width": 32, "height": 32, "fill": "#d9d9d9", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-success__avatar-text", "x": 11, "y": 8, "content": "U", "fontSize": 14, "fontWeight": "600", "fill": "#ffffff" }] }
+            {
+              "type": "frame",
+              "id": "board-detail-success__upload",
+              "x": 1296,
+              "y": 16,
+              "width": 72,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-success__upload-text",
+                  "x": 22,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-success__avatar",
+              "x": 1384,
+              "y": 16,
+              "width": 32,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-success__avatar-text",
+                  "x": 11,
+                  "y": 8,
+                  "content": "U",
+                  "fontSize": 14,
+                  "fontWeight": "600",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
         {
@@ -63,15 +135,116 @@
           "fill": "#ffffff",
           "cornerRadius": 12,
           "layout": "none",
-          "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 4 }, "blur": 12, "spread": 0 },
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000a",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 12,
+            "spread": 0
+          },
           "children": [
-            { "type": "text", "id": "board-detail-success__back", "x": 24, "y": 20, "content": "← 返回个人主页", "fontSize": 12, "fill": "#8b5cf6" },
-            { "type": "text", "id": "board-detail-success__title", "x": 24, "y": 48, "content": "界面设计灵感", "fontSize": 20, "fontWeight": "700", "fill": "#333333" },
-            { "type": "text", "id": "board-detail-success__desc", "x": 24, "y": 80, "content": "收藏优秀的 UI / 交互 / 组件细节", "fontSize": 12, "fill": "#999999" },
-            { "type": "frame", "id": "board-detail-success__author-avatar", "x": 24, "y": 112, "width": 24, "height": 24, "fill": "#d9d9d9", "cornerRadius": 12, "layout": "none" },
-            { "type": "text", "id": "board-detail-success__author", "x": 56, "y": 116, "content": "Username · 36 张 · 公开", "fontSize": 12, "fill": "#999999" },
-            { "type": "frame", "id": "board-detail-success__btn-edit", "x": 1144, "y": 24, "width": 88, "height": 32, "fill": "#ffffff", "cornerRadius": 16, "stroke": { "align": "inside", "thickness": 1, "fill": "#e8e8e8" }, "layout": "none", "children": [{ "type": "text", "id": "board-detail-success__btn-edit-text", "x": 20, "y": 8, "content": "编辑画板", "fontSize": 12, "fill": "#333333" }] },
-            { "type": "frame", "id": "board-detail-success__btn-upload", "x": 1244, "y": 24, "width": 124, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-success__btn-upload-text", "x": 32, "y": 8, "content": "上传到画板", "fontSize": 12, "fontWeight": "500", "fill": "#ffffff" }] }
+            {
+              "type": "text",
+              "id": "board-detail-success__back",
+              "x": 24,
+              "y": 20,
+              "content": "\u2190 \u8fd4\u56de\u4e2a\u4eba\u4e3b\u9875",
+              "fontSize": 12,
+              "fill": "#8b5cf6"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-success__title",
+              "x": 24,
+              "y": 48,
+              "content": "\u754c\u9762\u8bbe\u8ba1\u7075\u611f",
+              "fontSize": 20,
+              "fontWeight": "700",
+              "fill": "#333333"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-success__desc",
+              "x": 24,
+              "y": 80,
+              "content": "\u6536\u85cf\u4f18\u79c0\u7684 UI / \u4ea4\u4e92 / \u7ec4\u4ef6\u7ec6\u8282",
+              "fontSize": 12,
+              "fill": "#999999"
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-success__author-avatar",
+              "x": 24,
+              "y": 112,
+              "width": 24,
+              "height": 24,
+              "fill": "#d9d9d9",
+              "cornerRadius": 12,
+              "layout": "none"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-success__author",
+              "x": 56,
+              "y": 116,
+              "content": "Username \u00b7 36 \u5f20 \u00b7 \u516c\u5f00",
+              "fontSize": 12,
+              "fill": "#999999"
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-success__btn-edit",
+              "x": 1144,
+              "y": 24,
+              "width": 88,
+              "height": 32,
+              "fill": "#ffffff",
+              "cornerRadius": 16,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#e8e8e8"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-success__btn-edit-text",
+                  "x": 20,
+                  "y": 8,
+                  "content": "\u7f16\u8f91\u753b\u677f",
+                  "fontSize": 12,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-success__btn-upload",
+              "x": 1244,
+              "y": 24,
+              "width": 124,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-success__btn-upload-text",
+                  "x": 32,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20\u5230\u753b\u677f",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
         {
@@ -95,14 +268,90 @@
               "fill": "#ffffff",
               "cornerRadius": 12,
               "layout": "none",
-              "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 4 }, "blur": 12, "spread": 0 },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000000a",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 12,
+                "spread": 0
+              },
               "children": [
-                { "type": "frame", "id": "board-detail-success__card-0-img", "x": 0, "y": 0, "width": 260, "height": 300, "fill": "#f0ebf8", "cornerRadius": 12, "layout": "none" },
-                { "type": "text", "id": "board-detail-success__card-0-title", "x": 16, "y": 316, "content": "灵感素材 1", "fontSize": 14, "fontWeight": "500", "fill": "#333333" },
-                { "type": "frame", "id": "board-detail-success__card-0-tag", "x": 16, "y": 344, "width": 47, "height": 22, "fill": "#f0f2f5", "cornerRadius": 4, "layout": "none", "children": [{ "type": "text", "id": "board-detail-success__card-0-tag-text", "x": 8, "y": 4, "content": "UI设计", "fontSize": 10, "fill": "#666666" }] },
-                { "type": "frame", "id": "board-detail-success__card-0-avatar", "x": 16, "y": 380, "width": 16, "height": 16, "fill": "#d9d9d9", "cornerRadius": 8, "layout": "none" },
-                { "type": "text", "id": "board-detail-success__card-0-author", "x": 40, "y": 380, "content": "User 1", "fontSize": 12, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-success__card-0-view-detail", "x": 196, "y": 380, "content": "查看详情", "fontSize": 12, "fill": "#8b5cf6" }
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-0-img",
+                  "x": 0,
+                  "y": 0,
+                  "width": 260,
+                  "height": 300,
+                  "fill": "#f0ebf8",
+                  "cornerRadius": 12,
+                  "layout": "none"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-0-title",
+                  "x": 16,
+                  "y": 316,
+                  "content": "\u7075\u611f\u7d20\u6750 1",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-0-tag",
+                  "x": 16,
+                  "y": 344,
+                  "width": 47,
+                  "height": 22,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 4,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-success__card-0-tag-text",
+                      "x": 8,
+                      "y": 4,
+                      "content": "UI\u8bbe\u8ba1",
+                      "fontSize": 10,
+                      "fill": "#666666"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-0-avatar",
+                  "x": 16,
+                  "y": 380,
+                  "width": 16,
+                  "height": 16,
+                  "fill": "#d9d9d9",
+                  "cornerRadius": 8,
+                  "layout": "none"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-0-author",
+                  "x": 40,
+                  "y": 380,
+                  "content": "User 1",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-0-view-detail",
+                  "x": 196,
+                  "y": 380,
+                  "content": "\u67e5\u770b\u8be6\u60c5",
+                  "fontSize": 12,
+                  "fill": "#8b5cf6"
+                }
               ]
             },
             {
@@ -116,14 +365,90 @@
               "fill": "#ffffff",
               "cornerRadius": 12,
               "layout": "none",
-              "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 4 }, "blur": 12, "spread": 0 },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000000a",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 12,
+                "spread": 0
+              },
               "children": [
-                { "type": "frame", "id": "board-detail-success__card-1-img", "x": 0, "y": 0, "width": 260, "height": 452, "fill": "#ebf4f8", "cornerRadius": 12, "layout": "none" },
-                { "type": "text", "id": "board-detail-success__card-1-title", "x": 16, "y": 468, "content": "灵感素材 2", "fontSize": 14, "fontWeight": "500", "fill": "#333333" },
-                { "type": "frame", "id": "board-detail-success__card-1-tag", "x": 16, "y": 496, "width": 48, "height": 22, "fill": "#f0f2f5", "cornerRadius": 4, "layout": "none", "children": [{ "type": "text", "id": "board-detail-success__card-1-tag-text", "x": 8, "y": 4, "content": "3D渲染", "fontSize": 10, "fill": "#666666" }] },
-                { "type": "frame", "id": "board-detail-success__card-1-avatar", "x": 16, "y": 528, "width": 16, "height": 16, "fill": "#d9d9d9", "cornerRadius": 8, "layout": "none" },
-                { "type": "text", "id": "board-detail-success__card-1-author", "x": 40, "y": 528, "content": "User 2", "fontSize": 12, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-success__card-1-view-detail", "x": 196, "y": 528, "content": "查看详情", "fontSize": 12, "fill": "#8b5cf6" }
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-1-img",
+                  "x": 0,
+                  "y": 0,
+                  "width": 260,
+                  "height": 452,
+                  "fill": "#ebf4f8",
+                  "cornerRadius": 12,
+                  "layout": "none"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-1-title",
+                  "x": 16,
+                  "y": 468,
+                  "content": "\u7075\u611f\u7d20\u6750 2",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-1-tag",
+                  "x": 16,
+                  "y": 496,
+                  "width": 48,
+                  "height": 22,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 4,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-success__card-1-tag-text",
+                      "x": 8,
+                      "y": 4,
+                      "content": "3D\u6e32\u67d3",
+                      "fontSize": 10,
+                      "fill": "#666666"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-1-avatar",
+                  "x": 16,
+                  "y": 528,
+                  "width": 16,
+                  "height": 16,
+                  "fill": "#d9d9d9",
+                  "cornerRadius": 8,
+                  "layout": "none"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-1-author",
+                  "x": 40,
+                  "y": 528,
+                  "content": "User 2",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-1-view-detail",
+                  "x": 196,
+                  "y": 528,
+                  "content": "\u67e5\u770b\u8be6\u60c5",
+                  "fontSize": 12,
+                  "fill": "#8b5cf6"
+                }
               ]
             },
             {
@@ -137,14 +462,90 @@
               "fill": "#ffffff",
               "cornerRadius": 12,
               "layout": "none",
-              "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 4 }, "blur": 12, "spread": 0 },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000000a",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 12,
+                "spread": 0
+              },
               "children": [
-                { "type": "frame", "id": "board-detail-success__card-2-img", "x": 0, "y": 0, "width": 260, "height": 252, "fill": "#f8ebeb", "cornerRadius": 12, "layout": "none" },
-                { "type": "text", "id": "board-detail-success__card-2-title", "x": 16, "y": 268, "content": "灵感素材 3", "fontSize": 14, "fontWeight": "500", "fill": "#333333" },
-                { "type": "frame", "id": "board-detail-success__card-2-tag", "x": 16, "y": 296, "width": 36, "height": 22, "fill": "#f0f2f5", "cornerRadius": 4, "layout": "none", "children": [{ "type": "text", "id": "board-detail-success__card-2-tag-text", "x": 8, "y": 4, "content": "插画", "fontSize": 10, "fill": "#666666" }] },
-                { "type": "frame", "id": "board-detail-success__card-2-avatar", "x": 16, "y": 328, "width": 16, "height": 16, "fill": "#d9d9d9", "cornerRadius": 8, "layout": "none" },
-                { "type": "text", "id": "board-detail-success__card-2-author", "x": 40, "y": 328, "content": "User 3", "fontSize": 12, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-success__card-2-view-detail", "x": 196, "y": 328, "content": "查看详情", "fontSize": 12, "fill": "#8b5cf6" }
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-2-img",
+                  "x": 0,
+                  "y": 0,
+                  "width": 260,
+                  "height": 252,
+                  "fill": "#f8ebeb",
+                  "cornerRadius": 12,
+                  "layout": "none"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-2-title",
+                  "x": 16,
+                  "y": 268,
+                  "content": "\u7075\u611f\u7d20\u6750 3",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-2-tag",
+                  "x": 16,
+                  "y": 296,
+                  "width": 36,
+                  "height": 22,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 4,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-success__card-2-tag-text",
+                      "x": 8,
+                      "y": 4,
+                      "content": "\u63d2\u753b",
+                      "fontSize": 10,
+                      "fill": "#666666"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-success__card-2-avatar",
+                  "x": 16,
+                  "y": 328,
+                  "width": 16,
+                  "height": 16,
+                  "fill": "#d9d9d9",
+                  "cornerRadius": 8,
+                  "layout": "none"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-2-author",
+                  "x": 40,
+                  "y": 328,
+                  "content": "User 3",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-success__card-2-view-detail",
+                  "x": 196,
+                  "y": 328,
+                  "content": "\u67e5\u770b\u8be6\u60c5",
+                  "fontSize": 12,
+                  "fill": "#8b5cf6"
+                }
               ]
             }
           ]
@@ -154,7 +555,7 @@
     {
       "type": "frame",
       "id": "board-detail-empty",
-      "name": "BoardDetail/空 - /board/:id",
+      "name": "BoardDetail/\u7a7a - /board/:id",
       "x": 0,
       "y": 1800,
       "width": 1440,
@@ -177,12 +578,24 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-empty__logo", "x": 24, "y": 22, "content": "Pix Space", "fontSize": 20, "fontWeight": "bold", "fill": "#333333" },
+            {
+              "type": "text",
+              "id": "board-detail-empty__logo",
+              "x": 24,
+              "y": 22,
+              "content": "Pix Space",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "fill": "#333333"
+            },
             {
               "type": "frame",
               "id": "board-detail-empty__search",
@@ -194,12 +607,72 @@
               "cornerRadius": 20,
               "layout": "none",
               "children": [
-                { "type": "text", "id": "board-detail-empty__search-icon", "x": 16, "y": 11, "content": "🔍", "fontSize": 14, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-empty__search-placeholder", "x": 40, "y": 11, "content": "搜索高品质素材、灵感...", "fontSize": 14, "fill": "#999999" }
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__search-icon",
+                  "x": 16,
+                  "y": 11,
+                  "content": "\ud83d\udd0d",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__search-placeholder",
+                  "x": 40,
+                  "y": 11,
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                }
               ]
             },
-            { "type": "frame", "id": "board-detail-empty__upload", "x": 1296, "y": 16, "width": 72, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-empty__upload-text", "x": 22, "y": 8, "content": "上传", "fontSize": 14, "fontWeight": "500", "fill": "#ffffff" }] },
-            { "type": "frame", "id": "board-detail-empty__avatar", "x": 1384, "y": 16, "width": 32, "height": 32, "fill": "#d9d9d9", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-empty__avatar-text", "x": 11, "y": 8, "content": "U", "fontSize": 14, "fontWeight": "600", "fill": "#ffffff" }] }
+            {
+              "type": "frame",
+              "id": "board-detail-empty__upload",
+              "x": 1296,
+              "y": 16,
+              "width": 72,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__upload-text",
+                  "x": 22,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-empty__avatar",
+              "x": 1384,
+              "y": 16,
+              "width": 32,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__avatar-text",
+                  "x": 11,
+                  "y": 8,
+                  "content": "U",
+                  "fontSize": 14,
+                  "fontWeight": "600",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
         {
@@ -217,27 +690,191 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 4 },
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
             "blur": 12,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-empty__back", "x": 24, "y": 20, "content": "← 返回个人主页", "fontSize": 12, "fill": "#8b5cf6" },
-            { "type": "text", "id": "board-detail-empty__board-title", "x": 24, "y": 48, "content": "界面设计灵感", "fontSize": 20, "fontWeight": "700", "fill": "#333333" },
-            { "type": "text", "id": "board-detail-empty__board-desc", "x": 24, "y": 80, "content": "收藏优秀的 UI / 交互 / 组件细节", "fontSize": 12, "fill": "#999999" },
-            { "type": "frame", "id": "board-detail-empty__author-avatar", "x": 24, "y": 112, "width": 24, "height": 24, "fill": "#d9d9d9", "cornerRadius": 12, "layout": "none" },
-            { "type": "text", "id": "board-detail-empty__author", "x": 56, "y": 116, "content": "Username · 0 张 · 公开", "fontSize": 12, "fill": "#999999" },
-            { "type": "frame", "id": "board-detail-empty__btn-edit", "x": 1144, "y": 24, "width": 88, "height": 32, "fill": "#ffffff", "cornerRadius": 16, "stroke": { "align": "inside", "thickness": 1, "fill": "#e8e8e8" }, "layout": "none", "children": [{ "type": "text", "id": "board-detail-empty__btn-edit-text", "x": 20, "y": 8, "content": "编辑画板", "fontSize": 12, "fill": "#333333" }] },
-            { "type": "frame", "id": "board-detail-empty__btn-upload", "x": 1244, "y": 24, "width": 124, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-empty__btn-upload-text", "x": 32, "y": 8, "content": "上传到画板", "fontSize": 12, "fontWeight": "500", "fill": "#ffffff" }] }
+            {
+              "type": "text",
+              "id": "board-detail-empty__back",
+              "x": 24,
+              "y": 20,
+              "content": "\u2190 \u8fd4\u56de\u4e2a\u4eba\u4e3b\u9875",
+              "fontSize": 12,
+              "fill": "#8b5cf6"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-empty__board-title",
+              "x": 24,
+              "y": 48,
+              "content": "\u754c\u9762\u8bbe\u8ba1\u7075\u611f",
+              "fontSize": 20,
+              "fontWeight": "700",
+              "fill": "#333333"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-empty__board-desc",
+              "x": 24,
+              "y": 80,
+              "content": "\u6536\u85cf\u4f18\u79c0\u7684 UI / \u4ea4\u4e92 / \u7ec4\u4ef6\u7ec6\u8282",
+              "fontSize": 12,
+              "fill": "#999999"
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-empty__author-avatar",
+              "x": 24,
+              "y": 112,
+              "width": 24,
+              "height": 24,
+              "fill": "#d9d9d9",
+              "cornerRadius": 12,
+              "layout": "none"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-empty__author",
+              "x": 56,
+              "y": 116,
+              "content": "Username \u00b7 0 \u5f20 \u00b7 \u516c\u5f00",
+              "fontSize": 12,
+              "fill": "#999999"
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-empty__btn-edit",
+              "x": 1144,
+              "y": 24,
+              "width": 88,
+              "height": 32,
+              "fill": "#ffffff",
+              "cornerRadius": 16,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#e8e8e8"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__btn-edit-text",
+                  "x": 20,
+                  "y": 8,
+                  "content": "\u7f16\u8f91\u753b\u677f",
+                  "fontSize": 12,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-empty__btn-upload",
+              "x": 1244,
+              "y": 24,
+              "width": 124,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__btn-upload-text",
+                  "x": 32,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20\u5230\u753b\u677f",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
-        { "type": "frame", "id": "board-detail-empty__content", "x": 24, "y": 288, "width": 1392, "height": 860, "fill": "#ffffff", "cornerRadius": 12, "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" }, "layout": "none", "children": [{ "type": "frame", "id": "board-detail-empty__state", "x": 536, "y": 240, "width": 320, "height": 360, "fill": null, "layout": "none", "children": [{ "type": "frame", "id": "board-detail-empty__icon", "x": 128, "y": 0, "width": 64, "height": 64, "fill": "#f0f2f5", "cornerRadius": 32, "layout": "none", "children": [{ "type": "text", "id": "board-detail-empty__icon-text", "x": 20, "y": 16, "content": "🖼️", "fontSize": 24, "fill": "#999999" }] }, { "type": "text", "id": "board-detail-empty__title", "x": 124, "y": 88, "content": "暂无图片", "fontSize": 18, "fontWeight": "700", "fill": "#333333" }, { "type": "text", "id": "board-detail-empty__desc", "x": 96, "y": 120, "content": "上传或采集图片到这个画板", "fontSize": 12, "fill": "#999999" }] }] }
+        {
+          "type": "frame",
+          "id": "board-detail-empty__content",
+          "x": 24,
+          "y": 288,
+          "width": 1392,
+          "height": 860,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "board-detail-empty__state",
+              "x": 536,
+              "y": 240,
+              "width": 320,
+              "height": 360,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "board-detail-empty__icon",
+                  "x": 128,
+                  "y": 0,
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 32,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-empty__icon-text",
+                      "x": 20,
+                      "y": 16,
+                      "content": "\ud83d\uddbc\ufe0f",
+                      "fontSize": 24,
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__title",
+                  "x": 124,
+                  "y": 88,
+                  "content": "\u6682\u65e0\u56fe\u7247",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-empty__desc",
+                  "x": 96,
+                  "y": 120,
+                  "content": "\u4e0a\u4f20\u6216\u91c7\u96c6\u56fe\u7247\u5230\u8fd9\u4e2a\u753b\u677f",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "type": "frame",
       "id": "board-detail-loading",
-      "name": "BoardDetail/加载 - /board/:id",
+      "name": "BoardDetail/\u52a0\u8f7d - /board/:id",
       "x": 0,
       "y": 3100,
       "width": 1440,
@@ -260,12 +897,24 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-loading__logo", "x": 24, "y": 22, "content": "Pix Space", "fontSize": 20, "fontWeight": "bold", "fill": "#333333" },
+            {
+              "type": "text",
+              "id": "board-detail-loading__logo",
+              "x": 24,
+              "y": 22,
+              "content": "Pix Space",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "fill": "#333333"
+            },
             {
               "type": "frame",
               "id": "board-detail-loading__search",
@@ -277,22 +926,252 @@
               "cornerRadius": 20,
               "layout": "none",
               "children": [
-                { "type": "text", "id": "board-detail-loading__search-icon", "x": 16, "y": 11, "content": "🔍", "fontSize": 14, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-loading__search-placeholder", "x": 40, "y": 11, "content": "搜索高品质素材、灵感...", "fontSize": 14, "fill": "#999999" }
+                {
+                  "type": "text",
+                  "id": "board-detail-loading__search-icon",
+                  "x": 16,
+                  "y": 11,
+                  "content": "\ud83d\udd0d",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-loading__search-placeholder",
+                  "x": 40,
+                  "y": 11,
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                }
               ]
             },
-            { "type": "frame", "id": "board-detail-loading__upload", "x": 1296, "y": 16, "width": 72, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-loading__upload-text", "x": 22, "y": 8, "content": "上传", "fontSize": 14, "fontWeight": "500", "fill": "#ffffff" }] },
-            { "type": "frame", "id": "board-detail-loading__avatar", "x": 1384, "y": 16, "width": 32, "height": 32, "fill": "#d9d9d9", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-loading__avatar-text", "x": 11, "y": 8, "content": "U", "fontSize": 14, "fontWeight": "600", "fill": "#ffffff" }] }
+            {
+              "type": "frame",
+              "id": "board-detail-loading__upload",
+              "x": 1296,
+              "y": 16,
+              "width": 72,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-loading__upload-text",
+                  "x": 22,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-loading__avatar",
+              "x": 1384,
+              "y": 16,
+              "width": 32,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-loading__avatar-text",
+                  "x": 11,
+                  "y": 8,
+                  "content": "U",
+                  "fontSize": 14,
+                  "fontWeight": "600",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
-        { "type": "frame", "id": "board-detail-loading__board-info", "x": 24, "y": 88, "width": 1392, "height": 176, "fill": "#ffffff", "cornerRadius": 12, "layout": "none", "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 4 }, "blur": 12, "spread": 0 }, "children": [{ "type": "frame", "id": "board-detail-loading__board-s0", "x": 24, "y": 48, "width": 240, "height": 16, "fill": "#f0f2f5", "cornerRadius": 8, "layout": "none" }, { "type": "frame", "id": "board-detail-loading__board-s1", "x": 24, "y": 76, "width": 320, "height": 12, "fill": "#f0f2f5", "cornerRadius": 8, "layout": "none" }] },
-        { "type": "frame", "id": "board-detail-loading__masonry", "x": 24, "y": 288, "width": 1392, "height": 860, "fill": null, "layout": "none", "children": [{ "type": "frame", "id": "board-detail-loading__card-0", "x": 0, "y": 0, "width": 260, "height": 360, "fill": "#ffffff", "cornerRadius": 12, "layout": "none", "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 4 }, "blur": 12, "spread": 0 }, "children": [{ "type": "frame", "id": "board-detail-loading__card-0-cover", "x": 16, "y": 16, "width": 228, "height": 220, "fill": "#f0f2f5", "cornerRadius": 12, "layout": "none" }, { "type": "frame", "id": "board-detail-loading__card-0-s0", "x": 16, "y": 252, "width": 160, "height": 12, "fill": "#f0f2f5", "cornerRadius": 8, "layout": "none" }, { "type": "frame", "id": "board-detail-loading__card-0-s1", "x": 16, "y": 272, "width": 120, "height": 12, "fill": "#f0f2f5", "cornerRadius": 8, "layout": "none" }] }, { "type": "frame", "id": "board-detail-loading__card-1", "x": 284, "y": 0, "width": 260, "height": 360, "fill": "#ffffff", "cornerRadius": 12, "layout": "none", "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 4 }, "blur": 12, "spread": 0 }, "children": [{ "type": "frame", "id": "board-detail-loading__card-1-cover", "x": 16, "y": 16, "width": 228, "height": 220, "fill": "#f0f2f5", "cornerRadius": 12, "layout": "none" }, { "type": "frame", "id": "board-detail-loading__card-1-s0", "x": 16, "y": 252, "width": 160, "height": 12, "fill": "#f0f2f5", "cornerRadius": 8, "layout": "none" }, { "type": "frame", "id": "board-detail-loading__card-1-s1", "x": 16, "y": 272, "width": 120, "height": 12, "fill": "#f0f2f5", "cornerRadius": 8, "layout": "none" }] }] }
+        {
+          "type": "frame",
+          "id": "board-detail-loading__board-info",
+          "x": 24,
+          "y": 88,
+          "width": 1392,
+          "height": 176,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000a",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 12,
+            "spread": 0
+          },
+          "children": [
+            {
+              "type": "frame",
+              "id": "board-detail-loading__board-s0",
+              "x": 24,
+              "y": 48,
+              "width": 240,
+              "height": 16,
+              "fill": "#f0f2f5",
+              "cornerRadius": 8,
+              "layout": "none"
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-loading__board-s1",
+              "x": 24,
+              "y": 76,
+              "width": 320,
+              "height": 12,
+              "fill": "#f0f2f5",
+              "cornerRadius": 8,
+              "layout": "none"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "board-detail-loading__masonry",
+          "x": 24,
+          "y": 288,
+          "width": 1392,
+          "height": 860,
+          "fill": null,
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "board-detail-loading__card-0",
+              "x": 0,
+              "y": 0,
+              "width": 260,
+              "height": 360,
+              "fill": "#ffffff",
+              "cornerRadius": 12,
+              "layout": "none",
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000000a",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 12,
+                "spread": 0
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "board-detail-loading__card-0-cover",
+                  "x": 16,
+                  "y": 16,
+                  "width": 228,
+                  "height": 220,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 12,
+                  "layout": "none"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-loading__card-0-s0",
+                  "x": 16,
+                  "y": 252,
+                  "width": 160,
+                  "height": 12,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 8,
+                  "layout": "none"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-loading__card-0-s1",
+                  "x": 16,
+                  "y": 272,
+                  "width": 120,
+                  "height": 12,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 8,
+                  "layout": "none"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-loading__card-1",
+              "x": 284,
+              "y": 0,
+              "width": 260,
+              "height": 360,
+              "fill": "#ffffff",
+              "cornerRadius": 12,
+              "layout": "none",
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000000a",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 12,
+                "spread": 0
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "board-detail-loading__card-1-cover",
+                  "x": 16,
+                  "y": 16,
+                  "width": 228,
+                  "height": 220,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 12,
+                  "layout": "none"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-loading__card-1-s0",
+                  "x": 16,
+                  "y": 252,
+                  "width": 160,
+                  "height": 12,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 8,
+                  "layout": "none"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-loading__card-1-s1",
+                  "x": 16,
+                  "y": 272,
+                  "width": 120,
+                  "height": 12,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 8,
+                  "layout": "none"
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "type": "frame",
       "id": "board-detail-error",
-      "name": "BoardDetail/错误 - /board/:id",
+      "name": "BoardDetail/\u9519\u8bef - /board/:id",
       "x": 0,
       "y": 4400,
       "width": 1440,
@@ -315,12 +1194,24 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-error__logo", "x": 24, "y": 22, "content": "Pix Space", "fontSize": 20, "fontWeight": "bold", "fill": "#333333" },
+            {
+              "type": "text",
+              "id": "board-detail-error__logo",
+              "x": 24,
+              "y": 22,
+              "content": "Pix Space",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "fill": "#333333"
+            },
             {
               "type": "frame",
               "id": "board-detail-error__search",
@@ -332,12 +1223,72 @@
               "cornerRadius": 20,
               "layout": "none",
               "children": [
-                { "type": "text", "id": "board-detail-error__search-icon", "x": 16, "y": 11, "content": "🔍", "fontSize": 14, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-error__search-placeholder", "x": 40, "y": 11, "content": "搜索高品质素材、灵感...", "fontSize": 14, "fill": "#999999" }
+                {
+                  "type": "text",
+                  "id": "board-detail-error__search-icon",
+                  "x": 16,
+                  "y": 11,
+                  "content": "\ud83d\udd0d",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-error__search-placeholder",
+                  "x": 40,
+                  "y": 11,
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                }
               ]
             },
-            { "type": "frame", "id": "board-detail-error__upload", "x": 1296, "y": 16, "width": 72, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-error__upload-text", "x": 22, "y": 8, "content": "上传", "fontSize": 14, "fontWeight": "500", "fill": "#ffffff" }] },
-            { "type": "frame", "id": "board-detail-error__avatar", "x": 1384, "y": 16, "width": 32, "height": 32, "fill": "#d9d9d9", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-error__avatar-text", "x": 11, "y": 8, "content": "U", "fontSize": 14, "fontWeight": "600", "fill": "#ffffff" }] }
+            {
+              "type": "frame",
+              "id": "board-detail-error__upload",
+              "x": 1296,
+              "y": 16,
+              "width": 72,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-error__upload-text",
+                  "x": 22,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-error__avatar",
+              "x": 1384,
+              "y": 16,
+              "width": 32,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-error__avatar-text",
+                  "x": 11,
+                  "y": 8,
+                  "content": "U",
+                  "fontSize": 14,
+                  "fontWeight": "600",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
         {
@@ -355,27 +1306,214 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 4 },
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
             "blur": 12,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-error__back", "x": 24, "y": 20, "content": "← 返回个人主页", "fontSize": 12, "fill": "#8b5cf6" },
-            { "type": "text", "id": "board-detail-error__board-title", "x": 24, "y": 48, "content": "界面设计灵感", "fontSize": 20, "fontWeight": "700", "fill": "#333333" },
-            { "type": "text", "id": "board-detail-error__board-desc", "x": 24, "y": 80, "content": "收藏优秀的 UI / 交互 / 组件细节", "fontSize": 12, "fill": "#999999" },
-            { "type": "frame", "id": "board-detail-error__author-avatar", "x": 24, "y": 112, "width": 24, "height": 24, "fill": "#d9d9d9", "cornerRadius": 12, "layout": "none" },
-            { "type": "text", "id": "board-detail-error__author", "x": 56, "y": 116, "content": "Username · 36 张 · 公开", "fontSize": 12, "fill": "#999999" },
-            { "type": "frame", "id": "board-detail-error__btn-edit", "x": 1144, "y": 24, "width": 88, "height": 32, "fill": "#ffffff", "cornerRadius": 16, "stroke": { "align": "inside", "thickness": 1, "fill": "#e8e8e8" }, "layout": "none", "children": [{ "type": "text", "id": "board-detail-error__btn-edit-text", "x": 20, "y": 8, "content": "编辑画板", "fontSize": 12, "fill": "#333333" }] },
-            { "type": "frame", "id": "board-detail-error__btn-upload", "x": 1244, "y": 24, "width": 124, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-error__btn-upload-text", "x": 32, "y": 8, "content": "上传到画板", "fontSize": 12, "fontWeight": "500", "fill": "#ffffff" }] }
+            {
+              "type": "text",
+              "id": "board-detail-error__back",
+              "x": 24,
+              "y": 20,
+              "content": "\u2190 \u8fd4\u56de\u4e2a\u4eba\u4e3b\u9875",
+              "fontSize": 12,
+              "fill": "#8b5cf6"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-error__board-title",
+              "x": 24,
+              "y": 48,
+              "content": "\u754c\u9762\u8bbe\u8ba1\u7075\u611f",
+              "fontSize": 20,
+              "fontWeight": "700",
+              "fill": "#333333"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-error__board-desc",
+              "x": 24,
+              "y": 80,
+              "content": "\u6536\u85cf\u4f18\u79c0\u7684 UI / \u4ea4\u4e92 / \u7ec4\u4ef6\u7ec6\u8282",
+              "fontSize": 12,
+              "fill": "#999999"
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-error__author-avatar",
+              "x": 24,
+              "y": 112,
+              "width": 24,
+              "height": 24,
+              "fill": "#d9d9d9",
+              "cornerRadius": 12,
+              "layout": "none"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-error__author",
+              "x": 56,
+              "y": 116,
+              "content": "Username \u00b7 36 \u5f20 \u00b7 \u516c\u5f00",
+              "fontSize": 12,
+              "fill": "#999999"
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-error__btn-edit",
+              "x": 1144,
+              "y": 24,
+              "width": 88,
+              "height": 32,
+              "fill": "#ffffff",
+              "cornerRadius": 16,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#e8e8e8"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-error__btn-edit-text",
+                  "x": 20,
+                  "y": 8,
+                  "content": "\u7f16\u8f91\u753b\u677f",
+                  "fontSize": 12,
+                  "fill": "#333333"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-error__btn-upload",
+              "x": 1244,
+              "y": 24,
+              "width": 124,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-error__btn-upload-text",
+                  "x": 32,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20\u5230\u753b\u677f",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
-        { "type": "frame", "id": "board-detail-error__content", "x": 24, "y": 288, "width": 1392, "height": 860, "fill": "#ffffff", "cornerRadius": 12, "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" }, "layout": "none", "children": [{ "type": "frame", "id": "board-detail-error__state", "x": 536, "y": 240, "width": 320, "height": 360, "fill": null, "layout": "none", "children": [{ "type": "frame", "id": "board-detail-error__icon", "x": 128, "y": 0, "width": 64, "height": 64, "fill": "#f0f2f5", "cornerRadius": 32, "layout": "none", "children": [{ "type": "text", "id": "board-detail-error__icon-text", "x": 20, "y": 16, "content": "⚠️", "fontSize": 24, "fill": "#999999" }] }, { "type": "text", "id": "board-detail-error__title", "x": 124, "y": 88, "content": "加载失败", "fontSize": 18, "fontWeight": "700", "fill": "#333333" }, { "type": "text", "id": "board-detail-error__desc", "x": 88, "y": 120, "content": "网络或服务异常，请稍后重试", "fontSize": 12, "fill": "#999999" }, { "type": "frame", "id": "board-detail-error__btn", "x": 96, "y": 176, "width": 128, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-error__btn-text", "x": 52, "y": 8, "content": "重试", "fontSize": 12, "fontWeight": "500", "fill": "#ffffff" }] }] }] }
+        {
+          "type": "frame",
+          "id": "board-detail-error__content",
+          "x": 24,
+          "y": 288,
+          "width": 1392,
+          "height": 860,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "board-detail-error__state",
+              "x": 536,
+              "y": 240,
+              "width": 320,
+              "height": 360,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "board-detail-error__icon",
+                  "x": 128,
+                  "y": 0,
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 32,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-error__icon-text",
+                      "x": 20,
+                      "y": 16,
+                      "content": "\u26a0\ufe0f",
+                      "fontSize": 24,
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-error__title",
+                  "x": 124,
+                  "y": 88,
+                  "content": "\u52a0\u8f7d\u5931\u8d25",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-error__desc",
+                  "x": 88,
+                  "y": 120,
+                  "content": "\u7f51\u7edc\u6216\u670d\u52a1\u5f02\u5e38\uff0c\u8bf7\u7a0d\u540e\u91cd\u8bd5",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-error__btn",
+                  "x": 96,
+                  "y": 176,
+                  "width": 128,
+                  "height": 32,
+                  "fill": "#8b5cf6",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-error__btn-text",
+                      "x": 52,
+                      "y": 8,
+                      "content": "\u91cd\u8bd5",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "type": "frame",
       "id": "board-detail-forbidden",
-      "name": "BoardDetail/无权限 - /board/:id",
+      "name": "BoardDetail/\u65e0\u6743\u9650 - /board/:id",
       "x": 0,
       "y": 5700,
       "width": 1440,
@@ -398,12 +1536,24 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-forbidden__logo", "x": 24, "y": 22, "content": "Pix Space", "fontSize": 20, "fontWeight": "bold", "fill": "#333333" },
+            {
+              "type": "text",
+              "id": "board-detail-forbidden__logo",
+              "x": 24,
+              "y": 22,
+              "content": "Pix Space",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "fill": "#333333"
+            },
             {
               "type": "frame",
               "id": "board-detail-forbidden__search",
@@ -415,12 +1565,72 @@
               "cornerRadius": 20,
               "layout": "none",
               "children": [
-                { "type": "text", "id": "board-detail-forbidden__search-icon", "x": 16, "y": 11, "content": "🔍", "fontSize": 14, "fill": "#999999" },
-                { "type": "text", "id": "board-detail-forbidden__search-placeholder", "x": 40, "y": 11, "content": "搜索高品质素材、灵感...", "fontSize": 14, "fill": "#999999" }
+                {
+                  "type": "text",
+                  "id": "board-detail-forbidden__search-icon",
+                  "x": 16,
+                  "y": 11,
+                  "content": "\ud83d\udd0d",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-forbidden__search-placeholder",
+                  "x": 40,
+                  "y": 11,
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                }
               ]
             },
-            { "type": "frame", "id": "board-detail-forbidden__upload", "x": 1296, "y": 16, "width": 72, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-forbidden__upload-text", "x": 22, "y": 8, "content": "上传", "fontSize": 14, "fontWeight": "500", "fill": "#ffffff" }] },
-            { "type": "frame", "id": "board-detail-forbidden__avatar", "x": 1384, "y": 16, "width": 32, "height": 32, "fill": "#d9d9d9", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-forbidden__avatar-text", "x": 11, "y": 8, "content": "U", "fontSize": 14, "fontWeight": "600", "fill": "#ffffff" }] }
+            {
+              "type": "frame",
+              "id": "board-detail-forbidden__upload",
+              "x": 1296,
+              "y": 16,
+              "width": 72,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-forbidden__upload-text",
+                  "x": 22,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-detail-forbidden__avatar",
+              "x": 1384,
+              "y": 16,
+              "width": 32,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-detail-forbidden__avatar-text",
+                  "x": 11,
+                  "y": 8,
+                  "content": "U",
+                  "fontSize": 14,
+                  "fontWeight": "600",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
           ]
         },
         {
@@ -438,17 +1648,971 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 4 },
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
             "blur": 12,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "board-detail-forbidden__back", "x": 24, "y": 20, "content": "← 返回个人主页", "fontSize": 12, "fill": "#8b5cf6" },
-            { "type": "text", "id": "board-detail-forbidden__title-top", "x": 24, "y": 48, "content": "私有画板", "fontSize": 20, "fontWeight": "700", "fill": "#333333" },
-            { "type": "text", "id": "board-detail-forbidden__desc-top", "x": 24, "y": 80, "content": "仅创建者可见", "fontSize": 12, "fill": "#999999" }
+            {
+              "type": "text",
+              "id": "board-detail-forbidden__back",
+              "x": 24,
+              "y": 20,
+              "content": "\u2190 \u8fd4\u56de\u4e2a\u4eba\u4e3b\u9875",
+              "fontSize": 12,
+              "fill": "#8b5cf6"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-forbidden__title-top",
+              "x": 24,
+              "y": 48,
+              "content": "\u79c1\u6709\u753b\u677f",
+              "fontSize": 20,
+              "fontWeight": "700",
+              "fill": "#333333"
+            },
+            {
+              "type": "text",
+              "id": "board-detail-forbidden__desc-top",
+              "x": 24,
+              "y": 80,
+              "content": "\u4ec5\u521b\u5efa\u8005\u53ef\u89c1",
+              "fontSize": 12,
+              "fill": "#999999"
+            }
           ]
         },
-        { "type": "frame", "id": "board-detail-forbidden__content", "x": 24, "y": 288, "width": 1392, "height": 860, "fill": "#ffffff", "cornerRadius": 12, "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" }, "layout": "none", "children": [{ "type": "frame", "id": "board-detail-forbidden__state", "x": 536, "y": 240, "width": 320, "height": 360, "fill": null, "layout": "none", "children": [{ "type": "frame", "id": "board-detail-forbidden__icon", "x": 128, "y": 0, "width": 64, "height": 64, "fill": "#f0f2f5", "cornerRadius": 32, "layout": "none", "children": [{ "type": "text", "id": "board-detail-forbidden__icon-text", "x": 20, "y": 16, "content": "🔒", "fontSize": 24, "fill": "#999999" }] }, { "type": "text", "id": "board-detail-forbidden__title", "x": 116, "y": 88, "content": "无权限访问", "fontSize": 18, "fontWeight": "700", "fill": "#333333" }, { "type": "text", "id": "board-detail-forbidden__desc", "x": 80, "y": 120, "content": "该画板为私有，仅创建者可见", "fontSize": 12, "fill": "#999999" }, { "type": "frame", "id": "board-detail-forbidden__btn", "x": 96, "y": 176, "width": 128, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "board-detail-forbidden__btn-text", "x": 52, "y": 8, "content": "返回", "fontSize": 12, "fontWeight": "500", "fill": "#ffffff" }] }] }] }
+        {
+          "type": "frame",
+          "id": "board-detail-forbidden__content",
+          "x": 24,
+          "y": 288,
+          "width": 1392,
+          "height": 860,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "board-detail-forbidden__state",
+              "x": 536,
+              "y": 240,
+              "width": 320,
+              "height": 360,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "board-detail-forbidden__icon",
+                  "x": 128,
+                  "y": 0,
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 32,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-forbidden__icon-text",
+                      "x": 20,
+                      "y": 16,
+                      "content": "\ud83d\udd12",
+                      "fontSize": 24,
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-forbidden__title",
+                  "x": 116,
+                  "y": 88,
+                  "content": "\u65e0\u6743\u9650\u8bbf\u95ee",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "board-detail-forbidden__desc",
+                  "x": 80,
+                  "y": 120,
+                  "content": "\u8be5\u753b\u677f\u4e3a\u79c1\u6709\uff0c\u4ec5\u521b\u5efa\u8005\u53ef\u89c1",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-detail-forbidden__btn",
+                  "x": 96,
+                  "y": 176,
+                  "width": 128,
+                  "height": 32,
+                  "fill": "#8b5cf6",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-detail-forbidden__btn-text",
+                      "x": 52,
+                      "y": 8,
+                      "content": "\u8fd4\u56de",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "board-upload-dialog",
+      "name": "BoardDetail/\u5f39\u5c42/\u4e0a\u4f20\u5230\u753b\u677f",
+      "x": 0,
+      "y": 7000,
+      "width": 1440,
+      "height": 900,
+      "fill": "#00000066",
+      "clip": true,
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "board-upload-dialog__dialog",
+          "name": "Dialog",
+          "x": 320,
+          "y": 60,
+          "width": 800,
+          "height": 700,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "board-upload-dialog__title",
+              "x": 24,
+              "y": 24,
+              "content": "\u4e0a\u4f20\u5230\u753b\u677f",
+              "fontSize": 18,
+              "fontWeight": "700",
+              "fill": "#333333"
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog__close",
+              "x": 756,
+              "y": 24,
+              "width": 20,
+              "height": 20,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog__close-icon",
+                  "x": 2,
+                  "y": 0,
+                  "content": "\u2715",
+                  "fontSize": 16,
+                  "fill": "#999999"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog__divider-top",
+              "x": 0,
+              "y": 60,
+              "width": 800,
+              "height": 1,
+              "fill": "#e8e8e8",
+              "layout": "none"
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog__dropzone",
+              "name": "Dropzone",
+              "x": 24,
+              "y": 84,
+              "width": 752,
+              "height": 200,
+              "fill": null,
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 2,
+                "fill": "#e8e8e8",
+                "dashArray": [
+                  8,
+                  4
+                ]
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog__dropzone-icon",
+                  "x": 380,
+                  "y": 48,
+                  "content": "\ud83d\udcc1",
+                  "fontSize": 40,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog__dropzone-title",
+                  "x": 351,
+                  "y": 100,
+                  "content": "\u62d6\u62fd\u56fe\u7247\u5230\u6b64\u5904",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog__dropzone-or",
+                  "x": 394,
+                  "y": 124,
+                  "content": "\u6216",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog__dropzone-btn",
+                  "x": 360,
+                  "y": 152,
+                  "width": 80,
+                  "height": 32,
+                  "fill": "#ffffff",
+                  "cornerRadius": 16,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#8b5cf6"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__dropzone-btn-text",
+                      "x": 16,
+                      "y": 10,
+                      "content": "\u9009\u62e9\u6587\u4ef6",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "fill": "#8b5cf6"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "board-upload-dialog__hint",
+              "x": 24,
+              "y": 296,
+              "content": "\u652f\u6301 JPG / PNG / GIF / WebP\uff0c\u5355\u5f20\u4e0d\u8d85\u8fc7 10MB\uff0c\u6700\u591a 50 \u5f20",
+              "fontSize": 12,
+              "fill": "#999999"
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog__file-list-header",
+              "x": 24,
+              "y": 324,
+              "width": 752,
+              "height": 24,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog__file-count",
+                  "x": 0,
+                  "y": 4,
+                  "content": "\u5df2\u9009\u62e9 3 \u5f20\u56fe\u7247",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog__clear-all",
+                  "x": 728,
+                  "y": 4,
+                  "content": "\u6e05\u7a7a",
+                  "fontSize": 12,
+                  "fill": "#f56c6c"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog__file-list",
+              "name": "File List",
+              "x": 24,
+              "y": 356,
+              "width": 752,
+              "height": 232,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog__file-0",
+                  "name": "File Item 1",
+                  "x": 0,
+                  "y": 0,
+                  "width": 752,
+                  "height": 72,
+                  "fill": "#ffffff",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#e8e8e8"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-0-thumb",
+                      "x": 12,
+                      "y": 12,
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#f0ebf8",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "board-upload-dialog__file-0-thumb-icon",
+                          "x": 15,
+                          "y": 15,
+                          "content": "\ud83d\uddbc\ufe0f",
+                          "fontSize": 18,
+                          "fill": "#999999"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-0-name",
+                      "x": 76,
+                      "y": 16,
+                      "content": "design-inspiration-01.png",
+                      "fontSize": 14,
+                      "fill": "#333333"
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-0-size",
+                      "x": 76,
+                      "y": 40,
+                      "content": "2.4 MB",
+                      "fontSize": 12,
+                      "fill": "#999999"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-0-progress",
+                      "x": 340,
+                      "y": 28,
+                      "width": 200,
+                      "height": 8,
+                      "fill": "#f0f2f5",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "board-upload-dialog__file-0-progress-bar",
+                          "x": 0,
+                          "y": 0,
+                          "width": 200,
+                          "height": 8,
+                          "fill": "#67c23a",
+                          "cornerRadius": 4,
+                          "layout": "none"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-0-status",
+                      "x": 552,
+                      "y": 28,
+                      "content": "\u2713 \u5df2\u4e0a\u4f20",
+                      "fontSize": 12,
+                      "fill": "#67c23a"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-0-remove",
+                      "x": 716,
+                      "y": 24,
+                      "width": 24,
+                      "height": 24,
+                      "fill": null,
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "board-upload-dialog__file-0-remove-icon",
+                          "x": 6,
+                          "y": 6,
+                          "content": "\u2715",
+                          "fontSize": 12,
+                          "fill": "#999999"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog__file-1",
+                  "name": "File Item 2",
+                  "x": 0,
+                  "y": 80,
+                  "width": 752,
+                  "height": 72,
+                  "fill": "#ffffff",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#e8e8e8"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-1-thumb",
+                      "x": 12,
+                      "y": 12,
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#ebf4f8",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "board-upload-dialog__file-1-thumb-icon",
+                          "x": 15,
+                          "y": 15,
+                          "content": "\ud83d\uddbc\ufe0f",
+                          "fontSize": 18,
+                          "fill": "#999999"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-1-name",
+                      "x": 76,
+                      "y": 16,
+                      "content": "3d-render-studio.jpg",
+                      "fontSize": 14,
+                      "fill": "#333333"
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-1-size",
+                      "x": 76,
+                      "y": 40,
+                      "content": "5.8 MB",
+                      "fontSize": 12,
+                      "fill": "#999999"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-1-progress",
+                      "x": 340,
+                      "y": 28,
+                      "width": 200,
+                      "height": 8,
+                      "fill": "#f0f2f5",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "board-upload-dialog__file-1-progress-bar",
+                          "x": 0,
+                          "y": 0,
+                          "width": 120,
+                          "height": 8,
+                          "fill": "#8b5cf6",
+                          "cornerRadius": 4,
+                          "layout": "none"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-1-status",
+                      "x": 552,
+                      "y": 28,
+                      "content": "60%",
+                      "fontSize": 12,
+                      "fill": "#8b5cf6"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-1-remove",
+                      "x": 716,
+                      "y": 24,
+                      "width": 24,
+                      "height": 24,
+                      "fill": null,
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "board-upload-dialog__file-1-remove-icon",
+                          "x": 6,
+                          "y": 6,
+                          "content": "\u2715",
+                          "fontSize": 12,
+                          "fill": "#999999"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog__file-2",
+                  "name": "File Item 3",
+                  "x": 0,
+                  "y": 160,
+                  "width": 752,
+                  "height": 72,
+                  "fill": "#ffffff",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#e8e8e8"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-2-thumb",
+                      "x": 12,
+                      "y": 12,
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#f8ebeb",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "board-upload-dialog__file-2-thumb-icon",
+                          "x": 15,
+                          "y": 15,
+                          "content": "\ud83d\uddbc\ufe0f",
+                          "fontSize": 18,
+                          "fill": "#999999"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-2-name",
+                      "x": 76,
+                      "y": 16,
+                      "content": "illustration-set.webp",
+                      "fontSize": 14,
+                      "fill": "#333333"
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-2-size",
+                      "x": 76,
+                      "y": 40,
+                      "content": "1.1 MB",
+                      "fontSize": 12,
+                      "fill": "#999999"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-2-progress",
+                      "x": 340,
+                      "y": 28,
+                      "width": 200,
+                      "height": 8,
+                      "fill": "#f0f2f5",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "board-upload-dialog__file-2-progress-bar",
+                          "x": 0,
+                          "y": 0,
+                          "width": 0,
+                          "height": 8,
+                          "fill": "#8b5cf6",
+                          "cornerRadius": 4,
+                          "layout": "none"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__file-2-status",
+                      "x": 552,
+                      "y": 28,
+                      "content": "\u7b49\u5f85\u4e0a\u4f20",
+                      "fontSize": 12,
+                      "fill": "#999999"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "board-upload-dialog__file-2-remove",
+                      "x": 716,
+                      "y": 24,
+                      "width": 24,
+                      "height": 24,
+                      "fill": null,
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "board-upload-dialog__file-2-remove-icon",
+                          "x": 6,
+                          "y": 6,
+                          "content": "\u2715",
+                          "fontSize": 12,
+                          "fill": "#999999"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog__footer",
+              "x": 0,
+              "y": 620,
+              "width": 800,
+              "height": 64,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog__total",
+                  "x": 24,
+                  "y": 20,
+                  "content": "\u5171 3 \u5f20 \u00b7 9.3 MB",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog__btn-cancel",
+                  "x": 576,
+                  "y": 16,
+                  "width": 96,
+                  "height": 32,
+                  "fill": "#ffffff",
+                  "cornerRadius": 16,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#e8e8e8"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__btn-cancel-text",
+                      "x": 34,
+                      "y": 9,
+                      "content": "\u53d6\u6d88",
+                      "fontSize": 14,
+                      "fill": "#333333"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog__btn-upload",
+                  "x": 680,
+                  "y": 16,
+                  "width": 96,
+                  "height": 32,
+                  "fill": "#8b5cf6",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog__btn-upload-text",
+                      "x": 20,
+                      "y": 9,
+                      "content": "\u5f00\u59cb\u4e0a\u4f20",
+                      "fontSize": 14,
+                      "fontWeight": "500",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "board-upload-dialog-empty",
+      "name": "BoardDetail/\u5f39\u5c42/\u4e0a\u4f20\u5230\u753b\u677f-\u7a7a",
+      "x": 0,
+      "y": 8100,
+      "width": 1440,
+      "height": 900,
+      "fill": "#00000066",
+      "clip": true,
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "board-upload-dialog-empty__dialog",
+          "name": "Dialog",
+          "x": 320,
+          "y": 120,
+          "width": 800,
+          "height": 560,
+          "fill": "#ffffff",
+          "cornerRadius": 12,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "board-upload-dialog-empty__title",
+              "x": 24,
+              "y": 24,
+              "content": "\u4e0a\u4f20\u5230\u753b\u677f",
+              "fontSize": 18,
+              "fontWeight": "700",
+              "fill": "#333333"
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog-empty__close",
+              "x": 756,
+              "y": 24,
+              "width": 20,
+              "height": 20,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog-empty__close-icon",
+                  "x": 2,
+                  "y": 0,
+                  "content": "\u2715",
+                  "fontSize": 16,
+                  "fill": "#999999"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog-empty__divider-top",
+              "x": 0,
+              "y": 60,
+              "width": 800,
+              "height": 1,
+              "fill": "#e8e8e8",
+              "layout": "none"
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog-empty__dropzone",
+              "name": "Dropzone",
+              "x": 24,
+              "y": 84,
+              "width": 752,
+              "height": 360,
+              "fill": null,
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 2,
+                "fill": "#e8e8e8",
+                "dashArray": [
+                  8,
+                  4
+                ]
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog-empty__dropzone-icon",
+                  "x": 376,
+                  "y": 100,
+                  "content": "\ud83d\udcc1",
+                  "fontSize": 48,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog-empty__dropzone-title",
+                  "x": 344,
+                  "y": 168,
+                  "content": "\u62d6\u62fd\u56fe\u7247\u5230\u6b64\u5904",
+                  "fontSize": 16,
+                  "fontWeight": "500",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog-empty__dropzone-or",
+                  "x": 394,
+                  "y": 196,
+                  "content": "\u6216",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog-empty__dropzone-btn",
+                  "x": 360,
+                  "y": 224,
+                  "width": 80,
+                  "height": 32,
+                  "fill": "#ffffff",
+                  "cornerRadius": 16,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#8b5cf6"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog-empty__dropzone-btn-text",
+                      "x": 16,
+                      "y": 10,
+                      "content": "\u9009\u62e9\u6587\u4ef6",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "fill": "#8b5cf6"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "board-upload-dialog-empty__dropzone-hint",
+                  "x": 232,
+                  "y": 272,
+                  "content": "\u652f\u6301 JPG / PNG / GIF / WebP\uff0c\u5355\u5f20\u4e0d\u8d85\u8fc7 10MB\uff0c\u6700\u591a 50 \u5f20",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "board-upload-dialog-empty__footer",
+              "x": 0,
+              "y": 480,
+              "width": 800,
+              "height": 64,
+              "fill": null,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog-empty__btn-cancel",
+                  "x": 576,
+                  "y": 16,
+                  "width": 96,
+                  "height": 32,
+                  "fill": "#ffffff",
+                  "cornerRadius": 16,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#e8e8e8"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog-empty__btn-cancel-text",
+                      "x": 34,
+                      "y": 9,
+                      "content": "\u53d6\u6d88",
+                      "fontSize": 14,
+                      "fill": "#333333"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "board-upload-dialog-empty__btn-upload",
+                  "x": 680,
+                  "y": 16,
+                  "width": 96,
+                  "height": 32,
+                  "fill": "#8b5cf6",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "board-upload-dialog-empty__btn-upload-text",
+                      "x": 20,
+                      "y": 9,
+                      "content": "\u5f00\u59cb\u4e0a\u4f20",
+                      "fontSize": 14,
+                      "fontWeight": "500",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     }
   ]

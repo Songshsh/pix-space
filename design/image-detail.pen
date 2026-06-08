@@ -4,7 +4,7 @@
     {
       "type": "frame",
       "id": "image-detail-page",
-      "name": "图片详情页 - /image/:id",
+      "name": "\u56fe\u7247\u8be6\u60c5\u9875 - /image/:id",
       "x": 0,
       "y": 0,
       "width": 1440,
@@ -27,12 +27,24 @@
             "type": "shadow",
             "shadowType": "outer",
             "color": "#0000000a",
-            "offset": { "x": 0, "y": 2 },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
             "blur": 8,
             "spread": 0
           },
           "children": [
-            { "type": "text", "id": "image-detail__logo", "x": 24, "y": 22, "content": "Pix Space", "fontSize": 20, "fontWeight": "bold", "fill": "#333333" },
+            {
+              "type": "text",
+              "id": "image-detail__logo",
+              "x": 24,
+              "y": 22,
+              "content": "Pix Space",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "fill": "#333333"
+            },
             {
               "type": "frame",
               "id": "image-detail__search",
@@ -44,8 +56,24 @@
               "cornerRadius": 20,
               "layout": "none",
               "children": [
-                { "type": "text", "id": "image-detail__search-icon", "x": 16, "y": 11, "content": "🔍", "fontSize": 14, "fill": "#999999" },
-                { "type": "text", "id": "image-detail__placeholder", "x": 40, "y": 11, "content": "搜索高品质素材、灵感...", "fontSize": 14, "fill": "#999999" }
+                {
+                  "type": "text",
+                  "id": "image-detail__search-icon",
+                  "x": 16,
+                  "y": 11,
+                  "content": "\ud83d\udd0d",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "image-detail__placeholder",
+                  "x": 40,
+                  "y": 11,
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                }
               ]
             },
             {
@@ -67,7 +95,17 @@
                   "fill": "#8b5cf6",
                   "cornerRadius": 16,
                   "layout": "none",
-                  "children": [{ "type": "text", "id": "image-detail__upload-text", "x": 22, "y": 8, "content": "上传", "fontSize": 14, "fill": "#ffffff" }]
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-detail__upload-text",
+                      "x": 22,
+                      "y": 8,
+                      "content": "\u4e0a\u4f20",
+                      "fontSize": 14,
+                      "fill": "#ffffff"
+                    }
+                  ]
                 },
                 {
                   "type": "frame",
@@ -76,10 +114,20 @@
                   "y": 0,
                   "width": 32,
                   "height": 32,
-                  "fill": "#d9d9d9",
+                  "fill": "#8b5cf6",
                   "cornerRadius": 16,
                   "layout": "none",
-                  "children": [{ "type": "text", "id": "image-detail__avatar-text", "x": 11, "y": 8, "content": "U", "fontSize": 14, "fill": "#ffffff" }]
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-detail__avatar-text",
+                      "x": 11,
+                      "y": 8,
+                      "content": "U",
+                      "fontSize": 14,
+                      "fill": "#ffffff"
+                    }
+                  ]
                 }
               ]
             }
@@ -96,7 +144,17 @@
           "fill": "#ffffff",
           "cornerRadius": 12,
           "layout": "none",
-          "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000d", "offset": { "x": 0, "y": 4 }, "blur": 16, "spread": 0 },
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000d",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 16,
+            "spread": 0
+          },
           "children": [
             {
               "type": "frame",
@@ -118,7 +176,17 @@
                   "height": 840,
                   "fill": "#eeeeee",
                   "layout": "none",
-                  "children": [{ "type": "text", "id": "image-detail__img-placeholder", "x": 408, "y": 412, "content": "IMAGE_PLACEHOLDER", "fontSize": 14, "fill": "#999999" }]
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-detail__img-placeholder",
+                      "x": 408,
+                      "y": 412,
+                      "content": "IMAGE_PLACEHOLDER",
+                      "fontSize": 14,
+                      "fill": "#999999"
+                    }
+                  ]
                 }
               ]
             },
@@ -151,13 +219,49 @@
                       "fill": "#d9d9d9",
                       "cornerRadius": 20,
                       "layout": "none",
-                      "children": [{ "type": "text", "id": "image-detail__auth-avatar-text", "x": 14, "y": 13, "content": "A", "fontSize": 14, "fill": "#ffffff" }]
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "image-detail__auth-avatar-text",
+                          "x": 14,
+                          "y": 13,
+                          "content": "A",
+                          "fontSize": 14,
+                          "fill": "#ffffff"
+                        }
+                      ]
                     },
-                    { "type": "text", "id": "image-detail__auth-name", "x": 52, "y": 8, "content": "作者名称", "fontSize": 16, "fontWeight": "600", "fill": "#333333" },
-                    { "type": "text", "id": "image-detail__pub-time", "x": 52, "y": 28, "content": "2026-05-06 发布", "fontSize": 12, "fill": "#999999" }
+                    {
+                      "type": "text",
+                      "id": "image-detail__auth-name",
+                      "x": 52,
+                      "y": 8,
+                      "content": "\u4f5c\u8005\u540d\u79f0",
+                      "fontSize": 16,
+                      "fontWeight": "600",
+                      "fill": "#333333"
+                    },
+                    {
+                      "type": "text",
+                      "id": "image-detail__pub-time",
+                      "x": 52,
+                      "y": 28,
+                      "content": "2026-05-06 \u53d1\u5e03",
+                      "fontSize": 12,
+                      "fill": "#999999"
+                    }
                   ]
                 },
-                { "type": "text", "id": "image-detail__title", "x": 24, "y": 104, "content": "极简主义 3D 渲染图", "fontSize": 24, "fontWeight": "bold", "fill": "#333333" },
+                {
+                  "type": "text",
+                  "id": "image-detail__title",
+                  "x": 24,
+                  "y": 104,
+                  "content": "\u6781\u7b80\u4e3b\u4e49 3D \u6e32\u67d3\u56fe",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                  "fill": "#333333"
+                },
                 {
                   "type": "frame",
                   "id": "image-detail__actions",
@@ -167,10 +271,109 @@
                   "height": 100,
                   "layout": "none",
                   "children": [
-                    { "type": "frame", "id": "image-detail__collect", "x": 0, "y": 0, "width": 312, "height": 44, "fill": "#8b5cf6", "cornerRadius": 8, "layout": "none", "children": [{ "type": "text", "id": "image-detail__collect-text", "x": 120, "y": 12, "content": "采集到画板", "fontSize": 16, "fill": "#ffffff" }] },
-                    { "type": "frame", "id": "image-detail__download", "x": 0, "y": 56, "width": 96, "height": 40, "fill": "#ffffff", "stroke": { "align": "inside", "thickness": 1, "fill": "#e8e8e8" }, "cornerRadius": 8, "layout": "none", "children": [{ "type": "text", "id": "image-detail__download-text", "x": 33, "y": 11, "content": "下载", "fontSize": 14, "fill": "#8b5cf6" }] },
-                    { "type": "frame", "id": "image-detail__like", "x": 108, "y": 56, "width": 96, "height": 40, "fill": "#ffffff", "stroke": { "align": "inside", "thickness": 1, "fill": "#e8e8e8" }, "cornerRadius": 8, "layout": "none", "children": [{ "type": "text", "id": "image-detail__like-text", "x": 38, "y": 11, "content": "赞", "fontSize": 14, "fill": "#8b5cf6" }] },
-                    { "type": "frame", "id": "image-detail__share", "x": 216, "y": 56, "width": 96, "height": 40, "fill": "#ffffff", "stroke": { "align": "inside", "thickness": 1, "fill": "#e8e8e8" }, "cornerRadius": 8, "layout": "none", "children": [{ "type": "text", "id": "image-detail__share-text", "x": 38, "y": 11, "content": "分享", "fontSize": 14, "fill": "#8b5cf6" }] }
+                    {
+                      "type": "frame",
+                      "id": "image-detail__collect",
+                      "x": 0,
+                      "y": 0,
+                      "width": 312,
+                      "height": 44,
+                      "fill": "#8b5cf6",
+                      "cornerRadius": 8,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "image-detail__collect-text",
+                          "x": 120,
+                          "y": 12,
+                          "content": "\u91c7\u96c6\u5230\u753b\u677f",
+                          "fontSize": 16,
+                          "fill": "#ffffff"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "image-detail__download",
+                      "x": 0,
+                      "y": 56,
+                      "width": 96,
+                      "height": 40,
+                      "fill": "#ffffff",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#e8e8e8"
+                      },
+                      "cornerRadius": 8,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "image-detail__download-text",
+                          "x": 33,
+                          "y": 11,
+                          "content": "\u4e0b\u8f7d",
+                          "fontSize": 14,
+                          "fill": "#8b5cf6"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "image-detail__like",
+                      "x": 108,
+                      "y": 56,
+                      "width": 96,
+                      "height": 40,
+                      "fill": "#ffffff",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#e8e8e8"
+                      },
+                      "cornerRadius": 8,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "image-detail__like-text",
+                          "x": 38,
+                          "y": 11,
+                          "content": "\u8d5e",
+                          "fontSize": 14,
+                          "fill": "#8b5cf6"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "image-detail__share",
+                      "x": 216,
+                      "y": 56,
+                      "width": 96,
+                      "height": 40,
+                      "fill": "#ffffff",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#e8e8e8"
+                      },
+                      "cornerRadius": 8,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "image-detail__share-text",
+                          "x": 38,
+                          "y": 11,
+                          "content": "\u5206\u4eab",
+                          "fontSize": 14,
+                          "fill": "#8b5cf6"
+                        }
+                      ]
+                    }
                   ]
                 },
                 {
@@ -182,10 +385,43 @@
                   "height": 120,
                   "layout": "none",
                   "children": [
-                    { "type": "text", "id": "image-detail__meta-title", "x": 0, "y": 0, "content": "图片信息", "fontSize": 14, "fontWeight": "bold", "fill": "#333333" },
-                    { "type": "text", "id": "image-detail__meta-size", "x": 0, "y": 32, "content": "尺寸：3840 x 2160 px", "fontSize": 13, "fill": "#666666" },
-                    { "type": "text", "id": "image-detail__meta-format", "x": 0, "y": 56, "content": "格式：PNG", "fontSize": 13, "fill": "#666666" },
-                    { "type": "text", "id": "image-detail__meta-weight", "x": 0, "y": 80, "content": "大小：4.2 MB", "fontSize": 13, "fill": "#666666" }
+                    {
+                      "type": "text",
+                      "id": "image-detail__meta-title",
+                      "x": 0,
+                      "y": 0,
+                      "content": "\u56fe\u7247\u4fe1\u606f",
+                      "fontSize": 14,
+                      "fontWeight": "bold",
+                      "fill": "#333333"
+                    },
+                    {
+                      "type": "text",
+                      "id": "image-detail__meta-size",
+                      "x": 0,
+                      "y": 32,
+                      "content": "\u5c3a\u5bf8\uff1a3840 x 2160 px",
+                      "fontSize": 13,
+                      "fill": "#666666"
+                    },
+                    {
+                      "type": "text",
+                      "id": "image-detail__meta-format",
+                      "x": 0,
+                      "y": 56,
+                      "content": "\u683c\u5f0f\uff1aPNG",
+                      "fontSize": 13,
+                      "fill": "#666666"
+                    },
+                    {
+                      "type": "text",
+                      "id": "image-detail__meta-weight",
+                      "x": 0,
+                      "y": 80,
+                      "content": "\u5927\u5c0f\uff1a4.2 MB",
+                      "fontSize": 13,
+                      "fill": "#666666"
+                    }
                   ]
                 },
                 {
@@ -197,77 +433,60 @@
                   "height": 56,
                   "layout": "none",
                   "children": [
-                    { "type": "text", "id": "image-detail__tags-title", "x": 0, "y": 0, "content": "标签", "fontSize": 14, "fontWeight": "bold", "fill": "#333333" },
-                    { "type": "frame", "id": "image-detail__tag-1", "x": 0, "y": 28, "width": 48, "height": 22, "fill": "#f0f2f5", "cornerRadius": 4, "layout": "none", "children": [{ "type": "text", "id": "image-detail__tag-text-1", "x": 8, "y": 4, "content": "3D渲染", "fontSize": 10, "fill": "#666666" }] },
-                    { "type": "frame", "id": "image-detail__tag-2", "x": 56, "y": 28, "width": 36, "height": 22, "fill": "#f0f2f5", "cornerRadius": 4, "layout": "none", "children": [{ "type": "text", "id": "image-detail__tag-text-2", "x": 8, "y": 4, "content": "极简", "fontSize": 10, "fill": "#666666" }] }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "image-preview-dialog-page",
-      "name": "图片预览弹窗",
-      "x": 0,
-      "y": 1300,
-      "width": 1440,
-      "height": 1024,
-      "fill": "#00000080",
-      "clip": true,
-      "layout": "none",
-      "children": [
-        {
-          "type": "frame",
-          "id": "image-preview__dialog",
-          "x": 120,
-          "y": 60,
-          "width": 1200,
-          "height": 900,
-          "fill": "#ffffff",
-          "cornerRadius": 12,
-          "layout": "none",
-          "children": [
-            { "type": "text", "id": "image-preview__close", "x": 1160, "y": 20, "content": "✕", "fontSize": 24, "fill": "#999999" },
-            {
-              "type": "frame",
-              "id": "image-preview__body",
-              "x": 0,
-              "y": 0,
-              "width": 1200,
-              "height": 900,
-              "fill": "#ffffff",
-              "cornerRadius": 12,
-              "layout": "none",
-              "children": [
-                { "type": "frame", "id": "image-preview__img-area", "x": 40, "y": 40, "width": 760, "height": 820, "fill": "#f5f6f7", "layout": "none", "children": [] },
-                {
-                  "type": "frame",
-                  "id": "image-preview__info-area",
-                  "x": 840,
-                  "y": 40,
-                  "width": 320,
-                  "height": 820,
-                  "layout": "none",
-                  "children": [
                     {
-                      "type": "frame",
-                      "id": "image-preview__author",
+                      "type": "text",
+                      "id": "image-detail__tags-title",
                       "x": 0,
                       "y": 0,
-                      "width": 320,
-                      "height": 48,
+                      "content": "\u6807\u7b7e",
+                      "fontSize": 14,
+                      "fontWeight": "bold",
+                      "fill": "#333333"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "image-detail__tag-1",
+                      "x": 0,
+                      "y": 28,
+                      "width": 48,
+                      "height": 22,
+                      "fill": "#f0f2f5",
+                      "cornerRadius": 4,
                       "layout": "none",
                       "children": [
-                        { "type": "frame", "id": "image-preview__avatar", "x": 0, "y": 0, "width": 40, "height": 40, "fill": "#d9d9d9", "cornerRadius": 20, "layout": "none", "children": [] },
-                        { "type": "text", "id": "image-preview__name", "x": 52, "y": 10, "content": "作者名称", "fontSize": 16, "fill": "#333333" }
+                        {
+                          "type": "text",
+                          "id": "image-detail__tag-text-1",
+                          "x": 8,
+                          "y": 4,
+                          "content": "3D\u6e32\u67d3",
+                          "fontSize": 10,
+                          "fill": "#666666"
+                        }
                       ]
                     },
-                    { "type": "frame", "id": "image-preview__collect", "x": 0, "y": 80, "width": 320, "height": 44, "fill": "#8b5cf6", "cornerRadius": 8, "layout": "none", "children": [{ "type": "text", "id": "image-preview__collect-text", "x": 110, "y": 12, "content": "采集到画板", "fontSize": 16, "fill": "#ffffff" }] },
-                    { "type": "frame", "id": "image-preview__go-detail", "x": 0, "y": 140, "width": 320, "height": 40, "fill": "#ffffff", "stroke": { "align": "inside", "thickness": 1, "fill": "#e8e8e8" }, "cornerRadius": 8, "layout": "none", "children": [{ "type": "text", "id": "image-preview__detail-text", "x": 132, "y": 11, "content": "查看详情", "fontSize": 14, "fill": "#8b5cf6" }] }
+                    {
+                      "type": "frame",
+                      "id": "image-detail__tag-2",
+                      "x": 56,
+                      "y": 28,
+                      "width": 36,
+                      "height": 22,
+                      "fill": "#f0f2f5",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "image-detail__tag-text-2",
+                          "x": 8,
+                          "y": 4,
+                          "content": "\u6781\u7b80",
+                          "fontSize": 10,
+                          "fill": "#666666"
+                        }
+                      ]
+                    }
                   ]
                 }
               ]
@@ -279,7 +498,7 @@
     {
       "type": "frame",
       "id": "image-loading-page",
-      "name": "图片详情/加载",
+      "name": "\u56fe\u7247\u8be6\u60c5/\u52a0\u8f7d",
       "x": 0,
       "y": 2500,
       "width": 1440,
@@ -288,8 +507,36 @@
       "clip": true,
       "layout": "none",
       "children": [
-        { "type": "text", "id": "image-loading__title", "x": 24, "y": 24, "content": "图片详情 - 加载状态", "fontSize": 14, "fill": "#999999" },
-        { "type": "frame", "id": "image-loading__header", "x": 0, "y": 64, "width": 1440, "height": 64, "fill": "#ffffff", "layout": "none", "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 2 }, "blur": 8, "spread": 0 } },
+        {
+          "type": "text",
+          "id": "image-loading__title",
+          "x": 24,
+          "y": 24,
+          "content": "\u56fe\u7247\u8be6\u60c5 - \u52a0\u8f7d\u72b6\u6001",
+          "fontSize": 14,
+          "fill": "#999999"
+        },
+        {
+          "type": "frame",
+          "id": "image-loading__header",
+          "x": 0,
+          "y": 64,
+          "width": 1440,
+          "height": 64,
+          "fill": "#ffffff",
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000a",
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "blur": 8,
+            "spread": 0
+          }
+        },
         {
           "type": "frame",
           "id": "image-loading__content",
@@ -299,7 +546,11 @@
           "height": 860,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -312,8 +563,38 @@
               "fill": null,
               "layout": "none",
               "children": [
-                { "type": "frame", "id": "image-loading__loader", "x": 128, "y": 0, "width": 64, "height": 64, "fill": "#f0f2f5", "cornerRadius": 32, "layout": "none", "children": [{ "type": "text", "id": "image-loading__loader-text", "x": 28, "y": 18, "content": "…", "fontSize": 24, "fontWeight": "700", "fill": "#999999" }] },
-                { "type": "text", "id": "image-loading__loading-text", "x": 142, "y": 88, "content": "加载中", "fontSize": 12, "fill": "#999999" }
+                {
+                  "type": "frame",
+                  "id": "image-loading__loader",
+                  "x": 128,
+                  "y": 0,
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 32,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-loading__loader-text",
+                      "x": 28,
+                      "y": 18,
+                      "content": "\u2026",
+                      "fontSize": 24,
+                      "fontWeight": "700",
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "image-loading__loading-text",
+                  "x": 142,
+                  "y": 88,
+                  "content": "\u52a0\u8f7d\u4e2d",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                }
               ]
             }
           ]
@@ -323,7 +604,7 @@
     {
       "type": "frame",
       "id": "image-error-page",
-      "name": "图片详情/错误",
+      "name": "\u56fe\u7247\u8be6\u60c5/\u9519\u8bef",
       "x": 0,
       "y": 3700,
       "width": 1440,
@@ -332,8 +613,36 @@
       "clip": true,
       "layout": "none",
       "children": [
-        { "type": "text", "id": "image-error__title", "x": 24, "y": 24, "content": "图片详情 - 错误状态", "fontSize": 14, "fill": "#999999" },
-        { "type": "frame", "id": "image-error__header", "x": 0, "y": 64, "width": 1440, "height": 64, "fill": "#ffffff", "layout": "none", "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 2 }, "blur": 8, "spread": 0 } },
+        {
+          "type": "text",
+          "id": "image-error__title",
+          "x": 24,
+          "y": 24,
+          "content": "\u56fe\u7247\u8be6\u60c5 - \u9519\u8bef\u72b6\u6001",
+          "fontSize": 14,
+          "fill": "#999999"
+        },
+        {
+          "type": "frame",
+          "id": "image-error__header",
+          "x": 0,
+          "y": 64,
+          "width": 1440,
+          "height": 64,
+          "fill": "#ffffff",
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000a",
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "blur": 8,
+            "spread": 0
+          }
+        },
         {
           "type": "frame",
           "id": "image-error__content",
@@ -343,7 +652,11 @@
           "height": 860,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -356,11 +669,80 @@
               "fill": null,
               "layout": "none",
               "children": [
-                { "type": "frame", "id": "image-error__icon", "x": 128, "y": 0, "width": 64, "height": 64, "fill": "#f0f2f5", "cornerRadius": 32, "layout": "none", "children": [{ "type": "text", "id": "image-error__icon-text", "x": 28, "y": 16, "content": "!", "fontSize": 24, "fontWeight": "700", "fill": "#999999" }] },
-                { "type": "text", "id": "image-error__msg-title", "x": 124, "y": 88, "content": "加载失败", "fontSize": 18, "fontWeight": "700", "fill": "#333333" },
-                { "type": "text", "id": "image-error__msg-desc", "x": 112, "y": 120, "content": "请检查网络后重试", "fontSize": 12, "fill": "#999999" },
-                { "type": "frame", "id": "image-error__retry", "x": 112, "y": 160, "width": 96, "height": 32, "fill": "#8b5cf6", "cornerRadius": 16, "layout": "none", "children": [{ "type": "text", "id": "image-error__retry-text", "x": 36, "y": 8, "content": "重试", "fontSize": 12, "fontWeight": "600", "fill": "#ffffff" }] },
-                { "type": "text", "id": "image-error__back", "x": 136, "y": 208, "content": "返回发现", "fontSize": 12, "fill": "#8b5cf6" }
+                {
+                  "type": "frame",
+                  "id": "image-error__icon",
+                  "x": 128,
+                  "y": 0,
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 32,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-error__icon-text",
+                      "x": 28,
+                      "y": 16,
+                      "content": "!",
+                      "fontSize": 24,
+                      "fontWeight": "700",
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "image-error__msg-title",
+                  "x": 124,
+                  "y": 88,
+                  "content": "\u52a0\u8f7d\u5931\u8d25",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "image-error__msg-desc",
+                  "x": 112,
+                  "y": 120,
+                  "content": "\u8bf7\u68c0\u67e5\u7f51\u7edc\u540e\u91cd\u8bd5",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "image-error__retry",
+                  "x": 112,
+                  "y": 160,
+                  "width": 96,
+                  "height": 32,
+                  "fill": "#8b5cf6",
+                  "cornerRadius": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-error__retry-text",
+                      "x": 36,
+                      "y": 8,
+                      "content": "\u91cd\u8bd5",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "image-error__back",
+                  "x": 136,
+                  "y": 208,
+                  "content": "\u8fd4\u56de\u53d1\u73b0",
+                  "fontSize": 12,
+                  "fill": "#8b5cf6"
+                }
               ]
             }
           ]
@@ -370,7 +752,7 @@
     {
       "type": "frame",
       "id": "image-forbidden-page",
-      "name": "图片详情/无权限",
+      "name": "\u56fe\u7247\u8be6\u60c5/\u65e0\u6743\u9650",
       "x": 0,
       "y": 4900,
       "width": 1440,
@@ -379,8 +761,36 @@
       "clip": true,
       "layout": "none",
       "children": [
-        { "type": "text", "id": "image-forbidden__title", "x": 24, "y": 24, "content": "图片详情 - 无权限状态", "fontSize": 14, "fill": "#999999" },
-        { "type": "frame", "id": "image-forbidden__header", "x": 0, "y": 64, "width": 1440, "height": 64, "fill": "#ffffff", "layout": "none", "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 2 }, "blur": 8, "spread": 0 } },
+        {
+          "type": "text",
+          "id": "image-forbidden__title",
+          "x": 24,
+          "y": 24,
+          "content": "\u56fe\u7247\u8be6\u60c5 - \u65e0\u6743\u9650\u72b6\u6001",
+          "fontSize": 14,
+          "fill": "#999999"
+        },
+        {
+          "type": "frame",
+          "id": "image-forbidden__header",
+          "x": 0,
+          "y": 64,
+          "width": 1440,
+          "height": 64,
+          "fill": "#ffffff",
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000a",
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "blur": 8,
+            "spread": 0
+          }
+        },
         {
           "type": "frame",
           "id": "image-forbidden__content",
@@ -390,7 +800,11 @@
           "height": 860,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -403,10 +817,57 @@
               "fill": null,
               "layout": "none",
               "children": [
-                { "type": "frame", "id": "image-forbidden__icon", "x": 128, "y": 0, "width": 64, "height": 64, "fill": "#f0f2f5", "cornerRadius": 32, "layout": "none", "children": [{ "type": "text", "id": "image-forbidden__icon-text", "x": 24, "y": 16, "content": "×", "fontSize": 24, "fontWeight": "700", "fill": "#999999" }] },
-                { "type": "text", "id": "image-forbidden__msg-title", "x": 112, "y": 88, "content": "暂无访问权限", "fontSize": 18, "fontWeight": "700", "fill": "#333333" },
-                { "type": "text", "id": "image-forbidden__msg-desc", "x": 88, "y": 120, "content": "该图片为私有，仅作者可见", "fontSize": 12, "fill": "#999999" },
-                { "type": "text", "id": "image-forbidden__back", "x": 136, "y": 208, "content": "返回发现", "fontSize": 12, "fill": "#8b5cf6" }
+                {
+                  "type": "frame",
+                  "id": "image-forbidden__icon",
+                  "x": 128,
+                  "y": 0,
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 32,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-forbidden__icon-text",
+                      "x": 24,
+                      "y": 16,
+                      "content": "\u00d7",
+                      "fontSize": 24,
+                      "fontWeight": "700",
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "image-forbidden__msg-title",
+                  "x": 112,
+                  "y": 88,
+                  "content": "\u6682\u65e0\u8bbf\u95ee\u6743\u9650",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "image-forbidden__msg-desc",
+                  "x": 88,
+                  "y": 120,
+                  "content": "\u8be5\u56fe\u7247\u4e3a\u79c1\u6709\uff0c\u4ec5\u4f5c\u8005\u53ef\u89c1",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "image-forbidden__back",
+                  "x": 136,
+                  "y": 208,
+                  "content": "\u8fd4\u56de\u53d1\u73b0",
+                  "fontSize": 12,
+                  "fill": "#8b5cf6"
+                }
               ]
             }
           ]
@@ -416,7 +877,7 @@
     {
       "type": "frame",
       "id": "image-empty-page",
-      "name": "图片详情/不存在",
+      "name": "\u56fe\u7247\u8be6\u60c5/\u4e0d\u5b58\u5728",
       "x": 0,
       "y": 6100,
       "width": 1440,
@@ -425,8 +886,36 @@
       "clip": true,
       "layout": "none",
       "children": [
-        { "type": "text", "id": "image-empty__title", "x": 24, "y": 24, "content": "图片详情 - 空状态", "fontSize": 14, "fill": "#999999" },
-        { "type": "frame", "id": "image-empty__header", "x": 0, "y": 64, "width": 1440, "height": 64, "fill": "#ffffff", "layout": "none", "effect": { "type": "shadow", "shadowType": "outer", "color": "#0000000a", "offset": { "x": 0, "y": 2 }, "blur": 8, "spread": 0 } },
+        {
+          "type": "text",
+          "id": "image-empty__title",
+          "x": 24,
+          "y": 24,
+          "content": "\u56fe\u7247\u8be6\u60c5 - \u7a7a\u72b6\u6001",
+          "fontSize": 14,
+          "fill": "#999999"
+        },
+        {
+          "type": "frame",
+          "id": "image-empty__header",
+          "x": 0,
+          "y": 64,
+          "width": 1440,
+          "height": 64,
+          "fill": "#ffffff",
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000a",
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "blur": 8,
+            "spread": 0
+          }
+        },
         {
           "type": "frame",
           "id": "image-empty__content",
@@ -436,7 +925,11 @@
           "height": 860,
           "fill": "#ffffff",
           "cornerRadius": 12,
-          "stroke": { "align": "inside", "thickness": 0, "fill": "#e8e8e8" },
+          "stroke": {
+            "align": "inside",
+            "thickness": 0,
+            "fill": "#e8e8e8"
+          },
           "layout": "none",
           "children": [
             {
@@ -449,10 +942,57 @@
               "fill": null,
               "layout": "none",
               "children": [
-                { "type": "frame", "id": "image-empty__icon", "x": 128, "y": 0, "width": 64, "height": 64, "fill": "#f0f2f5", "cornerRadius": 32, "layout": "none", "children": [{ "type": "text", "id": "image-empty__icon-text", "x": 26, "y": 16, "content": "?", "fontSize": 24, "fontWeight": "700", "fill": "#999999" }] },
-                { "type": "text", "id": "image-empty__msg-title", "x": 124, "y": 88, "content": "图片已消失", "fontSize": 18, "fontWeight": "700", "fill": "#333333" },
-                { "type": "text", "id": "image-empty__msg-desc", "x": 88, "y": 120, "content": "该素材可能已被删除或移动", "fontSize": 12, "fill": "#999999" },
-                { "type": "text", "id": "image-empty__back", "x": 136, "y": 208, "content": "返回发现", "fontSize": 12, "fill": "#8b5cf6" }
+                {
+                  "type": "frame",
+                  "id": "image-empty__icon",
+                  "x": 128,
+                  "y": 0,
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 32,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "image-empty__icon-text",
+                      "x": 26,
+                      "y": 16,
+                      "content": "?",
+                      "fontSize": 24,
+                      "fontWeight": "700",
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "image-empty__msg-title",
+                  "x": 124,
+                  "y": 88,
+                  "content": "\u56fe\u7247\u5df2\u6d88\u5931",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "image-empty__msg-desc",
+                  "x": 88,
+                  "y": 120,
+                  "content": "\u8be5\u7d20\u6750\u53ef\u80fd\u5df2\u88ab\u5220\u9664\u6216\u79fb\u52a8",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "image-empty__back",
+                  "x": 136,
+                  "y": 208,
+                  "content": "\u8fd4\u56de\u53d1\u73b0",
+                  "fontSize": 12,
+                  "fill": "#8b5cf6"
+                }
               ]
             }
           ]

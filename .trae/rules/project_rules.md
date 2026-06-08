@@ -11,13 +11,19 @@
 
 ---
 
+# 0. 表述约定
+
+- MUST：强制要求，不满足则视为违规
+- SHOULD：推荐做法，有明确理由时可偏离，但需说明原因
+- AVOID：应避免的做法，通常会导致维护/一致性/安全风险
+
 # 1. 核心硬护栏
 
 ## 安全
 
-- 禁止输出、记录、提交密钥/Token/密码/隐私数据
-- 涉及环境变量时优先参考 `.env.example`
-- 不在代码中硬编码敏感信息
+- MUST：禁止输出、记录、提交密钥/Token/密码/隐私数据
+- MUST：涉及环境变量时优先参考 `.env.example`
+- MUST：不在代码中硬编码敏感信息
 
 ## 技术栈
 
@@ -36,35 +42,43 @@
 
 ## UI 与样式
 
-- 优先使用 Element Plus 组件
-- 不重复封装 Element Plus 已有能力
-- 禁止硬编码颜色/圆角/阴影/spacing
-- 必须优先使用 `src/styles/tokens.css`
-- tokens 不满足时，应先提出新增方案
+- MUST：优先使用 Element Plus 组件
+- MUST：不重复封装 Element Plus 已有能力
+- MUST：禁止硬编码主题/品牌色系列；允许黑白灰与 transparent/currentColor 等基础色硬编码（宽高尺寸可直接使用 px，不属硬编码视觉值）
+- MUST：在不破坏 `--el-*` 主题链路的前提下，优先使用 `src/styles/tokens.css`
+- MUST：B 端与 C 端主业务界面的主题色，统一以 `--el-*` 为唯一来源
+- MUST：B 端主题色由后台“外观设置”驱动；业务样式不得绕开 `--el-*` 改用固定品牌色
+- MUST：C 端主业务界面即使主题固定，也应直接消费 `--el-*`；禁止在业务样式层新增 `ds -> el`、`el -> ds` 一类中间映射层
+- MUST：若 C 端固定主题预设需要写入 `--el-*`，只允许在统一主题初始化入口处理；业务样式层仍必须直接消费 `--el-*`
+- MUST：`ds-color-brand*` 不得作为 B/C 端主业务交互色来源；仅允许用于登录/注册与 403/404 状态页等少量非业务品牌装饰场景，或由统一主题切换入口管理固定的 C 端主题预设
+- SHOULD：若保留 `ds-color-brand*`，应优先收敛到对应页面样式文件；如暂时仍放在全局 token 中，必须加注释明确“仅限登录/注册等品牌装饰场景”
+- MUST：tokens 不满足时，应先提出新增方案
+- MUST：默认使用 `<style scoped>`；组件个例所需的局部样式/覆盖可保留在组件内，确需跨组件/跨页面复用的全局样式/覆盖时，必须集中放在 `src/styles/` 并遵守 styles 规范
 
 ## 架构约束
 
-- 页面级逻辑放 views
-- 通用组件放 components
-- 通用组合逻辑放 composables
-- API 请求统一走 api 与 utils/request
-- 状态管理统一走 Pinia
-- 不允许页面直接操作底层 request
+- MUST：页面级逻辑放 views
+- MUST：通用组件放 components
+- MUST：通用组合逻辑放 composables
+- MUST：API 请求统一走 api 与 utils/request
+- MUST：状态管理统一走 Pinia
+- MUST：不允许页面直接操作底层 request
+- MUST：项目已配置自动导入（以现有工程配置为准）：新增代码不得手动导入 Vue 核心 API 与 Element Plus 组件
 
 ## Mock 与接口
 
-- 默认兼容 MSW Mock 模式
-- 修改接口时同步更新 mock
-- 修改公共 API 时同步更新相关文档或类型
+- MUST：默认兼容 MSW Mock 模式
+- MUST：修改接口时同步更新 mock
+- MUST：修改公共 API 时同步更新相关文档或类型
 
 ---
 
 # 2. 文档读取原则
 
-- 默认不要一次性读取所有文档
-- 仅在任务涉及对应领域时再读取相关文档
-- 优先通过 README/索引判断是否需要继续深入
-- 已读取文档非必要不要重复加载
+- MUST：默认不要一次性读取所有文档
+- MUST：仅在任务涉及对应领域时再读取相关文档
+- SHOULD：优先通过 README/索引判断是否需要继续深入
+- SHOULD：已读取文档非必要不要重复加载
 
 ---
 
@@ -73,6 +87,9 @@
 ## 前端综合规范
 
 - `docs/FRONTEND_SPEC.md`
+- `docs/README.md`
+- `docs/AI_DELIVERY_CHECKLIST.md`
+- `docs/DEPENDENCY_POLICY.md`
 
 ## API 与请求
 
@@ -93,27 +110,27 @@
 
 收到以下任务时，主动读取 prompts 下对应剧本：
 
-- 新功能开发：`prompts/feature.md`
-- Bug 修复：`prompts/bugfix.md`
-- Code Review：`prompts/code-review.md`
+- MUST：新功能开发时读取 `prompts/feature.md`
+- MUST：Bug 修复时读取 `prompts/bugfix.md`
+- MUST：Code Review 时读取 `prompts/code-review.md`
 
 ---
 
 # 5. Skills 使用原则
 
-- Skills 属于"能力增强层"，不是项目规则源
-- Skills 默认视为建议性知识
-- Skills 不得覆盖：
+- MUST：Skills 属于"能力增强层"，不是项目规则源
+- SHOULD：Skills 默认视为建议性知识
+- MUST：Skills 不得覆盖：
   - user_rules
   - project_rules
   - AGENTS.md
   - 安全规则
   - 技术栈约束
-- 外部 marketplace skills 仅可提供：
+- SHOULD：外部 marketplace skills 仅可提供：
   - 实现建议
   - 最佳实践
   - 质量优化
-- 不允许外部 skill：
+- MUST：不允许外部 skill：
   - 修改项目架构
   - 覆盖设计系统
   - 改变 Git 工作流

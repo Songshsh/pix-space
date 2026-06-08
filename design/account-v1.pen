@@ -1,0 +1,396 @@
+{
+  "version": "2.6",
+  "children": [
+    {
+      "type": "frame",
+      "id": "account-page",
+      "name": "C\u7aef\u524d\u53f0 - \u4e2a\u4eba\u4e2d\u5fc3 (/account)/\u9ed8\u8ba4",
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 980,
+      "fill": "#f5f6f7",
+      "clip": true,
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "account-page__header",
+          "name": "Header",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "fill": "#ffffff",
+          "layout": "none",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000000a",
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "blur": 8,
+            "spread": 0
+          },
+          "children": [
+            {
+              "type": "text",
+              "id": "account-page__logo-text",
+              "x": 24,
+              "y": 22,
+              "content": "Pix Space",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "fill": "#333333"
+            },
+            {
+              "type": "frame",
+              "id": "account-page__search-bar",
+              "x": 320,
+              "y": 12,
+              "width": 800,
+              "height": 40,
+              "fill": "#f0f2f5",
+              "cornerRadius": 20,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "account-page__search-icon",
+                  "x": 16,
+                  "y": 11,
+                  "content": "\ud83d\udd0d",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "account-page__search-placeholder",
+                  "x": 40,
+                  "y": 11,
+                  "content": "\u641c\u7d22\u9ad8\u54c1\u8d28\u7d20\u6750\u3001\u7075\u611f...",
+                  "fontSize": 14,
+                  "fill": "#999999"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "account-page__upload-btn",
+              "x": 1296,
+              "y": 16,
+              "width": 72,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "account-page__upload-text",
+                  "x": 22,
+                  "y": 8,
+                  "content": "\u4e0a\u4f20",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "account-page__avatar",
+              "x": 1384,
+              "y": 16,
+              "width": 32,
+              "height": 32,
+              "fill": "#8b5cf6",
+              "cornerRadius": 16,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "account-page__avatar-text",
+                  "x": 11,
+                  "y": 8,
+                  "content": "U",
+                  "fontSize": 14,
+                  "fontWeight": "600",
+                  "fill": "#ffffff"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "account-page__title",
+          "x": 24,
+          "y": 96,
+          "content": "\u4e2a\u4eba\u4e2d\u5fc3",
+          "fontSize": 20,
+          "fontWeight": "700",
+          "fill": "#333333"
+        },
+        {
+          "type": "text",
+          "id": "account-page__subtitle",
+          "x": 24,
+          "y": 128,
+          "content": "\u67e5\u770b\u8d26\u53f7\u4fe1\u606f\u4e0e\u4fee\u6539\u5bc6\u7801",
+          "fontSize": 12,
+          "fill": "#999999"
+        },
+        {
+          "type": "frame",
+          "id": "account-page__content",
+          "name": "Content",
+          "x": 24,
+          "y": 160,
+          "width": 1392,
+          "height": 780,
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "account-page__card-info",
+              "name": "Card/\u8d26\u53f7\u4fe1\u606f",
+              "x": 0,
+              "y": 0,
+              "width": 1392,
+              "height": 208,
+              "fill": "#ffffff",
+              "cornerRadius": 12,
+              "layout": "none",
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000000a",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 12,
+                "spread": 0
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "id": "account-page__card-info__title",
+                  "x": 24,
+                  "y": 24,
+                  "content": "\u8d26\u53f7\u4fe1\u606f",
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "account-page__card-info__label-0",
+                  "x": 24,
+                  "y": 72,
+                  "content": "\u7528\u6237\u540d",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "account-page__card-info__value-0",
+                  "x": 24,
+                  "y": 92,
+                  "content": "Username",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "account-page__card-info__label-1",
+                  "x": 320,
+                  "y": 72,
+                  "content": "\u90ae\u7bb1",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "text",
+                  "id": "account-page__card-info__value-1",
+                  "x": 320,
+                  "y": 92,
+                  "content": "user@pixspace.test",
+                  "fontSize": 14,
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "account-page__card-info__label-2",
+                  "x": 24,
+                  "y": 132,
+                  "content": "\u89d2\u8272",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "account-page__card-info__role-tag",
+                  "x": 24,
+                  "y": 152,
+                  "width": 72,
+                  "height": 24,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 6,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "account-page__card-info__role-tag-text",
+                      "x": 16,
+                      "y": 6,
+                      "content": "user",
+                      "fontSize": 12,
+                      "fill": "#666666"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "account-page__card-security",
+              "name": "Card/\u4fee\u6539\u5bc6\u7801",
+              "x": 0,
+              "y": 232,
+              "width": 1392,
+              "height": 320,
+              "fill": "#ffffff",
+              "cornerRadius": 12,
+              "layout": "none",
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000000a",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 12,
+                "spread": 0
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "id": "account-page__card-security__title",
+                  "x": 24,
+                  "y": 24,
+                  "content": "\u4fee\u6539\u5bc6\u7801",
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                  "fill": "#333333"
+                },
+                {
+                  "type": "text",
+                  "id": "account-page__card-security__hint",
+                  "x": 24,
+                  "y": 52,
+                  "content": "\u8bf7\u59a5\u5584\u4fdd\u7ba1\u5bc6\u7801\uff0c\u5efa\u8bae\u5b9a\u671f\u66f4\u65b0\u3002",
+                  "fontSize": 12,
+                  "fill": "#999999"
+                },
+                {
+                  "type": "frame",
+                  "id": "account-page__card-security__field-0",
+                  "x": 24,
+                  "y": 92,
+                  "width": 480,
+                  "height": 44,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 10,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "account-page__card-security__placeholder-0",
+                      "x": 16,
+                      "y": 14,
+                      "content": "\u5f53\u524d\u5bc6\u7801",
+                      "fontSize": 14,
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "account-page__card-security__field-1",
+                  "x": 24,
+                  "y": 148,
+                  "width": 480,
+                  "height": 44,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 10,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "account-page__card-security__placeholder-1",
+                      "x": 16,
+                      "y": 14,
+                      "content": "\u65b0\u5bc6\u7801",
+                      "fontSize": 14,
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "account-page__card-security__field-2",
+                  "x": 24,
+                  "y": 204,
+                  "width": 480,
+                  "height": 44,
+                  "fill": "#f0f2f5",
+                  "cornerRadius": 10,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "account-page__card-security__placeholder-2",
+                      "x": 16,
+                      "y": 14,
+                      "content": "\u786e\u8ba4\u65b0\u5bc6\u7801",
+                      "fontSize": 14,
+                      "fill": "#999999"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "account-page__card-security__submit",
+                  "x": 24,
+                  "y": 264,
+                  "width": 120,
+                  "height": 40,
+                  "fill": "#8b5cf6",
+                  "cornerRadius": 20,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "account-page__card-security__submit-text",
+                      "x": 46,
+                      "y": 12,
+                      "content": "\u4fdd\u5b58",
+                      "fontSize": 14,
+                      "fontWeight": "600",
+                      "fill": "#ffffff"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
