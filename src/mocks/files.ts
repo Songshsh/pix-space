@@ -4,7 +4,7 @@ import type {
   FileListParams,
 } from '../types/file';
 import { FileType } from '../utils/fileDisplay';
-
+import { createTimestamp } from './shared';
 interface FileRecord extends FileItem {
   parentId: number | null;
 }
@@ -93,14 +93,6 @@ const seedFiles: FileRecord[] = [
 ];
 
 let filesState: FileRecord[] = seedFiles.map((file) => ({ ...file }));
-
-function createTimestamp() {
-  const date = new Date();
-  const pad = (value: number) => value.toString().padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
-    date.getDate()
-  )}`;
-}
 
 function normalizeKeyword(value?: string) {
   return value?.trim().toLowerCase() || '';

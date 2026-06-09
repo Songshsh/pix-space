@@ -13,9 +13,11 @@ export function getFileList(
   params?: FileListParams,
   config?: AxiosRequestConfig
 ) {
-  return request.get('/files', { params, ...config }) as Promise<
-    ListResult<FileItem>
-  >;
+  return request.get('/files', {
+    params,
+    silentError: true,
+    ...config,
+  }) as Promise<ListResult<FileItem>>;
 }
 
 export function uploadFile(

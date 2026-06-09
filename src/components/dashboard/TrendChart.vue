@@ -5,7 +5,10 @@
         <span>访问趋势</span>
       </div>
     </template>
-    <div class="chart-placeholder">
+    <div v-if="chartData.length === 0" class="chart-placeholder">
+      <el-empty description="暂无数据" :image-size="80" />
+    </div>
+    <div v-else class="chart-placeholder">
       <div class="chart-bars">
         <div
           v-for="item in chartData"

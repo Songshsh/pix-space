@@ -9,10 +9,14 @@ import type {
 } from '../types/user';
 
 export function getUserList(
-  params?: UserListParams,
+  params: UserListParams,
   config?: AxiosRequestConfig
 ): Promise<UserListResponse> {
-  return request.get('/users', { params, ...config });
+  return request.get('/users', {
+    params,
+    silentError: true,
+    ...config,
+  }) as Promise<UserListResponse>;
 }
 
 export function createUser(

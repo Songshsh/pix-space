@@ -1,30 +1,11 @@
 <script setup lang="ts">
 import { Search } from '@element-plus/icons-vue';
 import PortalHeaderActions from '../components/portal/PortalHeaderActions.vue';
+import { usePortalSearch } from '../composables/usePortalSearch';
 
 const route = useRoute();
 const router = useRouter();
-const searchQuery = ref('');
-
-const syncQueryFromRoute = () => {
-  const q = typeof route.query.q === 'string' ? route.query.q : '';
-  if (searchQuery.value !== q) searchQuery.value = q;
-};
-
-watch(() => route.fullPath, syncQueryFromRoute, { immediate: true });
-
-const submitSearch = () => {
-  const q = searchQuery.value.trim();
-  if (!q) {
-    router.push({ path: '/explore' });
-    return;
-  }
-  router.push({ path: '/explore', query: { q } });
-};
-
-const clearSearch = () => {
-  router.push({ path: '/explore' });
-};
+const { searchQuery, submitSearch, clearSearch } = usePortalSearch();
 </script>
 
 <template>
@@ -59,6 +40,8 @@ const clearSearch = () => {
 </template>
 
 <style scoped>
+@import '../styles/shared-logo.css';
+
 .portal-layout {
   min-height: 100vh;
   background-color: var(--ds-color-bg-tertiary);
@@ -92,23 +75,6 @@ const clearSearch = () => {
   gap: var(--ds-space-3);
   cursor: pointer;
   min-width: 160px;
-}
-
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(
-    135deg,
-    var(--el-color-primary) 0%,
-    var(--el-color-primary-dark-2) 100%
-  );
-  border-radius: var(--ds-radius-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ds-color-text-inverse);
-  font-weight: 700;
-  font-size: 14px;
 }
 
 .logo-text {

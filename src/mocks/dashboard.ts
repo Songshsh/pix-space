@@ -2,6 +2,7 @@ import type { DashboardData } from '../types/dashboard';
 import { FileType } from '../utils/fileDisplay';
 
 export function getDashboardMock(): DashboardData {
+  const today = new Date().toISOString().slice(0, 10);
   return {
     stats: {
       totalImages: 1284,
@@ -39,35 +40,35 @@ export function getDashboardMock(): DashboardData {
         type: FileType.Image,
         size: '2.4 MB',
         uploader: '张三',
-        time: '2024-01-15 14:30',
+        time: `${today} 14:30`,
       },
       {
         name: 'document.pdf',
         type: FileType.Document,
         size: '1.2 MB',
         uploader: '李四',
-        time: '2024-01-15 13:20',
+        time: `${today} 13:20`,
       },
       {
         name: 'profile.png',
         type: FileType.Image,
         size: '856 KB',
         uploader: '王五',
-        time: '2024-01-15 12:15',
+        time: `${today} 12:15`,
       },
       {
         name: 'video-clip.mp4',
         type: FileType.Video,
         size: '45.6 MB',
         uploader: '张三',
-        time: '2024-01-15 11:00',
+        time: `${today} 11:00`,
       },
       {
         name: 'data-export.xlsx',
         type: FileType.Spreadsheet,
         size: '324 KB',
         uploader: '李四',
-        time: '2024-01-15 10:30',
+        time: `${today} 10:30`,
       },
     ],
   };

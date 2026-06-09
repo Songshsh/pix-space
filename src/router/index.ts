@@ -214,7 +214,9 @@ router.beforeEach((to, _from, next) => {
     return;
   }
 
-  if (!canAccess(to.meta.roles, userStore.role)) {
+  if (
+    !to.matched.every((record) => canAccess(record.meta.roles, userStore.role))
+  ) {
     queueProgressStart();
     next({ path: '/403', query: { from: to.fullPath } });
     return;

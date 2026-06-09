@@ -1,5 +1,6 @@
 import type { User, UserForm, UserListParams } from '../types/user';
 import type { UserRole } from '../utils/access';
+import { createTimestamp } from './shared';
 
 interface UserRecord extends User {
   password?: string;
@@ -106,14 +107,6 @@ function toUser(user: UserRecord): User {
   return safeUser;
 }
 
-function createTimestamp() {
-  const date = new Date();
-  const pad = (value: number) => value.toString().padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
-    date.getDate()
-  )} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
-}
-
 function normalizeKeyword(value?: string) {
   return value?.trim().toLowerCase() || '';
 }
@@ -200,7 +193,7 @@ export function createUserMock(data: UserForm) {
     password: data.password,
     role: data.role as UserRole,
     status: data.status,
-    createdAt: createTimestamp(),
+    createdAt: createTimestamp(true),
   };
 
   usersState = [nextUser, ...usersState];
@@ -285,7 +278,7 @@ export function upsertUserAccountMock(data: {
     password: data.password ?? current?.password,
     role: data.role,
     status: data.status,
-    createdAt: data.createdAt ?? current?.createdAt ?? createTimestamp(),
+    createdAt: data.createdAt ?? current?.createdAt ?? createTimestamp(true),
   };
 
   if (targetIndex >= 0) {

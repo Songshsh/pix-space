@@ -75,6 +75,21 @@ const handleFileChange = (event: Event) => {
   const input = event.target as HTMLInputElement;
   const file = input.files?.[0];
   if (!file) return;
+
+  // 文件大小校验（最大 5MB）
+  if (file.size > 5 * 1024 * 1024) {
+    ElMessage.warning('头像文件大小不能超过 5MB');
+    input.value = '';
+    return;
+  }
+
+  // 文件类型校验
+  if (!file.type.startsWith('image/')) {
+    ElMessage.warning('请选择图片文件');
+    input.value = '';
+    return;
+  }
+
   emit('avatarChange', file);
   input.value = '';
 };

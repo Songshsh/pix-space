@@ -1,7 +1,3 @@
-:root {
-  color-scheme: dark;
-}
-
 .starry-theme {
   --el-color-primary: var(--ds-color-brand-primary);
   --el-color-primary-dark-2: var(--ds-color-brand-primary-dark);
@@ -53,6 +49,7 @@
 }
 
 .auth-page {
+  color-scheme: dark;
   min-height: 100vh;
   background: linear-gradient(
     to bottom,

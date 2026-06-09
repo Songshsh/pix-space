@@ -18,7 +18,8 @@ export function parseRgbToHex(value: string): string | null {
 
 export const EP_DEFAULT_PRIMARY = '#409eff';
 // Portal 固定主题预设只允许在统一主题初始化入口消费品牌色 token。
-export const PORTAL_THEME_PRIMARY = 'var(--ds-color-brand-violet)';
+// 仅供 applyPortalPrimaryColorToRoot 使用，禁止业务代码直接消费。
+const PORTAL_THEME_PRIMARY = 'var(--ds-color-brand-violet)';
 
 export function resolveCssVar(value: string, el: HTMLElement): string {
   const trimmed = value.trim();

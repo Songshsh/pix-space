@@ -46,6 +46,15 @@ const canTransform = computed(() => !!props.item?.imageUrl);
 const canDownload = computed(() => !!props.item?.imageUrl);
 const canViewDetail = computed(() => !!props.item?.id);
 
+const bgColorRegex =
+  /^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)|rgba\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*(0|1|0?\.\d+)\s*\))$/;
+
+const safeBgColor = computed(() => {
+  const color = props.item?.bgColor;
+  if (!color) return undefined;
+  return bgColorRegex.test(color) ? color : undefined;
+});
+
 const resetPreviewTransform = () => {
   scale.value = 1;
   rotation.value = 0;
@@ -166,7 +175,7 @@ const goNext = () => {
               <div
                 v-else
                 class="image-placeholder"
-                :style="{ backgroundColor: item.bgColor }"
+                :style="{ backgroundColor: safeBgColor }"
               >
                 <div class="image-placeholder-badge">暂无预览图</div>
               </div>

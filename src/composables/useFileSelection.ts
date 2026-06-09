@@ -1,23 +1,17 @@
 import type { FileItem } from '../types/file';
+import { useMultiSelect } from './useMultiSelect';
 
 export function useFileSelection() {
-  const selectedFiles = ref<number[]>([]);
+  const {
+    selectedIds: selectedFiles,
+    toggle,
+    clear: clearSelection,
+  } = useMultiSelect<FileItem>();
 
-  const handleSelectFile = (file: FileItem) => {
-    const index = selectedFiles.value.indexOf(file.id);
-    if (index > -1) {
-      selectedFiles.value.splice(index, 1);
-    } else {
-      selectedFiles.value.push(file.id);
-    }
-  };
+  const handleSelectFile = (file: FileItem) => toggle(file);
 
   const handleSelectionChange = (selection: FileItem[]) => {
     selectedFiles.value = selection.map((item) => item.id);
-  };
-
-  const clearSelection = () => {
-    selectedFiles.value = [];
   };
 
   return {

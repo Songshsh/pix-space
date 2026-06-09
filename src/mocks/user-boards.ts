@@ -18,7 +18,7 @@ import type { ExploreItem } from '../types/explore';
 import type { Image } from '../types/image';
 import { mockItems } from './explore';
 import { getImagesMock } from './images';
-
+import { sampleImages } from './shared';
 const cardColors = [
   'var(--ds-color-card-lavender)',
   'var(--ds-color-card-sky)',
@@ -32,29 +32,6 @@ const cardColors = [
 
 const boardDetailTags = ['UI设计', '3D渲染', '插画', '品牌设计', '排版'];
 const boardDetailHeights = [300, 452, 252, 380, 250, 400, 280, 320];
-
-const sampleImages = [
-  '/mock-images/sample-01.png',
-  '/mock-images/sample-02.png',
-  '/mock-images/sample-03.png',
-  '/mock-images/sample-04.png',
-  '/mock-images/sample-05.png',
-  '/mock-images/sample-06.png',
-  '/mock-images/sample-07.png',
-  '/mock-images/sample-08.png',
-  '/mock-images/sample-09.png',
-  '/mock-images/sample-10.png',
-  '/mock-images/sample-11.png',
-  '/mock-images/sample-12.png',
-  '/mock-images/sample-13.png',
-  '/mock-images/sample-14.png',
-  '/mock-images/sample-15.png',
-  '/mock-images/sample-16.png',
-  '/mock-images/sample-17.png',
-  '/mock-images/sample-18.png',
-  '/mock-images/sample-19.png',
-  '/mock-images/sample-20.png',
-];
 
 function formatMockDate(day: number) {
   return `2026-04-${String(day).padStart(2, '0')}`;
@@ -1294,7 +1271,7 @@ export function getImageDetailMock(
   };
 }
 
-export function likeImageMock(imageId: string, actorUserId = 101) {
+export function likeImageMock(imageId: string, actorUserId = 0) {
   const state = getUserBoardsState(actorUserId);
   const exists = state.likes.find((item) => item.id === imageId);
   if (exists) return { ...exists };

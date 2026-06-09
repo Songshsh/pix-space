@@ -31,19 +31,29 @@ const baseConfig = {
 const request = axios.create(baseConfig);
 export const requestRaw = axios.create(baseConfig);
 
+/** 防止 401 递归处理 */
+let isHandling401 = false;
 let lastAuthExpiredAt = 0;
 
 function normalizeError(error: unknown): NormalizedRequestError {
   const isAxiosErr = axios.isAxiosError(error);
   const err = isAxiosErr
     ? error
-    : (error as {
-        response?: { status?: number; data?: { message?: string } };
-        code?: string;
-        request?: unknown;
-        message?: string;
-        config?: InternalAxiosRequestConfig;
-      });
+    : typeof error === 'object' && error !== null
+      ? (error as {
+          response?: { status?: number; data?: { message?: string } };
+          code?: string;
+          request?: unknown;
+          message?: string;
+          config?: InternalAxiosRequestConfig;
+        })
+      : ({ message: String(error) } as {
+          response?: { status?: number; data?: { message?: string } };
+          code?: string;
+          request?: unknown;
+          message?: string;
+          config?: InternalAxiosRequestConfig;
+        });
   const status = err.response?.status;
   const data = isAxiosErr ? err.response?.data : err.response?.data;
   const businessCode =
@@ -131,13 +141,18 @@ function handleError(error: unknown): Promise<never> {
     const userStore = useUserStore();
 
     if (userStore.isLoggedIn) {
-      const now = Date.now();
-      if (now - lastAuthExpiredAt > 1000) {
-        lastAuthExpiredAt = now;
-        userStore.logout();
-        dispatchAuthExpired();
-      } else {
-        userStore.logout();
+      if (!isHandling401) {
+        isHandling401 = true;
+        try {
+          const now = Date.now();
+          if (now - lastAuthExpiredAt > 1000) {
+            lastAuthExpiredAt = now;
+            dispatchAuthExpired();
+          }
+          userStore.logout();
+        } finally {
+          isHandling401 = false;
+        }
       }
     }
     return Promise.reject(normalized);

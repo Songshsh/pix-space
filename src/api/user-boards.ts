@@ -18,7 +18,10 @@ export function getUserBoardsSummary(
   userId: number | string,
   config?: AxiosRequestConfig
 ): Promise<UserBoardsSummary> {
-  return request.get(`/users/${userId}/summary`, config);
+  return request.get(`/users/${userId}/summary`, {
+    silentError: true,
+    ...config,
+  });
 }
 
 export function getUserBoardsPage(
@@ -27,6 +30,7 @@ export function getUserBoardsPage(
   config?: AxiosRequestConfig
 ): Promise<PagedListResult<Board>> {
   return request.get(`/users/${userId}/boards`, {
+    silentError: true,
     ...config,
     params,
   });
@@ -38,6 +42,7 @@ export function getUserUploadsPage(
   config?: AxiosRequestConfig
 ): Promise<PagedListResult<UploadImage>> {
   return request.get(`/users/${userId}/uploads`, {
+    silentError: true,
     ...config,
     params,
   });
@@ -49,6 +54,7 @@ export function getUserLikesPage(
   config?: AxiosRequestConfig
 ): Promise<PagedListResult<LikedImage>> {
   return request.get(`/users/${userId}/likes`, {
+    silentError: true,
     ...config,
     params,
   });
@@ -109,5 +115,5 @@ export function likeImage(
   imageId: string,
   config?: AxiosRequestConfig
 ): Promise<boolean> {
-  return request.post(`/users/${userId}/likes/${imageId}`, {}, config);
+  return request.post(`/users/${userId}/likes/${imageId}`, undefined, config);
 }

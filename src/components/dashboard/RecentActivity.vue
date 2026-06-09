@@ -5,8 +5,8 @@
     </template>
     <el-timeline>
       <el-timeline-item
-        v-for="activity in activities"
-        :key="activity.time + activity.content"
+        v-for="(activity, index) in activities"
+        :key="index"
         :timestamp="activity.time"
         :type="activity.type || undefined"
         placement="top"

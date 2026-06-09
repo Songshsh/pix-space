@@ -20,6 +20,11 @@ export const useUserStore = defineStore(
     const isSessionValidated = ref<boolean>(false);
     const authCheckFailed = ref<boolean>(false);
 
+    /**
+     * 本地是否存在用户数据（id 或 email）。
+     * 仅表示 localStorage / sessionStorage 或内存中存在用户信息，
+     * 不等于已完成服务端会话验证。
+     */
     const isLoggedIn = computed(() => Boolean(id.value || email.value));
     const isAuthenticated = computed(() => {
       return isLoggedIn.value && isSessionValidated.value;

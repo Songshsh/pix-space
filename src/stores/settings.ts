@@ -49,10 +49,14 @@ export const useSettingsStore = defineStore(
           applyTheme();
         }
       };
-      mediaQuery.addEventListener('change', handleSystemThemeChange);
 
-      onScopeDispose(() => {
-        mediaQuery.removeEventListener('change', handleSystemThemeChange);
+      // 使用 watchEffect 将监听器生命周期与当前 scope 绑定，
+      // onCleanup 确保 scope 销毁时自动 removeEventListener，避免泄漏
+      watchEffect((onCleanup) => {
+        mediaQuery.addEventListener('change', handleSystemThemeChange);
+        onCleanup(() => {
+          mediaQuery.removeEventListener('change', handleSystemThemeChange);
+        });
       });
     }
 

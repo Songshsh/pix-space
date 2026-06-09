@@ -105,6 +105,10 @@ async function requestImageBlob(image: Pick<Image, 'id'> & { url?: string }) {
       if (status === 401 || status === 403) {
         throw error;
       }
+      // 仅网络层错误时静默降级到 API 下载；明确的 4xx/5xx 直接抛出
+      if (status !== undefined && status >= 400) {
+        throw error;
+      }
     }
   }
 

@@ -2,7 +2,7 @@
   <div class="security-panel">
     <h3 class="section-title">安全设置</h3>
     <el-form
-      :ref="setInternalFormRef"
+      ref="formRef"
       :model="securityForm"
       :rules="rules"
       label-width="100px"
@@ -63,7 +63,6 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentPublicInstance } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import type { SecurityPanelForm } from './types';
 
@@ -77,8 +76,9 @@ defineProps<{
 const emit = defineEmits<{
   submit: [];
   toggleTwoFactor: [value: boolean];
-  'update:formRef': [value: FormInstance | undefined];
 }>();
+
+const formRef = ref<FormInstance>();
 
 const securityForm = defineModel<SecurityPanelForm>('form', {
   required: true,
@@ -87,11 +87,7 @@ const twoFactorEnabled = defineModel<boolean>('twoFactorEnabled', {
   required: true,
 });
 
-const setInternalFormRef = (
-  instance: Element | ComponentPublicInstance | null
-) => {
-  emit('update:formRef', (instance as FormInstance | null) ?? undefined);
-};
+defineExpose({ formRef });
 
 const handleTwoFactorChange = (value: string | number | boolean) => {
   const normalizedValue = Boolean(value);

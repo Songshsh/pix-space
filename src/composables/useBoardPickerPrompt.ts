@@ -24,10 +24,11 @@ export function useBoardPickerPrompt() {
     boardPickerLoading.value = true;
     try {
       const boards: Board[] = [];
+      const MAX_BOARDS = 500;
       let page = 1;
       let hasMore = true;
 
-      while (hasMore) {
+      while (hasMore && boards.length < MAX_BOARDS) {
         const result = await getUserBoardsPage(
           userId,
           { page, pageSize: 100 },
@@ -76,6 +77,13 @@ export function useBoardPickerPrompt() {
   };
 
   onBeforeUnmount(() => {
+    if (resolver) {
+      resolver('');
+    }
+  });
+
+  onDeactivated(() => {
+    // 清理 keep-alive 缓存场景下可能遗留的 resolver
     if (resolver) {
       resolver('');
     }

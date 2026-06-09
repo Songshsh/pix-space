@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { FormInstance, FormRules } from 'element-plus';
+
 interface BoardForm {
   name: string;
   description: string;
-  visibility: string;
+  visibility: 'public' | 'private';
 }
 
 const visible = defineModel<boolean>('visible', { required: true });
@@ -17,19 +19,26 @@ const emit = defineEmits<{
   confirm: [];
 }>();
 
+const formRef = ref<FormInstance>();
+
+const formRules: FormRules<BoardForm> = {
+  name: [{ required: true, message: '请输入画板名称', trigger: 'blur' }],
+};
+
 const dialogTitle = computed(() =>
   props.mode === 'create' ? '新建画板' : '编辑画板'
 );
 
-const handleConfirm = () => {
-  const name = form.value.name.trim();
-  if (!name) {
-    ElMessage.warning('请输入画板名称');
+const handleConfirm = async () => {
+  if (!formRef.value) return;
+  try {
+    await formRef.value.validate();
+  } catch {
     return;
   }
   form.value = {
     ...form.value,
-    name,
+    name: form.value.name.trim(),
     description: form.value.description.trim(),
   };
   emit('confirm');
@@ -44,8 +53,13 @@ const handleConfirm = () => {
     :close-on-click-modal="false"
     class="board-dialog"
   >
-    <el-form label-position="top" :model="form">
-      <el-form-item label="画板名称" required>
+    <el-form
+      ref="formRef"
+      label-position="top"
+      :model="form"
+      :rules="formRules"
+    >
+      <el-form-item label="画板名称" prop="name" required>
         <el-input
           v-model="form.name"
           placeholder="请输入画板名称"

@@ -157,7 +157,6 @@ function readMockSessionEmail() {
   if (typeof window === 'undefined') return null;
   const raw = window.localStorage.getItem(MOCK_SESSION_STORAGE_KEY);
   if (!raw) {
-    window.localStorage.removeItem(MOCK_SESSION_STORAGE_KEY);
     return null;
   }
   try {
@@ -214,14 +213,17 @@ function ensureAuthenticatedSession() {
 
 function ensureAdminSession() {
   const { user, denied } = ensureAuthenticatedSession();
-  if (denied || !user) return denied;
+  if (denied || !user) return { user: null, denied };
   if (user.role !== 'admin') {
-    return json(
-      { code: 403, message: '没有访问该资源的权限', data: null },
-      { status: 403 }
-    );
+    return {
+      user: null,
+      denied: json(
+        { code: 403, message: '没有访问该资源的权限', data: null },
+        { status: 403 }
+      ),
+    };
   }
-  return null;
+  return { user, denied: null };
 }
 
 function ensureOwnUserSession(userIdParam: string | undefined) {
@@ -463,11 +465,11 @@ export const handlers = [
     >;
     const email = (body.email as string) || '';
 
-    if (!email) {
+    if (!email || !email.includes('@')) {
       return json(
         {
           code: 400,
-          message: '参数错误',
+          message: '邮箱格式不正确',
           data: null,
         },
         { status: 400 }
@@ -551,9 +553,7 @@ export const handlers = [
       const managedUser = findUserByEmailMock(nextUser.email);
       const emailOccupied =
         (managedUser && managedUser.id !== nextUser.id) ||
-        profileState.has(nextUser.email) ||
-        passwordState.has(nextUser.email) ||
-        preferencesState.has(nextUser.email);
+        profileState.has(nextUser.email);
       if (emailOccupied) {
         return json(
           {
@@ -722,7 +722,7 @@ export const handlers = [
   }),
 
   http.get(/\/api\/files\/[^/]+\/download$/, ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const pathname = new URL(request.url).pathname;
     const match = pathname.match(/\/api\/files\/([^/]+)\/download$/);
@@ -803,13 +803,13 @@ export const handlers = [
   }),
 
   http.get('*/api/dashboard', () => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     return json({ code: 0, message: 'ok', data: getDashboardMock() });
   }),
 
   http.get('*/api/files', ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const url = new URL(request.url);
     const parentId = url.searchParams.get('parentId');
@@ -823,7 +823,7 @@ export const handlers = [
   }),
 
   http.post('*/api/files/upload', async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const url = new URL(request.url);
     const parentId = url.searchParams.get('parentId');
@@ -853,7 +853,7 @@ export const handlers = [
   }),
 
   http.post('*/api/files/folder', async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const body = (await request.json().catch(() => ({}))) as {
       name?: string;
@@ -887,7 +887,7 @@ export const handlers = [
   }),
 
   http.put(/\/api\/files\/[^/]+$/, async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const body = (await request.json().catch(() => ({}))) as { name?: string };
     const fileId = parseTrailingNumericId(request.url);
@@ -909,7 +909,7 @@ export const handlers = [
   }),
 
   http.delete(/\/api\/files\/[^/]+$/, ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     try {
       deleteFileMock(parseTrailingNumericId(request.url));
@@ -927,7 +927,7 @@ export const handlers = [
   }),
 
   http.get('*/api/images', ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const url = new URL(request.url);
     const result = getImageListMock({
@@ -942,7 +942,7 @@ export const handlers = [
   }),
 
   http.post('*/api/images/upload', async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const formData = await request.formData();
     try {
@@ -961,7 +961,7 @@ export const handlers = [
   }),
 
   http.delete(/\/api\/images\/[^/]+$/, ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const pathname = new URL(request.url).pathname;
     const match = pathname.match(/\/api\/images\/([^/]+)$/);
@@ -984,7 +984,7 @@ export const handlers = [
   }),
 
   http.put(/\/api\/images\/[^/]+$/, async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const pathname = new URL(request.url).pathname;
     const match = pathname.match(/\/api\/images\/([^/]+)$/);
@@ -1039,7 +1039,7 @@ export const handlers = [
   }),
 
   http.get('*/api/users', ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const url = new URL(request.url);
     const result = getUsersMock({
@@ -1053,7 +1053,7 @@ export const handlers = [
   }),
 
   http.post('*/api/users', async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const body = (await request.json().catch(() => ({}))) as {
       username?: string;
@@ -1095,7 +1095,7 @@ export const handlers = [
   }),
 
   http.put(/\/api\/users\/\d+$/, async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const body = (await request.json().catch(() => ({}))) as {
       username?: string;
@@ -1142,7 +1142,7 @@ export const handlers = [
   }),
 
   http.patch(/\/api\/users\/\d+\/status$/, async ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     const body = (await request.json().catch(() => ({}))) as {
       status?: 'active' | 'inactive';
@@ -1172,7 +1172,7 @@ export const handlers = [
   }),
 
   http.delete(/\/api\/users\/[^/]+$/, ({ request }) => {
-    const denied = ensureAdminSession();
+    const { denied } = ensureAdminSession();
     if (denied) return denied;
     try {
       const userId = parseTrailingNumericId(request.url);

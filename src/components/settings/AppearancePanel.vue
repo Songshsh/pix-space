@@ -4,9 +4,9 @@
     <el-form label-width="100px" class="settings-form">
       <el-form-item label="主题模式">
         <el-radio-group v-model="appearanceSettings.theme">
-          <el-radio label="light">浅色模式</el-radio>
-          <el-radio label="dark">深色模式</el-radio>
-          <el-radio label="auto">跟随系统</el-radio>
+          <el-radio value="light">浅色模式</el-radio>
+          <el-radio value="dark">深色模式</el-radio>
+          <el-radio value="auto">跟随系统</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="主题色">

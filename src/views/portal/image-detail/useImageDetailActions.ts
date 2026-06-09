@@ -35,18 +35,18 @@ export function useImageDetailActions(options: UseImageDetailActionsOptions) {
     handleBoardPickerCancel,
   } = useBoardPickerPrompt();
 
-  const ensureLoggedInUser = () => {
+  const ensureLoggedInUser = (): number | null => {
     if (!userStore.isAuthenticated) {
       ElMessage.warning('请先登录');
       router.push({
         path: '/login',
         query: { redirect: route.fullPath },
       });
-      return '';
+      return null;
     }
     if (!actingUserId.value) {
       ElMessage.warning('用户信息不完整');
-      return 0;
+      return null;
     }
     return actingUserId.value;
   };
@@ -62,7 +62,7 @@ export function useImageDetailActions(options: UseImageDetailActionsOptions) {
     }
 
     const username = ensureLoggedInUser();
-    if (!username) return false;
+    if (username === null) return false;
 
     try {
       const boardId = await promptBoardSelection(username);
@@ -106,7 +106,7 @@ export function useImageDetailActions(options: UseImageDetailActionsOptions) {
   const handleLike = async () => {
     if (!imageDetail.value || liking.value) return;
     const username = ensureLoggedInUser();
-    if (!username) return;
+    if (username === null) return;
     liking.value = true;
 
     try {

@@ -4,17 +4,24 @@ import type { ImageListParams, ImageListResponse } from '../types/image';
 import type { ImageDetail } from '../types/image-detail';
 
 export function getImageList(
-  params?: ImageListParams,
+  params: ImageListParams,
   config?: AxiosRequestConfig
 ): Promise<ImageListResponse> {
-  return request.get('/images', { params, ...config });
+  return request.get('/images', {
+    params,
+    silentError: true,
+    ...config,
+  }) as Promise<ImageListResponse>;
 }
 
 export function getImageDetail(
   id: string | number,
   config?: AxiosRequestConfig
 ): Promise<ImageDetail> {
-  return request.get(`/images/${id}`, config);
+  return request.get(`/images/${id}`, {
+    silentError: true,
+    ...config,
+  }) as Promise<ImageDetail>;
 }
 
 export function uploadImage(

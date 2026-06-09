@@ -5,5 +5,8 @@ import type { DashboardData } from '../types/dashboard';
 export function getDashboard(
   config?: AxiosRequestConfig
 ): Promise<DashboardData> {
-  return request.get('/dashboard', config);
+  return request.get('/dashboard', {
+    silentError: true,
+    ...config,
+  });
 }

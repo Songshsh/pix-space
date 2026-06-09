@@ -1,3 +1,6 @@
+// 此模块提供纯工厂函数（createPasswordForm / createPasswordFormRules），
+// 非 Vue composable（不依赖组件生命周期、不返回响应式状态）。
+// 因与 PasswordForm 组件紧密关联，故放在 composables 目录。
 import type { FormRules } from 'element-plus';
 import type { PasswordFormModel } from '../components/settings/types';
 

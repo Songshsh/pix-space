@@ -61,7 +61,7 @@
   width: 16px;
   height: 16px;
   background-color: var(--ds-color-bg-secondary);
-  border-radius: 50%;
+  border-radius: var(--ds-radius-circle);
 }
 
 .masonry-card-tags {

@@ -11,23 +11,20 @@ import type {
 
 export function login(data: LoginPayload) {
   return request.post('/auth/login', data, {
-    silentError: true,
     skipAuthRedirect: true,
   }) as Promise<AuthSessionResult>;
 }
 
-export function forgotPassword(data: ForgotPasswordPayload): Promise<boolean> {
+export function forgotPassword(data: ForgotPasswordPayload) {
   return request.post('/auth/forgot-password', data, {
-    silentError: true,
     skipAuthRedirect: true,
-  });
+  }) as Promise<boolean>;
 }
 
-export function register(data: RegisterPayload): Promise<boolean> {
+export function register(data: RegisterPayload) {
   return request.post('/auth/register', data, {
-    silentError: true,
     skipAuthRedirect: true,
-  });
+  }) as Promise<boolean>;
 }
 
 export function logout(config?: AxiosRequestConfig): Promise<boolean> {

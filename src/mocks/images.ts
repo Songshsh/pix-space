@@ -167,6 +167,7 @@ export async function uploadImagesMock(formData: FormData) {
   return created.map((item) => ({ ...item, tags: [...(item.tags || [])] }));
 }
 
+// 为测试预留
 export function resetImagesMock() {
   cloneSeed();
 }

@@ -5,5 +5,5 @@ import type { ExploreData } from '../types/explore';
 export function getExploreData(
   config?: AxiosRequestConfig
 ): Promise<ExploreData> {
-  return request.get('/explore', config);
+  return request.get('/explore', { silentError: true, ...config });
 }

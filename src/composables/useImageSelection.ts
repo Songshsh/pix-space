@@ -1,10 +1,14 @@
 import type { Ref } from 'vue';
 import type { Image } from '../types/image';
+import { useMultiSelect } from './useMultiSelect';
 
 export function useImageSelection(imagesRef: Ref<Image[]>) {
-  const selectedImages = ref<string[]>([]);
-
-  const selectedSet = computed(() => new Set(selectedImages.value));
+  const {
+    selectedIds: selectedImages,
+    selectedSet,
+    toggle: toggleSelect,
+    clear: clearSelection,
+  } = useMultiSelect<Image>();
 
   const isAllSelected = computed(() => {
     const images = imagesRef.value;
@@ -20,16 +24,6 @@ export function useImageSelection(imagesRef: Ref<Image[]>) {
     );
   });
 
-  const toggleSelect = (image: Image) => {
-    const id = image.id;
-    const index = selectedImages.value.indexOf(id);
-    if (index > -1) {
-      selectedImages.value.splice(index, 1);
-    } else {
-      selectedImages.value.push(id);
-    }
-  };
-
   const toggleSelectAll = (val: boolean) => {
     if (val) {
       selectedImages.value = imagesRef.value.map((img) => img.id);
@@ -38,14 +32,13 @@ export function useImageSelection(imagesRef: Ref<Image[]>) {
     }
   };
 
-  const clearSelection = () => {
-    selectedImages.value = [];
-  };
-
+  // 仅关心数组引用替换（如数据源整体刷新），不关心数组内部元素变化
   watch(
     imagesRef,
     (images) => {
-      const validIds = new Set(images.map((image) => image.id));
+      const validIds = new Set<string | number>(
+        images.map((image) => image.id)
+      );
       selectedImages.value = selectedImages.value.filter((id) =>
         validIds.has(id)
       );

@@ -48,9 +48,13 @@ export function useVirtualGrid(options: UseVirtualGridOptions) {
   const scrollContainer = inject(scrollContainerKey);
 
   onMounted(() => {
-    if (scrollContainer) {
-      scrollElement.value = scrollContainer();
+    if (!scrollContainer) {
+      console.warn(
+        '[useVirtualGrid] scrollContainer 未通过 inject(scrollContainerKey) 提供，虚拟滚动不可用'
+      );
+      return;
     }
+    scrollElement.value = scrollContainer();
   });
 
   return {

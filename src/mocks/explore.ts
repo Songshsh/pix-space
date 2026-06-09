@@ -1,4 +1,5 @@
 import type { ExploreData, ExploreItem } from '../types/explore';
+import { sampleImages } from './shared';
 
 export const categories = [
   '全部',
@@ -48,29 +49,6 @@ const sampleTags = [
   ['插画', '品牌设计'],
   ['自然摄影'],
   ['排版', 'UI设计'],
-];
-
-const sampleImages = [
-  '/mock-images/sample-01.png',
-  '/mock-images/sample-02.png',
-  '/mock-images/sample-03.png',
-  '/mock-images/sample-04.png',
-  '/mock-images/sample-05.png',
-  '/mock-images/sample-06.png',
-  '/mock-images/sample-07.png',
-  '/mock-images/sample-08.png',
-  '/mock-images/sample-09.png',
-  '/mock-images/sample-10.png',
-  '/mock-images/sample-11.png',
-  '/mock-images/sample-12.png',
-  '/mock-images/sample-13.png',
-  '/mock-images/sample-14.png',
-  '/mock-images/sample-15.png',
-  '/mock-images/sample-16.png',
-  '/mock-images/sample-17.png',
-  '/mock-images/sample-18.png',
-  '/mock-images/sample-19.png',
-  '/mock-images/sample-20.png',
 ];
 
 export const mockItems: ExploreItem[] = masonryHeights.map((h, i) => ({
