@@ -31,3 +31,15 @@
 ## 变更与验证
 
 - SHOULD：修改权限、跳转、meta 约定后，同步更新或新增 `src/router/index.test.ts`。
+
+## 常见操作
+
+- 新增后台菜单项/路由：在 `src/router/index.ts` 的后台子路由常量中新增 children，并补齐 `meta.title`、`meta.roles`、`meta.showInMenu`
+- 新增 Portal 路由：在 `src/router/index.ts` 的 Portal children 中新增路由，并确认由 `PortalLayout.vue` 承载
+- 调整权限：优先通过 `meta.roles` + `canAccess` 进行统一控制，避免在布局/页面散落 `v-if`
+
+## 关键文件
+
+- 路由定义与守卫：[index.ts](index.ts)
+- 路由单测：[index.test.ts](index.test.ts)
+- 权限工具：[../utils/access.ts](../utils/access.ts)

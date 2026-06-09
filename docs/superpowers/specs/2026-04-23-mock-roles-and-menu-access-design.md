@@ -4,6 +4,8 @@
 
 - Status：implemented
 - 目标读者：前端、测试、产品
+- 最后对齐：2026-06-09
+- 权威入口：无；当前实现以本文 Entry points、`src/mocks/README.md` 与代码为准
 - 范围：仅模拟数据模式（`VITE_USE_MOCK_DATA=true`）下的账号与权限验收；不改变真实后端鉴权方式
 - 模拟登录账号说明见 [src/mocks/README.md](../../../src/mocks/README.md)
 - Entry points：`src/router/index.ts`、`src/layouts/AdminLayout.vue`、`src/mocks/handlers.ts`、`src/utils/access.ts`

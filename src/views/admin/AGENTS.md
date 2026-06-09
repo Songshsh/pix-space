@@ -10,7 +10,7 @@
 
 - MUST：必须兼容权限控制
 - MUST：不允许绕过路由权限
-- MUST：菜单与权限保持一致（单一来源以 `src/router/index.ts` 中后台子路由常量的 meta 为准）
+- MUST：菜单与权限保持一致；单一来源与细则以 [../../router/AGENTS.md](../../router/AGENTS.md) 为准
 
 ## Layout
 
@@ -24,5 +24,7 @@
 
 ## 相关规范
 
-- 路由与权限入口：[../../router/index.ts](../../router/index.ts)
-- 受保护路由定义：[../../router/index.ts](../../router/index.ts)
+- 根视图规范：[../AGENTS.md](../AGENTS.md)
+- 布局规范：[../../layouts/AGENTS.md](../../layouts/AGENTS.md)
+- 路由规范：[../../router/AGENTS.md](../../router/AGENTS.md)
+- 权限工具：[../../utils/access.ts](../../utils/access.ts)

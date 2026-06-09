@@ -2,8 +2,10 @@
 
 ## 元信息
 
-- Status：draft
+- Status：implemented
 - 目标读者：产品、前端、测试
+- 最后对齐：2026-06-09
+- 权威入口：无；当前实现以本文 Entry points 与代码为准
 - 范围：新增认证域“找回密码”独立页面，支持邮箱提交与结果提示；不包含邮件模板、真实邮件发送链路、验证码与重置密码落地页
 - 主要改动点：在 `views/auth` 下新增找回密码页面；在路由层新增匿名访问入口；登录页忘记密码入口改为跳转；补充对应 API、MSW mock 与最小测试覆盖
 - Entry points：`src/views/auth/login/index.vue`、`src/views/auth/forgot-password/index.vue`、`src/router/index.ts`、`src/api/user.ts`、`src/mocks/handlers.ts`
@@ -11,16 +13,16 @@
 
 ## 1. 背景与目标
 
-当前登录页中的“忘记密码？”仅为占位链接，未提供实际跳转与提交能力。随着视图目录已经按 `admin`、`portal` 分层，认证前页面仍保留在独立的 `auth` 域，因此本次“找回密码”能力应继续落在 `views/auth` 下，而不是混入 B 端或 C 端业务页面。
+该方案对应的“找回密码”能力已经落地。认证前页面继续保留在独立的 `auth` 域，因此找回密码页面仍归属于 `views/auth`，而不是混入 B 端或 C 端业务页面。
 
-本次目标是补齐一个最小可用的找回密码流程：
+当前实现提供了一个最小可用的找回密码流程：
 
 - 用户从登录页点击“忘记密码？”进入独立页面
 - 用户输入邮箱并提交
 - 页面统一提示“如果该邮箱已注册，我们已发送重置链接”
 - 不泄露邮箱是否存在
 
-本次目标不追求真实邮件链路闭环，仅先完成前端页面、接口封装、Mock 行为与基础验证路径。
+当前实现仍不追求真实邮件链路闭环，范围聚焦于前端页面、接口封装、Mock 行为与基础验证路径。
 
 ## 2. 设计原则
 
@@ -34,15 +36,15 @@
 
 ### 3.1 页面位置与路由
 
-- 新增页面：`src/views/auth/forgot-password/index.vue`
-- 新增路由：`/forgot-password`
+- 当前页面：`src/views/auth/forgot-password/index.vue`
+- 当前路由：`/forgot-password`
 - 路由属性：匿名可访问，`meta.requiresAuth = false`
-- 登录页入口：将现有登录表单中的“忘记密码？”从空链接改为跳转 `/forgot-password`
+- 登录页入口：当前登录表单中的“忘记密码？”会跳转 `/forgot-password`
 
 选择 `auth` 而不是 `portal` / `admin` 的原因：
 
 - 该页面发生在登录前，不属于任何业务端内页面
-- 后续若增加 `reset-password`、`register`、`verify-email` 等能力，可继续归档到 `auth`
+- 后续若增加 `reset-password`、`register`、`verify-email` 等能力，仍归档到 `auth`
 - 认证域页面更适合保持顶层匿名访问，不依赖业务布局
 
 ### 3.2 视觉与布局
@@ -55,7 +57,7 @@
   - 表单区域：邮箱输入框、提交按钮
   - 辅助入口：返回登录
 
-推荐复用或参考现有登录页元素：
+当前实现复用或参考了以下现有登录页元素：
 
 - `StarryBackground`
 - 登录页容器层级与动画节奏
@@ -89,16 +91,16 @@
 
 ### 4.1 前端接口
 
-在认证相关 API 中新增忘记密码提交方法，建议放在 `src/api/user.ts`，保持与当前登录接口同域管理。
+认证相关 API 已新增忘记密码提交方法，当前放在 `src/api/user.ts`，与登录接口同域管理。
 
-建议接口形态：
+当前接口形态：
 
 ```ts
 type ForgotPasswordPayload = {
   email: string;
 };
 
-function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
+function forgotPassword(data: ForgotPasswordPayload): Promise<boolean>;
 ```
 
 请求语义：
@@ -109,11 +111,11 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 
 ### 4.2 Mock 行为
 
-在 `src/mocks/handlers.ts` 中新增对应 handler，默认返回成功：
+`src/mocks/handlers.ts` 中已新增对应 handler，默认返回成功：
 
 - 已知邮箱：返回成功
 - 未知邮箱：同样返回成功
-- 可选保留异常分支：用于测试网络失败或服务失败时的 UI 表现
+- 通过测试或调试手段触发异常分支，用于验证网络失败或服务失败时的 UI 表现
 
 统一成功返回的目的：
 
@@ -124,14 +126,14 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 
 ### 5.1 页面层
 
-- 新增 `src/views/auth/forgot-password/index.vue`
+- 当前页面位于 `src/views/auth/forgot-password/index.vue`
 - 页面负责：
   - 表单状态
   - 提交状态切换
   - 成功/失败反馈展示
   - 返回登录导航
 
-若页面交互保持简单，可维持单文件实现；若提交状态与行为分支增多，可新增页面私有 composable：
+当前实现保持单文件页面；若后续提交状态与行为分支显著增多，可新增页面私有 composable：
 
 - `src/views/auth/forgot-password/useForgotPasswordSubmit.ts`
 
@@ -139,7 +141,7 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 
 ### 5.2 登录页入口
 
-需要调整现有登录表单组件的忘记密码入口，使其具备明确导航能力。建议保持组件职责简单：
+现有登录表单组件的忘记密码入口已调整为明确导航能力，并保持组件职责简单：
 
 - 由登录页或登录表单通过路由链接跳转 `/forgot-password`
 - 不在登录页内内嵌忘记密码弹窗
@@ -147,7 +149,7 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 
 ### 5.3 路由层
 
-在 `src/router/index.ts` 中新增顶层匿名路由：
+当前在 `src/router/index.ts` 中使用顶层匿名路由：
 
 - `path: '/forgot-password'`
 - `name: 'ForgotPassword'`
@@ -157,17 +159,13 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 守卫层无需新增新的权限模型，但需确认：
 
 - 未登录访问 `/forgot-password` 不被拦截
-- 已登录访问 `/forgot-password` 时按认证前页面统一策略重定向离开
+- 已登录访问 `/forgot-password` 的策略以当前路由守卫实现为准
 
-本次建议：
+当前实现保持以下策略：
 
-- 与 `/login`、`/register` 保持一致：已登录用户访问 `/forgot-password` 时，重定向到 `sanitizeRedirectPath(to.query.redirect, '/explore')`
+- 当前仅 `/login`、`/register` 在已登录访问时会被统一重定向；`/forgot-password` 仍允许已登录用户访问
 
-原因是：
-
-- 认证前页面统一处理登录态，更利于维护和理解
-- 已登录用户继续停留在找回密码页通常没有业务价值
-- 可减少认证页访问策略分叉，避免后续路由守卫各写各的
+若后续希望与 `/login`、`/register` 完全一致，应同步修改路由守卫并更新本文档。
 
 ## 6. 验收标准
 
@@ -182,7 +180,7 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 
 ## 7. 测试与验证
 
-建议最小测试覆盖如下：
+当前实现的最小测试覆盖如下：
 
 - `src/views/auth/login/index.test.ts`
   - 补充点击忘记密码入口后的跳转或链接行为验证
@@ -216,7 +214,7 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 - 多端不同找回密码表单
 - 账号存在性差异化提示
 
-## 9. Notes
+## 9. 后续扩展关注点
 
 当前方案以 Mock 成功链路为主，后续接真实后端时需要重点确认：
 
@@ -224,9 +222,9 @@ function forgotPassword(data: ForgotPasswordPayload): Promise<void>;
 - 邮件发送限流策略
 - 提交频控与防滥用策略
 - 重置链接落地页的 token 校验方式
-- 是否需要对已登录用户访问认证页做统一跳转策略（建议与 `/login`、`/register` 保持一致，统一重定向离开认证前页面）
+- 是否需要对已登录用户访问认证页做统一跳转策略（当前仅 `/login`、`/register` 会被统一重定向，`/forgot-password` 仍允许访问）
 
-后续如果进入真实重置闭环，建议在 `views/auth` 下继续补齐：
+后续如果进入真实重置闭环，应在 `views/auth` 下继续补齐：
 
 - `reset-password`
 - `verify-email`（若需要）

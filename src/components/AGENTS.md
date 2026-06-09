@@ -20,12 +20,20 @@
 
 ## 样式
 
-- MUST：必须使用 design token（见 [../styles/tokens.css](../styles/tokens.css)）
-- MUST：禁止硬编码主题/品牌色系列；允许黑白灰与 transparent/currentColor 等基础色硬编码
+- MUST：组件样式遵循 `src/styles/AGENTS.md` 的统一约束
+- MUST：spacing、radius、shadow 与颜色的具体约束，以 [../styles/AGENTS.md](../styles/AGENTS.md) 与 [../styles/tokens.css](../styles/tokens.css) 为准
 
 ## 类型
 
 - MUST：props/emits 必须完整定义
+
+## 关键目录
+
+- 认证组件：`src/components/auth/`
+- 通用组件：`src/components/common/`
+- Portal 业务组件：`src/components/portal/`
+- Admin 业务组件：`src/components/dashboard/`、`src/components/users/`、`src/components/settings/`
+- 顶层共享组件：`src/components/StarryBackground.vue`、`src/components/StarryStatusPage.vue`
 
 ## 相关规范
 

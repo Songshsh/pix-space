@@ -12,6 +12,7 @@
 
 - MUST：新增任意 `dependencies` / `devDependencies`（包含运行时与开发期依赖）
 - MUST：升级现有依赖的主版本（major）
+- SHOULD：升级现有依赖的次版本/补丁版本（minor/patch）且会影响运行时行为、安全或体积时，提供本模板中的“风险评估 + 验证计划”
 - SHOULD：替换同类依赖（例如替换请求库、状态库、UI 组件库、测试框架）
 - SHOULD：引入运行时 polyfill、DOM 解析/渲染类依赖（安全风险较高）
 
@@ -65,7 +66,7 @@
   - 维护：……
   - License：……
 - 验证：
-  - npm run test
-  - （可选）npm run test:e2e / npm run build
+  - `npm run test`
+  - （可选）`npm run test:e2e` / `npm run build`
 - 回滚：……
 ```

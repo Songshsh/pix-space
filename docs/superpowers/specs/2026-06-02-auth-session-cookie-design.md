@@ -2,28 +2,32 @@
 
 ## 元信息
 
-- Status：draft
+- Status：implemented
 - 目标读者：产品、前端、后端、测试
-- 范围：将现有基于前端持有 token 的认证实现，调整为基于 `HttpOnly Cookie + 当前会话查询` 的 Web 认证架构；包含前端 store、request、认证 API、MSW mock、路由恢复与最小测试调整；不包含 OAuth、第三方登录、移动端统一认证、SSO 与 refresh token 体系
+- 最后对齐：2026-06-09
+- 权威入口：当前认证基线与工程入口以 [AUTH_ARCHITECTURE.md](../../AUTH_ARCHITECTURE.md) 为准；若本文与之不一致，以该文为准并同步修正本文
+- 范围：当前项目基于 `HttpOnly Cookie + 当前会话查询` 的 Web 认证架构说明；包含前端 store、request、认证 API、MSW mock、路由恢复与最小测试调整；不包含 OAuth、第三方登录、移动端统一认证、SSO 与 refresh token 体系
 - 主要改动点：移除前端对 token 的持久化与请求头注入；新增当前会话查询接口；统一使用 `withCredentials`；将 mock 认证从 token 模式切换为 session 模式；同步更新 API 文档与认证相关测试
 - Entry points：`src/stores/user.ts`、`src/utils/request.ts`、`src/api/user.ts`、`src/types/auth.ts`、`src/views/auth/login/index.vue`、`src/router/index.ts`、`src/main.ts`、`src/mocks/handlers.ts`、`src/api/README.md`
 - Acceptance checklist：登录、刷新、新开 tab、深链接访问、401 失效、登出与 mock 模式均可按统一会话语义工作
 
 ## 1. 背景与目标
 
-当前 `Pix Space` 的登录态由前端保存 token，并持久化在 `sessionStorage` 中。这种实现有两个直接问题：
+说明：本文保留“为什么这样改、有哪些关键取舍、如何验收”的设计记录；当前实现的事实说明、接口语义与工程入口以 [AUTH_ARCHITECTURE.md](../../AUTH_ARCHITECTURE.md) 为准。
+
+该方案对应的认证改造已经落地。改造前，`Pix Space` 的登录态由前端保存 token，并持久化在 `sessionStorage` 中。这种实现存在两个直接问题：
 
 - 登录态只能在当前 tab 有效，新开 tab 或复制链接打开时无法继续使用
 - 认证凭证由前端 JavaScript 可读可写，不适合作为新 Web 项目的长期认证架构
 
-项目当前仍处于前后端契约可调整阶段，因此本次不采用“把 `sessionStorage` 改为 `localStorage`”的权宜修补，而是直接将认证模型切换为更适合长期演进的 Web 方案：
+项目当前已经切换到更适合长期演进的 Web 认证方案，而不是继续沿用“把 `sessionStorage` 改为 `localStorage`”这类权宜修补：
 
 - 浏览器通过 `HttpOnly Cookie` 持有会话
 - 前端不保存 token
 - 前端启动时通过“当前会话查询”恢复登录态
 - 新开 tab、刷新、深链接直开都依赖同一套会话恢复逻辑
 
-本次目标是完成前端架构和 mock 契约的切换，使真实后端接入时无需再次推翻认证骨架。
+当前实现目标已经达成：前端架构与 mock 契约均已切换到统一的 session 语义，真实后端接入时无需再次推翻认证骨架。
 
 ## 2. 设计原则
 
@@ -59,10 +63,10 @@
 
 - `token`
 
-计算逻辑建议：
+当前实现中的计算逻辑：
 
 - `isLoggedIn`：基于用户身份字段存在性判断，例如 `Boolean(id || email)`
-- `isAuthenticated`：基于 `isSessionValidated`
+- `isAuthenticated`：基于 `isLoggedIn && isSessionValidated`
 
 这样可以避免“本地残留 token 但后端会话已失效”的伪登录态。
 
@@ -147,22 +151,22 @@
 
 ### 4.4 注册与找回密码
 
-`POST /auth/register` 与 `POST /auth/forgot-password` 可继续保持现有语义，不需要为了本次改造额外调整。
+`POST /auth/register` 与 `POST /auth/forgot-password` 保持现有语义，不需要为了本次改造额外调整。
 
 ## 5. 前端实现方案
 
 ### 5.1 store 改造
 
-在 `src/stores/user.ts` 中执行以下调整：
+`src/stores/user.ts` 当前实现如下：
 
 - 删除 `token` state 与相关返回字段
 - `login(userData, newToken?)` 改为 `login(userData)`，仅写入用户信息并设置 `isSessionValidated = true`
 - `logout()` 仍负责清空用户字段并重置认证状态，但应由 `useLogout` 在服务端确认成功后再调用，避免前后端会话状态不一致
-- `fetchUserInfo()` 改为调用当前会话接口，建议命名同步收敛为 `fetchSession()` 或复用 `fetchUserInfo()` 但底层改为 `/auth/session`
+- `fetchUserInfo()` 已收敛为 `fetchSession()`，并调用当前会话接口
 - `bootstrapAuth()` 不再先判断本地 token 是否存在，而是直接请求当前会话
-- `persist` 中不再保存 token；本次建议仅保留用户展示字段，或进一步不持久化用户资料，只依赖启动恢复
+- `persist` 中不再保存 token，仅保留用户展示字段
 
-选择保留 `bootstrapAuth()` 而不是新增全局认证初始化器的原因：
+当前实现保留 `bootstrapAuth()`，原因如下：
 
 - 现有启动链路已经依赖该方法
 - 路由守卫已经围绕 `isAuthReady` 和 `isAuthenticated` 组织
@@ -170,7 +174,7 @@
 
 ### 5.2 request 改造
 
-在 `src/utils/request.ts` 中执行以下调整：
+`src/utils/request.ts` 当前实现如下：
 
 - axios 基础配置新增 `withCredentials: true`
 - 删除请求拦截器中从 `userStore.token` 注入 `Authorization` 的逻辑
@@ -223,23 +227,26 @@
 - 当前会话接口是恢复登录态的唯一入口
 - 受保护接口不依赖请求头中的 `Authorization`
 
-### 6.2 推荐实现
+### 6.2 当前实现
 
-在 `src/mocks/handlers.ts` 中新增或调整：
+`src/mocks/handlers.ts` 当前实现如下：
 
 - 模块级会话状态，例如 `let currentSessionEmail: string | null = null`
+- 同时通过 `localStorage` 中的 `pix-space-mock-session` 快照恢复 `currentSessionEmail`，以便在 Mock 模式下覆盖刷新与新开 tab 的会话恢复体验
 
-接口行为建议：
+接口行为如下：
 
 - `POST /api/auth/login`
   - 校验邮箱和密码
   - 成功后设置 `currentSessionEmail = email`
+  - 同步写入 `localStorage` 会话快照
   - 返回 `{ user }`
 - `GET /api/auth/session`
   - 若 `currentSessionEmail` 存在，返回对应 `user`
   - 否则返回 `401`
 - `POST /api/auth/logout`
   - 清空 `currentSessionEmail`
+  - 同步清理 `localStorage` 会话快照
   - 返回 `true`
 
 其他依赖登录身份的 mock 接口：
@@ -264,7 +271,7 @@ MSW 在浏览器内运行，无法完全模拟真实后端设置 `HttpOnly Cooki
 - 现有 `LoginResult` 由 `{ token, user }` 改为仅包含 `user`
 - 或新增统一的 `AuthSessionResult`
 
-推荐写法：
+当前类型定义采用：
 
 ```ts
 export interface AuthSessionResult {
@@ -287,13 +294,13 @@ export interface AuthSessionResult {
 - 新增 `getSession()`，请求 `GET /auth/session`
 - `logout()` 保持 `POST /auth/logout`
 
-如果需要兼容已有调用方，也可以先保留 `getUserInfo()` 方法名，但底层不再请求 `/user/info`，而是明确改到 `/auth/session`。本次更推荐直接更名，减少语义混淆。
+当前实现直接使用 `getSession()`，不再保留 `getUserInfo()` 这一旧语义入口。
 
 ## 8. 测试与验收
 
 ### 8.1 自动化测试
 
-建议同步更新或新增以下测试：
+当前实现对应的测试与验收重点如下：
 
 - `src/stores/user.test.ts`
   - 登录后不再断言 token
@@ -329,7 +336,7 @@ export interface AuthSessionResult {
 - 权限模型重构
 - 登录页 UI 重设计
 
-## 10. Notes
+## 10. 后续接入关注点
 
 后续接真实后端时，需要重点确认以下事项：
 

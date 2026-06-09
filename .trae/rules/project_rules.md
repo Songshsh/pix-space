@@ -1,13 +1,14 @@
 # Pix Space 项目规则
 
-本文件仅包含：
+本文件主要包含：
 
 - 项目级约束
 - 技术栈约束
 - 架构约束
 - 文档索引
+- 规则优先级与 workflow/skills 使用边界
 
-本文件不包含用户长期偏好。
+本文件不包含用户长期偏好；用户长期偏好以 `.trae/rules/user_rules.md` 为准。
 
 ---
 
@@ -63,7 +64,7 @@
 - MUST：API 请求统一走 api 与 utils/request
 - MUST：状态管理统一走 Pinia
 - MUST：不允许页面直接操作底层 request
-- MUST：项目已配置自动导入（以现有工程配置为准）：新增代码不得手动导入 Vue 核心 API 与 Element Plus 组件
+- MUST：项目已配置自动导入（以现有工程配置为准）：新增代码默认应复用自动导入能力，避免手动导入 Vue 核心 API 与 Element Plus 组件；允许手动导入的例外场景以 `docs/FRONTEND_SPEC.md` 为准
 
 ## Mock 与接口
 

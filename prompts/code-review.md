@@ -1,10 +1,6 @@
 # 代码评审工作流
 
-## 表述约定
-
-- MUST：强制要求
-- SHOULD：推荐做法
-- AVOID：应避免
+表述约定与通用清单见 [shared-checklist.md](shared-checklist.md)。
 
 检查维度（按优先级）：
 
@@ -14,7 +10,7 @@
 4. 交互一致性：Element Plus 使用方式、空/加载/错误状态
 5. 可测试性：是否容易写测试、是否有回归验证方式
 
-## 输出格式建议
+## 输出格式要求
 
 在输出评审结果时，必须结构化展示：
 
@@ -29,19 +25,18 @@
 
 ## 审查前检查清单
 
-- MUST：开始审查前，先列出本次涉及的模块目录，并补齐读取对应的最近 `AGENTS.md`
-- MUST：若为全局审查或跨模块审查，在输出结论前说明本次已读取的局部 `AGENTS.md`
+- MUST：先按 [../AGENTS.md](../AGENTS.md) 执行“全局/跨模块审查预检”，包括列出涉及目录、补齐读取最近 `AGENTS.md`、以及在结论中说明已读取的局部 `AGENTS.md`
 - MUST：若使用 Task / 子 agent / 并行搜索协助审查，prompt 中必须显式写明需先读取的规则文件、审查维度与输出格式；禁止省略规则注入
-- MUST：若尚未完成上述检查，不得声称“已完成全局审查”“已全面审查”
+- MUST：若尚未完成根入口要求的预检，不得声称“已完成全局审查”“已全面审查”
 
 ## 评审时的项目约束校验（补充）
 
-- MUST：若尚未完成，先按 `AGENTS.md` 读取根规则、专题规范与就近 `AGENTS.md`
-- MUST：如变更包含新增/升级依赖，检查是否按 `docs/DEPENDENCY_POLICY.md` 给出完整评审信息，并评估体积/安全/维护风险
-- MUST：如变更涉及公共行为（API 契约、错误策略、权限规则、目录职责、样式策略等），检查是否同步更新文档与入口索引（参考 `docs/AGENTS.md` 与 `docs/README.md`）
-- MUST：检查是否违反工程自动导入约束（优先自动导入；例外场景以 `docs/FRONTEND_SPEC.md` 为准）
-- MUST：检查样式是否遵守 tokens 与集中覆盖策略（`src/styles/tokens.css`、`src/styles/AGENTS.md`）
-- SHOULD：以 `docs/AI_DELIVERY_CHECKLIST.md` 的“同步更新清单/验证最低口径”作为回归与交付检查基线
+- MUST：若尚未完成，先按 [../AGENTS.md](../AGENTS.md) 读取根规则、专题规范与就近 `AGENTS.md`
+- MUST：如变更包含新增/升级依赖，检查是否按 [docs/DEPENDENCY_POLICY.md](../docs/DEPENDENCY_POLICY.md) 给出完整评审信息，并评估体积/安全/维护风险
+- MUST：如变更涉及公共行为（API 契约、错误策略、权限规则、目录职责、样式策略等），检查是否同步更新文档与入口索引（参考 [docs/AGENTS.md](../docs/AGENTS.md) 与 [docs/README.md](../docs/README.md)）
+- MUST：检查是否违反工程自动导入约束（优先自动导入；例外场景以 [docs/FRONTEND_SPEC.md](../docs/FRONTEND_SPEC.md) 为准）
+- MUST：检查样式是否遵守 tokens 与集中覆盖策略（[tokens.css](../src/styles/tokens.css)、[src/styles/AGENTS.md](../src/styles/AGENTS.md)）
+- SHOULD：以 [docs/AI_DELIVERY_CHECKLIST.md](../docs/AI_DELIVERY_CHECKLIST.md) 的“同步更新清单/验证最低口径”作为回归与交付检查基线
 
 说明：
 

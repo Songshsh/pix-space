@@ -17,7 +17,14 @@
 - MUST：权限判断统一使用 `src/utils/access.ts` 的 `canAccess`。
 - AVOID：在布局中手写菜单数据源或分散写权限 `v-if`。
 
+菜单与权限约定以 [src/router/AGENTS.md](../router/AGENTS.md) 为准。
+
 ## 样式与 tokens
 
-- MUST：不硬编码颜色/圆角/间距/阴影，优先使用 `src/styles/tokens.css`。
+- MUST：样式与 token 的具体约束，以 [../styles/AGENTS.md](../styles/AGENTS.md) 为准；布局侧仅做消费，不另起一套样式规则。
 - SHOULD：保持布局容器的 padding、header 高度等与设计规则一致（设计规范入口见 `design/AGENTS.md`）。
+
+## 关键文件
+
+- 后台布局：[AdminLayout.vue](AdminLayout.vue)
+- 前台布局：[PortalLayout.vue](PortalLayout.vue)

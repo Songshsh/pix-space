@@ -2,6 +2,8 @@
 
 本清单用于在 Pix Space 中用 AI 协作开发时，降低“漏改、破坏约定、验证不足”的概率。建议在提交最终变更前逐项勾选。
 
+同步更新项与验证最低口径以 [prompts/shared-checklist.md](../prompts/shared-checklist.md) 为准；本清单只做交付前检查，不重复维护细则。
+
 ## 0. 表述约定
 
 - MUST：强制要求
@@ -18,40 +20,20 @@
 
 ## 2. 实现过程（常见踩坑防线）
 
-- [ ] MUST：遵循工程自动导入约束：不手动导入 Vue 核心 API 与 Element Plus 组件（见 [FRONTEND_SPEC.md](FRONTEND_SPEC.md)）
-- [ ] MUST：页面不直接操作底层 request；请求必须走 `src/api/` 与 `src/utils/request.ts` 体系（见 [project_rules.md](../.trae/rules/project_rules.md)）
-- [ ] MUST：样式优先使用 `src/styles/tokens.css`；禁止硬编码主题/品牌色系列，其余允许范围以 `project_rules.md` 与 `styles/AGENTS.md` 为准
-- [ ] MUST：默认写 `<style scoped>`；需要全局样式/覆盖时仅允许放在 `src/styles/` 并遵守 styles 规范
-- [ ] MUST：不输出、记录、提交密钥/Token/密码/隐私数据；避免不可信 `v-html`（见 [FRONTEND_SPEC.md](FRONTEND_SPEC.md)）
-- [ ] MUST：不随意新增 npm 依赖；如必须新增，先按 [DEPENDENCY_POLICY.md](DEPENDENCY_POLICY.md) 提供评审信息并等待确认
+- [ ] MUST：按 [prompts/shared-checklist.md](../prompts/shared-checklist.md) 执行工程约束（自动导入 / 依赖评审 / 请求分层 / 样式主题 / 验证最低口径）
+- [ ] MUST：对照 [FRONTEND_SPEC.md](FRONTEND_SPEC.md) 与最近的 `AGENTS.md` 检查样式、安全与目录职责是否越界
 
 ## 3. 同步更新清单（避免“只改了一个点”）
 
-### 3.1 接口与请求
+- [ ] MUST：按 [prompts/shared-checklist.md](../prompts/shared-checklist.md) 的“同步更新项（避免漏改）”逐项检查（API / 请求策略 / Mock / 路由权限 / 样式主题）
 
-- [ ] 若新增/修改 API：同步更新 `src/api/*` 的类型与封装（见 [src/api/README.md](../src/api/README.md)）
-- [ ] 若涉及错误提示/静默策略：遵守 request 统一策略（见 [src/utils/README.md](../src/utils/README.md)）
-- [ ] 若新增/修改 API：同步更新 MSW mock（见 [src/mocks/README.md](../src/mocks/README.md)）
-
-### 3.2 路由与权限
-
-- [ ] 若新增页面：确认路由入口与权限 meta，避免在布局里散落 `v-if`（见 [FRONTEND_SPEC.md](FRONTEND_SPEC.md)）
-
-### 3.3 样式与主题
-
-- [ ] 若新增 tokens：命名语义化、层级统一、优先复用（见 [styles/AGENTS.md](../src/styles/AGENTS.md)）
-- [ ] 若需覆盖 Element Plus：仅在 `src/styles/element-overrides.css` 等集中位置处理，避免局部覆盖
-
-### 3.4 文档
+### 3.1 文档
 
 - [ ] MUST：修改公共行为（API 契约/错误策略/权限/目录职责/样式策略等）时同步更新文档（见 [docs/AGENTS.md](AGENTS.md)）
 
 ## 4. 验证最低口径（交付前必须满足）
 
-- [ ] MUST：提供可验证入口（路由/按钮/复现步骤）
-- [ ] MUST：运行并通过 `npm run test`（脚本单一事实来源见 [CONTRIBUTING.md](../CONTRIBUTING.md)）
-- [ ] SHOULD：新增/改动复杂逻辑时补单元测试（Vitest）
-- [ ] SHOULD：新增页面或关键链路改动时补 E2E 冒烟（Playwright）
+- [ ] MUST：按 [prompts/shared-checklist.md](../prompts/shared-checklist.md) 的“验证最低口径”执行
 
 ## 5. 提交协作（仅在用户要求 commit 时）
 

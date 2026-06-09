@@ -29,6 +29,8 @@ views 负责：
 
 - AVOID：超大单文件页面。
 
+建议经验阈值：单文件超过 300 行时，优先拆分页面子组件与页面私有 composable，避免继续膨胀。
+
 ## 页面专属 composable
 
 - SHOULD：仅限当前页面使用的业务逻辑 composable 可放在对应 view 目录下（如 `useImageActions.ts`），无需提升到 `src/composables/`。

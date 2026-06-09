@@ -1,4 +1,4 @@
-# Composables 规范
+# Composables 模块规范
 
 ## 表述约定
 
@@ -28,6 +28,10 @@
 
 - MUST：明确 cleanup
 - MUST：避免隐式全局状态
+
+## 关键文件
+
+- 注入 key：[injectionKeys.ts](injectionKeys.ts)
 
 ## 相关规范
 

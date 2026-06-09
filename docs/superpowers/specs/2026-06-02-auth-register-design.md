@@ -4,6 +4,8 @@
 
 - Status：implemented
 - 目标读者：产品、前端、测试
+- 最后对齐：2026-06-09
+- 权威入口：无；当前实现以本文 Entry points 与代码为准
 - 范围：新增认证域“注册”独立页面，支持基础表单提交与结果反馈；不包含邮箱验证码、协议勾选、第三方登录、真实邮件链路与注册后自动登录
 - 主要改动点：在 `views/auth` 下新增注册页面；在路由层新增匿名访问入口；登录页“立即注册”入口改为跳转；补充对应 API、MSW mock 与最小测试覆盖
 - Entry points：`src/components/auth/LoginForm.vue`、`src/views/auth/login/index.vue`、`src/views/auth/register/index.vue`、`src/router/index.ts`、`src/api/user.ts`、`src/types/auth.ts`、`src/mocks/handlers.ts`
@@ -11,17 +13,17 @@
 
 ## 1. 背景与目标
 
-当前登录页中的“立即注册”仍是空链接，用户无法进入注册流程。项目现有认证前页面已经采用独立 `auth` 域组织，且“找回密码”已按独立页面实现，因此注册能力应继续沿用同样的页面边界与路由组织方式，而不是塞回登录页弹层或混入业务布局。
+当前项目已经提供最小可用的注册闭环。认证前页面继续统一放在独立的 `auth` 域内，注册能力与登录、找回密码保持同一页面边界与路由组织方式，而不是塞回登录页弹层或混入业务布局。
 
-本次目标是补齐一个最小可用的完整注册闭环：
+当前实现提供以下流程：
 
 - 用户从登录页点击“立即注册”进入独立注册页
 - 用户填写用户名、邮箱、密码、确认密码并提交
 - 页面通过统一 API 封装发起注册请求
 - Mock 模式下可校验邮箱重复并返回成功/失败语义
-- 注册成功后返回登录页，并携带邮箱用于后续回填
+- 注册成功后返回登录页，并携带注册成功标记
 
-本次目标不追求真实账号体系闭环，仅先完成前端页面、接口封装、Mock 行为、路由接入与基础验证路径。
+当前范围仍不追求真实账号体系闭环，重点放在前端页面、接口封装、Mock 行为、路由接入与基础验证路径。
 
 ## 2. 设计原则
 
@@ -35,10 +37,10 @@
 
 ### 3.1 页面位置与路由
 
-- 新增页面：`src/views/auth/register/index.vue`
-- 新增路由：`/register`
+- 当前页面：`src/views/auth/register/index.vue`
+- 当前路由：`/register`
 - 路由属性：匿名可访问，`meta.requiresAuth = false`
-- 登录页入口：将现有登录表单中的“立即注册”从空链接改为显式跳转 `/register`
+- 登录页入口：当前登录表单中的“立即注册”会显式跳转 `/register`
 
 选择独立页面而不是登录页弹层的原因：
 
@@ -56,7 +58,7 @@
   - 表单区域：用户名、邮箱、密码、确认密码、提交按钮
   - 辅助入口：已有账号则返回登录
 
-推荐复用或参考现有认证页元素：
+当前实现复用或参考了以下认证页元素：
 
 - `StarryBackground`
 - 登录页与找回密码页的容器结构和动画节奏
@@ -71,7 +73,7 @@
 - `password`：密码
 - `confirmPassword`：确认密码
 
-前端校验规则建议如下：
+当前实现采用以下前端校验规则：
 
 - 用户名：必填，去除首尾空格后不能为空，长度限制为 2 到 20 个字符
 - 邮箱：必填，需符合邮箱格式
@@ -95,7 +97,7 @@
 注册成功后不直接写入登录态，而是统一返回登录页：
 
 - 跳转到 `/login?registered=1`
-- 登录页展示一次性成功提示，但邮箱输入框保持空白，由用户自行输入
+- 只要 URL 仍保留 `registered=1`，登录页就会展示成功提示；邮箱输入框保持空白，由用户自行输入
 
 这样设计的原因：
 
@@ -121,7 +123,7 @@ export interface RegisterPayload {
 在 `src/api/user.ts` 中新增注册方法，继续与登录、找回密码放在同一认证域：
 
 ```ts
-export function register(data: RegisterPayload): Promise<void>;
+export function register(data: RegisterPayload): Promise<boolean>;
 ```
 
 请求语义：
@@ -132,9 +134,7 @@ export function register(data: RegisterPayload): Promise<void>;
 
 ### 4.2 API 文档约定
 
-需要在 `src/api/README.md` 中新增 `POST /auth/register` 说明。
-
-建议契约如下：
+`src/api/README.md` 中已新增 `POST /auth/register` 说明，当前契约如下：
 
 - 请求：
 
@@ -151,7 +151,7 @@ export function register(data: RegisterPayload): Promise<void>;
   - 邮箱重复：返回 `400`
   - message：`该邮箱已被注册`
 
-页面只依赖成功/失败语义，因此前端注册接口返回值可先保持 `Promise<void>`，避免过早绑定尚未确定的响应体细节。
+页面当前只依赖成功/失败语义，因此前端注册接口返回值保持 `Promise<boolean>`。
 
 ### 4.3 Mock 行为
 
@@ -161,7 +161,7 @@ export function register(data: RegisterPayload): Promise<void>;
 - 若邮箱已在现有 `profileState` 或 `passwordState` 中存在，则返回 `400` 和明确业务 message
 - 若邮箱未注册，则向现有 mock 状态中写入新用户资料与密码
 
-建议新增用户的 mock 行为：
+当前实现中的新增用户 mock 行为：
 
 - `role` 默认写为 `user`
 - `id` 采用现有 mock 体系内可递增或基于现有最大值生成的方式
@@ -188,7 +188,7 @@ export function register(data: RegisterPayload): Promise<void>;
 
 ### 5.2 注册页页面层
 
-新增 `src/views/auth/register/index.vue`，页面负责：
+当前页面位于 `src/views/auth/register/index.vue`，页面负责：
 
 - 注册表单状态
 - 表单校验
@@ -196,35 +196,35 @@ export function register(data: RegisterPayload): Promise<void>;
 - 成功后的跳转逻辑
 - 返回登录入口
 
-若实现复杂度保持在当前范围内，建议先维持单文件页面；仅当注册逻辑显著膨胀时，再拆出页面私有 composable，例如：
+当前实现保持单文件页面；若后续注册逻辑显著膨胀，再拆出页面私有 composable，例如：
 
 - `src/views/auth/register/useRegisterSubmit.ts`
 
-本次默认不提前抽离，遵循最小改动原则。
+当前实现未提前抽离，遵循最小改动原则。
 
 ### 5.3 登录页增强
 
-为了闭环成功后的回流体验，建议对登录页做两项小幅增强：
+为了闭环成功后的回流体验，当前登录页做了两项小幅增强：
 
-- 读取 query 中的 `registered=1` 并展示一次性成功提示，如“注册成功，请使用新账号登录”
+- 读取 query 中的 `registered=1` 并展示成功提示，如“注册成功，请使用新账号登录”
 - 登录页邮箱输入框保持空白，不做自动回填，由用户手动输入
 
 增强范围应保持克制：
 
 - 不保存到全局 store
-- 不在页面刷新后持续显示提示
+- 当前未在提示后自动清理 `registered=1`，因此页面刷新时仍会继续显示提示
 - 不新增复杂的 query 解析工具，直接在登录页按当前路由参数做最小处理
 
 ### 5.4 路由层
 
-在 `src/router/index.ts` 中新增顶层匿名路由：
+当前在 `src/router/index.ts` 中使用顶层匿名路由：
 
 - `path: '/register'`
 - `name: 'Register'`
 - `meta.title: '注册'`
 - `meta.requiresAuth: false`
 
-守卫策略建议与 `/login` 保持一致：
+守卫策略与 `/login` 保持一致：
 
 - 匿名用户可正常访问
 - 已登录用户访问 `/register` 时重定向到 `sanitizeRedirectPath(to.query.redirect, '/explore')`
@@ -242,13 +242,13 @@ export function register(data: RegisterPayload): Promise<void>;
 - 用户名为空、邮箱非法、密码过短、两次密码不一致时，表单可阻止提交并展示校验提示
 - 提交中按钮显示 loading，防止重复提交
 - 注册成功后跳回 `/login`，并携带注册成功标记
-- 登录页展示一次性注册成功提示，但邮箱输入框不自动回填
+- 登录页在 URL 保留 `registered=1` 时展示注册成功提示，但邮箱输入框不自动回填
 - 重复邮箱时展示明确业务错误提示
 - API、mock、路由、页面测试与文档保持同步更新
 
 ## 7. 测试与验证
 
-建议最小测试覆盖如下：
+当前实现的最小测试覆盖如下：
 
 - `src/router/index.test.ts`
   - 匿名访问 `/register` 不被守卫拦截
@@ -297,7 +297,7 @@ export function register(data: RegisterPayload): Promise<void>;
 - 注册成功后是否要求自动登录或返回 token
 - 登录页成功提示与邮箱回填是否需要沉淀为更通用的认证页行为
 
-如果认证域后续继续扩展，建议在 `views/auth` 下统一维护：
+如果认证域后续继续扩展，应在 `views/auth` 下统一维护：
 
 - `register`
 - `forgot-password`

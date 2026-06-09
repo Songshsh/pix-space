@@ -52,3 +52,8 @@
 - token 定义：[tokens.css](tokens.css)
 - Element Plus 覆盖：[element-overrides.css](element-overrides.css)
 - 登录/注册品牌样式：[auth-page.css](auth-page.css)
+
+## 相关规范
+
+- 文档地图：[docs/README.md](../../docs/README.md)
+- 前端综合规范：[docs/FRONTEND_SPEC.md](../../docs/FRONTEND_SPEC.md)

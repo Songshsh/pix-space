@@ -375,7 +375,10 @@ query：
 
 `POST /files/upload`
 
-请求：`FormData`（包含文件）
+请求：
+
+- body：`FormData`（包含文件）
+- query：`parentId`（可选，目标目录 ID；不传表示上传到根目录）
 
 响应 data：
 

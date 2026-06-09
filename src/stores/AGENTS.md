@@ -17,6 +17,11 @@
 - MUST：store 文件放在 `src/stores/`，命名与职责对应（例如 `user.ts`、`settings.ts`）。
 - SHOULD：对关键 store 补充单测（同目录 `*.test.ts`）。
 
+## 关键文件
+
+- 用户状态：[user.ts](user.ts)
+- 设置状态：[settings.ts](settings.ts)
+
 ## 相关规范
 
 - 前端综合规范：[../../docs/FRONTEND_SPEC.md](../../docs/FRONTEND_SPEC.md)
