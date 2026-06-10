@@ -54,7 +54,7 @@ const { searchQuery, submitSearch, clearSearch } = usePortalSearch();
   top: 0;
   z-index: var(--ds-z-sticky);
   background-color: var(--ds-color-bg-primary);
-  height: 64px;
+  height: var(--portal-header-height);
   box-shadow: var(--ds-shadow-1);
   display: flex;
   justify-content: center;

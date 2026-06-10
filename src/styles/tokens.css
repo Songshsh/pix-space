@@ -39,8 +39,14 @@ html,
   --ds-shadow-2: 0 6px 18px rgba(0, 0, 0, 0.12);
   --ds-shadow-3: 0 4px 15px rgba(0, 0, 0, 0.1);
   --ds-shadow-4: 0 6px 20px rgba(0, 0, 0, 0.15);
+  /* 品牌色 shadow：第一行为 color-mix 引用品牌色 token（支持时自动跟随主题），
+     第二行为硬编码兜底（不支持 color-mix 的浏览器回退） */
   --ds-shadow-glow-sm: 0 0 30px rgba(102, 126, 234, 0.3);
+  --ds-shadow-glow-sm: 0 0 30px
+    color-mix(in srgb, var(--ds-color-brand-primary) 30%, transparent);
   --ds-shadow-glow-md: 0 0 40px rgba(102, 126, 234, 0.4);
+  --ds-shadow-glow-md: 0 0 40px
+    color-mix(in srgb, var(--ds-color-brand-primary) 40%, transparent);
   --ds-shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.3);
   --ds-shadow-gallery-panel: 0 24px 60px #00000033;
   --ds-shadow-gallery-caption: 0 8px 18px #00000014;
@@ -48,7 +54,11 @@ html,
     0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05),
     inset 0 0 20px rgba(255, 255, 255, 0.02);
   --ds-shadow-focus: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  --ds-shadow-focus: 0 0 0 3px
+    color-mix(in srgb, var(--ds-color-brand-primary) 20%, transparent);
   --ds-shadow-btn-hover: 0 10px 20px rgba(102, 126, 234, 0.3);
+  --ds-shadow-btn-hover: 0 10px 20px
+    color-mix(in srgb, var(--ds-color-brand-primary) 30%, transparent);
 
   --ds-z-base: 0;
   --ds-z-local: 1;
@@ -61,6 +71,9 @@ html,
   --ds-color-bg-secondary: #f0f2f5;
   --ds-color-bg-tertiary: #f5f6f7;
   --ds-color-bg-hover: #f0f0ff;
+
+  /* Portal 布局常量 */
+  --portal-header-height: 64px;
 
   --ds-color-text-primary: #333333;
   --ds-color-text-secondary: #666666;
@@ -171,11 +184,19 @@ html.dark {
   --ds-shadow-3: 0 4px 15px rgba(0, 0, 0, 0.3);
   --ds-shadow-4: 0 6px 20px rgba(0, 0, 0, 0.4);
   --ds-shadow-glow-sm: 0 0 30px rgba(102, 126, 234, 0.2);
+  --ds-shadow-glow-sm: 0 0 30px
+    color-mix(in srgb, var(--ds-color-brand-primary) 20%, transparent);
   --ds-shadow-glow-md: 0 0 40px rgba(102, 126, 234, 0.3);
+  --ds-shadow-glow-md: 0 0 40px
+    color-mix(in srgb, var(--ds-color-brand-primary) 30%, transparent);
   --ds-shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.5);
   --ds-shadow-auth-card:
     0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06),
     inset 0 0 20px rgba(255, 255, 255, 0.03);
   --ds-shadow-focus: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  --ds-shadow-focus: 0 0 0 3px
+    color-mix(in srgb, var(--ds-color-brand-primary) 15%, transparent);
   --ds-shadow-btn-hover: 0 10px 20px rgba(102, 126, 234, 0.2);
+  --ds-shadow-btn-hover: 0 10px 20px
+    color-mix(in srgb, var(--ds-color-brand-primary) 20%, transparent);
 }

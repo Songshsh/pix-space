@@ -413,10 +413,10 @@ const goNext = () => {
   transform: translateX(-50%);
   display: inline-flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--ds-space-2);
   width: fit-content;
   max-width: min(360px, calc(100% - 32px));
-  padding: 10px 12px;
+  padding: var(--ds-space-3);
   border-radius: var(--ds-radius-4);
   background: var(--ds-color-overlay-medium);
   color: var(--ds-color-text-inverse);
@@ -442,9 +442,9 @@ const goNext = () => {
 .toolbar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 14px 12px;
-  border-radius: 28px;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4) var(--ds-space-3);
+  border-radius: var(--ds-radius-6);
   background: var(--ds-color-overlay-medium);
   box-shadow: var(--ds-shadow-gallery-panel);
   backdrop-filter: blur(16px);
@@ -520,8 +520,8 @@ const goNext = () => {
   }
 
   .toolbar {
-    gap: 8px;
-    padding: 10px;
+    gap: var(--ds-space-2);
+    padding: var(--ds-space-3);
   }
 
   .toolbar-action {
