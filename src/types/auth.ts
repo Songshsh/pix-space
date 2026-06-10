@@ -1,4 +1,4 @@
-import type { UserRole } from '../utils/access';
+import type { UserRole } from './access';
 
 export interface AuthUser {
   id?: number;

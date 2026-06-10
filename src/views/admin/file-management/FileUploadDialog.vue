@@ -26,8 +26,6 @@ const props = defineProps<{
 }>();
 
 const uploadCurrentFolder = (formData: FormData) => {
-  return uploadFile(formData, {
-    parentId: props.parentId,
-  });
+  return uploadFile(formData, props.parentId);
 };
 </script>

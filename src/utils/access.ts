@@ -1,7 +1,8 @@
-export type UserRole = 'admin' | 'user' | 'viewer';
-export type PermissionRole = UserRole | UserRole[] | undefined;
+import type { UserRole, PermissionRole } from '../types/access';
 
-const VALID_ROLES: Set<string> = new Set<UserRole>(['admin', 'user', 'viewer']);
+export type { UserRole, PermissionRole };
+
+const VALID_ROLES: Set<string> = new Set(['admin', 'user', 'viewer']);
 export const ADMIN_ACCESS_ROLES: UserRole[] = ['admin'];
 
 export function normalizeRole(input?: string): UserRole | undefined {

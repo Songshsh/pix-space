@@ -1,5 +1,5 @@
 import type { PaginatedData } from './http';
-import type { UserRole } from '../utils/access';
+import type { UserRole } from './access';
 
 export interface User {
   id: number;

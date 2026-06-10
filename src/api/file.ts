@@ -1,5 +1,5 @@
 import request, { requestRaw } from '../utils/request';
-import type { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
   FileItem,
   FileListParams,
@@ -12,7 +12,7 @@ import type {
 export function getFileList(
   params?: FileListParams,
   config?: AxiosRequestConfig
-) {
+): Promise<ListResult<FileItem>> {
   return request.get('/files', {
     params,
     silentError: true,
@@ -22,12 +22,9 @@ export function getFileList(
 
 export function uploadFile(
   formData: FormData,
-  options?: {
-    parentId?: number | null;
-    config?: AxiosRequestConfig;
-  }
+  parentId?: number | null,
+  config?: AxiosRequestConfig
 ): Promise<FileItem> {
-  const { parentId, config } = options || {};
   const params =
     parentId !== undefined && parentId !== null ? { parentId } : undefined;
   return request.post('/files/upload', formData, {
@@ -39,8 +36,11 @@ export function uploadFile(
   });
 }
 
-export function deleteFile(id: string | number): Promise<boolean> {
-  return request.delete(`/files/${id}`);
+export function deleteFile(
+  id: string | number,
+  config?: AxiosRequestConfig
+): Promise<boolean> {
+  return request.delete(`/files/${id}`, config);
 }
 
 export function updateFile(
@@ -54,7 +54,7 @@ export function updateFile(
 export function createFolder(
   data: CreateFolderPayload,
   config?: AxiosRequestConfig
-) {
+): Promise<CreateFolderResult> {
   return request.post(
     '/files/folder',
     data,
@@ -62,7 +62,10 @@ export function createFolder(
   ) as Promise<CreateFolderResult>;
 }
 
-export function downloadFile(id: string | number, config?: AxiosRequestConfig) {
+export function downloadFile(
+  id: string | number,
+  config?: AxiosRequestConfig
+): Promise<AxiosResponse<Blob>> {
   return requestRaw.get(`/files/${id}/download`, {
     responseType: 'blob',
     ...config,

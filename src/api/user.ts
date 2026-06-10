@@ -39,8 +39,11 @@ export function getSession(config?: AxiosRequestConfig) {
   }) as Promise<AuthSessionResult>;
 }
 
-export function updateUserProfile(data: Partial<AuthSessionResult['user']>) {
-  return request.put('/user/profile', data) as Promise<
+export function updateUserProfile(
+  data: Partial<AuthSessionResult['user']>,
+  config?: AxiosRequestConfig
+): Promise<AuthSessionResult['user']> {
+  return request.put('/user/profile', data, config) as Promise<
     AuthSessionResult['user']
   >;
 }
@@ -66,6 +69,9 @@ export function deleteUserAccount(
   return request.delete('/user/account', config);
 }
 
-export function changePassword(data: ChangePasswordForm): Promise<boolean> {
-  return request.put('/user/password', data);
+export function changePassword(
+  data: ChangePasswordForm,
+  config?: AxiosRequestConfig
+): Promise<boolean> {
+  return request.put('/user/password', data, config);
 }

@@ -3,7 +3,7 @@ import { usePasswordChange } from '../../../composables/usePasswordChange';
 import {
   createPasswordForm,
   createPasswordFormRules,
-} from '../../../composables/usePasswordForm';
+} from '../../../composables/passwordForm';
 import type { PasswordFormModel } from '../../../components/settings/types';
 
 export function useAccountPasswordForm() {

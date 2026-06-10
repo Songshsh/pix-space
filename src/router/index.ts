@@ -4,10 +4,9 @@ import {
   type RouteRecordRaw,
 } from 'vue-router';
 import { useUserStore } from '../stores/user';
-import nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
 import { ADMIN_ACCESS_ROLES, canAccess } from '../utils/access';
 import { sanitizeRedirectPath } from '../utils/auth';
+import { useNprogress } from '../composables/useNprogress';
 
 const siteTitle = import.meta.env.VITE_APP_TITLE || 'Pix Space';
 
@@ -44,7 +43,6 @@ export const protectedChildrenRoutes: RouteRecordRaw[] = [
       title: '用户管理',
       showInMenu: true,
       icon: 'User',
-      roles: ['admin'],
     },
   },
   {
@@ -61,7 +59,6 @@ export const protectedChildrenRoutes: RouteRecordRaw[] = [
       title: '系统设置',
       showInMenu: true,
       icon: 'Setting',
-      roles: ['admin'],
     },
   },
 ];
@@ -147,30 +144,18 @@ const routes: Array<RouteRecordRaw> = [
   },
 ];
 
-nprogress.configure({ showSpinner: false });
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 
-let progressTimer: ReturnType<typeof setTimeout> | undefined;
-let progressStarted = false;
-
-function cancelProgressStart() {
-  if (progressTimer) clearTimeout(progressTimer);
-  progressTimer = undefined;
-}
-
-function queueProgressStart() {
-  progressTimer = setTimeout(() => {
-    progressStarted = true;
-    nprogress.start();
-  }, 200);
-}
+const {
+  cancelProgressStart,
+  queueProgressStart,
+  done: nprogressDone,
+} = useNprogress();
 
 router.beforeEach((to, _from, next) => {
-  progressStarted = false;
   cancelProgressStart();
 
   const userStore = useUserStore();
@@ -207,7 +192,12 @@ router.beforeEach((to, _from, next) => {
     return;
   }
 
-  if ((to.path === '/login' || to.path === '/register') && isAuthenticated) {
+  if (
+    (to.path === '/login' ||
+      to.path === '/register' ||
+      to.path === '/forgot-password') &&
+    isAuthenticated
+  ) {
     const redirectPath = sanitizeRedirectPath(to.query.redirect, '/explore');
     queueProgressStart();
     next(redirectPath);
@@ -215,7 +205,7 @@ router.beforeEach((to, _from, next) => {
   }
 
   if (
-    !to.matched.every((record) => canAccess(record.meta.roles, userStore.role))
+    to.matched.some((record) => !canAccess(record.meta.roles, userStore.role))
   ) {
     queueProgressStart();
     next({ path: '/403', query: { from: to.fullPath } });
@@ -227,7 +217,7 @@ router.beforeEach((to, _from, next) => {
 
 router.afterEach((to, _from, failure) => {
   cancelProgressStart();
-  if (progressStarted || failure) nprogress.done();
+  nprogressDone();
   if (to.meta.title && !failure) {
     document.title = `${to.meta.title} - ${siteTitle}`;
   } else if (!failure) {
@@ -237,7 +227,7 @@ router.afterEach((to, _from, failure) => {
 
 router.onError(() => {
   cancelProgressStart();
-  nprogress.done();
+  nprogressDone();
 });
 
 export default router;

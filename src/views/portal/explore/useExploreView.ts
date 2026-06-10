@@ -1,5 +1,6 @@
 import { getExploreData } from '../../../api/explore';
 import type { ExploreData, SearchState } from '../../../types/explore';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 
 const HOT_CATEGORY_SET = new Set([
   'UI设计',
@@ -25,7 +26,7 @@ function matchesCategory(item: ExploreData['items'][number], category: string) {
 export function useExploreView() {
   const route = useRoute();
   const router = useRouter();
-  let requestId = 0;
+  const sequencer = useRequestSequencer();
 
   const activeCategory = ref('全部');
   const exploreData = ref<ExploreData>({
@@ -38,18 +39,18 @@ export function useExploreView() {
   const dataError = ref<string | null>(null);
 
   const loadExploreData = async () => {
-    const currentRequestId = ++requestId;
+    const requestId = sequencer.next();
     dataLoading.value = true;
     dataError.value = null;
     try {
       const result = await getExploreData({ silentError: true });
-      if (currentRequestId !== requestId) return;
+      if (requestId !== sequencer.currentSeq) return;
       exploreData.value = result;
     } catch (error) {
-      if (currentRequestId !== requestId) return;
+      if (requestId !== sequencer.currentSeq) return;
       dataError.value = error instanceof Error ? error.message : '加载失败';
     } finally {
-      if (currentRequestId === requestId) {
+      if (requestId === sequencer.currentSeq) {
         dataLoading.value = false;
       }
     }
@@ -176,6 +177,8 @@ export function useExploreView() {
       const rightSeed = getItemSeed(right.id);
 
       if (activeSort.value === 'hot') {
+        // 热度启发式公式：标签数量权重最高（每多一个标签 +100），其次是图片高度，
+        // 最后叠加随机 seed 以在同分项之间引入自然分布，避免相同分数的项顺序每次都完全一致。
         const leftHot = left.tags.length * 100 + left.imageHeight + leftSeed;
         const rightHot =
           right.tags.length * 100 + right.imageHeight + rightSeed;

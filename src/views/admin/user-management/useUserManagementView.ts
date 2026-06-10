@@ -1,10 +1,11 @@
 import { getUserList } from '../../../api/users';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 import type { Pagination, User, UserSearchForm } from '../../../types/user';
 
 export function useUserManagementView() {
   const loading = ref(false);
   const loadError = ref('');
-  let requestSeq = 0;
+  const sequencer = useRequestSequencer();
 
   const searchForm = reactive<UserSearchForm>({
     username: '',
@@ -21,7 +22,7 @@ export function useUserManagementView() {
   const tableData = ref<User[]>([]);
 
   const loadUsers = async () => {
-    const currentSeq = (requestSeq += 1);
+    const currentSeq = sequencer.next();
     loading.value = true;
     loadError.value = '';
     try {
@@ -35,15 +36,15 @@ export function useUserManagementView() {
         },
         { silentError: true }
       );
-      if (currentSeq !== requestSeq) return;
+      if (currentSeq !== sequencer.currentSeq) return;
       tableData.value = result?.list || [];
       pagination.total = result?.total || 0;
     } catch (error) {
-      if (currentSeq !== requestSeq) return;
+      if (currentSeq !== sequencer.currentSeq) return;
       const normalized = error as { message?: string };
       loadError.value = normalized.message || '用户列表加载失败';
     } finally {
-      if (currentSeq === requestSeq) {
+      if (currentSeq === sequencer.currentSeq) {
         loading.value = false;
       }
     }

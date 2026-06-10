@@ -4,6 +4,7 @@ import {
   getUserLikesPage,
   getUserUploadsPage,
 } from '../../../api/user-boards';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 import { useUserStore } from '../../../stores/user';
 import type {
   Board,
@@ -64,10 +65,10 @@ export function useUserBoardsView() {
   const uploadsSearch = ref('');
   const likesSearch = ref('');
   const uploadsSort = ref('最新');
-  let summaryRequestId = 0;
-  let boardsRequestId = 0;
-  let uploadsRequestId = 0;
-  let likesRequestId = 0;
+  const summarySequencer = useRequestSequencer();
+  const boardsSequencer = useRequestSequencer();
+  const uploadsSequencer = useRequestSequencer();
+  const likesSequencer = useRequestSequencer();
   let uploadsSearchTimer: ReturnType<typeof setTimeout> | undefined;
   let likesSearchTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -83,9 +84,9 @@ export function useUserBoardsView() {
   };
 
   const invalidateListRequests = () => {
-    boardsRequestId += 1;
-    uploadsRequestId += 1;
-    likesRequestId += 1;
+    void boardsSequencer.next();
+    void uploadsSequencer.next();
+    void likesSequencer.next();
   };
 
   const stats = computed(() => {
@@ -228,7 +229,7 @@ export function useUserBoardsView() {
   };
 
   const loadSummary = async () => {
-    const requestId = ++summaryRequestId;
+    const requestId = summarySequencer.next();
     if (!isValidUserId.value) {
       resetSummaryState();
       summaryLoading.value = false;
@@ -244,12 +245,12 @@ export function useUserBoardsView() {
       const result = await getUserBoardsSummary(userId.value, {
         silentError: true,
       });
-      if (requestId !== summaryRequestId) return;
+      if (requestId !== summarySequencer.currentSeq) return;
       profile.value = result.profile;
       summaryStats.value = result.stats;
       return true;
     } catch (error) {
-      if (requestId !== summaryRequestId) return;
+      if (requestId !== summarySequencer.currentSeq) return;
       const normalized = error as { status?: number; message?: string };
       if (normalized.status === 404) {
         resetSummaryState();
@@ -260,14 +261,14 @@ export function useUserBoardsView() {
       summaryError.value = normalized.message || '加载失败';
       return false;
     } finally {
-      if (requestId === summaryRequestId) {
+      if (requestId === summarySequencer.currentSeq) {
         summaryLoading.value = false;
       }
     }
   };
 
   const loadBoardsPage = async (nextPage = 1) => {
-    const requestId = ++boardsRequestId;
+    const requestId = boardsSequencer.next();
     boardsState.error = null;
     if (nextPage === 1) {
       boardsState.loading = true;
@@ -280,7 +281,7 @@ export function useUserBoardsView() {
         { page: nextPage, pageSize: boardsState.pageSize },
         { silentError: true }
       );
-      if (requestId !== boardsRequestId) return;
+      if (requestId !== boardsSequencer.currentSeq) return;
       boardsState.items =
         nextPage === 1 ? result.list : [...boardsState.items, ...result.list];
       boardsState.page = result.page;
@@ -288,10 +289,10 @@ export function useUserBoardsView() {
       boardsState.hasMore = result.hasMore;
       boardsState.initialized = true;
     } catch (error) {
-      if (requestId !== boardsRequestId) return;
+      if (requestId !== boardsSequencer.currentSeq) return;
       boardsState.error = error instanceof Error ? error.message : '加载失败';
     } finally {
-      if (requestId === boardsRequestId) {
+      if (requestId === boardsSequencer.currentSeq) {
         boardsState.loading = false;
         boardsState.loadingMore = false;
       }
@@ -299,7 +300,7 @@ export function useUserBoardsView() {
   };
 
   const loadUploadsPage = async (nextPage = 1) => {
-    const requestId = ++uploadsRequestId;
+    const requestId = uploadsSequencer.next();
     uploadsState.error = null;
     if (nextPage === 1) {
       uploadsState.loading = true;
@@ -317,7 +318,7 @@ export function useUserBoardsView() {
         },
         { silentError: true }
       );
-      if (requestId !== uploadsRequestId) return;
+      if (requestId !== uploadsSequencer.currentSeq) return;
       uploadsState.items =
         nextPage === 1 ? result.list : [...uploadsState.items, ...result.list];
       uploadsState.page = result.page;
@@ -325,10 +326,10 @@ export function useUserBoardsView() {
       uploadsState.hasMore = result.hasMore;
       uploadsState.initialized = true;
     } catch (error) {
-      if (requestId !== uploadsRequestId) return;
+      if (requestId !== uploadsSequencer.currentSeq) return;
       uploadsState.error = error instanceof Error ? error.message : '加载失败';
     } finally {
-      if (requestId === uploadsRequestId) {
+      if (requestId === uploadsSequencer.currentSeq) {
         uploadsState.loading = false;
         uploadsState.loadingMore = false;
       }
@@ -336,7 +337,7 @@ export function useUserBoardsView() {
   };
 
   const loadLikesPage = async (nextPage = 1) => {
-    const requestId = ++likesRequestId;
+    const requestId = likesSequencer.next();
     likesState.error = null;
     if (nextPage === 1) {
       likesState.loading = true;
@@ -353,7 +354,7 @@ export function useUserBoardsView() {
         },
         { silentError: true }
       );
-      if (requestId !== likesRequestId) return;
+      if (requestId !== likesSequencer.currentSeq) return;
       likesState.items =
         nextPage === 1 ? result.list : [...likesState.items, ...result.list];
       likesState.page = result.page;
@@ -361,10 +362,10 @@ export function useUserBoardsView() {
       likesState.hasMore = result.hasMore;
       likesState.initialized = true;
     } catch (error) {
-      if (requestId !== likesRequestId) return;
+      if (requestId !== likesSequencer.currentSeq) return;
       likesState.error = error instanceof Error ? error.message : '加载失败';
     } finally {
-      if (requestId === likesRequestId) {
+      if (requestId === likesSequencer.currentSeq) {
         likesState.loading = false;
         likesState.loadingMore = false;
       }

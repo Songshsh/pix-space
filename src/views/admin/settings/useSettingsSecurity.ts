@@ -3,9 +3,10 @@ import type { SecurityPanelForm } from '../../../components/settings/types';
 import {
   createPasswordForm,
   createPasswordFormRules,
-} from '../../../composables/usePasswordForm';
+} from '../../../composables/passwordForm';
 import { usePasswordChange } from '../../../composables/usePasswordChange';
 import type { FormInstance, FormRules } from 'element-plus';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 
 export function useSettingsSecurity() {
   const { submitPasswordChange } = usePasswordChange();
@@ -17,7 +18,7 @@ export function useSettingsSecurity() {
   const twoFactorSaving = ref(false);
   const savedTwoFactorEnabled = ref(false);
   const twoFactorEnabled = ref(false);
-  let preferencesRequestId = 0;
+  const sequencer = useRequestSequencer();
   let preferencesVersion = 0;
 
   const securityForm = reactive<SecurityPanelForm>(createPasswordForm());
@@ -52,14 +53,14 @@ export function useSettingsSecurity() {
   };
 
   const loadSecurityPreferences = async () => {
-    const requestId = ++preferencesRequestId;
+    const requestId = sequencer.next();
     const snapshotVersion = preferencesVersion;
     preferencesLoading.value = true;
     preferencesError.value = '';
     try {
       const result = await getUserPreferences({ silentError: true });
       if (
-        requestId !== preferencesRequestId ||
+        requestId !== sequencer.currentSeq ||
         snapshotVersion !== preferencesVersion
       ) {
         return null;
@@ -70,13 +71,13 @@ export function useSettingsSecurity() {
       preferencesError.value = '';
       return result;
     } catch {
-      if (requestId === preferencesRequestId) {
+      if (requestId === sequencer.currentSeq) {
         preferencesLoaded.value = false;
         preferencesError.value = '偏好加载失败，请重试';
       }
       return null;
     } finally {
-      if (requestId === preferencesRequestId) {
+      if (requestId === sequencer.currentSeq) {
         preferencesLoading.value = false;
       }
     }

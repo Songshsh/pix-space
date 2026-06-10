@@ -1,5 +1,5 @@
 import request, { requestRaw } from '../utils/request';
-import type { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type { ImageListParams, ImageListResponse } from '../types/image';
 import type { ImageDetail } from '../types/image-detail';
 
@@ -31,33 +31,40 @@ export function uploadImage(
   return request.post('/images/upload', formData, config);
 }
 
-export function deleteImage(id: string | number): Promise<boolean> {
-  return request.delete(`/images/${id}`);
+export function deleteImage(
+  id: string | number,
+  config?: AxiosRequestConfig
+): Promise<boolean> {
+  return request.delete(`/images/${id}`, config);
 }
 
 export function updateImage(
   id: string | number,
-  data: { title?: string; isFavorite?: boolean; tags?: string[] }
+  data: { title?: string; isFavorite?: boolean; tags?: string[] },
+  config?: AxiosRequestConfig
 ): Promise<boolean> {
-  return request.put(`/images/${id}`, data);
+  return request.put(`/images/${id}`, data, config);
 }
 
 export function downloadImage(
   id: string | number,
   config?: AxiosRequestConfig
-) {
+): Promise<AxiosResponse<Blob>> {
   return requestRaw.get(`/images/${id}/download`, {
     responseType: 'blob',
     ...config,
   });
 }
 
-export function downloadImageByUrl(url: string, config?: AxiosRequestConfig) {
+export function downloadImageByUrl(
+  url: string,
+  config?: AxiosRequestConfig
+): Promise<AxiosResponse<Blob>> {
   const requestUrl = String(url || '');
   if (!requestUrl.startsWith('/') || requestUrl.startsWith('//')) {
     return Promise.reject(new Error('仅支持同源相对路径下载'));
   }
-  return requestRaw.get(url, {
+  return requestRaw.get(requestUrl, {
     responseType: 'blob',
     baseURL: '',
     ...config,

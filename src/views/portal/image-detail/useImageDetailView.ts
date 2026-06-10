@@ -1,4 +1,5 @@
 import { getImageDetail } from '../../../api/image';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 import type { ImageDetail } from '../../../types/image-detail';
 import { formatFileSize } from '../../../utils/fileDisplay';
 
@@ -22,7 +23,7 @@ export function useImageDetailView() {
   const imageId = computed(() => {
     return typeof route.params.id === 'string' ? route.params.id.trim() : '';
   });
-  let detailRequestId = 0;
+  const sequencer = useRequestSequencer();
 
   const loading = ref(true);
   const loadError = ref<string | null>(null);
@@ -46,14 +47,15 @@ export function useImageDetailView() {
     const match = url.match(/\.([a-z0-9]+)(?:\?|$)/i);
     const format = match?.[1] ? match[1].toUpperCase() : undefined;
     return {
+      // TODO: 从图片加载完成后获取实际尺寸，或从 API 返回的元数据中读取
       dimensions: undefined,
       format,
       size,
     };
   });
 
-  const loadDetail = async () => {
-    const requestId = ++detailRequestId;
+  const loadImageDetail = async () => {
+    const requestId = sequencer.next();
     if (!imageId.value) {
       loadError.value = null;
       notFound.value = true;
@@ -71,10 +73,10 @@ export function useImageDetailView() {
 
     try {
       const result = await getImageDetail(imageId.value, { silentError: true });
-      if (requestId !== detailRequestId) return;
+      if (requestId !== sequencer.currentSeq) return;
       imageDetail.value = result;
     } catch (error) {
-      if (requestId !== detailRequestId) return;
+      if (requestId !== sequencer.currentSeq) return;
       const normalized = error as { status?: number; message?: string };
       if (normalized.status === 404) {
         notFound.value = true;
@@ -84,7 +86,7 @@ export function useImageDetailView() {
         loadError.value = normalized.message || '加载失败';
       }
     } finally {
-      if (requestId === detailRequestId) {
+      if (requestId === sequencer.currentSeq) {
         loading.value = false;
       }
     }
@@ -93,13 +95,13 @@ export function useImageDetailView() {
   watch(
     imageId,
     () => {
-      void loadDetail();
+      void loadImageDetail();
     },
     { immediate: true }
   );
 
   const handleRetry = () => {
-    void loadDetail();
+    void loadImageDetail();
   };
 
   const handleBack = () => {
@@ -113,7 +115,7 @@ export function useImageDetailView() {
     viewState,
     loadError,
     imageMetaData,
-    loadDetail,
+    loadImageDetail,
     handleRetry,
     handleBack,
   };

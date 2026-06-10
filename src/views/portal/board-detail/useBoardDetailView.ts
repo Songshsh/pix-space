@@ -1,5 +1,6 @@
 import { getBoardDetail } from '../../../api/boards';
 import type { BoardDetail } from '../../../types/board-detail';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 
 export type BoardDetailViewState =
   | 'loading'
@@ -14,7 +15,7 @@ export function useBoardDetailView() {
   const router = useRouter();
 
   const boardId = computed(() => String(route.params.id || ''));
-  let detailRequestId = 0;
+  const sequencer = useRequestSequencer();
 
   const loading = ref(true);
   const loadError = ref<string | null>(null);
@@ -59,7 +60,7 @@ export function useBoardDetailView() {
   };
 
   const loadDetail = async () => {
-    const requestId = ++detailRequestId;
+    const requestId = sequencer.next();
     if (!boardId.value) {
       notFound.value = true;
       loading.value = false;
@@ -74,10 +75,10 @@ export function useBoardDetailView() {
 
     try {
       const result = await getBoardDetail(boardId.value, { silentError: true });
-      if (requestId !== detailRequestId) return;
+      if (requestId !== sequencer.currentSeq) return;
       boardDetail.value = result;
     } catch (error) {
-      if (requestId !== detailRequestId) return;
+      if (requestId !== sequencer.currentSeq) return;
       const normalized = error as { status?: number; message?: string };
       if (normalized.status === 403) {
         forbidden.value = true;
@@ -87,7 +88,7 @@ export function useBoardDetailView() {
         loadError.value = normalized.message || '加载失败';
       }
     } finally {
-      if (requestId === detailRequestId) {
+      if (requestId === sequencer.currentSeq) {
         loading.value = false;
       }
     }

@@ -1,5 +1,6 @@
 import { getImageList } from '../../../api/image';
 import { PREVIEW_COLORS } from '../../../constants/image';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 import type { Image } from '../../../types/image';
 import { useDebounceFn } from '@vueuse/core';
 
@@ -30,14 +31,14 @@ export function useImageList() {
   const activeCollection = ref<string>('all');
   const activeTag = ref<string>('');
 
-  let requestSeq = 0;
+  const sequencer = useRequestSequencer();
 
   const collectionTitle = computed(() => {
     return COLLECTION_TITLES[activeCollection.value] || '全部图片';
   });
 
   const loadImages = async () => {
-    const currentSeq = (requestSeq += 1);
+    const currentSeq = sequencer.next();
     loading.value = true;
     error.value = null;
     try {
@@ -52,7 +53,7 @@ export function useImageList() {
         },
         { silentError: true }
       );
-      if (currentSeq !== requestSeq) return;
+      if (currentSeq !== sequencer.currentSeq) return;
       const list = result?.list || [];
       images.value = list.map((img: Image, index: number) => ({
         ...img,
@@ -71,10 +72,10 @@ export function useImageList() {
       }));
       totalImages.value = result?.total || images.value.length;
     } catch (err) {
-      if (currentSeq !== requestSeq) return;
+      if (currentSeq !== sequencer.currentSeq) return;
       error.value = err instanceof Error ? err.message : '加载图片失败';
     } finally {
-      if (currentSeq === requestSeq) {
+      if (currentSeq === sequencer.currentSeq) {
         loading.value = false;
       }
     }

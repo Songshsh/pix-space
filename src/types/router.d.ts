@@ -1,5 +1,5 @@
 import type { MenuIconKey } from '../router';
-import type { UserRole } from '../utils/access';
+import type { UserRole } from './access';
 import 'vue-router';
 
 declare module 'vue-router' {

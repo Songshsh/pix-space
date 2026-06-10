@@ -1,6 +1,7 @@
 import { getFileList } from '../../../api/file';
 import type { FileItem, ListResult } from '../../../types/file';
 import { useDebounceFn } from '@vueuse/core';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 
 interface BreadcrumbItem {
   id: number | null;
@@ -31,10 +32,10 @@ export function useFileManagementView(options: UseFileManagementViewOptions) {
     { id: null, name: '我的文件' },
   ]);
 
-  let loadFilesSeq = 0;
+  const sequencer = useRequestSequencer();
 
   const loadFiles = async () => {
-    const currentSeq = (loadFilesSeq += 1);
+    const currentSeq = sequencer.next();
     loading.value = true;
     loadError.value = null;
     try {
@@ -47,15 +48,15 @@ export function useFileManagementView(options: UseFileManagementViewOptions) {
         },
         { silentError: true }
       )) as ListResult<FileItem>;
-      if (currentSeq !== loadFilesSeq) return;
+      if (currentSeq !== sequencer.currentSeq) return;
       files.value = result.list || [];
       pagination.total = result.total || 0;
       clearSelection();
     } catch (err) {
-      if (currentSeq !== loadFilesSeq) return;
+      if (currentSeq !== sequencer.currentSeq) return;
       loadError.value = err instanceof Error ? err.message : '加载文件失败';
     } finally {
-      if (currentSeq === loadFilesSeq) {
+      if (currentSeq === sequencer.currentSeq) {
         loading.value = false;
       }
     }

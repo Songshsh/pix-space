@@ -1,6 +1,7 @@
 import type { UserPreferences } from '../../../types/auth';
 import { updateUserPreferences } from '../../../api/user';
 import type { NotificationSettingsForm } from '../../../components/settings/types';
+import { useRequestSequencer } from '../../../composables/requestSequencer';
 
 const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettingsForm = {
   system: true,
@@ -43,7 +44,7 @@ export function useSettingsNotifications() {
   const applyingNotificationSettings = ref(false);
   const notificationSaving = ref(false);
   const notificationSettingsDirty = ref(false);
-  let notificationUpdateSeq = 0;
+  const sequencer = useRequestSequencer();
 
   const applyNotificationSettings = (
     notifications: UserPreferences['notifications'],
@@ -83,7 +84,7 @@ export function useSettingsNotifications() {
 
   const handleNotificationUpdate = async () => {
     if (notificationSaving.value || !notificationSettingsReady.value) return;
-    const requestId = ++notificationUpdateSeq;
+    const currentSeq = sequencer.next();
     const previous = { ...lastSyncedNotificationSettings.value };
     notificationSaving.value = true;
     try {
@@ -98,18 +99,18 @@ export function useSettingsNotifications() {
         },
         { silentError: true }
       );
-      if (requestId !== notificationUpdateSeq) {
+      if (currentSeq !== sequencer.currentSeq) {
         return;
       }
       applyNotificationSettings(result.notifications, { force: true });
       ElMessage.success('通知设置已更新');
     } catch {
-      if (requestId !== notificationUpdateSeq) {
+      if (currentSeq !== sequencer.currentSeq) {
         return;
       }
       applyNotificationSettings(previous, { force: true });
     } finally {
-      if (requestId === notificationUpdateSeq) {
+      if (currentSeq === sequencer.currentSeq) {
         notificationSaving.value = false;
       }
     }

@@ -16,7 +16,7 @@ const {
   viewState,
   loadError,
   imageMetaData,
-  loadDetail,
+  loadImageDetail,
   handleRetry,
   handleBack,
 } = useImageDetailView();
@@ -49,7 +49,7 @@ const retryLoadDetail = () => {
 const refreshDetailAfterCollect = async () => {
   const collected = await handleCollect();
   if (collected && imageDetail.value) {
-    await loadDetail();
+    await loadImageDetail();
   }
 };
 
@@ -127,7 +127,7 @@ const goAuthorProfile = () => {
 <style scoped>
 .image-detail-page {
   width: 100%;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - var(--portal-header-height));
 }
 
 .detail-card {
