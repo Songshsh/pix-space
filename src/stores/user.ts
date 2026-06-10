@@ -6,16 +6,23 @@ import type { NormalizedRequestError } from '../types/http';
 
 type UserData = Partial<AuthUser>;
 
+/** 非持久化的用户补充字段，可收敛为一个 reactive 对象 */
+const userExtra = reactive({
+  phone: '',
+  bio: '',
+});
+
 export const useUserStore = defineStore(
   'user',
   () => {
+    // 以下 5 个字段通过 pinia-plugin-persistedstate 的 pick 持久化，必须保持为独立顶层 ref
     const id = ref<number | null>(null);
     const name = ref<string>('');
     const email = ref<string>('');
     const role = ref<UserRole | ''>('');
     const avatar = ref<string>('');
-    const phone = ref<string>('');
-    const bio = ref<string>('');
+
+    // 认证状态 flag，与用户数据分离管理
     const isAuthReady = ref<boolean>(false);
     const isSessionValidated = ref<boolean>(false);
     const authCheckFailed = ref<boolean>(false);
@@ -35,8 +42,8 @@ export const useUserStore = defineStore(
       name: name.value,
       email: email.value,
       avatar: avatar.value,
-      phone: phone.value,
-      bio: bio.value,
+      phone: userExtra.phone,
+      bio: userExtra.bio,
       isLoggedIn: isLoggedIn.value,
     }));
 
@@ -53,8 +60,8 @@ export const useUserStore = defineStore(
       email.value = '';
       role.value = '';
       avatar.value = '';
-      phone.value = '';
-      bio.value = '';
+      userExtra.phone = '';
+      userExtra.bio = '';
       isSessionValidated.value = false;
       authCheckFailed.value = false;
     }
@@ -63,20 +70,22 @@ export const useUserStore = defineStore(
       const normalizedRole = normalizeRole(userData.role);
       const hasExplicitRole =
         typeof userData.role === 'string' && userData.role.trim() !== '';
-      if (
-        !userData.name ||
-        !userData.email ||
-        (hasExplicitRole && !normalizedRole)
-      ) {
-        throw new Error('用户信息不完整');
+      if (!userData.name) {
+        throw new Error('用户信息不完整：缺少姓名');
+      }
+      if (!userData.email) {
+        throw new Error('用户信息不完整：缺少邮箱');
+      }
+      if (hasExplicitRole && !normalizedRole) {
+        throw new Error(`用户信息不完整：无效的角色值 "${userData.role}"`);
       }
       id.value = userData.id ?? null;
       name.value = userData.name;
       email.value = userData.email;
       role.value = normalizedRole || 'user';
       avatar.value = userData.avatar || '';
-      phone.value = userData.phone || '';
-      bio.value = userData.bio || '';
+      userExtra.phone = userData.phone || '';
+      userExtra.bio = userData.bio || '';
     }
 
     function updateProfile(profile: UserData) {
@@ -93,16 +102,20 @@ export const useUserStore = defineStore(
         const normalized = normalizeRole(profile.role);
         if (normalized) {
           role.value = normalized;
+        } else {
+          console.warn(
+            `[useUserStore.updateProfile] 忽略无效角色值: "${profile.role}"`
+          );
         }
       }
       if (profile.avatar !== undefined) {
         avatar.value = profile.avatar || '';
       }
       if (profile.phone !== undefined) {
-        phone.value = profile.phone || '';
+        userExtra.phone = profile.phone || '';
       }
       if (profile.bio !== undefined) {
-        bio.value = profile.bio || '';
+        userExtra.bio = profile.bio || '';
       }
     }
 
@@ -156,8 +169,8 @@ export const useUserStore = defineStore(
       email,
       role,
       avatar,
-      phone,
-      bio,
+      phone: readonly(userExtra).phone,
+      bio: readonly(userExtra).bio,
       isLoggedIn,
       isAuthenticated,
       isAuthReady,

@@ -367,7 +367,7 @@ export const handlers = [
         { status: 403 }
       );
     }
-    if (!user || !password.trim()) {
+    if (!user || !password) {
       return json(
         {
           code: 401,
@@ -378,7 +378,7 @@ export const handlers = [
       );
     }
     const expectedPassword = passwordState.get(email);
-    if (passwordState.has(email) && expectedPassword !== password) {
+    if (expectedPassword && expectedPassword !== password) {
       return json(
         {
           code: 401,

@@ -115,9 +115,8 @@ const confirmUpload = async () => {
     resetUploadState();
     emit('success');
     visible.value = false;
-  } catch (error) {
+  } catch {
     ElMessage.error('上传失败，请稍后重试');
-    throw error;
   } finally {
     uploading.value = false;
   }

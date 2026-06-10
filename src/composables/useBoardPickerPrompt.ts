@@ -58,6 +58,21 @@ export function useBoardPickerPrompt() {
 
     return await new Promise<string>((resolve) => {
       resolver = resolve;
+      // 安全兜底：5 分钟后自动释放，防止 resolver 因异常未被正确清理导致内存泄漏
+      setTimeout(
+        () => {
+          if (resolver === resolve) {
+            resolver = null;
+            if (boardPickerVisible.value) {
+              boardPickerVisible.value = false;
+              boardPickerBoards.value = [];
+              selectedBoardId.value = '';
+            }
+            resolve('');
+          }
+        },
+        5 * 60 * 1000
+      );
     });
   };
 

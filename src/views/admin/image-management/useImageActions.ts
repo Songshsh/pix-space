@@ -37,7 +37,7 @@ export function useImageActions(options: UseImageActionsOptions) {
           loadImages();
           ElMessage.success('重命名成功');
         } catch {
-          void 0;
+          // API 层已通过拦截器统一 toast 错误提示，此处仅吞异常防止未处理 rejection
         }
       })
       .catch(() => {});
@@ -61,7 +61,7 @@ export function useImageActions(options: UseImageActionsOptions) {
           loadImages();
           ElMessage.success('图片已删除');
         } catch {
-          void 0;
+          // API 层已通过拦截器统一 toast 错误提示，此处仅吞异常防止未处理 rejection
         }
       })
       .catch(() => {});
@@ -77,7 +77,7 @@ export function useImageActions(options: UseImageActionsOptions) {
       loadImages();
       ElMessage.success(newValue ? '已添加到收藏' : '已取消收藏');
     } catch {
-      void 0;
+      // API 层已通过拦截器统一 toast 错误提示，此处仅吞异常防止未处理 rejection
     }
   };
 
@@ -100,7 +100,7 @@ export function useImageActions(options: UseImageActionsOptions) {
           loadImages();
           ElMessage.success('标签已更新');
         } catch {
-          void 0;
+          // API 层已通过拦截器统一 toast 错误提示，此处仅吞异常防止未处理 rejection
         }
       })
       .catch(() => {});
@@ -111,11 +111,15 @@ export function useImageActions(options: UseImageActionsOptions) {
       await downloadImageFile(image);
       ElMessage.success(`已开始下载《${image.title}》`);
     } catch {
-      void 0;
+      // API 层已通过拦截器统一 toast 错误提示，此处仅吞异常防止未处理 rejection
     }
   };
 
   const copyImageLink = async (image: Image) => {
+    if (!navigator.clipboard) {
+      ElMessage.error('当前环境不支持剪贴板操作');
+      return;
+    }
     try {
       await navigator.clipboard.writeText(image.url);
       ElMessage.success('链接已复制到剪贴板');

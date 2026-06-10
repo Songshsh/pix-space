@@ -58,6 +58,7 @@ export function useBoardDetailActions(options: UseBoardDetailActionsOptions) {
       if (normalized.status === 403 || normalized.status === 404) {
         editDialogVisible.value = false;
         await loadDetail();
+        return;
       }
       throw error;
     } finally {
@@ -92,6 +93,7 @@ export function useBoardDetailActions(options: UseBoardDetailActionsOptions) {
       if (normalized.status === 403 || normalized.status === 404) {
         uploadDialogVisible.value = false;
         await loadDetail();
+        return;
       }
       throw error;
     } finally {

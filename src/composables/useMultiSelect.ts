@@ -4,11 +4,7 @@
  */
 export function useMultiSelect<T extends { id: string | number }>() {
   const selectedIds = ref<T['id'][]>([]);
-  const selectedSet = ref<Set<T['id']>>(new Set());
-
-  watch(selectedIds, (ids) => {
-    selectedSet.value = new Set(ids as T['id'][]);
-  });
+  const selectedSet = computed(() => new Set(selectedIds.value));
 
   const toggle = (item: T) => {
     const id = item.id;

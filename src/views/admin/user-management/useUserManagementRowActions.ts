@@ -43,19 +43,28 @@ export function useUserManagementRowActions(
       .catch(() => {});
   };
 
-  const handleStatusChange = async (row: User, status: User['status']) => {
+  const handleStatusChange = async (row: User, newStatus: User['status']) => {
     if (isCurrentUser(row)) {
-      ElMessage.warning('不支持禁用当前登录账号');
+      ElMessage.warning('不支持修改当前登录账号状态');
       return;
     }
-    const updated = await updateUserStatus(row.id, { status });
-    const target = options.tableData.value.find((item) => item.id === row.id);
-    if (target) {
-      target.status = updated.status;
+    const previousStatus = row.status;
+    try {
+      const updated = await updateUserStatus(row.id, { status: newStatus });
+      const target = options.tableData.value.find((item) => item.id === row.id);
+      if (target) {
+        target.status = updated.status;
+      }
+      ElMessage.success(
+        updated.status === 'active' ? '用户已启用' : '用户已禁用'
+      );
+    } catch {
+      // API 层已弹 toast，此处恢复开关状态防止 UI 与实际状态不一致
+      const target = options.tableData.value.find((item) => item.id === row.id);
+      if (target) {
+        target.status = previousStatus;
+      }
     }
-    ElMessage.success(
-      updated.status === 'active' ? '用户已启用' : '用户已禁用'
-    );
   };
 
   const handleViewPermissions = (row: User) => {

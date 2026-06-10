@@ -61,16 +61,16 @@ export function useImageDetailActions(options: UseImageDetailActionsOptions) {
       return false;
     }
 
-    const username = ensureLoggedInUser();
-    if (username === null) return false;
+    const uid = ensureLoggedInUser();
+    if (uid === null) return false;
 
     try {
-      const boardId = await promptBoardSelection(username);
+      const boardId = await promptBoardSelection(uid);
       if (!boardId || !imageDetail.value) return false;
 
       collecting.value = true;
 
-      await collectImageToBoard(username, boardId, {
+      await collectImageToBoard(uid, boardId, {
         imageId: imageDetail.value.id,
         source: imageDetail.value.source,
       });
@@ -105,17 +105,17 @@ export function useImageDetailActions(options: UseImageDetailActionsOptions) {
 
   const handleLike = async () => {
     if (!imageDetail.value || liking.value) return;
-    const username = ensureLoggedInUser();
-    if (username === null) return;
+    const uid = ensureLoggedInUser();
+    if (uid === null) return;
     liking.value = true;
 
     try {
       if (imageDetail.value.isLiked) {
-        await unlikeImage(username, imageDetail.value.id);
+        await unlikeImage(uid, imageDetail.value.id);
         imageDetail.value = { ...imageDetail.value, isLiked: false };
         ElMessage.success('已取消赞');
       } else {
-        await likeImage(username, imageDetail.value.id);
+        await likeImage(uid, imageDetail.value.id);
         imageDetail.value = { ...imageDetail.value, isLiked: true };
         ElMessage.success('已点赞');
       }
@@ -142,6 +142,8 @@ export function useImageDetailActions(options: UseImageDetailActionsOptions) {
     textarea.style.left = '-9999px';
     document.body.appendChild(textarea);
     textarea.select();
+    // 降级路径：navigator.clipboard.writeText 失败时（通常是安全上下文限制或用户拒绝权限）。
+    // document.execCommand('copy') 已被 Web 标准废弃，但作为降级手段仍广泛可用，暂保留以提升兼容性。
     const copied = document.execCommand('copy');
     textarea.remove();
     if (copied) {

@@ -94,6 +94,7 @@ export function useSettingsSystem(
           await Promise.all(keys.map((key) => window.caches.delete(key)));
         }
         window.localStorage.removeItem(SETTINGS_STORE_KEY);
+        window.sessionStorage.clear();
       }
       resetSettingsState();
       window.localStorage.removeItem(SYSTEM_SETTINGS_STORAGE_KEY);
