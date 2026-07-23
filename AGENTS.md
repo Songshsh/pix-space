@@ -46,7 +46,7 @@
 
 补充要求：
 
-- MUST：若审查覆盖 `src/components/`、`src/composables/`、`src/router/`、`src/layouts/`、`src/stores/`、`src/views/`、`src/api/`、`src/utils/`、`src/mocks/`、`src/styles/`、`docs/`、`design/` 等目录，必须补齐读取对应目录的最近 `AGENTS.md`
+- MUST：若审查覆盖 `src/components/`、`src/composables/`、`src/router/`、`src/layouts/`、`src/stores/`、`src/views/`、`src/api/`、`src/utils/`、`src/mocks/`、`src/styles/`、`backend/`、`docs/`、`design/` 等目录，必须补齐读取对应目录的最近 `AGENTS.md`
 - MUST：若使用 Task / 子 agent / 并行搜索协助审查，prompt 中必须显式写明需先读取的规则文件与输出格式要求；禁止假定子任务天然继承当前会话中的规则上下文
 - MUST：输出全局审查结论时，应说明本次已补齐读取了哪些局部 `AGENTS.md`
 
@@ -97,6 +97,10 @@
 - [src/views/admin/AGENTS.md](src/views/admin/AGENTS.md) - 后台管理页面规范
 - [src/views/portal/AGENTS.md](src/views/portal/AGENTS.md) - 前台门户页面规范
 - [src/views/system/AGENTS.md](src/views/system/AGENTS.md) - 系统状态页规范
+
+### 后端模块
+
+- [backend/AGENTS.md](backend/AGENTS.md) - Java 后端（Spring Boot）模块规范；后端任务/审查前必读，其技术栈与架构约束与前端完全不同
 
 ### 文档
 

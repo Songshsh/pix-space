@@ -29,7 +29,7 @@
 
 ### accepted
 
-- 当前暂无 `accepted` 文档；后续新增时必须补入本索引
+- [2026-07-20-account-lifecycle-and-data-contract-design.md](2026-07-20-account-lifecycle-and-data-contract-design.md)
 
 ### implemented
 

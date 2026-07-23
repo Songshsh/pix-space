@@ -17,6 +17,8 @@
 - 我要改路由/权限：先读 [src/router/README.md](../src/router/README.md)，再补齐 [FRONTEND_SPEC.md](FRONTEND_SPEC.md) 的“路由与权限”与 [src/router/AGENTS.md](../src/router/AGENTS.md)
 - 我要改样式/主题：先读 [FRONTEND_SPEC.md](FRONTEND_SPEC.md) 的“界面与样式约束”与 [src/styles/AGENTS.md](../src/styles/AGENTS.md)
 - 我要新增/升级依赖：先读 [DEPENDENCY_POLICY.md](DEPENDENCY_POLICY.md)
+- 我要启动 Java 后端：先读 [superpowers/plans/2026-06-10-java-backend-bootstrap-plan.md](superpowers/plans/2026-06-10-java-backend-bootstrap-plan.md)，按其中的 `backend/`、`docker-compose.dev.yml` 与前端 `.env` 联调说明执行
+- 我要查后端运行命令：先读 [backend/RUNBOOK.md](../backend/RUNBOOK.md)
 
 ## 命名约定
 
@@ -35,6 +37,7 @@
 - [AI_DELIVERY_CHECKLIST.md](AI_DELIVERY_CHECKLIST.md)：AI 开发交付自检清单（同步更新项与最低验证口径）
 - [DEPENDENCY_POLICY.md](DEPENDENCY_POLICY.md)：新增依赖评审确认（单一事实来源）
 - [DOCS_OWNERSHIP_MATRIX.md](DOCS_OWNERSHIP_MATRIX.md)：文档职责矩阵（避免重复维护与口径漂移）
+- [backend/RUNBOOK.md](../backend/RUNBOOK.md)：Java 后端运行、容器、端口与排障手册
 - [src/api/README.md](../src/api/README.md)：API 契约约定
 - [src/router/README.md](../src/router/README.md)：路由拓扑、公开/受保护入口与查询参数约定
 - [src/utils/README.md](../src/utils/README.md)：请求与错误处理约定
