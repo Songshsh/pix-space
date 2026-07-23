@@ -13,6 +13,9 @@ dist/
 .env.*.local
 .env.production
 
+# Backend env (prod only, keep .example committed)
+backend/.env.prod
+
 # Vite
 .vite/
 
