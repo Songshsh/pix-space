@@ -6,89 +6,89 @@ import type {
 import { FileType } from '../utils/fileDisplay';
 import { createTimestamp } from './shared';
 interface FileRecord extends FileItem {
-  parentId: number | null;
+  parentId: string | null;
 }
 
 const seedFiles: FileRecord[] = [
   {
-    id: 1,
+    id: '1',
     name: '项目文档',
     type: FileType.Folder,
     size: 0,
-    modifiedAt: '2024-01-15',
+    updatedAt: '2024-01-15',
     parentId: null,
   },
   {
-    id: 2,
+    id: '2',
     name: '产品截图.png',
     type: FileType.Image,
     size: 2516582,
-    modifiedAt: '2024-01-15',
+    updatedAt: '2024-01-15',
     parentId: null,
   },
   {
-    id: 3,
+    id: '3',
     name: '用户手册.pdf',
     type: FileType.Document,
     size: 1258291,
-    modifiedAt: '2024-01-14',
+    updatedAt: '2024-01-14',
     parentId: null,
   },
   {
-    id: 4,
+    id: '4',
     name: '演示视频.mp4',
     type: FileType.Video,
     size: 47815065,
-    modifiedAt: '2024-01-13',
+    updatedAt: '2024-01-13',
     parentId: null,
   },
   {
-    id: 5,
+    id: '5',
     name: '数据报表.xlsx',
     type: FileType.Spreadsheet,
     size: 331776,
-    modifiedAt: '2024-01-12',
+    updatedAt: '2024-01-12',
     parentId: null,
   },
   {
-    id: 6,
+    id: '6',
     name: '设计稿',
     type: FileType.Folder,
     size: 0,
-    modifiedAt: '2024-01-11',
+    updatedAt: '2024-01-11',
     parentId: null,
   },
   {
-    id: 7,
+    id: '7',
     name: '需求说明.md',
     type: FileType.Document,
     size: 18432,
-    modifiedAt: '2024-01-11',
-    parentId: 1,
+    updatedAt: '2024-01-11',
+    parentId: '1',
   },
   {
-    id: 8,
+    id: '8',
     name: '接口清单.xlsx',
     type: FileType.Spreadsheet,
     size: 409600,
-    modifiedAt: '2024-01-10',
-    parentId: 1,
+    updatedAt: '2024-01-10',
+    parentId: '1',
   },
   {
-    id: 9,
+    id: '9',
     name: '首页原型.fig',
     type: FileType.Document,
     size: 5242880,
-    modifiedAt: '2024-01-09',
-    parentId: 6,
+    updatedAt: '2024-01-09',
+    parentId: '6',
   },
   {
-    id: 10,
+    id: '10',
     name: '图标素材.zip',
     type: FileType.Document,
     size: 7340032,
-    modifiedAt: '2024-01-08',
-    parentId: 6,
+    updatedAt: '2024-01-08',
+    parentId: '6',
   },
 ];
 
@@ -98,7 +98,7 @@ function normalizeKeyword(value?: string) {
   return value?.trim().toLowerCase() || '';
 }
 
-function ensureValidParent(parentId: number | null) {
+function ensureValidParent(parentId: string | null) {
   if (parentId === null) return null;
   const parent = filesState.find((file) => file.id === parentId);
   if (!parent) {
@@ -110,13 +110,13 @@ function ensureValidParent(parentId: number | null) {
   return parentId;
 }
 
-function resolveParentId(payload: CreateFolderPayload): number | null {
+function resolveParentId(payload: CreateFolderPayload): string | null {
   if ('parentId' in payload) {
     return ensureValidParent(payload.parentId ?? null);
   }
 
   const path = 'parentPath' in payload ? payload.parentPath || [] : [];
-  let currentParentId: number | null = null;
+  let currentParentId: string | null = null;
   for (const segment of path) {
     const folder = filesState.find(
       (file) =>
@@ -134,8 +134,8 @@ function resolveParentId(payload: CreateFolderPayload): number | null {
 
 function ensureUniqueName(
   name: string,
-  parentId: number | null,
-  excludeId?: number
+  parentId: string | null,
+  excludeId?: string
 ) {
   if (!name.trim()) {
     throw new Error('名称不合法');
@@ -172,7 +172,7 @@ function inferFileTypeByName(name: string) {
   return FileType.Document;
 }
 
-function deleteRecursively(targetId: number) {
+function deleteRecursively(targetId: string) {
   const childFolders = filesState
     .filter(
       (file) => file.parentId === targetId && file.type === FileType.Folder
@@ -209,11 +209,11 @@ export function createFolderMock(payload: CreateFolderPayload) {
   ensureUniqueName(name, parentId);
 
   const nextFolder: FileRecord = {
-    id: Date.now(),
+    id: String(Date.now()),
     name,
     type: FileType.Folder,
     size: 0,
-    modifiedAt: createTimestamp(),
+    updatedAt: createTimestamp(),
     parentId,
   };
 
@@ -221,7 +221,7 @@ export function createFolderMock(payload: CreateFolderPayload) {
   return nextFolder;
 }
 
-export function updateFileMock(id: number, name: string) {
+export function updateFileMock(id: string, name: string) {
   const targetIndex = filesState.findIndex((file) => file.id === id);
   if (targetIndex < 0) {
     throw new Error('文件不存在');
@@ -234,7 +234,7 @@ export function updateFileMock(id: number, name: string) {
   const updated: FileRecord = {
     ...current,
     name: nextName,
-    modifiedAt: createTimestamp(),
+    updatedAt: createTimestamp(),
   };
 
   filesState = filesState.map((file, index) =>
@@ -244,12 +244,12 @@ export function updateFileMock(id: number, name: string) {
   return updated;
 }
 
-export function findFileByIdMock(id: number) {
+export function findFileByIdMock(id: string) {
   const file = filesState.find((item) => item.id === id);
   return file ? { ...file } : null;
 }
 
-export function deleteFileMock(id: number) {
+export function deleteFileMock(id: string) {
   const target = filesState.find((file) => file.id === id);
   if (!target) {
     throw new Error('文件不存在');
@@ -266,7 +266,7 @@ export function deleteFileMock(id: number) {
 
 export async function uploadFileMock(
   formData: FormData,
-  parentId?: number | null
+  parentId?: string | null
 ) {
   const nextParentId = ensureValidParent(parentId ?? null);
   const entries = formData.getAll('files');
@@ -291,11 +291,11 @@ export async function uploadFileMock(
   });
   const createdFiles: FileRecord[] = selectedFiles.map((file, index) => {
     return {
-      id: Date.now() + index,
+      id: String(Date.now() + index),
       name: file.name,
       type: inferFileTypeByName(file.name),
       size: file.size,
-      modifiedAt: createTimestamp(),
+      updatedAt: createTimestamp(),
       parentId: nextParentId,
     };
   });

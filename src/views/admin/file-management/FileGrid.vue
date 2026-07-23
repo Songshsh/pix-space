@@ -37,7 +37,7 @@
           <div class="file-info">
             <p class="file-name">{{ file.name }}</p>
             <p class="file-meta">
-              {{ formatFileSize(file.size) }} · {{ file.modifiedAt }}
+              {{ formatFileSize(file.size) }} · {{ file.updatedAt }}
             </p>
           </div>
           <div class="file-actions">
@@ -85,7 +85,7 @@ import {
 
 const props = defineProps<{
   files: FileItem[];
-  selectedFiles: number[];
+  selectedFiles: string[];
 }>();
 
 defineEmits<{

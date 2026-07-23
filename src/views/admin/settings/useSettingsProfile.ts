@@ -7,7 +7,7 @@ export function useSettingsProfile() {
   const profileSaving = ref(false);
 
   const profileForm = reactive<ProfilePanelForm>({
-    username: userStore.name || '',
+    username: userStore.username || '',
     email: userStore.email || '',
     phone: userStore.phone || '',
     bio: userStore.bio || '',
@@ -16,14 +16,14 @@ export function useSettingsProfile() {
 
   watch(
     () => [
-      userStore.name,
+      userStore.username,
       userStore.email,
       userStore.phone,
       userStore.bio,
       userStore.avatar,
     ],
-    ([name, email, phone, bio, avatar]) => {
-      profileForm.username = name || '';
+    ([username, email, phone, bio, avatar]) => {
+      profileForm.username = username || '';
       profileForm.email = email || '';
       profileForm.phone = phone || '';
       profileForm.bio = bio || '';
@@ -37,14 +37,14 @@ export function useSettingsProfile() {
     profileSaving.value = true;
     try {
       const result = await updateUserProfile({
-        name: profileForm.username.trim(),
+        username: profileForm.username.trim(),
         email: profileForm.email.trim(),
         phone: profileForm.phone.trim(),
         bio: profileForm.bio.trim(),
         avatar: profileForm.avatar,
       });
       userStore.updateProfile(result);
-      profileForm.username = result.name;
+      profileForm.username = result.username;
       profileForm.email = result.email;
       profileForm.phone = result.phone || '';
       profileForm.bio = result.bio || '';

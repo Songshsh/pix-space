@@ -54,14 +54,6 @@ export interface UserBoardsSummary {
   stats: UserBoardsStats;
 }
 
-export interface PagedListResult<T> {
-  list: T[];
-  page: number;
-  pageSize: number;
-  total: number;
-  hasMore: boolean;
-}
-
 export interface UserBoardsPageQuery {
   page: number;
   pageSize: number;

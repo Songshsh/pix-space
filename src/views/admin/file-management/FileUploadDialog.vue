@@ -22,7 +22,7 @@ defineEmits<{
 
 const props = defineProps<{
   visible: boolean;
-  parentId?: number | null;
+  parentId?: string | null;
 }>();
 
 const uploadCurrentFolder = (formData: FormData) => {

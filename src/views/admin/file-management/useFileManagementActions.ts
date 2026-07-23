@@ -19,8 +19,8 @@ interface UseFileManagementActionsOptions {
     pageSize: number;
     total: number;
   };
-  currentFolderId: Ref<number | null>;
-  selectedFiles: Ref<number[]>;
+  currentFolderId: Ref<string | null>;
+  selectedFiles: Ref<string[]>;
   clearSelection: () => void;
   loadFiles: () => Promise<void>;
   syncPaginationAfterDelete: () => Promise<void>;

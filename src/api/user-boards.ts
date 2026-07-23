@@ -4,7 +4,6 @@ import type {
   Board,
   BoardFormPayload,
   LikedImage,
-  PagedListResult,
   UploadImage,
   UploadImageStatus,
   UserBoardsPageQuery,
@@ -12,6 +11,7 @@ import type {
   UserLikesPageQuery,
   UserUploadsPageQuery,
 } from '../types/user-boards';
+import type { PaginatedData } from '../types/http';
 import type { ImageDetailSource } from '../types/image-detail';
 
 export function getUserBoardsSummary(
@@ -28,7 +28,7 @@ export function getUserBoardsPage(
   userId: number | string,
   params: UserBoardsPageQuery,
   config?: AxiosRequestConfig
-): Promise<PagedListResult<Board>> {
+): Promise<PaginatedData<Board>> {
   return request.get(`/users/${userId}/boards`, {
     silentError: true,
     ...config,
@@ -40,7 +40,7 @@ export function getUserUploadsPage(
   userId: number | string,
   params: UserUploadsPageQuery,
   config?: AxiosRequestConfig
-): Promise<PagedListResult<UploadImage>> {
+): Promise<PaginatedData<UploadImage>> {
   return request.get(`/users/${userId}/uploads`, {
     silentError: true,
     ...config,
@@ -52,7 +52,7 @@ export function getUserLikesPage(
   userId: number | string,
   params: UserLikesPageQuery,
   config?: AxiosRequestConfig
-): Promise<PagedListResult<LikedImage>> {
+): Promise<PaginatedData<LikedImage>> {
   return request.get(`/users/${userId}/likes`, {
     silentError: true,
     ...config,

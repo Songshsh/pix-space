@@ -17,7 +17,7 @@ export const useUserStore = defineStore(
   () => {
     // 以下 5 个字段通过 pinia-plugin-persistedstate 的 pick 持久化，必须保持为独立顶层 ref
     const id = ref<number | null>(null);
-    const name = ref<string>('');
+    const username = ref<string>('');
     const email = ref<string>('');
     const role = ref<UserRole | ''>('');
     const avatar = ref<string>('');
@@ -39,7 +39,7 @@ export const useUserStore = defineStore(
 
     const userInfo = computed(() => ({
       id: id.value,
-      name: name.value,
+      username: username.value,
       email: email.value,
       avatar: avatar.value,
       phone: userExtra.phone,
@@ -56,7 +56,7 @@ export const useUserStore = defineStore(
 
     function logout() {
       id.value = null;
-      name.value = '';
+      username.value = '';
       email.value = '';
       role.value = '';
       avatar.value = '';
@@ -70,8 +70,8 @@ export const useUserStore = defineStore(
       const normalizedRole = normalizeRole(userData.role);
       const hasExplicitRole =
         typeof userData.role === 'string' && userData.role.trim() !== '';
-      if (!userData.name) {
-        throw new Error('用户信息不完整：缺少姓名');
+      if (!userData.username) {
+        throw new Error('用户信息不完整：缺少用户名');
       }
       if (!userData.email) {
         throw new Error('用户信息不完整：缺少邮箱');
@@ -80,7 +80,7 @@ export const useUserStore = defineStore(
         throw new Error(`用户信息不完整：无效的角色值 "${userData.role}"`);
       }
       id.value = userData.id ?? null;
-      name.value = userData.name;
+      username.value = userData.username;
       email.value = userData.email;
       role.value = normalizedRole || 'user';
       avatar.value = userData.avatar || '';
@@ -92,8 +92,8 @@ export const useUserStore = defineStore(
       if (profile.id !== undefined) {
         id.value = profile.id;
       }
-      if (profile.name !== undefined) {
-        name.value = profile.name;
+      if (profile.username !== undefined) {
+        username.value = profile.username;
       }
       if (profile.email !== undefined) {
         email.value = profile.email;
@@ -165,7 +165,7 @@ export const useUserStore = defineStore(
 
     return {
       id,
-      name,
+      username,
       email,
       role,
       avatar,
@@ -192,7 +192,7 @@ export const useUserStore = defineStore(
     persist: {
       key: 'pix-space-user-store',
       storage: sessionStorage,
-      pick: ['id', 'name', 'email', 'role', 'avatar'],
+      pick: ['id', 'username', 'email', 'role', 'avatar'],
     },
   }
 );

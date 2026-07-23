@@ -12,7 +12,7 @@ const router = useRouter();
 const { logout } = useLogout();
 const userStore = useUserStore();
 
-const currentUser = computed(() => userStore.name || 'U');
+const currentUser = computed(() => userStore.username || 'U');
 const hasUserAvatar = computed(() => Boolean(userStore.avatar));
 const isLoggedIn = computed(() => userStore.isAuthenticated);
 const canShowAdmin = computed(() => canAccessAdmin(userStore.role));

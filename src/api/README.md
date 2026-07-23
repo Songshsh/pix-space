@@ -384,12 +384,12 @@ query：
 
 ```json
 {
-  "id": 1001,
+  "id": "1001",
   "name": "example.pdf",
   "type": "document",
   "size": 1024,
-  "modifiedAt": "2026-05-22",
-  "parentId": 1
+  "updatedAt": "2026-05-22",
+  "parentId": "1"
 }
 ```
 
@@ -422,7 +422,7 @@ query：
 请求 data（二选一）：
 
 ```json
-{ "name": "新文件夹", "parentId": 1 }
+{ "name": "新文件夹", "parentId": "1" }
 ```
 
 或
@@ -434,10 +434,10 @@ query：
 响应 data：
 
 ```json
-{ "id": 1001, "name": "新文件夹", "parentId": 1 }
+{ "id": "1001", "name": "新文件夹", "parentId": "1" }
 ```
 
-类型：`{ id: number, name: string, parentId?: number, parentPath?: string[] }`
+类型：`{ id: string, name: string, parentId?: string, parentPath?: string[] }`
 
 ### 下载文件
 

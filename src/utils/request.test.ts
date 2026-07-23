@@ -34,7 +34,12 @@ describe('request', () => {
 
   it('logs out and redirects on 401', async () => {
     const userStore = useUserStore();
-    userStore.login({ id: 1, name: 'Bob', email: 'b@c.com', role: 'admin' });
+    userStore.login({
+      id: 1,
+      username: 'Bob',
+      email: 'b@c.com',
+      role: 'admin',
+    });
     window.history.pushState({}, '', '/admin/dashboard');
     let eventRedirect = '';
     const listener = (event: Event) => {

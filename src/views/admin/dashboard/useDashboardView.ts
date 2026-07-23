@@ -25,7 +25,7 @@ export function useDashboardView() {
   const loading = ref(false);
   const loadError = ref('');
 
-  const userName = computed(() => userStore.name || '用户');
+  const userName = computed(() => userStore.username || '用户');
 
   const stats = ref<DashboardStats>(createDefaultStats());
   const chartData = ref<ChartData[]>([]);

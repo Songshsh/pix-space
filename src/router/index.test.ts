@@ -82,7 +82,12 @@ describe('router guards', () => {
     vi.resetModules();
     setActivePinia(createPinia());
     const userStore = useUserStore();
-    userStore.login({ id: 1, name: 'Bob', email: 'b@c.com', role: 'admin' });
+    userStore.login({
+      id: 1,
+      username: 'Bob',
+      email: 'b@c.com',
+      role: 'admin',
+    });
 
     const { default: router } = await import('./index');
 
@@ -98,7 +103,7 @@ describe('router guards', () => {
     const userStore = useUserStore();
     userStore.login({
       id: 2,
-      name: 'Viewer',
+      username: 'Viewer',
       email: 'v@c.com',
       role: 'viewer',
     });
@@ -117,7 +122,7 @@ describe('router guards', () => {
     const userStore = useUserStore();
     userStore.login({
       id: 2,
-      name: 'Viewer',
+      username: 'Viewer',
       email: 'v@c.com',
       role: 'viewer',
     });
@@ -172,7 +177,7 @@ describe('router guards', () => {
     const userStore = useUserStore();
     userStore.login({
       id: 2,
-      name: 'Viewer',
+      username: 'Viewer',
       email: 'v@c.com',
       role: 'viewer',
     });

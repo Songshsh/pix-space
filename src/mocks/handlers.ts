@@ -123,7 +123,7 @@ const profileState = new Map<string, MockProfile>(
     account.email,
     {
       id: account.id,
-      name: account.username,
+      username: account.username,
       email: account.email,
       role: account.role,
       avatar: '',
@@ -298,7 +298,7 @@ function syncManagedUserAccount(
 
   profileState.set(user.email, {
     id: user.id,
-    name: user.username,
+    username: user.username,
     email: user.email,
     role: user.role,
     avatar: currentProfile?.avatar || '',
@@ -337,6 +337,12 @@ function parseTrailingNumericId(url: string) {
   const pathname = new URL(url).pathname;
   const match = pathname.match(/\/(\d+)(?:\/status)?$/);
   return match ? Number(match[1]) : NaN;
+}
+
+function parseTrailingId(url: string) {
+  const pathname = new URL(url).pathname;
+  const match = pathname.match(/\/([^/]+)(?:\/status)?$/);
+  return match ? match[1] : '';
 }
 
 export const handlers = [
@@ -404,11 +410,11 @@ export const handlers = [
       string,
       unknown
     >;
-    const name = String(body.name || '').trim();
+    const username = String(body.username || '').trim();
     const email = String(body.email || '').trim();
     const password = String(body.password || '');
 
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
       return json(
         {
           code: 400,
@@ -431,7 +437,7 @@ export const handlers = [
     }
 
     const nextUser = createUserMock({
-      username: name,
+      username,
       email,
       password,
       role: 'user',
@@ -440,14 +446,14 @@ export const handlers = [
 
     profileState.set(email, {
       id: nextUser.id,
-      name,
+      username,
       email,
       role: 'user',
       avatar: '',
       phone: '',
       bio: '',
     });
-    syncUserBoardsProfileMock(nextUser.id, { username: name, bio: '' });
+    syncUserBoardsProfileMock(nextUser.id, { username, bio: '' });
     passwordState.set(email, password);
     preferencesState.set(email, createDefaultPreferences());
 
@@ -523,8 +529,8 @@ export const handlers = [
       );
     }
     const nextUser: MockProfile = { ...user };
-    if (typeof body.name === 'string') {
-      nextUser.name = body.name;
+    if (typeof body.username === 'string') {
+      nextUser.username = body.username;
     }
     if (typeof body.email === 'string') {
       const trimmedEmail = body.email.trim();
@@ -586,7 +592,7 @@ export const handlers = [
         : undefined;
     upsertUserAccountMock({
       id: nextUser.id,
-      username: nextUser.name,
+      username: nextUser.username,
       email: nextUser.email,
       role: nextUser.role,
       status: nextUserStatus || 'active',
@@ -594,7 +600,7 @@ export const handlers = [
     });
     if (typeof nextUser.id === 'number') {
       syncUserBoardsProfileMock(nextUser.id, {
-        username: nextUser.name,
+        username: nextUser.username,
         bio: nextUser.bio || '',
       });
     }
@@ -711,7 +717,7 @@ export const handlers = [
         : undefined;
     upsertUserAccountMock({
       id: user.id,
-      username: user.name,
+      username: user.username,
       email: user.email,
       role: user.role,
       status: currentUserStatus || 'active',
@@ -726,7 +732,7 @@ export const handlers = [
     if (denied) return denied;
     const pathname = new URL(request.url).pathname;
     const match = pathname.match(/\/api\/files\/([^/]+)\/download$/);
-    const fileId = Number(match?.[1] || 0);
+    const fileId = match?.[1] || '';
     const file = findFileByIdMock(fileId);
     if (!file) {
       return json(
@@ -817,7 +823,7 @@ export const handlers = [
       page: Number(url.searchParams.get('page') || 1),
       pageSize: Number(url.searchParams.get('pageSize') || 20),
       keyword: url.searchParams.get('keyword') || '',
-      parentId: parentId ? Number(parentId) : undefined,
+      parentId: parentId || undefined,
     });
     return json({ code: 0, message: 'ok', data: result });
   }),
@@ -829,10 +835,7 @@ export const handlers = [
     const parentId = url.searchParams.get('parentId');
     const formData = await request.formData();
     try {
-      const result = await uploadFileMock(
-        formData,
-        parentId ? Number(parentId) : null
-      );
+      const result = await uploadFileMock(formData, parentId || null);
       return json({
         code: 0,
         message: 'ok',
@@ -890,7 +893,7 @@ export const handlers = [
     const { denied } = ensureAdminSession();
     if (denied) return denied;
     const body = (await request.json().catch(() => ({}))) as { name?: string };
-    const fileId = parseTrailingNumericId(request.url);
+    const fileId = parseTrailingId(request.url);
     try {
       const result = updateFileMock(fileId, body.name || '');
       return json({ code: 0, message: 'ok', data: result });
@@ -912,7 +915,7 @@ export const handlers = [
     const { denied } = ensureAdminSession();
     if (denied) return denied;
     try {
-      deleteFileMock(parseTrailingNumericId(request.url));
+      deleteFileMock(parseTrailingId(request.url));
       return json({ code: 0, message: 'ok', data: true });
     } catch (error) {
       return json(
@@ -1371,7 +1374,7 @@ export const handlers = [
           { status: 401 }
         );
       }
-      const result = createUserBoardMock(user.id, user.name, {
+      const result = createUserBoardMock(user.id, user.username, {
         name: body.name || '',
         description: body.description || '',
         visibility: body.visibility || 'public',

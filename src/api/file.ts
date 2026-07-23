@@ -22,7 +22,7 @@ export function getFileList(
 
 export function uploadFile(
   formData: FormData,
-  parentId?: number | null,
+  parentId?: string | null,
   config?: AxiosRequestConfig
 ): Promise<FileItem> {
   const params =

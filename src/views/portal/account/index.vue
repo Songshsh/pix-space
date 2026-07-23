@@ -6,7 +6,7 @@
     </div>
 
     <AccountProfileCard
-      :name="userStore.name"
+      :name="userStore.username"
       :email="userStore.email"
       :role="userStore.role"
     />

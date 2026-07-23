@@ -4,7 +4,7 @@ import { useDebounceFn } from '@vueuse/core';
 import { useRequestSequencer } from '../../../composables/requestSequencer';
 
 interface BreadcrumbItem {
-  id: number | null;
+  id: string | null;
   name: string;
 }
 
@@ -27,7 +27,7 @@ export function useFileManagementView(options: UseFileManagementViewOptions) {
   });
 
   const files = ref<FileItem[]>([]);
-  const currentFolderId = ref<number | null>(null);
+  const currentFolderId = ref<string | null>(null);
   const breadcrumbItems = ref<BreadcrumbItem[]>([
     { id: null, name: '我的文件' },
   ]);

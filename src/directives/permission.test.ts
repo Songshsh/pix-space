@@ -41,7 +41,7 @@ describe('createPermissionDirective', () => {
 
     userStore.login({
       id: 1,
-      name: 'Admin',
+      username: 'Admin',
       email: 'admin@example.com',
       role: 'admin',
     });
@@ -52,7 +52,7 @@ describe('createPermissionDirective', () => {
 
     userStore.login({
       id: 1,
-      name: 'Admin',
+      username: 'Admin',
       email: 'admin@example.com',
       role: 'admin',
     });
@@ -64,7 +64,7 @@ describe('createPermissionDirective', () => {
     await wrapper.setProps({ requiredRole: 'viewer' });
     userStore.login({
       id: 2,
-      name: 'Viewer',
+      username: 'Viewer',
       email: 'viewer@example.com',
       role: 'viewer',
     });

@@ -15,6 +15,9 @@ export interface ApiEnvelope<T = unknown> {
 export interface PaginatedData<T = unknown> {
   list: T[];
   total: number;
+  page: number;
+  pageSize: number;
+  hasMore: boolean;
 }
 
 export interface NormalizedRequestError {

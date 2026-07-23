@@ -2,7 +2,7 @@ import type { UserRole } from './access';
 
 export interface AuthUser {
   id?: number;
-  name: string;
+  username: string;
   email: string;
   role: UserRole;
   avatar?: string;
@@ -20,7 +20,7 @@ export interface ForgotPasswordPayload {
 }
 
 export interface RegisterPayload {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }

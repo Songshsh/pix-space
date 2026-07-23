@@ -107,7 +107,7 @@ export function useSettingsSystem(
   const handleExportData = () => {
     const payload = {
       user: {
-        name: userStore.name,
+        username: userStore.username,
         email: userStore.email,
         role: userStore.role,
         avatar: userStore.avatar,
@@ -128,7 +128,7 @@ export function useSettingsSystem(
       type: 'application/json;charset=utf-8',
     });
     const filename = `pix-space-settings-${sanitizeFilenamePart(
-      userStore.name || userStore.email || 'user'
+      userStore.username || userStore.email || 'user'
     )}.json`;
     triggerDownload(blob, filename);
     ElMessage.success('数据导出成功');

@@ -2,12 +2,12 @@ import type {
   Board,
   BoardFormPayload,
   LikedImage,
-  PagedListResult,
   UploadImage,
   UploadImageStatus,
   UserBoardsProfile,
   UserBoardsSummary,
 } from '../types/user-boards';
+import type { PaginatedData } from '../types/http';
 import type {
   BoardDetail,
   BoardDetailImage,
@@ -403,7 +403,7 @@ function paginateList<T>(
   list: T[],
   page: number,
   pageSize: number
-): PagedListResult<T> {
+): PaginatedData<T> {
   const safePage = Math.max(1, page);
   const safePageSize = Math.max(1, pageSize);
   const start = (safePage - 1) * safePageSize;
