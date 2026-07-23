@@ -118,7 +118,7 @@ async function bootstrap() {
     app.use(pinia);
     app.directive('permission', createPermissionDirective(pinia));
     const settingsStore = useSettingsStore(pinia);
-    settingsStore.applyTheme();
+    settingsStore.applyTheme(); // 确保挂载前主题已同步到 <html> 上（减少首屏闪烁）
 
     window.addEventListener(AUTH_EXPIRED_EVENT, (event: Event) => {
       const currentRoute = router.currentRoute.value;

@@ -182,10 +182,22 @@ function applyRequestInterceptors(instance: AxiosInstance) {
         }
       }
 
+      // CSRF 防护：从 XSRF-TOKEN Cookie 中读取 Token，写入 X-XSRF-TOKEN 请求头
+      // 后端 SecurityConfig 中 CookieCsrfTokenRepository 负责生成和验证
+      const csrfToken = readCsrfToken();
+      if (csrfToken) {
+        config.headers['X-XSRF-TOKEN'] = csrfToken;
+      }
+
       return config;
     },
     (error: unknown) => Promise.reject(error)
   );
+}
+
+function readCsrfToken(): string | null {
+  const match = document.cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : null;
 }
 
 function applyResponseInterceptors(
