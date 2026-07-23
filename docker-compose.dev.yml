@@ -1,0 +1,80 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║          本地开发基础设施（MySQL + Redis + MinIO）            ║
+# ╚══════════════════════════════════════════════════════════════╝
+# 启动：docker compose -f docker-compose.dev.yml up -d
+# 停止：docker compose -f docker-compose.dev.yml down
+# 数据持久化在命名的 Docker volumes 中，删容器不会丢数据
+#
+# 各服务端口规划（避免与宿主机已有服务冲突）：
+#   MySQL  → 宿主机 3307 → 容器 3306（避开系统 MySQL 默认 3306）
+#   Redis  → 宿主机 6379 → 容器 6379
+#   MinIO  → 宿主机 9000（API）/ 9001（Web 控制台）
+
+# ── services 下每个 key 是一个独立的容器 ──
+services:
+  # ══════════════════════ MySQL 8.4 数据库 ══════════════════════
+  mysql:
+    image: mysql:8.4 # Docker Hub 上的官方 MySQL 镜像，8.4 是 LTS 长期支持版本
+    container_name: pix-space-mysql # 容器名，便于 docker logs/exec 定位
+    # ⬇ 以下环境变量仅在容器首次启动时生效，MySQL 镜像会自动执行：
+    #   1. 创建数据库 pix_space
+    #   2. 创建业务用户 pix，密码 pix123456
+    #   3. 授予 pix 对 pix_space 的全部权限
+    environment:
+      MYSQL_ROOT_PASSWORD: root # 【创建】root 管理员密码（仅用于 DBA 操作，业务程序不用）
+      MYSQL_DATABASE: pix_space # 【创建】数据库名（首次启动自动创建，无需手动 CREATE DATABASE）
+      MYSQL_USER: pix # 【创建】业务账号（非 root，权限最小化）
+      MYSQL_PASSWORD: pix123456 # 【创建】业务账号密码（application-dev.yml 使用此密码连接）
+    ports:
+      - '3307:3306' # 宿主机 3307 → 容器内 3306（避开本机系统 MySQL 的 3306）
+    volumes:
+      # 冒号前：命名卷名（底部 volumes 里声明），冒号后：容器内 MySQL 数据目录
+      # 删容器不丢数据，除非 docker volume rm 显式删除
+      - pix-space-mysql-data:/var/lib/mysql
+
+  # ══════════════════════ Redis 7 缓存 / Session 存储 ══════════
+  redis:
+    image: redis:7 # Redis 7.x 官方镜像
+    container_name: pix-space-redis
+    # 开发环境默认无密码，生产环境必须配置密码（见 application-prod.yml）
+    ports:
+      - '6379:6379' # 默认 Redis 端口，宿主机与容器相同
+    volumes:
+      - pix-space-redis-data:/data # 持久化 RDB 快照（开发环境未开 AOF），重启不丢缓存
+
+  # ══════════════════════ MinIO 对象存储（自建 S3 兼容存储） ═══
+  minio:
+    # pin 到功能完整的稳定版本，保证本地环境可复现（避免 latest 浮动）
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    container_name: pix-space-minio
+    # server /data：以 /data 目录为存储根目录
+    # --console-address ":9001"：Web 控制台监听 9001 端口
+    command: server /data --console-address ":9001"
+    # ⬇ 以下环境变量在容器首次启动时创建 MinIO 的 root 凭据：
+    #   access-key（用户名）和 secret-key（密码）是一对用于 API 调用的凭证
+    environment:
+      MINIO_ROOT_USER: minioadmin # 【创建】root 用户名（等同于 AWS S3 的 Access Key）
+      MINIO_ROOT_PASSWORD: minioadmin # 【创建】root 密码（等同于 AWS S3 的 Secret Key）
+    ports:
+      - '9000:9000' # S3 API 端口（后端代码通过 MinIO Client 调用此端口上传/下载文件）
+      - '9001:9001' # Web 控制台（浏览器访问 http://localhost:9001 管理 Bucket 和文件）
+    volumes:
+      - pix-space-minio-data:/data # 上传的文件持久化到命名卷
+
+  # ══════════════════════ MinIO Bucket 初始化（一次性任务） ═══════
+  # 用 mc 在 minio 就绪后创建开发 bucket（pix-space-dev），建完即退出；
+  # 与 application-dev.yml 的 app.storage.bucket 保持一致，免去手动到控制台建桶
+  createbuckets:
+    image: minio/mc:RELEASE.2025-04-08T15-39-49Z
+    container_name: pix-space-createbuckets
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c " until mc alias set local http://minio:9000 minioadmin minioadmin; do echo 'wait minio...'; sleep 2; done; mc mb --ignore-existing local/pix-space-dev; echo 'bucket ready'; exit 0; "
+
+# ── 命名卷声明（Docker 管理，数据不随容器删除而丢失） ──
+# 删除数据卷需显式执行：docker compose -f docker-compose.dev.yml down -v
+volumes:
+  pix-space-mysql-data:
+  pix-space-redis-data:
+  pix-space-minio-data:

@@ -1,0 +1,174 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║                   生产环境部署配置                             ║
+# ╚══════════════════════════════════════════════════════════════╝
+#
+# 启动方式（两种选一）：
+#
+#   方案 A（最佳实践，推荐）：
+#     1. 本地构建镜像：docker build -f backend/Dockerfile -t pix-space-backend:prod ./backend
+#     2. 把镜像弄到服务器（推 Docker Hub / 打包传输 / 直接在服务器上构建）
+#     3. cp backend/.env.prod.example backend/.env.prod 并填入真实值
+#     4. docker compose -f docker-compose.prod.yml --env-file backend/.env.prod up -d
+#
+#   方案 B（单机简化，代码已在服务器上）：
+#     1. cp backend/.env.prod.example backend/.env.prod 并填入真实值
+#     2. 取消下方 backend 服务中 build 的注释，注释掉 image 行
+#     3. docker compose -f docker-compose.prod.yml --env-file backend/.env.prod up -d
+#
+# 与开发环境（docker-compose.dev.yml）的关键区别：
+#   - 敏感值（密码/密钥）通过 ${VAR} 从 .env.prod 注入，不硬编码在 yml 中
+#   - 非敏感连接信息（DB_URL / DB_USERNAME / REDIS_HOST / MINIO_ENDPOINT）直接写在本文件
+#   - 后端通过 Docker 内部网络连接 mysql/redis/minio（服务名即主机名，如 mysql:3306）
+#   - MySQL / Redis / MinIO 端口不暴露到宿主机，仅容器间通信（安全最小化）
+#   - 若要使用云服务（RDS / 云 Redis / OSS），删除对应 service，改 backend 环境变量即可
+#
+# ${VAR} 语法说明：
+#   ${DB_PASSWORD} 等值来自 --env-file 指定的 .env.prod 文件，启动时由 docker compose 替换
+
+services:
+  # ══════════════════════ Spring Boot 后端 ═══════════════════════
+  backend:
+    # ── 方案 A（最佳实践）：先打镜像推到仓库，这里直接引用镜像名 ──
+    image: pix-space-backend:prod
+    # ── 方案 B（单机简化）：不推仓库，compose 直接从源码构建 ──
+    #   取消下方 build 的注释，同时注释掉上面的 image 行，即可在服务器上一键构建+部署
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    container_name: pix-space-backend-prod
+    # 崩溃 / 宿主机重启后自动拉起；纯 compose 下这是"自愈"的主要来源（healthcheck 本身不触发重启）
+    restart: unless-stopped
+    ports:
+      - '8080:8080' # 仅后端端口对外暴露（生产环境前端通常通过 Nginx 反向代理访问）
+    environment:
+      # ── Spring Profile（必须，覆盖 application.yml 中默认的 dev） ──
+      # 不设此项会以 dev profile 启动，连接 localhost 而非容器内服务，导致启动失败
+      SPRING_PROFILES_ACTIVE: prod
+
+      # ── 数据库（使用【创建】好的用户名密码连接） ──
+      # 主机名 mysql 是下方 MySQL service 的 key，Docker 内部 DNS 自动解析为容器 IP
+      # allowPublicKeyRetrieval=true 是 MySQL 8.0+ caching_sha2_password 认证所需
+      DB_URL: jdbc:mysql://mysql:3306/pix_space_prod?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&connectionCollation=utf8mb4_unicode_ci
+      DB_USERNAME: pix_prod # 【使用】下方 MySQL 容器中 MYSQL_USER/MYSQL_PASSWORD 创建的业务账号和密码
+      DB_PASSWORD: ${DB_PASSWORD}
+
+      # ── Redis ──
+      REDIS_HOST: redis # 服务名即主机名，Docker 内部 DNS 自动解析
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD} # 【使用】下方 Redis 容器 --requirepass 设置的密码
+
+      # ── CORS（部署前必须替换为实际前端域名，否则浏览器拦截跨域请求） ──
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+
+      # ── MinIO ──
+      MINIO_ENDPOINT: http://minio:9000 # 服务名 minio 由 Docker 内部 DNS 解析
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} # 【使用】下方 MinIO 容器中 MINIO_ROOT_USER 创建的凭据
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} # 【使用】下方 MinIO 容器中 MINIO_ROOT_PASSWORD 创建的凭据
+      MINIO_BUCKET: ${MINIO_BUCKET}
+
+    # depends_on 控制启动顺序：确保依赖服务先启动后，再启动 backend
+    # 但"启动完成" ≠ "就绪可用"，所以 MySQL 额外配置了 healthcheck（见下方）
+    depends_on:
+      mysql:
+        condition: service_healthy # 等待 MySQL 健康检查通过（而不仅仅是容器启动）
+      redis:
+        condition: service_started # Redis 启动即就绪，无需健康检查
+      minio:
+        condition: service_started # MinIO 启动即就绪
+
+    # 容器健康探针：周期性访问 Actuator readiness 端点（含 db/redis 检查）
+    # 依赖镜像内的 curl（见 backend/Dockerfile 运行阶段安装）
+    # start_period 给足 Spring Boot 启动时间，启动期内失败不计入 retries
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:8080/actuator/health/readiness' ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  # ══════════════════════ MySQL 8.4（仅容器内网通信） ═════════════
+  mysql:
+    image: mysql:8.4 # LTS 长期支持版本
+    container_name: pix-space-mysql-prod
+    restart: unless-stopped
+    # ⬇ 以下环境变量在容器首次启动时创建数据库和用户：
+    #   1. 创建数据库 pix_space
+    #   2. 创建业务用户 pix，密码来自 .env.prod 中的 DB_PASSWORD
+    #   3. 授予 pix 对 pix_space 的全部权限
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # 【创建】root 管理员密码（仅 DBA 操作使用）
+      MYSQL_DATABASE: pix_space_prod # 【创建】数据库名（首次启动自动创建）
+      MYSQL_USER: pix_prod # 【创建】业务账号（非 root，权限最小化）
+      MYSQL_PASSWORD: ${DB_PASSWORD} # 【创建】业务账号密码（与 backend 连接用的密码一致）
+    # 生产环境不暴露数据库端口到宿主机，外部无法直接连接数据库（安全最小化）
+    # 若需临时调试，取消下方注释后 docker compose -f docker-compose.prod.yml up -d 即可
+    # ports:
+    #   - "3307:3306"
+    volumes:
+      - pix-space-mysql-prod-data:/var/lib/mysql # 数据持久化，删容器不丢数据
+    # healthcheck：每 10 秒用 mysqladmin ping 检测数据库是否可用
+    # backend 的 depends_on 依赖此项，确保数据库完全就绪后才启动后端
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p${MYSQL_ROOT_PASSWORD}' ] # 用 root 密码执行健康检查
+      interval: 10s # 每 10 秒检查一次
+      timeout: 5s # 单次检查超时时间
+      retries: 5 # 连续失败 5 次判定为不健康
+
+  # ══════════════════════ Redis 7（仅容器内网通信） ═══════════════
+  redis:
+    image: redis:7
+    container_name: pix-space-redis-prod
+    restart: unless-stopped
+    # 开启密码认证：--requirepass 的值由 .env.prod 中的 REDIS_PASSWORD 注入
+    # 即使仅容器内网通信，Redis 存有 Session，也应设置密码（安全最小化）
+    # --appendonly yes 开启 AOF：每次写操作追加到硬盘账本，崩溃重启最多丢最后 1 秒，
+    # 避免仅靠 RDB 快照时因 Redis 重启丢失大量用户 Session 而被迫重新登录
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
+    # 生产环境不暴露端口到宿主机
+    # ports:
+    #   - "6379:6379"
+    volumes:
+      - pix-space-redis-prod-data:/data # 持久化：RDB 快照 + AOF 日志（appendonly 已开启）
+
+  # ══════════════════════ MinIO（仅容器内网通信） ═════════════════
+  minio:
+    # pin 到功能完整的稳定版本，保证生产可复现（避免 latest 浮动导致不同时间拉到不同版本）
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    container_name: pix-space-minio-prod
+    restart: unless-stopped
+    # server /data：存储根目录；--console-address ":9001"：Web 控制台端口
+    command: server /data --console-address ":9001"
+    # ⬇ 以下环境变量在容器首次启动时创建 MinIO root 凭据：
+    #   access-key 和 secret-key 来自 .env.prod，backend 随后用它们调用 MinIO API
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY} # 【创建】root 用户名（等同于 AWS S3 的 Access Key）
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY} # 【创建】root 密码（等同于 AWS S3 的 Secret Key）
+    # 生产环境通过 Nginx 反向代理暴露 MinIO，不直接映射端口到宿主机
+    # ports:
+    #   - "9000:9000"
+    volumes:
+      - pix-space-minio-prod-data:/data # 上传的文件持久化
+
+  # ══════════════════════ MinIO Bucket 初始化（一次性任务） ═══════
+  # 用 mc（MinIO Client）在 minio 就绪后创建业务 bucket，创建完即退出。
+  # 把"建桶"放在基础设施层：后端启动无需依赖 MinIO，将来切换云 OSS 也不受影响。
+  createbuckets:
+    image: minio/mc:RELEASE.2025-04-08T15-39-49Z
+    container_name: pix-space-createbuckets-prod
+    depends_on:
+      minio:
+        condition: service_started
+    # $$ 转义：避免被 compose 提前插值，交由容器内 shell 展开环境变量
+    entrypoint: >
+      /bin/sh -c " until mc alias set local http://minio:9000 $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD; do echo 'wait minio...'; sleep 2; done; mc mb --ignore-existing local/$$MINIO_BUCKET; echo 'bucket ready'; exit 0; "
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY} # 与 minio 服务的 root 用户一致
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY} # 与 minio 服务的 root 密码一致
+      MINIO_BUCKET: ${MINIO_BUCKET}
+
+# ── 命名卷声明（Docker 管理，数据不随容器删除而丢失） ──
+# 删除数据卷需显式执行：docker compose -f docker-compose.prod.yml down -v
+volumes:
+  pix-space-mysql-prod-data:
+  pix-space-redis-prod-data:
+  pix-space-minio-prod-data:
