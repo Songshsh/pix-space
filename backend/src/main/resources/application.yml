@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: pix-space-backend # 应用名
+  # ── 环境切换：default 仅作兜底，生产通过环境变量 SPRING_PROFILES_ACTIVE=prod 覆盖 ──
+  profiles:
+    default: dev
+  # ── Jackson JSON 序列化配置 ──
+  # 注意：以下 time-zone / date-format 仅作用于旧式 java.util.Date / Calendar；
+  # 项目实体使用的 java.time.LocalDateTime 由 JacksonConfig 单独配置格式
+  # （Spring Boot 默认不会用下面的 pattern 序列化 java.time 类型，会输出带 T 的 ISO-8601）
+  jackson:
+    time-zone: Asia/Shanghai # 仅影响 Date/Calendar 这类"绝对时间点"的展示时区
+    date-format: yyyy-MM-dd HH:mm:ss # 仅作用于 java.util.Date；java.time 的格式见 JacksonConfig
+  # ── 文件上传限制（dev / prod 共用，若某环境需单独调整可在对应 profile 中覆盖） ──
+  servlet:
+    multipart:
+      max-file-size: 20MB # 单文件最大 20MB
+      max-request-size: 30MB # 单次请求总大小上限（含非文件字段）
+
+server:
+  port: 8080 # 后端服务端口
+  servlet:
+    # ── Session Cookie 配置（自动写入浏览器的登录凭证） ──
+    session:
+      timeout: 30m # Session 过期时间：30 分钟无活动后自动失效（Redis 删除 + Cookie 查空 → 视为未登录）
+      cookie:
+        name: PIX_SPACE_SESSION # Cookie 名称，覆盖默认的 JSESSIONID，隐藏技术栈
+        http-only: true # JS 无法通过 document.cookie 读取，防御 XSS 攻击
+        same-site: lax # 跨站策略：允许点击链接时带 Cookie，阻止 iframe/img 等子请求携带
+
+# ── MyBatis-Plus 配置 ──
+mybatis-plus:
+  configuration:
+    # 数据库下划线字段（created_at）自动映射为 Java 驼峰属性（createdAt）
+    map-underscore-to-camel-case: true
+
+# ── Swagger / OpenAPI 文档页面路径 ──
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+# ── Actuator 健康探针（容器编排的 liveness/readiness 探针来源） ──
+management:
+  endpoints:
+    web:
+      exposure:
+        # 仅暴露 health 端点；其余（如 env/beans 会泄露配置）一律不暴露
+        include: health
+  endpoint:
+    health:
+      # 显式开启 liveness/readiness 探针，暴露 /actuator/health/{liveness,readiness}
+      probes:
+        enabled: true
+      # never：对外只返回 UP/DOWN，不显示 db/redis 等内部细节，避免信息泄露
+      show-details: never
+      group:
+        # liveness：只看应用进程是否存活（失败会被编排系统「重启」）
+        liveness:
+          include: livenessState
+        # readiness：看是否有能力接客（失败只「暂停转发流量」不重启）
+        # 纳入 db/redis：数据库或 Session 存储不可用时，该实例应被摘出流量
+        readiness:
+          include: readinessState,db,redis

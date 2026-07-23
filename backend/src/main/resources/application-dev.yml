@@ -1,0 +1,44 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║                    开发环境配置（dev profile）                 ║
+# ╚══════════════════════════════════════════════════════════════╝
+# 激活方式：application.yml 中默认 spring.profiles.active=dev
+# 本文件所有值仅用于本地开发，生产环境值见 application-prod.yml（通过环境变量注入）
+
+spring:
+  # ── MySQL 数据源（Docker 容器，端口映射 3307 → 容器内 3306） ──
+  datasource:
+    # JDBC 连接串各参数含义：
+    #   localhost:3307 → 宿主机端口（docker-compose 映射）
+    #   pix_space      → 数据库名（docker-compose 启动时自动创建）
+    #   allowPublicKeyRetrieval → MySQL 8.0+ 默认 caching_sha2_password 认证，JDBC 驱动需要此参数获取公钥
+    #   useSSL=false   → 本地开发关闭 SSL
+    #   serverTimezone → 时区设为上海，避免存储时间偏差 8 小时
+    #   connectionCollation=utf8mb4_unicode_ci → 连接使用 utf8mb4，支持中文及 4 字节 Unicode（如 emoji），与建表 collation 一致
+    url: jdbc:mysql://localhost:3307/pix_space?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&connectionCollation=utf8mb4_unicode_ci
+    username: pix # docker-compose 中 MYSQL_USER/MYSQL_PASSWORD 创建的业务账号
+    password: ${DB_PASSWORD:pix123456} # 默认值仅用于本地开发，可通过环境变量覆盖
+  data:
+    # ── Redis（Docker 容器，默认端口 6379） ──
+    # 用途：缓存热点数据 + 存储 Session
+    # 开发环境默认无密码，Spring Boot 通过 Jedis/Lettuce 客户端直连
+    redis:
+      host: localhost # 本机地址（Docker 端口已映射到宿主机）
+      port: 6379 # 默认 Redis 端口
+  # ── Session 存储策略：存入 Redis ──
+  # 好处：后端重启后用户无需重新登录；多实例部署时共享 Session
+  session:
+    store-type: redis # 可选值：none（内存，重启丢失）/ redis（外存，推荐）
+
+# ── 自定义业务配置（前缀 app.*，通过 @ConfigurationProperties 读取） ──
+app:
+  # CORS 跨域：浏览器安全策略禁止 localhost:5173 直接请求 localhost:8080
+  # 此处显式允许前端开发服务器（Vite 默认 5173）访问后端 8080
+  cors:
+    allowed-origins:
+      - http://localhost:5173 # Vite 前端开发服务器地址
+  # MinIO 对象存储（Docker 容器，用于存储用户上传的图片/文件）
+  storage:
+    endpoint: http://localhost:9000 # MinIO S3 API 地址（程序调用此端口上传/下载文件），控制台在 9001
+    access-key: ${MINIO_ACCESS_KEY:minioadmin} # 默认值仅用于本地开发，可通过环境变量覆盖
+    secret-key: ${MINIO_SECRET_KEY:minioadmin} # 默认值仅用于本地开发，可通过环境变量覆盖
+    bucket: pix-space-dev # 开发环境 Bucket 名称，类似文件系统中的"根文件夹"概念
